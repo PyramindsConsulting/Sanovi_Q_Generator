@@ -1,0 +1,2 @@
+[29-Jul-2016 09:02:26 UTC] PHP Fatal error:  Call to undefined function no_of_rows_base_prices() in /home/pyraminds/public_html/sanovi/tables/base_prices.php on line 68
+[08-Aug-2016 07:08:11 UTC] PHP Notice:  Undefined index: authentication in /home/sanoviitsupport/public_html/quote/SanoviTechnologies/Qgenerator/tables/modify_tables.php on line 40

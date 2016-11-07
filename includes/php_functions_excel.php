@@ -1,0 +1,636 @@
+<?php
+function find_quote_created_user($refNo, $verNo){
+include ('../../../includes/config.php');  
+$query="SELECT login_name FROM LicenseGeneration WHERE license_reference_id='$refNo' AND license_revision_id='$verNo'";
+$result=mysqli_query($connect,$query);
+if(!$result){
+echo "Database Query Failed";
+}
+$row=mysqli_fetch_array($result);
+return $row["login_name"];
+}
+
+function fetch_lgt_data($refId, $verId){
+include ("../../../includes/config.php");
+$query = "SELECT * FROM LicenseGeneration WHERE license_reference_id='$refId' AND license_revision_id='$verId'";
+$result=mysqli_query($connect, $query);
+if(!$result){
+echo "Database query failed";
+}
+
+$row=mysqli_fetch_array($result);
+
+$details["login_name"]=$row["login_name"];
+$details["license_generation_date"]=$row["license_generation_date"];
+$details["license_crt_id"]=$row["license_crt_id"];
+$details["license_lht_id"]=$row["license_lht_id"];
+$details["status"]=$row["status"];
+
+return $details;
+
+}
+
+function fetch_crt_2s_data($crt_id){
+include ("../../../includes/config.php");
+$query="SELECT * FROM CustomerRequirements WHERE license_crt_id='$crt_id'";
+$result=mysqli_query($connect ,$query);
+if(!$result){
+echo "Database Query Failed";
+}
+
+$row=mysqli_fetch_array($result);
+
+//Qty
+$details["0"]["1"]=$row["2s_noOfVmImages"];
+$details["1"]["1"]=$row["2s_noOfVmDatabases"];
+$details["2"]["1"]=$row["2s_noOfBareMetalWinLinuxServers"];
+$details["3"]["1"]=$row["2s_noOfBareMetalWinLinuxDatabases"];
+$details["4"]["1"]=$row["2s_noOfBareMetalUnixServers"];
+$details["5"]["1"]=$row["2s_noOfBareMetalUnixDatabases"];
+$details["6"]["1"]=$row["2s_noOfVirtualSharePointServers"];
+$details["7"]["1"]=$row["2s_noOfSharePointServers"];
+$details["8"]["1"]=$row["2s_noOfVirtualMSExchangeDatabases"];
+$details["9"]["1"]=$row["2s_noOfMSExchangeDatabases"];
+$details["10"]["1"]=$row["2s_noOfVirtualServersUsingAdvancedReplication"];
+$details["11"]["1"]=$row["2s_noOfUsingAdvancedReplication"];
+$details["12"]["1"]=$row["2s_noOfServersForPFRReplication"];
+
+//Questions
+$details["0"]["0"]=$row["noOfVmImages_2s"];
+$details["1"]["0"]=$row["noOfVmDatabases_2s"];
+$details["2"]["0"]=$row["noOfBareMetalWinLinuxServers_2s"];
+$details["3"]["0"]=$row["noOfBareMetalWinLinuxDatabases_2s"];
+$details["4"]["0"]=$row["noOfBareMetalUnixServers_2s"];
+$details["5"]["0"]=$row["noOfBareMetalUnixDatabases_2s"];
+$details["6"]["0"]=$row["noOfVirtualSharePointServers_2s"];
+$details["7"]["0"]=$row["noOfSharePointServers_2s"];
+$details["8"]["0"]=$row["noOfVirtualMSExchangeDatabases_2s"];
+$details["9"]["0"]=$row["noOfMSExchangeDatabases_2s"];
+$details["10"]["0"]=$row["noOfVirtualServersUsingAdvancedReplication_2s"];
+$details["11"]["0"]=$row["noOfUsingAdvancedReplication_2s"];
+$details["12"]["0"]=$row["noOfServersForPFRReplication_2s"];
+
+return $details;
+}
+
+function fetch_crt_3s_data($crt_id){
+include ("../../../includes/config.php");
+$query="SELECT * FROM CustomerRequirements WHERE license_crt_id='$crt_id'";
+$result=mysqli_query($connect ,$query);
+if(!$result){
+echo "Database Query Failed";
+}
+
+$row=mysqli_fetch_array($result);
+
+//Qty
+$details["0"]["1"]=$row["3s_isBunkerSite"];
+$details["1"]["1"]=$row["3s_noOfServersInBunkerSite"];
+$details["2"]["1"]=$row["3s_noOfVmImages"];
+$details["3"]["1"]=$row["3s_noOfVmDatabases"];
+$details["4"]["1"]=$row["3s_noOfBareMetalWinLinuxServers"];
+$details["5"]["1"]=$row["3s_noOfBareMetalWinLinuxDatabases"];
+$details["6"]["1"]=$row["3s_noOfBareMetalUnixServers"];
+$details["7"]["1"]=$row["3s_noOfBareMetalUnixDatabases"];
+$details["8"]["1"]=$row["3s_noOfVirtualSharePointServers"];
+$details["9"]["1"]=$row["3s_noOfSharePointServers"];
+$details["10"]["1"]=$row["3s_noOfVirtualMSExchangeDatabases"];
+$details["11"]["1"]=$row["3s_noOfMSExchangeDatabases"];
+$details["12"]["1"]=$row["3s_noOfVirtualServersUsingAdvancedReplication"];
+$details["13"]["1"]=$row["3s_noOfUsingAdvancedReplication"];
+$details["14"]["1"]=$row["3s_noOfServersForPFRReplication"];
+
+//Questions
+$details["0"]["0"]=$row["isBunkerSite_3s"];
+$details["1"]["0"]=$row["noOfServersInBunkerSite_3s"];
+$details["2"]["0"]=$row["noOfVmImages_3s"];
+$details["3"]["0"]=$row["noOfVmDatabases_3s"];
+$details["4"]["0"]=$row["noOfBareMetalWinLinuxServers_3s"];
+$details["5"]["0"]=$row["noOfBareMetalWinLinuxDatabases_3s"];
+$details["6"]["0"]=$row["noOfBareMetalUnixServers_3s"];
+$details["7"]["0"]=$row["noOfBareMetalUnixDatabases_3s"];
+$details["8"]["0"]=$row["noOfVirtualSharePointServers_3s"];
+$details["9"]["0"]=$row["noOfSharePointServers_3s"];
+$details["10"]["0"]=$row["noOfVirtualMSExchangeDatabases_3s"];
+$details["11"]["0"]=$row["noOfMSExchangeDatabases_3s"];
+$details["12"]["0"]=$row["noOfVirtualServersUsingAdvancedReplication_3s"];
+$details["13"]["0"]=$row["noOfUsingAdvancedReplication_3s"];
+$details["14"]["0"]=$row["noOfServersForPFRReplication_3s"];
+
+//    print_r($details);
+return $details;
+}
+
+function adding2s_3s($qty_2s,$qty_3s,$bunker){
+$a=0;
+$count1=count($qty_3s);
+for($i=0;$i<$count1;$i++){
+$qty_que_3s[$i][0]=get_question($qty_3s[$i][0]);
+$qty_que_3s[$i][1]=$qty_3s[$i][1];
+}
+$count2=count($qty_2s);
+for($i=0;$i<$count2;$i++){
+$qty_que_2s[$i][0]=get_question($qty_2s[$i][0]);
+$qty_que_2s[$i][1]=$qty_2s[$i][1];
+}
+for($j=0;$j<=$count1;$j++){
+for($i=0;$i<=$count2;$i++){
+if($qty_que_2s[$i][0]==$qty_que_3s[$j][0]){
+$Qty_2s_3s[$a][0]=$qty_que_2s[$i][0];//storing name
+if($bunker=='No'){
+$Qty_2s_3s[$a][1]=($qty_que_2s[$i][1]+($qty_que_3s[$j][1]*2));//adding quantity
+}else
+if(($qty_3s[$j][0]=='prod_servers_3S')||($qty_3s[$j][0]=='prod_servers_3S')){ 
+// double the quantity of advanced replications
+$Qty_2s_3s[$a][1]=$qty_que_2s[$i][1]+($qty_que_3s[$j][1]*2);//adding quantity
+}
+else{
+$Qty_2s_3s[$a][1]=$qty_que_2s[$i][1]+($qty_que_3s[$j][1]);//adding quantity
+}
+}    
+}$a++;
+}
+$Qty_2s_3s=remove_nulls($Qty_2s_3s);
+//    print_r($Qty_2s_3s);
+return $Qty_2s_3s;
+}
+
+function fetch_lht_data($lht_id){
+include ("../../../includes/config.php");
+$query="SELECT * FROM LicenseHistory WHERE license_lht_id='$lht_id'";
+$result=mysqli_query($connect ,$query);
+if(!$result){
+echo "Database Query Failed";
+}
+
+$row=mysqli_fetch_array($result);
+
+$details["licenseCost"]=$row["licenseCost"];
+$details["discountPercentageOnLicense"]=$row["discountPercentageOnLicense"];
+$details["licenseDiscountValue"]=$row["licenseDiscountValue"];
+$details["licenseCostAfterDiscount"]=$row["licenseCostAfterDiscount"];
+$details["productSupportCost"]=$row["productSupportCost"];
+$details["discountPercentageOnSupport"]=$row["discountPercentageOnSupport"];
+$details["prodDiscountValue"]=$row["prodDiscountValue"];
+$details["finalSupportCost"]=$row["finalSupportCost"];
+$details["PSCost"]=$row["PSCost"];
+$details["discountPercentageOnPS"]=$row["discountPercentageOnPS"];
+$details["discountValueOnPS"]=$row["discountValueOnPS"];
+$details["finalPSCost"]=$row["finalPSCost"];
+$details["trainingCost"]=$row["trainingCost"];
+$details["discountPercentageOnTraining"]=$row["discountPercentageOnTraining"];
+$details["trainingDiscountValue"]=$row["trainingDiscountValue"];
+$details["finalTrainingCost"]=$row["finalTrainingCost"];
+$details["discountPercentageOnBunkerSite"]=$row["discountPercentageOnBunkerSite"];
+$details["finalLicenseCost"]=$row["finalLicenseCost"];
+$details["totalValue"]=$row["totalValue"];
+//    print_r($details);
+return $details;
+}
+
+function get_question($name){
+include ("../../../includes/config.php");
+$query="SELECT question FROM QGeneratorQuestions WHERE name='$name'";
+$result=mysqli_query($connect ,$query);
+if(!$result){
+echo "Database Query Failed";
+}
+
+$row=mysqli_fetch_array($result);
+
+$question=$row["question"];
+
+return $question;
+}
+
+function remove_nulls($arrayName){
+$a=0;
+$temp=array();
+$count=count($arrayName);
+for($i=0;$i<=$count+1;$i++){
+if(!(is_null($arrayName[$i][0]))){
+if($arrayName[$i][1]>0){
+$temp[$a][0]=$arrayName[$i][0];
+$temp[$a][1]=$arrayName[$i][1];
+$a++;
+}
+}
+}
+return $temp;
+}
+
+function fetch_crt_customer_data($crt_id){
+    include ("../../../includes/config.php");
+    $query="SELECT * FROM CustomerRequirements WHERE license_crt_id='$crt_id'";
+    $result=mysqli_query($connect ,$query);
+    if(!$result){
+        echo "Database Query Failed";
+    }
+    
+    $row=mysqli_fetch_array($result);
+    
+    $details["license_crt_id"]=$row["license_crt_id"];
+    $details["product"]=$row["product"];
+    $details["license_type"]=$row["license_type"];
+    $details["country"]=$row["country"];
+    $details["cust_currency"]=$row["cust_currency"];
+    $details["cust_org_name"]=$row["cust_org_name"];
+    $details["cust_name"]=$row["cust_name"];
+    $details["mode_of_sale"]=$row["mode_of_sale"];
+    $details["product_module"]=$row["product_module"];
+    
+    return $details;
+}
+function displayAnnexure_1($refid,$verid){
+        include ("../../../includes/config.php");
+        $query="select annexure_1 from LicenseGeneration where license_reference_id='$refid' and license_revision_id='$verid'";
+        $result=mysqli_query($connect,$query);
+        $row=mysqli_fetch_array($result);
+        return $row['annexure_1'];
+}
+function get_exchange_rate($currency){
+        
+        include ("../../../includes/config.php");
+        $query="select exchange_rate from ExchangeRates where target_currency='$currency'";
+        $result=mysqli_query($connect,$query);
+        if(!$result){
+             echo "database query failed";
+        }
+        $row=mysqli_fetch_array($result);
+        $exchange_rate=$row['exchange_rate'];
+        return $exchange_rate;
+}
+
+function License_billing_quantity($data_2s_3s,$ProdModule,$Country,$ModeOfSale,$currency){
+        $temp=array();
+        include ("../../../includes/config.php");
+        if($ModeOfSale!='Support Only Sale'){
+        $license=$data_2s_3s;
+        $count=count($license);
+        for($j=0;$j<$count+1;$j++){
+                $question=@$license[$j][0];
+                $qty=@$license[$j][1];
+                $query="select * from BasePrices where product_module= '$ProdModule' and question='$question' and country='$Country'";
+                $result=mysqli_query($connect,$query);
+                if(!$result){
+                    echo "database query failed";
+                    die();
+                }
+                $row=mysqli_fetch_array($result);
+                $i=0;
+                $temp[$j][$i]=$row['part_number'];
+                $i++;
+                $temp[$j][$i]=$row['part_desc'];
+                $i++;
+                $temp[$j][$i]=$qty;
+                $i++;
+                $amount=$row['base_price']* get_exchange_rate($currency);
+                $temp[$j][$i]=round($qty * $amount);
+            }
+            return $temp;
+            
+        }
+}
+
+function masterServerLicense_view($ModeOfSale,$Country){
+        include ("../../../includes/config.php");
+        $temp=array();
+        $query="select * from BasePrices where mode_of_sale='$ModeOfSale' and product_support_questions='License' and country='$Country'";
+             $result=mysqli_query($connect,$query); 
+                if ($result->num_rows > 0) {
+                while($row=mysqli_fetch_array($result)){
+                    $i=0;$j=0;
+                        $temp[$i][$j]=$row['part_number'];
+                        $j++;
+                        $temp[$i][$j]=$row['part_desc'];
+                        $j++;
+                        $temp[$i][$j]='1';
+                        $j++;
+                        $temp[$i][$j]=$row['base_price'];
+                    }
+                    return $temp;
+                }
+    }
+
+function fetch_crt_prof_data($crt_id){
+    include ("../../../includes/config.php");
+    $query="SELECT * FROM CustomerRequirements WHERE license_crt_id='$crt_id'";
+    $result=mysqli_query($connect ,$query);
+    if(!$result){
+        echo "Database Query Failed";
+    }
+    
+    $row=mysqli_fetch_array($result);
+    
+    //Qty
+    $details["0"]["1"]=$row["areProfessionalServicesRequired"];
+    $details["1"]["1"]=$row["Prof_serviceType"];
+    $details["2"]["1"]=$row["Prof_noOfVmImages"];
+    $details["3"]["1"]=$row["Prof_noOfVmDatabases"];
+    $details["4"]["1"]=$row["Prof_noOfBareMetalWinLinuxServers"];
+    $details["5"]["1"]=$row["Prof_noOfBareMetalWinLinuxDatabases"];
+    $details["6"]["1"]=$row["Prof_noOfBareMetalUnixServers"];
+    $details["7"]["1"]=$row["Prof_noOfBareMetalUnixDatabases"];
+    $details["8"]["1"]=$row["Prof_noOfUsingAdvancedReplication"];
+    $details["9"]["1"]=$row["Prof_noOfVirtualServersUsingAdvancedReplication"];
+    $details["10"]["1"]=$row["Prof_noOfSharePointServers"];
+    $details["11"]["1"]=$row["Prof_noOfSharePointDatabases"];
+    $details["12"]["1"]=$row["Prof_noOfVirtualSharePointServers"];
+    $details["13"]["1"]=$row["Prof_noOfVirtualSharePointDatabases"];
+    $details["14"]["1"]=$row["Prof_noOfMSExchangeDatabases"];
+    $details["15"]["1"]=$row["Prof_noOfVirtualMSExchangeDatabases"];
+
+    //Questions
+    $details["0"]["0"]=$row["areProfessionalServicesRequired_Q"];
+    $details["1"]["0"]=$row["serviceType_Prof"];
+    $details["2"]["0"]=$row["noOfVmImages_Prof"];
+    $details["3"]["0"]=$row["noOfVmDatabases_Prof"];
+    $details["4"]["0"]=$row["noOfBareMetalWinLinuxServers_Prof"];
+    $details["5"]["0"]=$row["noOfBareMetalWinLinuxDatabases_Prof"];
+    $details["6"]["0"]=$row["noOfBareMetalUnixServers_Prof"];
+    $details["7"]["0"]=$row["noOfBareMetalUnixDatabases_Prof"];
+    $details["8"]["0"]=$row["noOfUsingAdvancedReplication_Prof"];
+    $details["9"]["0"]=$row["noOfVirtualServersUsingAdvancedReplication_Prof"];
+    $details["10"]["0"]=$row["noOfSharePointServers_Prof"];
+    $details["11"]["0"]=$row["noOfSharePointDatabases_Prof"];
+    $details["12"]["0"]=$row["noOfVirtualSharePointServers_Prof"];
+    $details["13"]["0"]=$row["noOfVirtualSharePointDatabases_Prof"];
+    $details["14"]["0"]=$row["noOfMSExchangeDatabases_Prof"];
+    $details["15"]["0"]=$row["noOfVirtualMSExchangeDatabases_Prof"];
+    
+    return $details;
+}
+
+function Professional_billing_quantity($tempArray,$temparray2,$ProdModule,$Country,$ModeOfSale,$currency,$prof_services_all){
+            $temp=array();
+            include ("../../../includes/config.php");
+            
+            if($ModeOfSale!='Support Only Sale'){
+            if($prof_services_all=="No"){
+                    $QuestionsAndValues_Prof=remove_nulls($tempArray);
+                    $count=count($QuestionsAndValues_Prof);
+                    for($i=0;$i<=$count;$i++){
+                        $QuestionsAndValues_Prof[$i][0]=get_question($QuestionsAndValues_Prof[$i][0]);
+                        $QuestionsAndValues_Prof[$i][1]=$QuestionsAndValues_Prof[$i][1];
+                    }
+                    for($j=0;$j<$count;$j++){
+                        $question1=@$QuestionsAndValues_Prof[$j][0];
+                        $qty=@$QuestionsAndValues_Prof[$j][1];
+                        $simpleApps=round($qty*0.7);
+                        $complexApps=$qty-$simpleApps; //Calculating complex apps at 30% of total
+                        $query="select * from BasePrices where product_module= '$ProdModule' and question='$question1' and country='$Country'";
+                        $result=mysqli_query($connect,$query);
+                        if(!$result){
+                            echo "database query failed";
+                            die();
+                        }
+                        $row=mysqli_fetch_array($result);
+                        $part_desc=$row['part_desc'];
+                        $base_price=$row['base_price'];
+                        $simpleAppValue=0;
+                        $complexAppValue=0;
+                        for($i=$simpleApps;$i>0;$i--){
+                            if($i>3){    
+                                $query2="select * from LearningFactor where app='4'";
+                                $result2=mysqli_query($connect,$query2);
+                                if(!$result2){
+                                    echo "database query failed";
+                                    die();
+                                }
+                                $row2=mysqli_fetch_array($result2);
+                                $simpleAppValue+= ($base_price * ($row2['simple_app'])/100);
+                            }else{
+                                $query2="select * from LearningFactor where app='$i'";
+                                $result2=mysqli_query($connect,$query2);
+                                if(!$result2){
+                                    echo "database query failed";
+                                    die();
+                                }
+                                $row2=mysqli_fetch_array($result2);
+                                $simpleAppValue+= ($base_price * ($row2['simple_app'])/100);
+                            }
+                        }
+                        for($i=$complexApps;$i>0;$i--){
+                            if($i>3){    
+                                $query2="select * from LearningFactor where app='4'";
+                                $result2=mysqli_query($connect,$query2);
+                                if(!$result2){
+                                    echo "database query failed";
+                                    die();
+                                }
+                                $row2=mysqli_fetch_array($result2);
+                                $complexAppValue+= ($base_price * ($row2['complex_app'])/100);
+                            }else{
+                                $query2="select * from LearningFactor where app='$i'";
+                                $result2=mysqli_query($connect,$query2);
+                                if(!$result2){
+                                    echo "database query failed";
+                                    die();
+                                }
+                                $row2=mysqli_fetch_array($result2);
+                                $complexAppValue+= ($base_price * ($row2['complex_app'])/100);
+                            }
+                        }
+                         $professional_value=$simpleAppValue+$complexAppValue;
+                         if($Type_of_service=="Remote"){
+                            $professional_service_value=($professional_value * 0.6);
+                        }else{
+                            $professional_service_value=$professional_value;
+                         }
+                        $i=0;
+                        $temp[$j][$i]=$row['part_number'];
+                        $i++;
+                        $temp[$j][$i]=$row['part_desc'];
+                        $i++;
+                        $temp[$j][$i]=$qty;
+                        $i++;
+                        $temp[$j][$i]=round($professional_service_value * get_exchange_rate($currency));
+                    }
+                   return $temp;
+                }else{
+                    $Qty_2s_3s=$temparray2;
+                    $QuestionsAndValues_Prof=remove_nan_questions($tempArray);
+                    $count=count($Qty_2s_3s);
+                    $count1=count($QuestionsAndValues_Prof);
+                    for($i=0;$i<=$count1;$i++){
+                        $QuestionsAndValues_Prof[$i][0]=get_question($QuestionsAndValues_Prof[$i][0]);
+                        $QuestionsAndValues_Prof[$i][1]=$QuestionsAndValues_Prof[$i][1];
+                    }
+                    for($j=0;$j<$count;$j++){
+                        $question1=$QuestionsAndValues_Prof[$j][0];
+                        $question2=$Qty_2s_3s[$j][0];
+                        $qty=$Qty_2s_3s[$j][1];
+                        $simpleApps=round($qty*0.7);
+                        $complexApps=$qty-$simpleApps; //Calculating complex apps at 30% of total
+                        $query="select * from BasePrices where product_module= '$ProdModule' and question='$question1' and country='$Country'";
+                        $result=mysqli_query($connect,$query);
+                        if(!$result){
+                            echo "database query failed";
+                            die();
+                        }
+                        $row=mysqli_fetch_array($result);
+                        $base_price=$row['base_price'];
+                        $simpleAppValue=0;
+                        $complexAppValue=0;
+                        for($i=$simpleApps;$i>0;$i--){
+                            if($i>3){    
+                                $query2="select * from LearningFactor where app='4'";
+                                $result2=mysqli_query($connect,$query2);
+                                if(!$result2){
+                                    echo "database query failed";
+                                    die();
+                                }
+                                $row1=mysqli_fetch_array($result2);
+                                $simpleAppValue+= ($base_price * ($row1['simple_app'])/100);
+                            }else{
+                                $query2="select * from LearningFactor where app='$i'";
+                                $result2=mysqli_query($connect,$query2);
+                                if(!$result2){
+                                    echo "database query failed";
+                                    die();
+                                }
+                                $row1=mysqli_fetch_array($result2);
+                                $simpleAppValue+= ($base_price * ($row1['simple_app'])/100);
+                            }
+                        }
+                        for($i=$complexApps;$i>0;$i--){
+                            if($i>3){    
+                                $query2="select * from LearningFactor where app='4'";
+                                $result2=mysqli_query($connect,$query2);
+                                if(!$result2){
+                                    echo "database query failed";
+                                    die();
+                                }
+                                $row1=mysqli_fetch_array($result2);
+                                $complexAppValue+= ($base_price * ($row1['complex_app'])/100);
+                            }else{
+                                $query2="select * from LearningFactor where app='$i'";
+                                $result2=mysqli_query($connect,$query2);
+                                if(!$result2){
+                                    echo "database query failed";
+                                    die();
+                                }
+                                $row1=mysqli_fetch_array($result2);
+                                $complexAppValue+= ($base_price * ($row1['complex_app'])/100);
+                            }
+                        }
+                        $professional_value=$simpleAppValue+$complexAppValue;
+                         if($Type_of_service=="Remote"){
+                            $professional_service_value=($professional_value * 0.6);
+                        }else{
+                            $professional_service_value=$professional_value;
+                         }
+                        $i=0;
+                        $temp[$j][$i]=$row['part_number'];
+                        $i++;
+                        $temp[$j][$i]=$row['part_desc'];
+                        $i++;
+                        $temp[$j][$i]=$qty;
+                        $i++;
+                        $temp[$j][$i]=round($professional_service_value * get_exchange_rate($currency));
+                    }
+                    return $temp;
+                }
+        }
+    }
+
+function remove_nan_questions($arrayName){
+            $a=0;
+            $temp=array();
+            $count=count($arrayName);
+            for($i=0;$i<=$count+1;$i++){
+                if(is_numeric($arrayName[$i][1])){
+                    $temp[$a][0]=$arrayName[$i][0];
+                    $temp[$a][1]=$arrayName[$i][1];
+                    $a++;
+                }
+            }
+            return $temp;
+        }
+
+    function masterServerProf_view($ModeOfSale,$Country){
+        include ("../../../includes/config.php");
+        $temp=array();
+         $query="select * from BasePrices where mode_of_sale='$ModeOfSale' and product_support_questions='Professional_services' and country='$Country'";
+             $result=mysqli_query($connect,$query); 
+                if ($result->num_rows > 0) {
+                while($row=mysqli_fetch_array($result)){
+                    $i=0;$j=0;
+                        $temp[$i][$j]=$row['part_number'];
+                        $j++;
+                        $temp[$i][$j]=$row['part_desc'];
+                        $j++;
+                        $temp[$i][$j]='1';
+                        $j++;
+                        $temp[$i][$j]=$row['base_price'];
+                    }
+                    return $temp;
+                }
+    }
+
+function fetch_crt_prod_support_years($crt_id){
+    include ("../../../includes/config.php");
+    $query="SELECT yearsOfSupport FROM CustomerRequirements WHERE license_crt_id='$crt_id'";
+    $result=mysqli_query($connect ,$query);
+    if(!$result){
+        echo "Database Query Failed";
+    }
+    
+    $row=mysqli_fetch_array($result);
+    
+    //Qty
+    $details=$row["yearsOfSupport"];
+    
+    return $details;
+}
+
+function Product_billing_quantity($tempArray,$ProdModule,$Country,$ModeOfSale,$currency,$Productsupport){
+            $temp=array();
+            include ("../../../includes/config.php");
+            $product_qty=remove_nulls($tempArray);
+            $count=count($product_qty);
+            for($i=0;$i<$count;$i++){
+                $productqty[$i][0]=get_question($product_qty[$i][0]);
+                $productqty[$i][1]=$product_qty[$i][1];
+            }
+            for($j=0;$j<$count;$j++){
+                $question=$productqty[$j][0];
+                $qty=$productqty[$j][1];
+                $query="select * from BasePrices where product_module= '$ProdModule' and product_support_questions='$question' and country='$Country'";
+                $result=mysqli_query($connect,$query);
+                if(!$result){
+                    echo "database query failed";
+                }
+                $row=mysqli_fetch_array($result);
+                $i=0;
+                $temp[$j][$i]=$row['part_number'];
+                $i++;
+                $temp[$j][$i]=$row['part_desc'];
+                $i++;
+                $temp[$j][$i]=$qty;
+                $i++;
+                $temp[$j][$i]= round($row['base_price']*$Productsupport *get_exchange_rate($currency));
+            }
+        return $temp;
+        }
+
+function masterServerproduct_view($ModeOfSale,$Country){
+        include ("../../../includes/config.php");
+        $temp=array();
+         $query="select * from BasePrices where mode_of_sale='$ModeOfSale' and product_support_questions='Product_support' and country='$Country'";
+             $result=mysqli_query($connect,$query); 
+                if ($result->num_rows > 0) {
+                while($row=mysqli_fetch_array($result)){
+                    $i=0;$j=0;
+                        $temp[$i][$j]=$row['part_number'];
+                        $j++;
+                        $temp[$i][$j]=$row['part_desc'];
+                        $j++;
+                        $temp[$i][$j]='1';
+                        $j++;
+                        $temp[$i][$j]=$row['base_price'];
+                    }
+                    return $temp;
+                }
+    }
+?>

@@ -1,0 +1,349 @@
+
+
+#crumbs ul {
+    list-style: none;
+    display: inline-table;
+    text-align: center;
+}
+
+#crumbs ul li {
+    display: inline;
+}
+
+#crumbs ul li a {
+    display: block;
+    float: left;
+    height: 20px;
+    background: grey;
+    text-align: center;
+    padding: 8px 120px 20px 100px;
+    position: relative;
+    margin: 0px 5px 0 0;
+    font-size: 12px;
+    text-decoration: none;
+    color: #fff;
+}
+
+#crumbs ul li a:after {
+    content: "";
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
+    border-left: 14px solid grey;
+    position: absolute;
+    right: -14px;
+    top: 0;
+    z-index: 1;
+}
+
+#crumbs ul li a:before {
+    content: "";
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
+    border-left: 14px solid white;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#crumbs ul li:first-child a {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    margin-left: 20px;
+}
+
+#crumbs ul li:first-child a:before {
+    display: none;
+}
+
+#crumbs ul li:last-child a {
+    padding-right: 120px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#crumbs ul li:last-child a:after {
+    display: none;
+}
+
+#crumbs ul li .active {
+    background-color: #53ae3b;
+}
+
+#crumbs ul li .active:after {
+    border-left-color: #53ae3b;
+}
+
+@media only screen and (max-width:1085px) {
+    #crumbs ul li a {
+        display: block;
+        float: left;
+        height: 25px;
+        background: grey;
+        text-align: center;
+        padding: 5px 70px 15px 70px;
+        position: relative;
+        margin: 0px 5px 0 0;
+        font-size: 12px;
+        text-decoration: none;
+        color: #fff;
+    }
+    #crumbs ul li:last-child a {
+        padding-right: 70px;
+    }
+    #crumbs ul li a:after {
+        content: "";
+        border-top: 12px solid transparent;
+        border-bottom: 12px solid transparent;
+        border-left: 12px solid grey;
+        position: absolute;
+        right: -12px;
+        top: 0;
+        z-index: 1;
+    }
+    #crumbs ul li a:before {
+        content: "";
+        border-top: 12px solid transparent;
+        border-bottom: 12px solid transparent;
+        border-left: 12px solid white;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}
+
+@media only screen and (max-width:1045px) {
+    #crumbs ul li a {
+        display: block;
+        float: left;
+        height: 25px;
+        background: grey;
+        text-align: center;
+        padding: 5px 70px 15px 70px;
+        position: relative;
+        margin: 0px 5px 0 0;
+        font-size: 12px;
+        text-decoration: none;
+        color: #fff;
+    }
+    #crumbs ul li:last-child a {
+        padding-right: 70px;
+    }
+}
+
+@media only screen and (max-width:1020px) {
+    #crumbs ul li a {
+        display: block;
+        float: left;
+        height: 25px;
+        background: grey;
+        text-align: center;
+        padding: 5px 60px 15px 60px;
+        position: relative;
+        margin: 0px 5px 0 0;
+        font-size: 12px;
+        text-decoration: none;
+        color: #fff;
+    }
+    #crumbs ul li:last-child a {
+        padding-right: 50px;
+    }
+}
+
+@media only screen and (max-width:967px) {
+    #crumbs ul li a {
+        display: block;
+        float: left;
+        height: 25px;
+        background: grey;
+        text-align: center;
+        padding: 5px 50px 15px 50px;
+        position: relative;
+        margin: 0px 5px 0 0;
+        font-size: 12px;
+        text-decoration: none;
+        color: #fff;
+    }
+    #crumbs ul li:last-child a {
+        padding-right: 50px;
+    }
+}
+
+@media only screen and (max-width:885px) {
+    #crumbs ul li a {
+        display: block;
+        float: left;
+        height: 25px;
+        background: grey;
+        text-align: center;
+        padding: 5px 40px 15px 40px;
+        position: relative;
+        margin: 0px 5px 0 0;
+        font-size: 12px;
+        text-decoration: none;
+        color: #fff;
+    }
+    #crumbs ul li:last-child a {
+        padding-right: 40px;
+    }
+}
+
+@media only screen and (max-width:825px) {
+    #crumbs ul li a {
+        display: block;
+        float: left;
+        height: 25px;
+        background: grey;
+        text-align: center;
+        padding: 5px 30px 15px 30px;
+        position: relative;
+        margin: 0px 5px 0 0;
+        font-size: 12px;
+        text-decoration: none;
+        color: #fff;
+    }
+    #crumbs ul li:last-child a {
+        padding-right: 30px;
+    }
+}
+
+@media only screen and (max-width:710px) {
+    #crumbs ul li a {
+        display: block;
+        float: left;
+        height: 25px;
+        background: grey;
+        text-align: center;
+        padding: 5px 20px 15px 20px;
+        position: relative;
+        margin: 0px 5px 0 0;
+        font-size: 12px;
+        text-decoration: none;
+        color: #fff;
+    }
+    #crumbs ul li:last-child a {
+        padding-right: 25px;
+    }
+}
+
+@media only screen and (max-width:630px) {
+    #crumbs ul li a {
+        display: block;
+        float: left;
+        height: 25px;
+        background: grey;
+        text-align: center;
+        padding: 5px 15px 15px 15px;
+        position: relative;
+        margin: 0px 5px 0 0;
+        font-size: 12px;
+        text-decoration: none;
+        color: #fff;
+    }
+    #crumbs ul li:last-child a {
+        padding-right: 15px;
+    }
+}
+
+@media only screen and (max-width:594px) {
+    #crumbs ul li a {
+        display: block;
+        float: left;
+        height: 25px;
+        background: grey;
+        text-align: center;
+        padding: 5px 10px 15px 10px;
+        position: relative;
+        margin: 0px 5px 0 0;
+        font-size: 12px;
+        text-decoration: none;
+        color: #fff;
+    }
+    #crumbs ul li:last-child a {
+        padding-right: 10px;
+    }
+}
+
+@media only screen and (max-width:540px) {
+    #crumbs ul li a {
+        display: block;
+        float: left;
+        height: 25px;
+        background: grey;
+        text-align: center;
+        padding: 5px 10px 15px 10px;
+        position: relative;
+        margin: 0px 5px 0 0;
+        font-size: 10px;
+        text-decoration: none;
+        color: #fff;
+    }
+    #crumbs ul li:last-child a {
+        padding-right: 10px;
+    }
+}
+
+@media only screen and (max-width:495px) {
+    #crumbs ul li a {
+        display: block;
+        float: left;
+        height: 25px;
+        background: grey;
+        text-align: center;
+        padding: 5px 8px 15px 8px;
+        position: relative;
+        margin: 0px 5px 0 0;
+        font-size: 11px;
+        text-decoration: none;
+        color: #fff;
+    }
+    #crumbs ul li:last-child a {
+        padding-right: 8px;
+    }
+    #crumbs ul li:first-child a {
+        margin-left: -20px;
+    }
+}
+
+@media only screen and (max-width:430px) {
+    #crumbs ul li a {
+        display: block;
+        float: left;
+        height: 25px;
+        background: grey;
+        text-align: center;
+        padding: 5px 5px 15px 10px;
+        position: relative;
+        margin: 0px 5px 0 0;
+        font-size: 8px;
+        text-decoration: none;
+        color: #fff;
+    }
+    #crumbs ul li:last-child a {
+        padding-right: 20px;
+    }
+    #crumbs ul li:first-child a {
+        margin-left: -30px;
+    }
+}
+
+@media only screen and (max-width:330px) {
+    #crumbs ul li a {
+        display: block;
+        float: left;
+        height: 25px;
+        background: grey;
+        text-align: center;
+        padding: 5px 5px 15px 10px;
+        position: relative;
+        margin: 0px 5px 0 0;
+        font-size: 8px;
+        text-decoration: none;
+        color: #fff;
+    }
+    #crumbs ul li:last-child a {
+        padding-right: 10px;
+    }
+    #crumbs ul li:first-child a {
+        margin-left: -30px;
+    }
+}
