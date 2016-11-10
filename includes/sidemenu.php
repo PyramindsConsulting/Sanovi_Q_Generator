@@ -18,7 +18,7 @@
     <p><a href="../myprofile.php">My Profile</a></p>
     <p><a href="../changeprofilepassword.php">Change Password</a></p><br>
     <?php 
-        if($_SESSION["userrole"]=="Administrator" || $_SESSION["userrole"]=="Chief Executive Officer" || $_SESSION["userrole"]=="Chief Financial Officer"){
+        if($_SESSION["userrole"]=="Administrator"){
             echo "<p style=\"color:#011D42;\"><b>ADMINISTRATOR</b></p>";
             echo "<p><a href=\"../admin/userlist.php\">User List</a></p>";
             echo "<p><a href=\"../admin/adduser.php\">Add User</a></p>";
