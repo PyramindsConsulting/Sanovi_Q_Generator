@@ -846,13 +846,14 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer" style="background-color:lightgrey;">
-                                                <button class="btn btn-lg btn-success savebtn pull-right" id="savebutton" hidden="hidden" type="submit">Next</button><br><br><br>
+                                                <button class="btn btn-lg btn-success savebtn pull-left" id="backbutton" >Back</button>
+                                                <button class="btn btn-lg btn-success savebtn pull-right" id="savebutton" type="submit">Next</button><br><br><br>
                                                 <span>* You are in final screen of Review Configuration<br>You cannot come back once you click on Next</span>
                                             </div>
                                         </div>
-                                <?php
+                                <?php 
      $connect->close();
-?>
+?> 
                             </form>
                         </div>
                     </div>
