@@ -94,7 +94,7 @@
                     <li class="<?php echo $profile; ?>"><a href="../myprofile.php">My Profile</a></li>
                     <li class="<?php echo $ch_password; ?>"><a href="../changeprofilepassword.php">Change Password</a></li>
                     <?php 
-                        if($_SESSION["userrole"]=="Administrator" || $_SESSION["userrole"]=="Chief Executive Officer" || $_SESSION["userrole"]=="Chief Financial Officer"){
+                        if($_SESSION["userrole"]=="Administrator"){
                             echo "<li style=\"background-color:#f7f7f7; padding:4px; color:#011D42;\"><b>ADMINISTRATOR</b></li>";
                             echo "<li class=".$user_list."><a href=\"../admin/userlist.php\">User List</a></li>";
                             echo "<li class=".$add_user."><a href=\"../admin/adduser.php\">Add User</a></li>";
@@ -105,7 +105,7 @@
                         }
                     ?>
                     <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-                    
+                    <li><a href="help" target="_blank"><span class="glyphicon glyphicon-question-sign"></span></a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

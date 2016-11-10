@@ -85,13 +85,15 @@
                         
                         <li class="<?php echo $profile; ?>"><a href="../myprofile.php">Profile</a></li>
                         <?php 
-                            if($_SESSION["userrole"]=="Administrator" || $_SESSION["userrole"]=="Chief Executive Officer" || $_SESSION["userrole"]=="Chief Financial Officer"){
+                            if($_SESSION["userrole"]=="Administrator"){
                                 echo "<li class=".$admin."><a href=\"../admin/userlist.php\">Admin</a></li>";
                             }
                         ?>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        <li><a href="help" target="_blank"><span class="glyphicon glyphicon-question-sign"></span></a></li>
+                        
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->

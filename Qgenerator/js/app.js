@@ -53,6 +53,14 @@ $(document).ready(function () {
         document.getElementById('button3').style.display = "none";
         document.getElementById('less3').style.display = "none";
     });
+    $('#backbutton').click(function () {
+        $("#requirements").hide(1000);
+        $("#professionalsection").show(1000);
+//        document.getElementById('personalpanel1').style.display = "none";
+//        document.getElementById('button3').style.display = "none";
+//        document.getElementById('less3').style.display = "none";
+    });
+    
     $('#userRequirements').click(function () {
         $('#product').text($('#productname').val());
         $('#LicenseName').text($('#license').val());
