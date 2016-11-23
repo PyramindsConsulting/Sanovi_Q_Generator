@@ -1,7 +1,7 @@
 <?php
     $host_name  = "192.186.234.211";
-    $database   = "sanovi_licensequote";
-    $user_name  = "sanovi_licensequ";
+    $database   = "sanovi_licensequote_u";
+    $user_name  = "sanovi_license_u";
     $password   = "XRebTEU@7zk.";
 
 

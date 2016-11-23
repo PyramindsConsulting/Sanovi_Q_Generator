@@ -218,7 +218,7 @@
                         </div>
                         <div class="row" id="background">
                         <div class="row">
-                            <div class="col-sm-5"><b>License fee for Prepetual Sanovi Cloud Continuity Module</b></div>
+                            <div class="col-sm-5"><b>License fee for Perpetual Sanovi Cloud Continuity Module</b></div>
                             <div class="col-sm-2"></div>
                             <div class="col-sm-1"></div>
                             <div class="col-sm-2"></div>

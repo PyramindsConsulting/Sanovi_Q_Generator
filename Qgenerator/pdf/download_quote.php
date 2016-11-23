@@ -164,10 +164,10 @@ $pdf->ln();
 //TABLE HEADING
 $pdf->Line(200,58,10,58);
 $pdf->SetFont('Arial','B',8);
-$pdf->Cell(80,5,'Item',0,0);
-$pdf->Cell(35,5,'List Price ('.$currency.')',0,0);
+$pdf->Cell(155,5,'Item',0,0);
+//$pdf->Cell(35,5,'List Price ('.$currency.')',0,0);
 //$pdf->Cell(30,5,'Discount %',0,0);
-$pdf->Cell(40,5,'Discount Value '.$currency,0,0);
+//$pdf->Cell(40,5,'Discount Value '.$currency,0,0);
 $pdf->Cell(40,5,'Final Price '.$currency,0,0);
 $pdf->Line(200,67,10,67);
 $pdf->ln();
@@ -177,31 +177,31 @@ $pdf->SetFont('Arial','',8);
 $pdf->ln();
 //
 
-$pdf->MultiCell(60,5,'License fee for Prepetual Sanovi Cloud Continuity Module',0,'L');
+$pdf->MultiCell(60,5,'License fee for Perpetual Sanovi Cloud Continuity Module',0,'L');
 
 //LICENSING PRICES & DISCOUNTS
-$pdf->Cell(80,5,'- Licensing',0,0); //
+$pdf->Cell(103,5,'- Licensing',0,0); //
 $licensing=currency_format($lht_data["licenseCost"],$currency);
-$pdf->Cell(23,5,$licensing,0,0,'R');
+//$pdf->Cell(23,5,$licensing,0,0,'R');
 //$pdf->Cell(25,5,$lht_data["discountPercentageOnLicense"],0,0,'R');
 $pdf->Cell(36,5,'-',0,0,'R');
 $finalLicenseCost=currency_format($lht_data["finalLicenseCost"],$currency);
 $pdf->Cell(42,5,currency_format($lht_data["finalLicenseCost"],$currency),0,0,'R');
 $pdf->ln();
-$pdf->Cell(80,5,'- Product Support',0,0);
-$pdf->Cell(23,5,currency_format($lht_data["productSupportCost"],$currency),0,0,'R');
+$pdf->Cell(103,5,'- Product Support',0,0);
+//$pdf->Cell(23,5,currency_format($lht_data["productSupportCost"],$currency),0,0,'R');
 //$pdf->Cell(25,5,$lht_data["discountPercentageOnSupport"],0,0,'R');
 $pdf->Cell(36,5,'-',0,0,'R');
 $pdf->Cell(42,5,currency_format($lht_data["finalSupportCost"],$currency),0,0,'R');
 $pdf->ln();
-$pdf->Cell(80,5,'- Professional Services',0,0);
-$pdf->Cell(23,5,currency_format($lht_data["PSCost"],$currency),0,0,'R');
+$pdf->Cell(103,5,'- Professional Services',0,0);
+//$pdf->Cell(23,5,currency_format($lht_data["PSCost"],$currency),0,0,'R');
 //$pdf->Cell(25,5,$lht_data["discountPercentageOnPS"],0,0,'R');
 $pdf->Cell(36,5,'-',0,0,'R');
 $pdf->Cell(42,5,currency_format($lht_data["finalPSCost"],$currency),0,0,'R');
 $pdf->ln();
-$pdf->Cell(80,5,'- DRM Product Training',0,0);
-$pdf->Cell(23,5,currency_format($lht_data["trainingCost"],$currency),0,0,'R');
+$pdf->Cell(103,5,'- DRM Product Training',0,0);
+//$pdf->Cell(23,5,currency_format($lht_data["trainingCost"],$currency),0,0,'R');
 //$pdf->Cell(25,5,$lht_data["discountPercentageOnTraining"],0,0,'R');
 $pdf->Cell(36,5,'-',0,0,'R');
 $pdf->Cell(42,5,currency_format($lht_data["finalTrainingCost"],$currency),0,0,'R');
