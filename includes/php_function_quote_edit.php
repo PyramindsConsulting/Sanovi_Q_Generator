@@ -939,4 +939,17 @@ function Product_billing_quantity($tempArray,$ProdModule,$Country,$ModeOfSale,$c
         $row=mysqli_fetch_array($result);
         return $row["approved_by_emp_id"];
     }
+    
+    function get_quote_generated_name($userid){
+        include "../../includes/config.php";
+        $query="SELECT emp_name FROM users WHERE login_name='$userid'";
+        $result = mysqli_query($connect, $query);
+        //CHECK IF QUERY EXECUTES OR NOT
+        if(!$result){
+            die("Database Query Failed");
+        }
+        //ACQUIRING THE DATA FROM DB
+        $row=mysqli_fetch_array($result);
+        return $row["emp_name"];
+    }
 ?>

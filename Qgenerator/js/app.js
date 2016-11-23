@@ -694,7 +694,7 @@ function next_page1() {
             document.getElementById("second").style.display = "none";
             document.getElementById("third").style.display = "none";
         }
-        else if (!elem4.match(Exp2) || !isNaN(elem4)) {
+        else if (!elem4.match(Exp1) || !isNaN(elem4)) {
             document.getElementById('customernamecheck').style.display = "inline";
             document.getElementById('namelen').style.display = "none";
             document.getElementById('namecheck').style.display = "none";
@@ -705,7 +705,7 @@ function next_page1() {
             document.getElementById("second").style.display = "none";
             document.getElementById("third").style.display = "none";
         }
-        else if ((!partner.match(Exp2)) || (!isNaN(partner))) {
+        else if (!partner.match(Exp1) || !isNaN(partner)) {
             document.getElementById('partnerlen').style.display = "none";
             document.getElementById('partnernamecheck').style.display = "inline";
             document.getElementById('customernamecheck').style.display = "none";

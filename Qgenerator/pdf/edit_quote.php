@@ -57,10 +57,10 @@ $pdf->ln();
 $pdf->SetFont('Arial','',8);
 $pdf->ln();
 
-//$text=str_repeat('License fee for Prepetual Sanovi Cloud Continuity Module',20);
+//$text=str_repeat('License fee for Perpetual Sanovi Cloud Continuity Module',20);
 //$nb=$pdf->WordWrap($text,120);
 //$pdf->MultiCell( 200, 40, $reportSubtitle, 1);
-$pdf->MultiCell(60,5,'License fee for Prepetual Sanovi Cloud Continuity Module',0,'L');
+$pdf->MultiCell(60,5,'License fee for Perpetual Sanovi Cloud Continuity Module',0,'L');
 
 //LICENSING PRICES & DISCOUNTS
 $pdf->Cell(60,5,'- Licensing',0,0); //
