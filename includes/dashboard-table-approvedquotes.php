@@ -95,6 +95,7 @@
                         <td>
                             <center>
                                 <!--More ICON -->
+<!--
                                 <?php 
                                     if($latest_version==0){ ?>
 
@@ -102,6 +103,7 @@
                                 <a href="dashboard-more.php?refId=<?php echo $ref_ids_created_by_users[$i]."&verId=".$versions[$latest_version];?>" data-toggle="tooltip" data-placement="top" title="Quote History" data-toggle="tooltip" data-placement="top" title="Quote History"><span class="glyphicon glyphicon-option-horizontal"></span></a>
                                 <?php }
                                 ?>
+-->
                             </center>
                         </td>
                     </tr>

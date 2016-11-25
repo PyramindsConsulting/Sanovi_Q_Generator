@@ -21,22 +21,25 @@ $verId=$_GET["verId"];
 //}
     
 $quote_created_user=find_quote_created_user($refId, $verId);
+$quote_created_rep_manager=find_rep_manager_of_quote_creator($quote_created_user);
 $logged_in_user=$_SESSION["username"];
 $quote_created_name=get_quote_generated_name($quote_created_user);
 if($_SESSION["userrole"]=="Administrator" || $_SESSION["userrole"]=="Chief Executive Officer" || $_SESSION["userrole"]=="Chief Financial Officer"){
     
 }else{
     $approval_assigned_to=approval_assigned_to($refId, $verId);
-    if($_SESSION["emp_id"]==$approval_assigned_to){
+    if($_SESSION["emp_id"]==$approval_assigned_to || $_SESSION["emp_id"]==$quote_created_rep_manager){
         
     }else{
         if(($logged_in_user!=$quote_created_user) || ($_SESSION["userrole"]=="Quote Requestor")){
-            //die("Access Denied!");
-            echo "<center><br>";
-            echo "<img src=\"..\images/Access-Denied.jpg\" width=\"25%\">";
-            echo "<p style=\"color:red;\">You are not authorized to visit this page</p>";
-            echo "</center>";
-            die();
+            if($approval_assigned_to=="Draft"){
+            }else{
+                echo "<center><br>";
+                echo "<img src=\"..\images/Access-Denied.jpg\" width=\"25%\">";
+                echo "<p style=\"color:red;\">You are not authorized to visit this page</p>";
+                echo "</center>";
+                die();
+            }
         }
     }
 }

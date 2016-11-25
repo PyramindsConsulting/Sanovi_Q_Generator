@@ -68,7 +68,7 @@
                                     $rows=no_of_rows_user_roles();
                                     for($i=1; $i<=$rows; $i++){
                                         if (!empty($_POST["UserDiscountsButton$i"])) {
-                                            $result=update_userroles_values($i, $_POST["DiscPercentage$i"]);
+                                            $result=update_userroles_values($i, $_POST["DiscPercentage$i"], $_POST["MinDiscPercentage$i"]);
                                             echo "<p style=\"color:GREEN;\">".$result."</p>";
 //                                            echo "No Errors";
                                         }
@@ -81,7 +81,8 @@
                                         <tr>
                                             <td></td>
                                             <td>Role</td>
-                                            <td>Discount Percentage</td>
+                                            <td>Min Discount Percentage</td>
+                                            <td>Max Discount Percentage</td>
                                             <td></td>
                                         </tr>
                                     </thead>
@@ -99,6 +100,9 @@
                                                     </td>
                                                     <td>
                                                         <input name="DiscName<?php echo $i; ?>" value="<?php echo $details["UserRole"]; ?>" type="text" readonly="true" onblur="this.readOnly='true';" onchange="document.getElementById('GDB<?php echo $i ?>').removeAttribute('disabled'); document.getElementById('GDB<?php echo $i ?>').style.backgroundColor='#b7fcae'"  size="25" >
+                                                    </td>
+                                                    <td>
+                                                        <input name="MinDiscPercentage<?php echo $i; ?>" value="<?php echo $details["MinDiscount"]; ?>" type="text" readonly="true" onblur="this.readOnly='true';" onchange="document.getElementById('GDB<?php echo $i ?>').removeAttribute('disabled'); document.getElementById('GDB<?php echo $i ?>').style.backgroundColor='#b7fcae'" ondblclick="this.readOnly='';">
                                                     </td>
                                                     <td>
                                                         <input name="DiscPercentage<?php echo $i; ?>" value="<?php echo $details["MaxDiscount"]; ?>" type="text" readonly="true" onblur="this.readOnly='true';" onchange="document.getElementById('GDB<?php echo $i ?>').removeAttribute('disabled'); document.getElementById('GDB<?php echo $i ?>').style.backgroundColor='#b7fcae'" ondblclick="this.readOnly='';">

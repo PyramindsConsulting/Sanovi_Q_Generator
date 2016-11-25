@@ -925,4 +925,16 @@ function Product_billing_quantity($tempArray,$ProdModule,$Country,$ModeOfSale,$c
         $row=mysqli_fetch_array($result);
         return $row['annexure_1'];
     }
+
+    //FINDING THE QUOTE STATUS
+    function get_quote_status($ref_Id, $ver_Id){
+        include "../includes/config.php";
+        
+        $query="SELECT status FROM LicenseGeneration WHERE license_reference_id='$ref_Id' AND license_revision_id='$ver_Id'";
+        $result = mysqli_query($connect, $query);
+        $row=mysqli_fetch_array($result);
+        $quote_status=$row["status"];
+        
+        return $quote_status;
+    }
 ?>

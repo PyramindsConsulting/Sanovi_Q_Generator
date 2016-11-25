@@ -58,27 +58,29 @@
                                 $quote_creator=find_quote_created_user_for_approval($ref_id, $ver_id);
                                  
                                 if($_SESSION["userrole"]!="Quote Requestor"){
-                                    $quote_validity=is_valid_quote($ref_id, $ver_id); //CHECK THE EXISTANCE OF QUOTE
-                                    if($quote_validity=="Quote Not Found" || $quote_validity=="Unknown Database Error! Contact Administrator"){
-                                        echo "<center><p style=\"color:red;\"><br>$quote_validity</p></center>";
-                                    }else{
-                                        $quote_status=find_quote_status_to_delete($ref_id, $ver_id); //USING SAME FUNCTION USED TO DELETE QUOTE
-                                        if($quote_status=="Finalized"){
-                                            echo "<center><p style=\"color:red;\"><br>Quote is already Finalized</p></center>";
-                                            //REDIRECT TO DASHBOARD
-                                            header( "refresh:5;url=dashboard.php" );
-                                            echo '<center>You\'ll be redirected to Dashboard in 5 secs.</center>';
-                                            echo '<center><a href="dashboard.php">Click to redirect immediately</a><br></center>';
+                                    if($_SESSION["userrole"]!="Sales Manager"){
+                                        $quote_validity=is_valid_quote($ref_id, $ver_id); //CHECK THE EXISTANCE OF QUOTE
+                                        if($quote_validity=="Quote Not Found" || $quote_validity=="Unknown Database Error! Contact Administrator"){
+                                            echo "<center><p style=\"color:red;\"><br>$quote_validity</p></center>";
                                         }else{
-                                            //WRITE CODE FOR FINALIZING THE QUOTE
-                                            if(finalize_quote_generated_by_QR($ref_id, $ver_id)=="Successful"){
-                                                echo "<center><span style=\"color:Green;\">Quote Approved Successfully</span></center>";
-                                                header('location:pdf/mail_alert_for_approval_confirmation.php?refId='.$ref_id.'&verId='.$ver_id.'&qgenemailid='.$qgenemailid.'&qgename='.$qgename);
-//                                                header( "refresh:5;url=dashboard.php" ); 
-//                                                echo '<center>You\'ll be redirected to Dashboard in 5 secs.<br></center>';
-//                                                echo '<center><a href="dashboard.php">Click to redirect immediately</a><br></center>';
+                                            $quote_status=find_quote_status_to_delete($ref_id, $ver_id); //USING SAME FUNCTION USED TO DELETE QUOTE
+                                            if($quote_status=="Finalized"){
+                                                echo "<center><p style=\"color:red;\"><br>Quote is already Finalized</p></center>";
+                                                //REDIRECT TO DASHBOARD
+                                                header( "refresh:5;url=dashboard.php" );
+                                                echo '<center>You\'ll be redirected to Dashboard in 5 secs.</center>';
+                                                echo '<center><a href="dashboard.php">Click to redirect immediately</a><br></center>';
                                             }else{
-                                                echo "<center><span style=\"color:red;\">Unknown Error Occured! Please contact Administrator</span></center>";
+                                                //WRITE CODE FOR FINALIZING THE QUOTE
+                                                if(finalize_quote_generated_by_QR($ref_id, $ver_id)=="Successful"){
+                                                    echo "<center><span style=\"color:Green;\">Quote Approved Successfully</span></center>";
+                                                    header('location:pdf/mail_alert_for_approval_confirmation.php?refId='.$ref_id.'&verId='.$ver_id.'&qgenemailid='.$qgenemailid.'&qgename='.$qgename);
+    //                                                header( "refresh:5;url=dashboard.php" ); 
+    //                                                echo '<center>You\'ll be redirected to Dashboard in 5 secs.<br></center>';
+    //                                                echo '<center><a href="dashboard.php">Click to redirect immediately</a><br></center>';
+                                                }else{
+                                                    echo "<center><span style=\"color:red;\">Unknown Error Occured! Please contact Administrator</span></center>";
+                                                }
                                             }
                                         }
                                     }
