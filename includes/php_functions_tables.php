@@ -154,6 +154,7 @@
         $details=array();
         $details["UserRole"]=$row["UserRole"];
         $details["MaxDiscount"]=$row["MaxDiscount"];
+        $details["MinDiscount"]=$row["MinDiscount"];
 //        print_r ($details);
         return $details;
     }
@@ -173,10 +174,10 @@
     }
 
     //FUNCTION FOR UPDATING USER ROLES TABLE
-    function update_userroles_values($app_id, $discount_percentage){
+    function update_userroles_values($app_id, $discount_percentage, $Mindiscount_percentage){
         include ("../../includes/config.php");
         
-        $query="UPDATE UserRoles SET MaxDiscount = '$discount_percentage' WHERE modify_tbl_key='$app_id'";
+        $query="UPDATE UserRoles SET MinDiscount = '$Mindiscount_percentage', MaxDiscount = '$discount_percentage' WHERE modify_tbl_key='$app_id'";
         $result = mysqli_query($connect, $query);
         //CHECK IF QUERY EXECUTES OR NOT
         if(!$result){

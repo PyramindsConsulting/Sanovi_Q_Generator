@@ -4,7 +4,6 @@ $(document).ready(function () {
     });
     $('[data-toggle="tooltip"]').tooltip();
     $("#requirements").hide();
-    
     $('#button1').click(function () {
         $("#2_site_panel").show(1000);
         document.getElementById('less1').style.display = "inline";
@@ -56,11 +55,10 @@ $(document).ready(function () {
     $('#backbutton').click(function () {
         $("#requirements").hide(1000);
         $("#professionalsection").show(1000);
-//        document.getElementById('personalpanel1').style.display = "none";
-//        document.getElementById('button3').style.display = "none";
-//        document.getElementById('less3').style.display = "none";
+        //        document.getElementById('personalpanel1').style.display = "none";
+        //        document.getElementById('button3').style.display = "none";
+        //        document.getElementById('less3').style.display = "none";
     });
-    
     $('#userRequirements').click(function () {
         $('#product').text($('#productname').val());
         $('#LicenseName').text($('#license').val());
@@ -287,12 +285,14 @@ $(document).ready(function () {
         }
         else {
             $('#Prof_prod_servers').text($('#prof_services_prod_servers').val());
+            document.getElementById('Prof_prod_servers').innerHTML=$('#prof_services_prod_servers').val();
         }
         if ($('#prof_services_virtual_prod').val() == "") {
             $('#prof_virtual_prod').hide();
         }
         else {
             $('#Prof_virtual_prod').text($('#prof_services_virtual_prod').val());
+            document.getElementById('Prof_virtual_prod').innerHTML=$('#prof_services_virtual_prod').val();
         }
         if ($('#prof_services_share_server').val() == "") {
             $('#prof_share_server').hide();
@@ -354,11 +354,10 @@ $(document).ready(function () {
         else {
             $("#table").hide();
         }
-        
         if (document.getElementById('advanced_replication_3s').checked) {
             $("#3-site").prop("checked", true);
         }
-        if ($("#3-site").is(":checked")) {
+        if ($("#3-site").is(":checked")){
             $("#table1").show();
             document.getElementById('servers_3S').style.display = "inline";
             document.getElementById('vm_images_3S').style.display = "inline";
@@ -472,7 +471,6 @@ $(document).ready(function () {
     });
 });
 $(document).ready(function () {
-    
     if ($("#prof").is(":checked")) {
         $("#table2").show();
         document.getElementById('panel3').style.display = "none";
@@ -547,6 +545,163 @@ window.onload = function () {
     document.getElementById("second").style.display = "none";
     document.getElementById("third").style.display = "none";
 };
+//var vm_advanced_3s=document.getElementById('virtual_prod_3s').value;
+//var bm_advanced_3s=document.getElementById('prod_servers_3s').value;
+//validation for 2-site advanced values
+function correctValuesEnteredIn2s_vm() {
+    var vm_advanced_2s = document.getElementById('virtual_prod_2s').value;
+    var vm_images_2s = document.getElementById('vm_images_2s').value;
+    var bm_win_2s = document.getElementById('b_windows_datas_2s').value;
+    var bm_unix_2s = document.getElementById('b_unix_datas_2s').value;
+    var bm_advanced_2s = document.getElementById('prod_servers_2s').value;
+    var bm_advanced_2s_addon = Number(bm_win_2s) + Number(bm_unix_2s);
+//    alert(vm_advanced_2s);
+    if (checkNumbers(vm_advanced_2s, vm_images_2s) || checkNumbers(bm_advanced_2s, bm_advanced_2s_addon)) {
+        if (checkNumbers(vm_advanced_2s, vm_images_2s) && !checkNumbers(bm_advanced_2s, bm_advanced_2s_addon)) {
+            document.getElementById('virtual_prod_2s').focus();
+            $("#virtual_prod_2S").addClass("has-error has-feedback");
+            $("#prod_servers_2S").removeClass("has-error");
+            return false;
+        }
+        else if (checkNumbers(bm_advanced_2s, bm_advanced_2s_addon) && !checkNumbers(vm_advanced_2s, vm_images_2s)) {
+            document.getElementById('prod_servers_2s').focus();
+            $("#prod_servers_2S").addClass("has-error has-feedback");
+            $("#virtual_prod_2S").removeClass("has-error");
+            return false;
+        }
+        else {
+            document.getElementById('prod_servers_2s').focus();
+            $("#prod_servers_2S").addClass("has-error has-feedback");
+            return false;
+        }
+    }
+    else if (checkNumbers(vm_advanced_2s, vm_images_2s) && checkNumbers(bm_advanced_2s, bm_advanced_2s_addon)) {
+        document.getElementById('prod_servers_2s').focus();
+        $("#prod_servers_2S").addClass("has-error has-feedback");
+        return false;
+    }
+    else if(!properNumber(bm_advanced_2s)){
+        document.getElementById('prod_servers_2s').focus();
+        $("#prod_servers_2S").addClass("has-error has-feedback");  
+        return false;
+    }else if(!properNumber(vm_advanced_2s)){
+        document.getElementById('virtual_prod_2s').focus();
+        $("#virtual_prod_2S").addClass("has-error has-feedback");  
+        return false;
+    }
+    else {
+        $("#virtual_prod_2S").removeClass("has-error");
+        $("#prod_servers_2S").removeClass("has-error");
+        return true;
+    }
+    
+}
+
+//validation for 3-site advanced values
+function correctValuesEnteredIn3s_vm() {
+    var vm_advanced_3s = document.getElementById('virtual_prod_3s').value;
+    var vm_images_3s = document.getElementById('vm_images_3s').value;
+    var bm_win_3s = document.getElementById('b_windows_datas_3s').value;
+    var bm_unix_3s = document.getElementById('b_unix_datas_3s').value;
+    var bm_advanced_3s = document.getElementById('prod_servers_3s').value;
+    var bm_advanced_3s_addon = Number(bm_win_3s) + Number(bm_unix_3s);
+    if (checkNumbers(vm_advanced_3s, vm_images_3s) || checkNumbers(bm_advanced_3s, bm_advanced_3s_addon)) {
+        if (checkNumbers(vm_advanced_3s, vm_images_3s) && !checkNumbers(bm_advanced_3s, bm_advanced_3s_addon)) {
+            document.getElementById('virtual_prod_3s').focus();
+            $("#virtual_prod_3S").addClass("has-error has-feedback");
+            $("#prod_servers_3S").removeClass("has-error");
+            return false;
+        }
+        else if (checkNumbers(bm_advanced_3s, bm_advanced_3s_addon) && !checkNumbers(vm_advanced_3s, vm_images_3s)) {
+            document.getElementById('prod_servers_3s').focus();
+            $("#prod_servers_3S").addClass("has-error has-feedback");
+            $("#virtual_prod_3S").removeClass("has-error");
+            return false;
+        }
+        else {
+            document.getElementById('prod_servers_3s').focus();
+            $("#prod_servers_3S").addClass("has-error has-feedback");
+            return false;
+        }
+    }
+    else if (checkNumbers(vm_advanced_3s, vm_images_3s) && checkNumbers(bm_advanced_3s, bm_advanced_3s_addon)) {
+        document.getElementById('prod_servers_3s').focus();
+        $("#prod_servers_3S").addClass("has-error has-feedback");
+        return false;
+    }
+    else if(!properNumber(bm_advanced_3s)){
+        document.getElementById('prod_servers_3s').focus();
+        $("#prod_servers_3S").addClass("has-error has-feedback");  
+        return false;
+    }else if(!properNumber(vm_advanced_3s)){
+        document.getElementById('virtual_prod_3s').focus();
+        $("#virtual_prod_3S").addClass("has-error has-feedback");  
+        return false;
+    }
+    else {
+        $("#virtual_prod_3S").removeClass("has-error");
+        $("#prod_servers_3S").removeClass("has-error");
+        return true;
+    }
+}
+
+//validation for prof-services advanced values
+function correctValuesEnteredInprof() {
+    var prof_prod_vm=document.getElementById("prof_services_vm_image").value;
+//    alert(prof_prod_vm);
+    var prof_prod_vm_addon=document.getElementById("prof_services_virtual_prod").value;
+    var prof_prod_bm_win=document.getElementById("prof_services_b_windows_datas").value;
+    var prof_prod_bm_lin=document.getElementById("prof_services_b_unix_datas").value;
+    var prof_prod_bm_addon=document.getElementById("prof_services_prod_servers").value;
+    var advanced_add_on_limit=Number(prof_prod_bm_win)+Number(prof_prod_bm_lin);
+    
+    if (checkNumbers(prof_prod_vm_addon,prof_prod_vm) || checkNumbers(prof_prod_bm_addon, advanced_add_on_limit)) {
+        if (checkNumbers(prof_prod_vm_addon,prof_prod_vm) && !checkNumbers(prof_prod_bm_addon, advanced_add_on_limit)) {
+            document.getElementById('prof_services_virtual_prod').focus();
+            $("#Prof_Services_virtual_prod").addClass("has-error has-feedback");
+            $("#Prof_Services_prod_servers").removeClass("has-error");
+            return false;
+        }
+        else if (checkNumbers(prof_prod_bm_addon, advanced_add_on_limit) && !checkNumbers(prof_prod_vm_addon,prof_prod_vm)) {
+            document.getElementById('prof_services_prod_servers').focus();
+            $("#Prof_Services_prod_servers").addClass("has-error has-feedback");
+            $("#Prof_Services_virtual_prod").removeClass("has-error");
+            return false;
+        }
+        else {
+            document.getElementById('prof_services_prod_servers').focus();
+            $("#Prof_Services_prod_servers").addClass("has-error has-feedback");
+            return false;
+        }
+    }
+    else if (checkNumbers(prof_prod_vm_addon,prof_prod_vm) && checkNumbers(prof_prod_bm_addon, advanced_add_on_limit)) {
+        document.getElementById('prof_services_prod_servers').focus();
+        $("#Prof_Services_prod_servers").addClass("has-error has-feedback");
+        return false;
+    }else if(!properNumber(prof_prod_bm_addon)){
+        document.getElementById('prof_services_prod_servers').focus();
+        $("#Prof_Services_prod_servers").addClass("has-error has-feedback");  
+        return false;
+    }else if(!properNumber(prof_prod_vm_addon)){
+        document.getElementById('prof_services_virtual_prod').focus();
+        $("#Prof_Services_virtual_prod").addClass("has-error has-feedback");  
+        return false;
+    }
+    else {
+        $("#Prof_Services_virtual_prod").removeClass("has-error");
+        $("#Prof_Services_prod_servers").removeClass("has-error");
+        return true;
+    }
+}
+
+function checkNumbers(num1, num2) {
+    if (Number(num1) > Number(num2)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 // Function that executes on click of first next button.
 function next_page1() {
     var elem = document.getElementById("name").value;
@@ -772,320 +927,247 @@ function next_page2() {
     var servers_3s = document.getElementById('servers_3s').value;
     if (!properNumber(vm_images_2s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('vm_images_2s').focus();
-        }
-        else {
-            document.getElementById('vm_images_2s').focus();
-        }
+            $("#vm_images_2S").addClass("has-error");
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#vm_images_2S").removeClass("has-error");
     if (!properNumber(db_2s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('db_2s').focus();
-        }
-        else {
-            document.getElementById('db_2s').focus();
-        }
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return false;
+            $("#db_2S").addClass("has-error");
+            document.getElementById("second").style.display = "block";
+            document.getElementById("third").style.display = "none";
+            return false;
     }
+    $("#db_2S").removeClass("has-error");
     if (!properNumber(b_windows_datas_2s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('b_windows_datas_2s').focus();
-        }
-        else {
-            document.getElementById('b_windows_datas_2s').focus();
-        }
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return false;
+            $("#b_windows_datas_2S").addClass("has-error");
+            document.getElementById("second").style.display = "block";
+            document.getElementById("third").style.display = "none";
+            return false;
     }
+    $("#b_windows_datas_2S").removeClass("has-error");
     if (!properNumber(b_windows_db_2s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('b_windows_db_2s').focus();
-        }
-        else {
-            document.getElementById('b_windows_db_2s').focus();
-        }
+            $("#b_windows_db_2S").addClass("has-error");
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#b_windows_db_2S").removeClass("has-error");
     if (!properNumber(b_unix_datas_2s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('b_unix_datas_2s').focus();
-        }
-        else {
-            document.getElementById('b_unix_datas_2s').focus();
-        }
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return false;
+            $("#b_unix_datas_2S").addClass("has-error");
+            document.getElementById("second").style.display = "block";
+            document.getElementById("third").style.display = "none";
+            return false;
     }
+    $("#b_unix_datas_2S").removeClass("has-error");
     if (!properNumber(b_unix_db_2s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('b_unix_db_2s').focus();
-        }
-        else {
-            document.getElementById('b_unix_db_2s').focus();
-        }
+            $("#b_unix_db_2S").addClass("has-error");
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#b_unix_db_2S").removeClass("has-error");
     if (!properNumber(share_server_2s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('share_server_2s').focus();
-        }
-        else {
-            document.getElementById('share_server_2s').focus();
-        }
+        $("#share_server_2S").addClass("has-error");
         document.getElementById("second").style.display = "inline";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#share_server_2S").removeClass("has-error");
     if (!properNumber(virtual_sharepoint_server_2s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('virtual_sharepoint_server_2s').focus();
-        }
-        else {
-            document.getElementById('virtual_sharepoint_server_2s').focus();
-        }
+         $("#virtual_sharepoint_server_2S").addClass("has-error");
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#virtual_sharepoint_server_2S").removeClass("has-error");
     if (!properNumber(prod_ms_2s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('prod_ms_2s').focus();
-        }
-        else {
-            document.getElementById('prod_ms_2s').focus();
-        }
+        $("#prod_ms_2S").addClass("has-error");
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#prod_ms_2S").removeClass("has-error");
     if (!properNumber(prod_v_ms_2s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('prod_v_ms_2s').focus();
-        }
-        else {
-            document.getElementById('prod_v_ms_2s').focus();
-        }
+        $("#prod_v_ms_2S").addClass("has-error");
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#prod_v_ms_2S").removeClass("has-error");
     if (!properNumber(servers_2s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('servers_2s').focus();
-        }
-        else {
-            document.getElementById('servers_2s').focus();
-        }
+            $("#servers_2S").addClass("has-error");
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#servers_2S").removeClass("has-error");
+    
     if (!properNumber(prod_servers_2s)) {
-        var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('prod_servers_2s').focus();
-        }
-        else {
-            document.getElementById('prod_servers_2s').focus();
-        }
+        $("#prod_servers_2S").addClass("has-error");
+//        alert("Please Enter Proper Value PROD");
+//        alert(document.getElementById('prod_servers_2S').value);
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#prod_servers_2S").removeClass("has-error");
+    
     if (!properNumber(virtual_prod_2s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('virtual_prod_2s').focus();
-        }
-        else {
-            document.getElementById('virtual_prod_2s').focus();
-        }
+//        document.getElementById('virtual_prod_2s').focus();
+//            $("#virtual_prod_2S").addClass("has-error has-feedback");
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#virtual_prod_2S").removeClass("has-error");
     if (!properNumber(vm_images_3s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('vm_images_3s').focus();
-        }
-        else {
-            document.getElementById('vm_images_3s').focus();
-        }
+         $("#vm_images_3S").addClass("has-error");
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#vm_images_3S").removeClass("has-error");
     if (!properNumber(database_3s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('database_3s').focus();
-        }
-        else {
-            document.getElementById('database_3s').focus();
-        }
+            $("#database_3S").addClass("has-error");
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#database_3S").removeClass("has-error");
     if (!properNumber(b_windows_datas_3s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('b_windows_datas_3s').focus();
-        }
-        else {
-            document.getElementById('b_windows_datas_3s').focus();
-        }
+            $("#b_windows_datas_3S").addClass("has-error");
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#b_windows_datas_3S").removeClass("has-error");
     if (!properNumber(b_windows_db_3s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('b_windows_db_3s').focus();
-        }
-        else {
-            document.getElementById('b_windows_db_3s').focus();
-        }
+            $("#b_windows_db_3S").addClass("has-error");
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#b_windows_db_3S").removeClass("has-error");
     if (!properNumber(b_unix_datas_3s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('b_unix_datas_3s').focus();
-        }
-        else {
-            document.getElementById('b_unix_datas_3s').focus();
-        }
+            $("#b_unix_datas_3S").addClass("has-error");    
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#b_unix_datas_3S").removeClass("has-error");
     if (!properNumber(b_unix_db_3s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('b_unix_db_3s').focus();
-        }
-        else {
-            document.getElementById('b_unix_db_3s').focus();
-        }
+            $("#b_unix_db_3S").addClass("has-error");
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#b_unix_db_3S").removeClass("has-error");
     if (!properNumber(share_server_3s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('share_server_3s').focus();
-        }
-        else {
-            document.getElementById('share_server_3s').focus();
-        }
+            $("#share_server_3S").addClass("has-error");
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#share_server_3S").removeClass("has-error");
     if (!properNumber(virtual_server_3s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('virtual_server_3s').focus();
-        }
-        else {
-            document.getElementById('virtual_server_3s').focus();
-        }
+            $("#virtual_server_3S").addClass("has-error");
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#virtual_server_3S").removeClass("has-error");
     if (!properNumber(prod_ms_3s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('prod_ms_3s').focus();
-        }
-        else {
-            document.getElementById('prod_ms_3s').focus();
-        }
+            $("#prod_ms_3S").addClass("has-error");
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#prod_ms_3S").removeClass("has-error");
     if (!properNumber(prod_v_ms_3s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('prod_v_ms_3s').focus();
-        }
-        else {
-            document.getElementById('prod_v_ms_3s').focus();
-        }
+            $("#prod_v_ms_3S").addClass("has-error");
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#prod_v_ms_3S").removeClass("has-error");
     if (!properNumber(servers_3s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('servers_3s').focus();
-        }
-        else {
-            document.getElementById('servers_3s').focus();
-        }
+            $("#servers_3s").addClass("has-error");
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#servers_3s").removeClass("has-error");
     if (!properNumber(prod_servers_3s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('prod_servers_3s').focus();
-        }
-        else {
-            document.getElementById('prod_servers_3s').focus();
-        }
+            $("#prod_servers_3S").addClass("has-error");
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
+    $("#prod_servers_3S").removeClass("has-error");
     if (!properNumber(virtual_prod_3s)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('virtual_prod_3s').focus();
-        }
-        else {
-            document.getElementById('virtual_prod_3s').focus();
-        }
+            $("#virtual_prod_3S").addClass("has-error");
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
     }
-    else {
-        document.getElementById("second").style.display = "none";
-        document.getElementById("third").style.display = "block";
-    }
+    $("#virtual_prod_3S").removeClass("has-error");
+    
+//    else {
+//        document.getElementById("second").style.display = "none";
+//        document.getElementById("third").style.display = "block";
+//    }
     var site_2s_vm_images_2s = document.getElementById("vm_images_2s").value;
     var site_2s_db_2s = document.getElementById("db_2s").value;
     var site_2s_b_windows_datas_2s = document.getElementById("b_windows_datas_2s").value;
@@ -1117,14 +1199,53 @@ function next_page2() {
     document.getElementById("prof_services_b_unix_datas_addon").innerHTML = Number(site_2s_b_unix_datas_2s) + Number(site_3s_b_unix_datas_3s);
     document.getElementById("prof_services_b_unix_db_addon").innerHTML = Number(site_2s_b_unix_db_2s) + Number(site_3s_b_unix_db_3s);
     document.getElementById("prof_services_prod_servers_addon").innerHTML = Number(site_2s_prod_servers_2s) + Number(site_3s_prod_servers_3s);
+    document.getElementById("prof_services_virtual_prod_addon").value = Number(site_2s_prod_servers_2s) + Number(site_3s_prod_servers_3s);
     document.getElementById("prof_services_virtual_prod_addon").innerHTML = Number(site_2s_virtual_prod_2s) + Number(site_3s_virtual_prod_3s);
+    document.getElementById("prof_services_prod_servers_addon").value  = Number(site_2s_virtual_prod_2s) + Number(site_3s_virtual_prod_3s);
     document.getElementById("prof_services_share_server_addon").innerHTML = Number(site_2s_share_server_2s) + Number(site_3s_share_server_3s);
     document.getElementById("prof_services_share_db_addon").innerHTML = Number(site_2s_share_server_2s) + Number(site_3s_share_server_3s);
     document.getElementById("prof_services_v_share_server_addon").innerHTML = Number(site_2s_virtual_sharepoint_server_2s) + Number(site_3s_virtual_server_3s);
     document.getElementById("prof_services_v_share_db_addon").innerHTML = Number(site_2s_virtual_sharepoint_server_2s) + Number(site_3s_virtual_server_3s);
     document.getElementById("prof_services_prod_ms_addon").innerHTML = Number(site_2s_prod_ms_2s) + Number(site_3s_prod_ms_3s);
     document.getElementById("prof_services_prod_v_ms_addon").innerHTML = Number(site_2s_prod_v_ms_2s) + Number(site_3s_prod_v_ms_3s);
+    $("#vm_images_2S").removeClass("has-error");
+    $("#db_2S").removeClass("has-error");
+    $("#b_windows_datas_2S").removeClass("has-error");
+    $("#b_windows_db_2S").removeClass("has-error");
+    $("#b_unix_datas_2S").removeClass("has-error");
+    $("#b_unix_db_2S").removeClass("has-error");
+     $("#share_server_2S").removeClass("has-error");
+    $("#virtual_sharepoint_server_2S").removeClass("has-error");
+    $("#prod_ms_2S").removeClass("has-error");
+    $("#prod_v_ms_2S").removeClass("has-error");
+    $("#servers_2S").removeClass("has-error");
+    $("#prod_servers_2S").removeClass("has-error");
+     $("#virtual_prod_2S").removeClass("has-error");
+    $("#vm_images_3S").removeClass("has-error");
+    $("#database_3S").removeClass("has-error");
+    $("#b_windows_datas_3S").removeClass("has-error");
+    $("#b_windows_db_3S").removeClass("has-error");
+    $("#b_unix_datas_3S").removeClass("has-error");
+    $("#b_unix_db_3S").removeClass("has-error");
+    $("#share_server_3S").removeClass("has-error");
+    $("#virtual_server_3S").removeClass("has-error");
+    $("#prod_ms_3S").removeClass("has-error");
+    $("#prod_v_ms_3S").removeClass("has-error");
+    $("#servers_3s").removeClass("has-error");
+    $("#prod_servers_3S").removeClass("has-error");
+    $("#virtual_prod_3S").removeClass("has-error");
     $("#requirements").hide();
+    if (correctValuesEnteredIn2s_vm() && correctValuesEnteredIn3s_vm()) {
+        document.getElementById("second").style.display = "none";
+        document.getElementById("third").style.display = "block";
+        return true;
+    }
+    else {
+        document.getElementById("second").style.display = "block";
+        document.getElementById("third").style.display = "none";
+        return false;
+    }
+    
 }
 
 function valid_product() {
@@ -1163,17 +1284,21 @@ function displayAdvanced() {
     else if ((elem != "") && ((elem1 == "") && (elem2 == ""))) {
         document.getElementById('prod_servers_2S').style.display = "none";
         document.getElementById('virtual_prod_2S').style.display = "inline";
+        document.getElementById('virtual_prod_2s_addon').innerHTML = elem;
         document.getElementById('advancedCheck').style.display = "none";
     }
     else if ((elem == "") && ((elem1 != "") || (elem2 != ""))) {
         document.getElementById('advancedCheck').style.display = "none";
         document.getElementById('prod_servers_2S').style.display = "inline";
+        document.getElementById('prod_servers_2s_addon').innerHTML = Number(elem1) + Number(elem2);
         document.getElementById('virtual_prod_2S').style.display = "none";
     }
     else {
         document.getElementById('advancedCheck').style.display = "none";
         document.getElementById('prod_servers_2S').style.display = "inline";
         document.getElementById('virtual_prod_2S').style.display = "inline";
+        document.getElementById('virtual_prod_2s_addon').innerHTML = elem;
+        document.getElementById('prod_servers_2s_addon').innerHTML = Number(elem1) + Number(elem2);
     }
 }
 
@@ -1190,17 +1315,21 @@ function displayAdvance_3s() {
     else if ((elem != "") && ((elem1 == "") && (elem2 == ""))) {
         document.getElementById('prod_servers_3S').style.display = "none";
         document.getElementById('virtual_prod_3S').style.display = "inline";
+        document.getElementById('virtual_prod_3s_addon').innerHTML = elem;
         document.getElementById('advancedCheck_3s').style.display = "none";
     }
     else if ((elem == "") && ((elem1 != "") || (elem2 != ""))) {
         document.getElementById('advancedCheck_3s').style.display = "none";
         document.getElementById('prod_servers_3S').style.display = "inline";
+        document.getElementById('prod_servers_3s_addon').innerHTML = Number(elem1) + Number(elem2);
         document.getElementById('virtual_prod_3S').style.display = "none";
     }
     else {
         document.getElementById('advancedCheck_3s').style.display = "none";
         document.getElementById('prod_servers_3S').style.display = "inline";
         document.getElementById('virtual_prod_3S').style.display = "inline";
+        document.getElementById('virtual_prod_3s_addon').innerHTML = elem;
+        document.getElementById('prod_servers_3s_addon').innerHTML = Number(elem1) + Number(elem2);
     }
 }
 
@@ -1209,6 +1338,8 @@ function dispalyAdvance_prof() {
     var elem = document.getElementById('prof_services_vm_image').value;
     var elem1 = document.getElementById('prof_services_b_windows_datas').value;
     var elem2 = document.getElementById('prof_services_b_unix_datas').value;
+    
+    
     if ((elem == "") && (elem1 == "") && (elem2 == "")) {
         document.getElementById('advancedCheck_Prof').style.display = "inline";
         document.getElementById('Prof_Services_prod_servers').style.display = "none";
@@ -1218,16 +1349,24 @@ function dispalyAdvance_prof() {
         document.getElementById('advancedCheck_Prof').style.display = "none";
         document.getElementById('Prof_Services_prod_servers').style.display = "none";
         document.getElementById('Prof_Services_virtual_prod').style.display = "inline";
+        document.getElementById('prof_services_virtual_prod_addon').innerHTML = elem;
+        document.getElementById('prof_services_virtual_prod_addon').value = elem;
     }
     else if ((elem == "") && ((elem1 != "") || (elem2 != ""))) {
         document.getElementById('advancedCheck_Prof').style.display = "none";
         document.getElementById('Prof_Services_prod_servers').style.display = "inline";
+        document.getElementById('prof_services_prod_servers_addon').innerHTML = Number(elem1) + Number(elem2);
+        document.getElementById('prof_services_prod_servers_addon').value = Number(elem1) + Number(elem2);
         document.getElementById('Prof_Services_virtual_prod').style.display = "none";
     }
     else {
         document.getElementById('advancedCheck_Prof').style.display = "none";
         document.getElementById('Prof_Services_prod_servers').style.display = "inline";
         document.getElementById('Prof_Services_virtual_prod').style.display = "inline";
+        document.getElementById('prof_services_virtual_prod_addon').innerHTML = elem;
+        document.getElementById('prof_services_virtual_prod_addon').value = elem;
+        document.getElementById('prof_services_prod_servers_addon').value = Number(elem1) + Number(elem2);
+        document.getElementById('prof_services_prod_servers_addon').innerHTML = Number(elem1) + Number(elem2);
     }
 }
 
@@ -1266,158 +1405,116 @@ function roleBasedDiscount() {
     var prof_services_prod_v_ms = document.getElementById('prof_services_prod_v_ms').value;
     if (!properNumber(prof_services_vm_image)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('prof_services_vm_image').focus();
-        }
-        else {
-            document.getElementById('prof_services_vm_image').focus();
-        }
+            $("#Prof_Services_vm_image").addClass("has-error");
         document.getElementById("third").style.display = "block";
         return false;
     }
+    $("#Prof_Services_vm_image").removeClass("has-error");
     if (!properNumber(prof_services_database)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('prof_services_database').focus();
-        }
-        else {
-            document.getElementById('prof_services_database').focus();
-        }
+            $("#Prof_Services_database").addClass("has-error");
         document.getElementById("third").style.display = "block";
         return false;
     }
+    $("#Prof_Services_database").removeClass("has-error");
     if (!properNumber(prof_services_b_windows_datas)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('prof_services_b_windows_datas').focus();
-        }
-        else {
-            document.getElementById('prof_services_b_windows_datas').focus();
-        }
+            $("#Prof_Services_b_windows_datas").addClass("has-error");
         document.getElementById("third").style.display = "block";
         return false;
     }
+    $("#Prof_Services_b_windows_datas").removeClass("has-error");
     if (!properNumber(prof_services_b_windows_db)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('prof_services_b_windows_db').focus();
-        }
-        else {
-            document.getElementById('prof_services_b_windows_db').focus();
-        }
+            $("#Prof_Services_b_windows_db").addClass("has-error");
         document.getElementById("third").style.display = "block";
         return false;
     }
+    $("#Prof_Services_b_windows_db").removeClass("has-error");
     if (!properNumber(prof_services_b_unix_datas)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('prof_services_b_unix_datas').focus();
-        }
-        else {
-            document.getElementById('prof_services_b_unix_datas').focus();
-        }
-        document.getElementById("third").style.display = "block";
+            $("#Prof_Services_b_unix_datas").addClass("has-error");
+            document.getElementById("third").style.display = "block";
         return false;
     }
+    $("#Prof_Services_b_unix_datas").removeClass("has-error");
     if (!properNumber(prof_services_b_unix_db)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('prof_services_b_unix_db').focus();
-        }
-        else {
-            document.getElementById('prof_services_b_unix_db').focus();
-        }
+            $("#Prof_Services_b_unix_db").addClass("has-error");
         document.getElementById("third").style.display = "block";
         return false;
     }
+    $("#Prof_Services_b_unix_db").removeClass("has-error");
     if (!properNumber(prof_services_share_server)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('prof_services_share_server').focus();
-        }
-        else {
-            document.getElementById('prof_services_share_server').focus();
-        }
+            $("#Prof_Services_share_server").addClass("has-error");
         document.getElementById("third").style.display = "block";
         return false;
     }
+    $("#Prof_Services_share_server").removeClass("has-error");
     if (!properNumber(prof_services_share_db)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('prof_services_share_db').focus();
-        }
-        else {
-            document.getElementById('prof_services_share_db').focus();
-        }
+            $("#Prof_Services_share_db").addClass("has-error");
         document.getElementById("third").style.display = "block";
         return false;
     }
+    $("#Prof_Services_share_db").removeClass("has-error");
     if (!properNumber(prof_services_v_share_server)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('prof_services_v_share_server').focus();
-        }
-        else {
-            document.getElementById('prof_services_v_share_server').focus();
-        }
+            $("#Prof_Services_v_share_server").addClass("has-error");
         document.getElementById("third").style.display = "block";
         return false;
     }
+    $("#Prof_Services_v_share_server").removeClass("has-error");
     if (!properNumber(prof_services_v_share_db)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('prof_services_v_share_db').focus();
-        }
-        else {
-            document.getElementById('prof_services_v_share_db').focus();
-        }
+            $("#Prof_Services_v_share_db").addClass("has-error");
         document.getElementById("third").style.display = "block";
         return false;
     }
+    $("#Prof_Services_v_share_db").removeClass("has-error");
     if (!properNumber(prof_services_prod_ms)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('prof_services_prod_ms').focus();
-        }
-        else {
-            document.getElementById('prof_services_prod_ms').focus();
-        }
+            $("#Prof_Services_prod_ms").addClass("has-error");
         document.getElementById("third").style.display = "block";
         return false;
     }
+    $("#Prof_Services_prod_ms").removeClass("has-error");
     if (!properNumber(prof_services_prod_v_ms)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('prof_services_prod_v_ms').focus();
-        }
-        else {
-            document.getElementById('prof_services_prod_v_ms').focus();
-        }
+            $("#Prof_Services_prod_v_ms").addClass("has-error");
         document.getElementById("third").style.display = "block";
         return false;
     }
+    $("#Prof_Services_prod_v_ms").removeClass("has-error");
     if (!properNumber(prof_services_virtual_prod)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('prof_services_virtual_prod').focus();
-        }
-        else {
-            document.getElementById('prof_services_virtual_prod').focus();
-        }
+            $("#Prof_Services_virtual_prod").addClass("has-error");
         document.getElementById("third").style.display = "block";
         return false;
     }
+    $("#Prof_Services_virtual_prod").removeClass("has-error");
     if (!properNumber(prof_services_prod_servers)) {
         var r = confirm("Please Enter Proper Value");
-        if (r == true) {
             document.getElementById('prof_services_prod_servers').focus();
-        }
-        else {
-            document.getElementById('prof_services_prod_servers').focus();
-        }
+            $("#Prof_Services_prod_servers").addClass("has-error");
         document.getElementById("third").style.display = "block";
         return false;
     }
+    $("#Prof_Services_prod_servers").removeClass("has-error");
     //professsional services validation
     var site_2s_vm_images_2s = document.getElementById("vm_images_2s").value;
     var site_2s_db_2s = document.getElementById("db_2s").value;
@@ -1459,68 +1556,132 @@ function roleBasedDiscount() {
     var prof_services_prod_v_ms = document.getElementById('prof_services_prod_v_ms').value;
     if (prof_services_vm_image > (Number(site_2s_vm_images_2s) + Number(site_3s_vm_images_3s))) {
         document.getElementById('prof_services_vm_image').focus();
+        $("#Prof_Services_vm_image").addClass("has-error");
         return false;
     }
+    $("#Prof_Services_vm_image").removeClass("has-error");
     if (prof_services_database > (Number(site_2s_db_2s) + Number(site_3s_database_3s))) {
         document.getElementById('prof_services_database').focus();
+        $("#prof_Services_database").addClass("has-error");
         return false;
     }
+    $("#Prof_Services_database").removeClass("has-error"); 
     if (prof_services_b_windows_datas > (Number(site_2s_b_windows_datas_2s) + Number(site_3s_b_windows_datas_3s))) {
         document.getElementById('prof_services_b_windows_datas').focus();
+        $("#Prof_Services_b_windows_datas").addClass("has-error");
         return false;
     }
+    $("#Prof_Services_b_windows_datas").removeClass("has-error"); 
     if (prof_services_b_windows_db > (Number(site_2s_b_windows_db_2s) + Number(site_3s_b_windows_db_3s))) {
         document.getElementById('prof_services_b_windows_db').focus();
+        $("#Prof_Services_b_windows_db").addClass("has-error");
         return false;
     }
+    $("#Prof_Services_b_windows_db").removeClass("has-error"); 
     if (prof_services_b_unix_datas > (Number(site_2s_b_unix_datas_2s) + Number(site_3s_b_unix_datas_3s))) {
         document.getElementById('prof_services_b_unix_datas').focus();
+        $("#Prof_Services_b_unix_datas").addClass("has-error");
         return false;
     }
+    $("#Prof_Services_b_unix_datas").removeClass("has-error"); 
     if (prof_services_b_unix_db > (Number(site_2s_b_unix_db_2s) + Number(site_3s_b_unix_db_3s))) {
         document.getElementById('prof_services_b_unix_db').focus();
+        $("#Prof_Services_b_unix_db").addClass("has-error");
         return false;
     }
-    if (prof_services_prod_servers > (Number(site_2s_prod_servers_2s) + Number(site_3s_prod_servers_3s))) {
+    $("#Prof_Services_b_unix_db").removeClass("has-error"); 
+//    if (!correctValuesEnteredInprof()) {
+//        $("#inline_table2").show();
+//        $("#Prof_Services_virtual_prod").removeClass("has-error has-feedback");
+//        $("#Prof_Services_prod_servers").addClass("has-error has-feedback");
+//        document.getElementById('prof_services_prod_servers').focus();
+//        return false;
+//    }
+//    if (prof_services_virtual_prod > (Number(prof_services_b_windows_datas) + Number(prof_services_b_unix_datas))) {
+//        $("#inline_table2").show();
+//        $("#Prof_Services_prod_servers").removeClass("has-error has-feedback");
+//        $("#Prof_Services_virtual_prod").addClass("has-error has-feedback");
+//        document.getElementById('prof_services_virtual_prod').focus();
+//        return false;
+//    }
+    var prof_prod_vm=document.getElementById("prof_services_vm_image").value;
+//    alert(prof_prod_vm);
+    var prof_prod_vm_addon=document.getElementById("prof_services_virtual_prod").value;
+    var prof_prod_bm_win=document.getElementById("prof_services_b_windows_datas").value;
+    var prof_prod_bm_lin=document.getElementById("prof_services_b_unix_datas").value;
+    var prof_prod_bm_addon=document.getElementById("prof_services_prod_servers").value;
+    var advanced_add_on_limit=Number(prof_prod_bm_win)+Number(prof_prod_bm_lin);
+    if (checkNumbers(prof_prod_vm_addon,prof_prod_vm) || checkNumbers(prof_prod_bm_addon, advanced_add_on_limit)) {
+        if (checkNumbers(prof_prod_vm_addon,prof_prod_vm) && !checkNumbers(prof_prod_bm_addon, advanced_add_on_limit)) {
+            $("#inline_table2").show();
+            document.getElementById('prof_services_virtual_prod').focus();
+            $("#Prof_Services_virtual_prod").addClass("has-error has-feedback");
+            $("#Prof_Services_prod_servers").removeClass("has-error");
+            return false;
+        }
+        else if (checkNumbers(prof_prod_bm_addon, advanced_add_on_limit) && !checkNumbers(prof_prod_vm_addon,prof_prod_vm)) {
+            $("#inline_table2").show();
+            document.getElementById('prof_services_prod_servers').focus();
+            $("#Prof_Services_prod_servers").addClass("has-error has-feedback");
+            $("#Prof_Services_virtual_prod").removeClass("has-error");
+            return false;
+        }
+        else {
+            $("#inline_table2").show();
+            document.getElementById('prof_services_prod_servers').focus();
+            $("#Prof_Services_prod_servers").addClass("has-error has-feedback");
+            return false;
+        }
+    }
+    else if (checkNumbers(prof_prod_vm_addon,prof_prod_vm) && checkNumbers(prof_prod_bm_addon, advanced_add_on_limit)) {
         $("#inline_table2").show();
         document.getElementById('prof_services_prod_servers').focus();
+        $("#Prof_Services_prod_servers").addClass("has-error has-feedback");
         return false;
     }
-    if (prof_services_virtual_prod > (Number(site_2s_virtual_prod_2s) + Number(site_3s_virtual_prod_3s))) {
-        $("#inline_table2    ").show();
-        document.getElementById('prof_services_virtual_prod').focus();
-        return false;
-    }
+    $("#Prof_Services_prod_servers").removeClass("has-error"); 
     if (prof_services_share_server > (Number(site_2s_share_server_2s) + Number(site_3s_share_server_3s))) {
         $("#prof_panel").show();
         document.getElementById('prof_services_share_server').focus();
+        $("#Prof_Services_share_server").addClass("has-error");
         return false;
     }
+    $("#Prof_Services_share_server").removeClass("has-error"); 
     if (prof_services_share_db > (Number(site_2s_share_server_2s) + Number(site_3s_share_server_3s))) {
         $("#prof_panel").show();
         document.getElementById('prof_services_share_db').focus();
+        $("#Prof_Services_share_db").addClass("has-error");
         return false;
     }
+    $("#Prof_Services_share_db").removeClass("has-error"); 
     if (prof_services_v_share_server > (Number(site_2s_virtual_sharepoint_server_2s) + Number(site_3s_virtual_server_3s))) {
         $("#prof_panel").show();
         document.getElementById('prof_services_v_share_server').focus();
+        $("#Prof_Services_v_share_server").addClass("has-error");
         return false;
     }
+    $("#Prof_Services_v_share_server").removeClass("has-error"); 
     if (prof_services_v_share_db > (Number(site_2s_virtual_sharepoint_server_2s) + Number(site_3s_virtual_server_3s))) {
         $("#prof_panel").show();
         document.getElementById('prof_services_v_share_db').focus();
+        $("#Prof_Services_v_share_db").addClass("has-error");
         return false;
     }
+    $("#Prof_Services_v_share_db").removeClass("has-error"); 
     if (prof_services_prod_ms > (Number(site_2s_prod_ms_2s) + Number(site_3s_prod_ms_3s))) {
         $("#prof_panel").show();
         document.getElementById('prof_services_prod_ms').focus();
+        $("#Prof_Services_prod_ms").addClass("has-error");
         return false;
     }
+    $("#Prof_Services_prod_ms").removeClass("has-error"); 
     if (prof_services_prod_ms > (Number(site_2s_prod_v_ms_2s) + Number(site_3s_prod_v_ms_3s))) {
         $("#prof_panel").show();
         document.getElementById('prof_services_prod_v_ms').focus();
+        $("#Prof_Services_prod_v_ms").addClass("has-error");
         return false;
     }
+    $("#Prof_Services_prod_v_ms").removeClass("has-error"); 
     document.getElementById("product_support").readOnly = true;
     document.getElementById("prof").checked = false;
     $("#table2").hide();
@@ -1530,7 +1691,23 @@ function roleBasedDiscount() {
     //    document.getElementById("discount").disabled = true;
     document.getElementById('userRequirements').style.display = "none";
     document.getElementById('prevbtn').style.display = "none";
+    document.getElementById('backbutton').style.display = "inline";
     document.getElementById('savebutton').style.display = "inline";
     $("#professionalsection").hide();
     $("#requirements").show(1000);
+}
+function goBackToPreviousPage(){
+    $("#crumbs ul li #config_review").removeClass("active");
+    document.getElementById("product_support").readOnly = false;
+    document.getElementById("prof").checked = true;
+    $("#table2").show();
+    document.getElementById("prof").disabled = false;
+    //    document.getElementById("discount").checked = false;
+    $("#table4").show();
+    document.getElementById('userRequirements').style.display = "inline";
+    document.getElementById('prevbtn').style.display = "inline";
+    document.getElementById('backbutton').style.display = "none";
+    document.getElementById('savebutton').style.display = "none";
+    $("#professionalsection").show();
+    $("#requirements").hide(1000);
 }

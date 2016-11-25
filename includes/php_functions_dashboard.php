@@ -1,5 +1,25 @@
 <?php
+    function find_all_ref_ids_from_lgt_search($username,$SearchOn,$Key){
+        if ($SearchOn=="Opportunity"){
+          $SearchField="cust_org_name";  
+        }else if($SearchOn=="Customer"){
+          $SearchField="cust_name";  
+        }else{
+          $SearchField="partner";  
+        }
+        include "../includes/config.php";
+        $query = "SELECT DISTINCT LicenseGeneration.license_reference_id FROM LicenseGeneration INNER JOIN CustomerRequirements ON LicenseGeneration.license_crt_id = CustomerRequirements.license_crt_id WHERE LicenseGeneration.login_name='$username' and CustomerRequirements.$SearchField LIKE '%$Key%'";
+//        echo $query;
+        $query = $connect->query("SELECT DISTINCT LicenseGeneration.license_reference_id FROM LicenseGeneration INNER JOIN CustomerRequirements ON LicenseGeneration.license_crt_id = CustomerRequirements.license_crt_id WHERE LicenseGeneration.login_name='$username' and CustomerRequirements.$SearchField LIKE '%$Key%'");
+        $ref_ids = array();
+        while($result = $query->fetch_assoc()) {
+            $ref_ids[] =  $result['license_reference_id'];  
+        }
+        
+        $reversed = array_reverse($ref_ids);
 
+        return $reversed;
+    }
     //FUNCTION TO FIND ALL REFERENCE IDS OF COMPLETE QUOTE COLLECTION
     function find_all_ref_ids_from_lgt_full_collection(){
         include "../includes/config.php";
@@ -203,7 +223,7 @@
         return $ref_ids;
     }
 
-    //FUNCTION TO FIND ROLE OF A LOGIN NAME
+    //3)FUNCTION TO FIND ROLE OF A LOGIN NAME
     function find_role_from_login_name($login_name){
         include "../includes/config.php";
         
@@ -216,7 +236,7 @@
         
     }
 
-    //FINDING ALL LOGIN NAMES FOR APPROVAL/REPORTING MANAGER
+    //2)FINDING ALL LOGIN NAMES FOR APPROVAL/REPORTING MANAGER
     function find_all_login_names_reporting_to_approver($approver){
         include "../includes/config.php";
         $query = $connect->query("SELECT DISTINCT login_name,emp_id FROM users WHERE reporting_manager='$approver'");
@@ -238,10 +258,14 @@
         return $login_names;
     }
 
-    //FINDING ALL REF IDS CREATED BY ONE LOGIN NAME
+    //4)FINDING ALL REF IDS CREATED BY ONE LOGIN NAME
     function find_all_ref_ids_created_by_login_name($login_name){
         include "../includes/config.php";
-        $query = $connect->query("SELECT DISTINCT LicenseGeneration.license_reference_id, LicenseHistory.discountPercentageOnLicense, LicenseHistory.discountPercentageOnSupport, LicenseHistory.discountPercentageOnPS, LicenseHistory.discountPercentageOnTraining FROM LicenseGeneration INNER JOIN LicenseHistory ON LicenseGeneration.license_lht_id=LicenseHistory.license_lht_id WHERE LicenseGeneration.login_name='$login_name' AND LicenseGeneration.status='Discount'");
+        if($login_name=="QuoteRequestor"){
+            $query = $connect->query("SELECT DISTINCT LicenseGeneration.license_reference_id, LicenseHistory.discountPercentageOnLicense, LicenseHistory.discountPercentageOnSupport, LicenseHistory.discountPercentageOnPS, LicenseHistory.discountPercentageOnTraining FROM LicenseGeneration INNER JOIN LicenseHistory ON LicenseGeneration.license_lht_id=LicenseHistory.license_lht_id WHERE LicenseGeneration.login_name='$login_name' AND LicenseGeneration.status='Draft'"); 
+        }else{
+            $query = $connect->query("SELECT DISTINCT LicenseGeneration.license_reference_id, LicenseHistory.discountPercentageOnLicense, LicenseHistory.discountPercentageOnSupport, LicenseHistory.discountPercentageOnPS, LicenseHistory.discountPercentageOnTraining FROM LicenseGeneration INNER JOIN LicenseHistory ON LicenseGeneration.license_lht_id=LicenseHistory.license_lht_id WHERE LicenseGeneration.login_name='$login_name' AND LicenseGeneration.status='Discount'");
+        }
         $license_reference_discount = array();
         $max_discount = array();
         $i=0;
@@ -253,7 +277,7 @@
         return $license_reference_discount;
     }
 
-    //FUNCTION TO FIND RERERENCE IDS FOR APPROVAL
+    //1)FUNCTION TO FIND RERERENCE IDS FOR APPROVAL
     function find_all_ref_ids_for_approal($approver){
         include "../includes/config.php";
         $all_ref_ids=(find_all_login_names_reporting_to_approver($approver));
@@ -264,7 +288,6 @@
         for ($i=0; $i<$no_of_all_ref_ids; $i++){
             $filtered_all_ref_ids=array_merge($filtered_all_ref_ids,find_all_ref_ids_created_by_login_name($all_ref_ids[$i]));
         }
-        
         $approver_role=$_SESSION["userrole"];
         $query="SELECT MaxDiscount, MinDiscount FROM UserRoles WHERE UserRole='$approver_role'";
 //        $query="SELECT MaxDiscount, MinDiscount FROM UserRoles WHERE UserRole='Sales Director'";
@@ -281,7 +304,7 @@
                 $j++;
             }
         }
-        return $approval_ref_ids;
+        return array_reverse($approval_ref_ids);
 //        return $filtered_all_ref_ids;
     }
 

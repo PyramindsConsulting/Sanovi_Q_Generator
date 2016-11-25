@@ -232,7 +232,7 @@
                 </div>
                 <br> </div>
         
-        <form method="post" action="http://quote.sanovi.com/finalize_edit.php">
+        <form method="post" action="http://quotedev.sanovi.com/finalize_edit.php">
             <div class="container" id="license">
                         <div class="row" id='bg_clr1'>
                             <div class="col-xs-5"><b>Item</b></div>

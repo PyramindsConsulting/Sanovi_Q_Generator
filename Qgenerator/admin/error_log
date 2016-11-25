@@ -878,3 +878,60 @@
 [21-Oct-2016 07:58:29 UTC] PHP Fatal error:  Call to undefined function breadcrumb() in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 48
 [24-Oct-2016 10:48:05 UTC] PHP Notice:  Use of undefined constant emp_id - assumed 'emp_id' in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/confirmmodifyuser.php on line 62
 [24-Oct-2016 10:48:05 UTC] PHP Notice:  Use of undefined constant emp_id - assumed 'emp_id' in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/confirmmodifyuser.php on line 66
+[14-Nov-2016 06:08:39 UTC] PHP Notice:  Use of undefined constant emp_id - assumed 'emp_id' in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/confirmmodifyuser.php on line 62
+[14-Nov-2016 06:08:39 UTC] PHP Notice:  Use of undefined constant emp_id - assumed 'emp_id' in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/confirmmodifyuser.php on line 66
+[14-Nov-2016 06:08:46 UTC] PHP Notice:  Use of undefined constant emp_id - assumed 'emp_id' in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/confirmmodifyuser.php on line 62
+[14-Nov-2016 06:08:46 UTC] PHP Notice:  Use of undefined constant emp_id - assumed 'emp_id' in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/confirmmodifyuser.php on line 66
+[14-Nov-2016 06:08:46 UTC] PHP Notice:  Undefined index: repArea_apac in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/confirmmodifyuser.php on line 207
+[14-Nov-2016 06:08:46 UTC] PHP Notice:  Undefined index: repArea_usa_europe in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/confirmmodifyuser.php on line 211
+[14-Nov-2016 06:08:46 UTC] PHP Notice:  Undefined index: repArea_r_of_w in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/confirmmodifyuser.php on line 215
+[14-Nov-2016 06:14:52 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 104
+[14-Nov-2016 06:14:52 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 104
+[14-Nov-2016 06:14:52 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 104
+[14-Nov-2016 06:14:52 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 104
+[14-Nov-2016 06:14:52 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 104
+[14-Nov-2016 06:14:52 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 104
+[14-Nov-2016 06:14:52 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 104
+[14-Nov-2016 06:15:19 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 104
+[14-Nov-2016 06:15:19 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 104
+[14-Nov-2016 06:15:19 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 104
+[14-Nov-2016 06:15:19 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 104
+[14-Nov-2016 06:15:19 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 104
+[14-Nov-2016 06:15:19 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 104
+[14-Nov-2016 06:15:19 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 104
+[14-Nov-2016 06:15:21 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:15:21 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:15:21 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:15:21 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:15:21 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:15:21 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:15:21 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:16:20 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:16:20 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:16:20 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:16:20 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:16:20 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:16:20 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:16:20 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:16:23 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:16:23 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:16:23 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:16:23 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:16:23 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:16:23 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:16:23 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:18:18 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:18:18 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:18:18 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:18:18 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:18:18 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:18:18 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:18:18 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105
+[14-Nov-2016 06:18:58 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 106
+[14-Nov-2016 06:18:58 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 106
+[14-Nov-2016 06:18:58 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 106
+[14-Nov-2016 06:18:58 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 106
+[14-Nov-2016 06:18:58 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 106
+[14-Nov-2016 06:18:58 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 106
+[14-Nov-2016 06:18:58 UTC] PHP Notice:  Undefined index: MixDiscount in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 106
+[14-Nov-2016 06:19:24 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting variable (T_VARIABLE) or '$' in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/change_discounts.php on line 105

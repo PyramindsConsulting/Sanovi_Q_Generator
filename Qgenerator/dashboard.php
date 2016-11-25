@@ -17,10 +17,16 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/style-bg-other-pages.css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        
+        <!--JS FILES-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <script src="js/menu.js"></script>
+<!--        <script src="js/menu.js"></script>-->
         <script src="js/dashboard.js"></script>
         <script>
             $(document).ready(function(){
@@ -45,14 +51,17 @@
                 include "../includes/mainmenu.php";
                 include "../includes/php_functions_dashboard.php";
                 include "../includes/php_function_quote.php";
+                include "../includes/dashboard-jquery.php";
         ?>
         <div class="container">
             <br>
             <h2>Quote List</h2>
             <!-- CAPTURING GET VALUES-->
             <?php
-                $MyQuotes=$RecentQuotes=$AllQuotes=$QuotesApproval=$ApprovedQuotes="";
+                $MyQuotes=$RecentQuotes=$AllQuotes=$QuotesApproval=$ApprovedQuotes=$SearchQuotes="";
                 $SelectedView=$_GET["View"];
+                $SearchOn=$_GET["SearchOn"];
+                $Key=$_GET["Key"];
                 switch ($SelectedView){
                     case "MyQuotes":
                         $MyQuotes="selected";
@@ -69,6 +78,9 @@
 					case "ApprovedQuotes":
 						$ApprovedQuotes="selected";
 						break;
+                    case "SearchQuotes":
+						$SearchQuotes="selected";
+						break; 
                     default:
                         $RecentQuotes="selected";
                         $SelectedView="RecentQuotes";
@@ -97,8 +109,15 @@
                                     if($_SESSION["userrole"]!="Quote Requestor"){
                                 ?>
                                 <option value='QuotesApproval' <?php echo $QuotesApproval ?>>Quotes for Approval</option>
-                                <option value='ApprovedQuotes' <?php echo $ApprovedQuotes ?>>Approved Quotes</option>
                                 <?php } ?>
+                                <?php 
+                                    if($_SESSION["userrole"]!="Quote Requestor"){
+                                        if($_SESSION["userrole"]!="Sales Manager"){
+                                ?>
+                                <option value='ApprovedQuotes' <?php echo $ApprovedQuotes ?>>Approved Quotes</option>
+                                <?php }} ?>
+                                
+                                <option value='SearchQuotes' <?php echo $SearchQuotes ?>>Search Quotes</option>
                             </select>
                         </div>
                     </div>
@@ -145,15 +164,36 @@
             <!--            DISPLAY QUOTES FOR APPROVAL-->
             <?php
                 if($SelectedView=="QuotesApproval"){
-                    include "../includes/dashboard-table-quotesforapproval.php";
+                    if($_SESSION["userrole"]=="Quote Requestor"){
+                        echo "<center><br>";
+                        echo "<img src=\"images/Access-Denied.jpg\" width=\"25%\">";
+                        echo "<p style=\"color:red;\">You are not authorized to visit this page</p>";
+                        echo "</center>";
+                    }else{
+                        include "../includes/dashboard-table-quotesforapproval.php";
+                    }
                 }
             ?>
             
             <!--            DISPLAY APPROVED QUOTES -->
             <?php
                 if($SelectedView=="ApprovedQuotes"){
-					//echo "Under Construction";
-                    include "../includes/dashboard-table-approvedquotes.php";
+                    if($_SESSION["userrole"]=="Quote Requestor" || $_SESSION["userrole"]=="Sales Manager"){
+                        echo "<center><br>";
+                        echo "<img src=\"images/Access-Denied.jpg\" width=\"25%\">";
+                        echo "<p style=\"color:red;\">You are not authorized to visit this page</p>";
+                        echo "</center>";
+                    }else{
+                        include "../includes/dashboard-table-approvedquotes.php";
+                    }
+                }
+            ?>
+            
+            <!--            DISPLAY SEARCH QUOTES -->
+            <?php
+                if($SelectedView=="SearchQuotes"){
+                    include "../includes/dashboard-jquery.php";
+                    include "../includes/dashboard-search.php";
                 }
             ?>
         </div>

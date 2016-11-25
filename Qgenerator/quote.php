@@ -207,7 +207,7 @@
                 </div>
                 <br> 
         </div>
-        <form method="post" action="http://quote.sanovi.com/finalize.php">
+        <form method="post" action="http://quotedev.sanovi.com/finalize.php">
         <div class="container" id="license">
                         <div class="row" id='bg_clr1'>
                             <div class="col-xs-5"><b>Item</b></div>
@@ -367,6 +367,7 @@
         <?php 
                     }else{
                ?>
+                
                <br>
                <center style="color:green;"><b>Quote Saved Successfully</b><br> Ref No : <?php echo $_SESSION['ref_id']; ?><br><br>Contact Your Manager for Approval </center>
        <?php

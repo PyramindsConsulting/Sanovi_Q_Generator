@@ -929,7 +929,7 @@ function Product_billing_quantity($tempArray,$ProdModule,$Country,$ModeOfSale,$c
     //FUNCTION TO FIND QUOTE APPROVAL ASSIGNED TO (RETURNS EMP ID OF ASSIGNED APPROVER)
     function approval_assigned_to($refId, $verId){
         include "../../includes/config.php";
-        $query="SELECT approved_by_emp_id FROM LicenseGeneration WHERE license_reference_id='$refId' AND license_revision_id='$verId'";
+        $query="SELECT approved_by_emp_id, status FROM LicenseGeneration WHERE license_reference_id='$refId' AND license_revision_id='$verId'";
         $result = mysqli_query($connect, $query);
         //CHECK IF QUERY EXECUTES OR NOT
         if(!$result){
@@ -937,7 +937,11 @@ function Product_billing_quantity($tempArray,$ProdModule,$Country,$ModeOfSale,$c
         }
         //ACQUIRING THE DATA FROM DB
         $row=mysqli_fetch_array($result);
-        return $row["approved_by_emp_id"];
+        if($row["status"]=="Draft"){
+            return $row["status"];
+        }else{
+            return $row["approved_by_emp_id"];
+        }
     }
     
     function get_quote_generated_name($userid){
@@ -951,5 +955,19 @@ function Product_billing_quantity($tempArray,$ProdModule,$Country,$ModeOfSale,$c
         //ACQUIRING THE DATA FROM DB
         $row=mysqli_fetch_array($result);
         return $row["emp_name"];
+    }
+
+    //FINDING REPORTING MANAGER OF QUOTE CREATED USER NAME
+    function find_rep_manager_of_quote_creator($quote_created_user){
+        include "../../includes/config.php";
+        $query="SELECT reporting_manager FROM users WHERE login_name='$quote_created_user'";
+        $result = mysqli_query($connect, $query);
+        //CHECK IF QUERY EXECUTES OR NOT
+        if(!$result){
+            die("Database Query Failed");
+        }
+        //ACQUIRING THE DATA FROM DB
+        $row=mysqli_fetch_array($result);
+        return $row["reporting_manager"];
     }
 ?>

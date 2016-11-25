@@ -52,9 +52,13 @@
                         <td>
                             <center>
                                 <!--Approve Quote ICON -->
-                                <?php if($_SESSION["userrole"]!="Quote Requestor"){ ?>
+                                <?php 
+                                    if($_SESSION["userrole"]!="Quote Requestor"){
+                                        if($_SESSION["userrole"]!="Sales Manager"){
+                                ?>
                                 <?php $generator_emailid=find_qgenerator_emailid($ref_ids_created_by_users[$i], $versions[$latest_version]); ?>
                                 <a onclick="return confirm('Are you sure to Finalize the Quote !');" href="quote_approve.php?refId=<?php echo $ref_ids_created_by_users[$i]."&verId=".$versions[$latest_version]."&qgenemailid=".$generator_emailid;?>" data-toggle="tooltip" data-placement="top" title="Approve Quote"><span class="glyphicon glyphicon-ok"> </span></a>
+                                <?php } ?>
                                 
                                 <!--View Quote ICON -->
                                     <a href="pdf/html_view_quote.php?refId=<?php echo $ref_ids_created_by_users[$i]."&verId=".$versions[$latest_version];?>" target="_blank" data-toggle="tooltip" data-placement="top" title="View Quote"><span class="glyphicon glyphicon-eye-open"> </span></a>
@@ -66,25 +70,31 @@
                                 
                                 <!--Edit Quote ICON -->
                                 <?php
+                                    if($_SESSION["userrole"]!="Sales Manager"){
                                     if($quote_status=="Finalized"){?>
                                         <a onclick="return confirm('Finalized Quote cannot be edited. New version will be created. Confirm to proceed');" href="Q-Generator-Edit.php?refid=<?php echo $ref_ids_created_by_users[$i]."&verid=".$versions[$latest_version];?>" target="_blank" data-toggle="tooltip" data-placement="top" title="Edit Quote"><span class="glyphicon glyphicon-edit"> </span></a>
                                 <?php }else{ ?>
                                         <a href="Q-Generator-Edit.php?refid=<?php echo $ref_ids_created_by_users[$i]."&verid=".$versions[$latest_version];?>" target="_blank" data-toggle="tooltip" data-placement="top" title="Edit Quote"><span class="glyphicon glyphicon-edit"> </span></a>
-                                <?php } ?>
+                                <?php } } ?>
 
                                 <!--Download Quote ICON -->
+<!--
                                 <?php if($_SESSION["userrole"]!="Quote Requestor"){ ?>
                                     <a href="pdf/download_quote.php?refId=<?php echo $ref_ids_created_by_users[$i]."&verId=".$versions[$latest_version];?>" data-toggle="tooltip" data-placement="top" title="Download Quote"><span class="glyphicon glyphicon-save-file"> </span></a>
+-->
                                 
                                 <!--EMail Quote ICON -->
+<!--
                                     <?php
                                         if($quote_status=="Draft"){?>
                                             <span class="glyphicon glyphicon-envelope"> </span>
                                         <?php }else{?>
                                             <a href="pdf/generate_quote_attachment.php?refId=<?php echo $ref_ids_created_by_users[$i]."&verId=".$versions[$latest_version]."&emailid=".$_SESSION["emailid"];?>" data-toggle="tooltip" data-placement="top" title="Email Quote"><span class="glyphicon glyphicon-envelope"> </span></a>
                                     <?php } ?>
+-->
                                 
                                 <!--Delete Quote ICON -->
+<!--
                                     <?php
                                         if($quote_status=="Finalized" || $quote_status=="Discount" ){?>
                                             <span class="glyphicon glyphicon-trash"> </span>
@@ -93,6 +103,7 @@
                                         <?php }
                                     ?>
                                 <?php } ?>
+-->
                             </center>
                         </td>
                         <td>
@@ -106,7 +117,7 @@
 <!--                                    <a href="dashboard-more-approval.php?refId=<?php //echo $ref_ids_created_by_users[$i]."&verId=".$versions[$latest_version];?>" data-toggle="tooltip" data-placement="top" title="Quote History" data-toggle="tooltip" data-placement="top" title="Quote History"><span class="glyphicon glyphicon-option-horizontal"></span></a>-->
                                 <?php //}
                                 ?>
-                                    <span class="glyphicon glyphicon-question-sign"></span>
+<!--                                    <span class="glyphicon glyphicon-question-sign"></span>-->
                             </center>
                         </td>
                     </tr>

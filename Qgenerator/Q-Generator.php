@@ -35,6 +35,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/crumbs.css">
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/style-bg-other-pages.css">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         
         <!--JS FILES-->
@@ -212,7 +213,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-2 col-sm-offset-10">
-                                            <button class="nextpagebtn" name="validate" type="button" onclick="next_page1()">Next</button>
+                                            <button class="btn btn-success nextpagebtn" name="validate" type="button" onclick="next_page1()">Next</button>
                                         </div>
                                     </div>
                                 </div>
@@ -246,7 +247,7 @@
                                                                     <div class='col-sm-12'> 
                                                                         <div class='form-group' id='".$row['name']."'> 
                                                                             <div class='col-sm-8'>" . $row["question"] . "</div>
-                                                                            <div class='col-sm-4'>
+                                                                            <div class='col-sm-4' id='".$row['name']."'>
                                                                                 <input type='hidden' value='".$row["question"]."' name='".$row['id']."'>
                                                                                 <input class='form-control' type='text' id='".$row['id']."' name='".$row['name']."' placeholder='0' style='width:100%'>
                                                                             </div>
@@ -265,7 +266,7 @@
                                                                     <div class='col-sm-12'> 
                                                                         <div class='form-group' id='".$row['name']."'> 
                                                                             <div class='col-sm-8'>" . $row["question"] . "</div>
-                                                                            <div class='col-sm-4'>
+                                                                            <div class='col-sm-4' id='".$row['name']."'>
                                                                                 <input type='hidden' value='".$row["question"]."' name='".$row['id']."'>
                                                                                 <input class='form-control' type='text' id='".$row['id']."' name='".$row['name']."' placeholder='0' style='width:100%'>
                                                                             </div>
@@ -275,8 +276,8 @@
                                                         }
                                                         echo "</div>";
                                                         echo '<div class="row">
-                                                        <button type="button" id="less1" style="float:right ;margin-right:15px" >Less</button>';
-                                                        echo '<button type="button" id="button1" style="float:right ;margin-right:15px" >More</button></div><br>';      
+                                                        <button type="button" class="btn" id="less1" style="float:right ;margin-right:15px" >Less</button>';
+                                                        echo '<button type="button" class="btn" id="button1" style="float:right ;margin-right:15px" >More</button></div><br>';      
                                                         $query2 = "select * from QGeneratorQuestions where category='2-Site_advanced' limit 0,10";
                                                         $advanced_replication= $connect->query($query2);
                                                         if ($advanced_replication->num_rows > 0) {
@@ -297,9 +298,14 @@
                                                                     <div class='col-sm-12'> 
                                                                         <div class='form-group' id='".$row['name']."'> 
                                                                             <div class='col-sm-8'>" . $row["question"] . "</div>
-                                                                            <div class='col-sm-4'>
+                                                                            <div class='col-sm-4' id='".$row['name']."'>
+                                                                            <div class='input-group'>
                                                                                 <input type='hidden' value='".$row["question"]."' name='".$row['id']."'>
-                                                                                <input class='form-control' type='text' id='".$row['id']."' name='".$row['name']."' placeholder='0' style='width:100%'>
+                                                                                <input class='form-control' type='text' id='".$row['id']."' name='".$row['name']."' placeholder='0' style='width:100%' onblur='correctValuesEnteredIn2s_vm()'>
+                                                                                <span class='input-group-btn'>
+                                                                                    <button class='btn btn-secondary' type='button' id='".$row['addon']."'>0</button>
+                                                                                </span>
+                                                                                </div> 
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -356,7 +362,7 @@
                                                             <div class='from-group' id='".$row['name']."'>
                                                                 <div class='col-sm-8'>" . $row["question"] . "
                                                                 </div>
-                                                                <div class='col-sm-4'>
+                                                                <div class='col-sm-4' id='".$row['name']."'>
                                                                     <input type='hidden'  value='".$row["question"]."' name='".$row['id']."'>
                                                                     <input class='form-control' type='text' id='" .$row['id']."' name='" .$row['name']."' placeholder='0' id='value' style='width:100%'>
                                                                 </div>
@@ -375,7 +381,7 @@
                                                                     <div class='col-sm-12'> 
                                                                         <div class='form-group' id='".$row['name']."'> 
                                                                             <div class='col-sm-8'>" . $row["question"] . "</div>
-                                                                            <div class='col-sm-4'>
+                                                                            <div class='col-sm-4' id='".$row['name']."'>
                                                                                 <input type='hidden' value='".$row["question"]."' name='".$row['id']."'>
                                                                                 <input class='form-control' type='text' id='".$row['id']."' name='".$row['name']."' placeholder='0' style='width:100%'>
                                                                             </div>
@@ -384,8 +390,8 @@
                                                                 </div><br>";
                                                         }
                                                         echo "</div>";
-                                            echo '<div class="row"><button  type="button" id="button2" style="float:right ;margin-right:15px">More</button>';
-                                            echo '<button  type="button" id="less2" style="float:right ;margin-right:15px" >Less</button></div><br>';
+                                            echo '<div class="row"><button class="btn" type="button" id="button2" style="float:right ;margin-right:15px">More</button>';
+                                            echo '<button  type="button" class="btn" id="less2" style="float:right ;margin-right:15px" >Less</button></div><br>';
                                                         $query2 = "select * from QGeneratorQuestions where category='3-Site_advanced' limit 0,10";
                                                         $advanced_replication= $connect->query($query2);
                                                         if ($advanced_replication->num_rows > 0) {
@@ -405,9 +411,14 @@
                                                                                     <div class='col-sm-12'> 
                                                                                         <div class='form-group' id='".$row['name']."'> 
                                                                                             <div class='col-sm-8'>" . $row["question"] . "</div>
-                                                                                            <div class='col-sm-4'>
-                                                                                                <input type='hidden' value='".$row["question"]."' name='".$row['id']."'>
-                                                                                                <input class='form-control' type='text' id='".$row['id']."' name='".$row['name']."' placeholder='0' style='width:100%'>
+                                                                                            <div class='col-sm-4' id='".$row['name']."'>
+                                                                                                <div class='input-group' id='".$row['name']."'>
+                                                                                <input type='hidden' value='".$row["question"]."' name='".$row['id']."'>
+                                                                                <input class='form-control' type='text' id='".$row['id']."' name='".$row['name']."' placeholder='0' style='width:100%' onblur='correctValuesEnteredIn3s_vm()'>
+                                                                                <span class='input-group-btn'>
+                                                                                    <button class='btn btn-secondary' type='button' id='".$row['addon']."'>0</button>
+                                                                                </span>
+                                                                                </div> 
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -430,8 +441,8 @@
                             ?>
                                         <div class="form-group">
                                             <div class="col-sm-12">
-                                                <button class="nextpagebtn pull-left" type="button" onclick="prev_page1()">Prev</button>
-                                                <button class="nextpagebtn pull-right" type="button" onclick="next_page2()">Next</button>
+                                                <button class="btn btn-success nextpagebtn pull-left" type="button" onclick="prev_page1()">Prev</button>
+                                                <button class="btn btn-success nextpagebtn pull-right" type="button" onclick="next_page2()">Next</button>
                                             </div>
                                         </div>
                                 </div>
@@ -506,7 +517,7 @@
                                             <div class='col-sm-8'>" . $row["question"] . "
                                             </div>
                                             <div class='col-sm-4'> 
-                                            <div class='input-group'>
+                                            <div class='input-group' id='".$row['name']."'>
                                                 <input type='hidden' value='".$row["question"]."' name='".$row['id']."'>
                                                 <input class='form-control' class='form-control' type='text' id='" .$row['id']."' name='" .$row['name']."' placeholder='0' id='value' style='width:100%'><span class='input-group-btn'>
                                                                     <button class='btn btn-secondary' type='button' id='".$row['addon']."'>0</button>
@@ -529,7 +540,7 @@
                                             <div class='form-group' id='".$row['name']."'> 
                                                 <div class='col-sm-8'>" . $row["question"] . "</div>
                                                 <div class='col-sm-4'>
-                                                 <div class='input-group'>
+                                                 <div class='input-group' id='".$row['name']."'>
                                                         <input type='hidden' value='".$row["question"]."' name='".$row['id']."'>
                                                         <input class='form-control' class='form-control' type='text' id='" .$row['id']."' name='" .$row['name']."' placeholder='0' id='value' style='width:100%'>
                                                         <span class='input-group-btn'>
@@ -542,8 +553,8 @@
                                     </div><br>";
                             }
                             echo "</div>";
-                            echo '<div class="row"><button type="button" id="button3" style="float:right ;margin-right:15px" >More</button>';
-                            echo '<button type="button" id="less3" style="float:right ;margin-right:15px" >Less</button></div><br>';
+                            echo '<div class="row"><button class="btn" type="button" id="button3" style="float:right ;margin-right:15px" >More</button>';
+                            echo '<button type="button" class="btn" id="less3" style="float:right ;margin-right:15px" >Less</button></div><br>';
                             $query2 = "select * from QGeneratorQuestions where category='Prof-Services_advanced' limit 0,10";
                             $advanced_replication= $connect->query($query2);
                             if ($advanced_replication->num_rows > 0) {
@@ -553,7 +564,7 @@
                                             <div class='panel panel-default'>
                                                 <div class='panel-heading'>
                                                     <label class='radio-inline'>
-                                                        <input type='checkbox' class='licence' id='advanced_replication_prof'onclick='dispalyAdvance_prof()' >&nbsp;&nbsp;Any Professional Services for Advanced Replication
+                                                        <input type='checkbox' class='licence' id='advanced_replication_prof' onclick='dispalyAdvance_prof()' >&nbsp;&nbsp;Any Professional Services for Advanced Replication
                                                     </label>
                                                 </div>
                                                 <div class='panel-body collapse' id='inline_table2'>";
@@ -564,9 +575,9 @@
                                                             <div class='form-group' id='".$row['name']."'> 
                                                                 <div class='col-sm-8'>" . $row["question"] . "</div>
                                                                 <div class='col-sm-4'>
-                                                                   <div class='input-group'>
+                                                                   <div class='input-group' id='" .$row['name']."'>
                                                                         <input type='hidden' value='".$row["question"]."' name='".$row['id']."'>
-                                                                        <input class='form-control' class='form-control' type='text' id='" .$row['id']."' name='" .$row['name']."' placeholder='0' id='value' style='width:100%'>
+                                                                        <input class='form-control' class='form-control' type='text' id='" .$row['id']."' name='" .$row['name']."' onblur='correctValuesEnteredInprof()' placeholder='0' id='value' style='width:100%'>
                                                                         <span class='input-group-btn'>
                                                                                     <button class='btn btn-secondary' type='button' id='".$row['addon']."'>0</button>
                                                                         </span>
@@ -598,7 +609,7 @@
                                         <div class="contianer">
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <button class="nextpagebtn pull-left" id="prevbtn" type="button" onclick="prev_page2()">Prev</button>
+                                                    <button class="btn btn-success pull-left" id="prevbtn" type="button" onclick="prev_page2()">Prev</button>
                                                     <button type="button" style="float:right;" id="userRequirements" class="btn btn-success pull-right" onclick="roleBasedDiscount()">Next</button>
                                                 </div>
                                                 <!-- Button trigger modal -->
@@ -846,7 +857,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer" style="background-color:lightgrey;">
-                                                <button class="btn btn-lg btn-success savebtn pull-left" id="backbutton" >Back</button>
+                                                <button type="button" class="btn btn-lg btn-success savebtn pull-left" id="backbutton" onclick="goBackToPreviousPage()">Back</button>
                                                 <button class="btn btn-lg btn-success savebtn pull-right" id="savebutton" type="submit">Next</button><br><br><br>
                                                 <span>* You are in final screen of Review Configuration<br>You cannot come back once you click on Next</span>
                                             </div>
