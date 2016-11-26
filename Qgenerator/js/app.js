@@ -886,6 +886,17 @@ function next_page1() {
             document.getElementById("productModule2").innerHTML = elem3;
         }
     }
+    if(checkLengthOfNotes()){
+        document.getElementById("first").style.display = "none";
+        document.getElementById("second").style.display = "block";
+        document.getElementById("third").style.display = "none";
+        return true;
+    }else{
+        document.getElementById("first").style.display = "block";
+        document.getElementById("second").style.display = "none";
+        document.getElementById("third").style.display = "none";
+        return false;
+    }
 }
 
 function properNumber(numb) {
@@ -1710,4 +1721,22 @@ function goBackToPreviousPage(){
     document.getElementById('savebutton').style.display = "none";
     $("#professionalsection").show();
     $("#requirements").hide(1000);
+}
+
+function checkLengthOfNotes(){
+    var elem=document.getElementById('option_tag').value;
+    elem=elem.trim();
+    document.getElementById('option_tag').value=elem;
+//    alert(elem.length);
+    if(elem.length>=256){
+        document.getElementById('optionlen').style.display="inline";
+         $("#optionDiv").addClass("has-error");
+        document.getElementById('option_tag').focus();
+        return false;
+    }else{
+        document.getElementById('optionlen').style.display="none";
+        $("#optionDiv").removeClass("has-error");
+        document.getElementById('optionlen').style.display="false";
+        return true;
+    }
 }

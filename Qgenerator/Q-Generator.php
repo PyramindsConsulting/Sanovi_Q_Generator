@@ -104,7 +104,7 @@
                                                 <div class='dropdown'>
                                                     <select id='license' class='form-control' name='License'>
                                                         <option value='Perpetual'>Perpetual</option>
-                                                        <option value='Subscription' disabled style="background-color:#cccccc">Subscription</option>
+                                                        <option value='Subscription'>Subscription</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -178,6 +178,17 @@
                                             <div class='col-sm-6'>
                                                 <input type='text' id='partner' name='partner_name' class='form-control' value="" style='width:100%'> <span id='partnerlen' style='color:red;font-size:15px;display:none'>please enter Partner name</span>
                                             <span id='partnernamecheck' style='color:red;font-size:15px;display:none'>please enter proper name</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class='form-group'>
+                                        <div class='row'>
+                                            <div class='col-sm-6'>
+                                                <label style='font-size:16px'>Notes(Option Tag)</label>
+                                            </div>
+                                            <div class='col-sm-6' id="optionDiv">
+                                                <textarea rows="4" cols="50" id='option_tag' name='Option_tag' class='form-control'  style='width:100%' onblur="checkLengthOfNotes()"></textarea>
+                                                <span id='optionlen' style='color:red;font-size:15px;display:none'>Max 256 characters allowed </span>
                                             </div>
                                         </div>
                                     </div>

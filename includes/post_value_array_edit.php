@@ -4,6 +4,7 @@ $Currency=$_POST["Currency"];
 $CustomerName=$_POST["Customer_name"];
 $OrgName=$_POST["organization_name"];
 $Partner=$_POST["partner_name"];
+$OptionTag=$_POST["Option_tag"];
 $license=$_POST["License"];
 $product=$_POST["Productname"];
 $Country=$_POST["Country"];

@@ -16,6 +16,7 @@
         $details["organization_name"]=$row["cust_org_name"];
         $details["Customer_name"]=$row["cust_name"];
         $details["Partner_name"]=$row["partner"];
+        $details["option_tag"]=$row["option_tag"];
         $details["Mode_of_sale"]=$row["mode_of_sale"];
         $details["Product_module"]=$row["product_module"];
         $details["vm_images_2S"]=$row["2s_noOfVmImages"];

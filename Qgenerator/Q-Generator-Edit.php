@@ -143,9 +143,20 @@
                                             </div>
                                             <div class='col-sm-6'>
                                                 <div class='dropdown'>
+                                                    <?php 
+                                                        $perpetual_selected=$subscription_selected="";
+                                                        switch($quote_values["License"]){
+                                                            case "Perpetual":
+                                                                $perpetual_selected="selected";
+                                                                break;
+                                                            case "Subscription":
+                                                                $subscription_selected="selected";
+                                                                break;
+                                                        }
+                                                    ?>
                                                     <select id='license' class='form-control' name='License'>
-                                                        <option value='Perpetual'>Perpetual</option>
-                                                        <option value='Subscription' disabled style="background-color:#cccccc">Subscription</option>
+                                                        <option value='Perpetual' <?php echo $perpetual_selected;?> >Perpetual</option>
+                                                        <option value='Subscription' <?php echo $subscription_selected;?> >Subscription</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -254,6 +265,17 @@
                                             <div class='col-sm-6'>
                                                 <input type='text' id='partner' name='partner_name' class='form-control' value="<?php echo $quote_values["Partner_name"]; ?>" style='width:100%'> <span id='partnerlen' style='color:red;font-size:15px;display:none'>please enter Partner name</span>
                                             <span id='partnernamecheck' style='color:red;font-size:15px;display:none'>please enter proper name</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class='form-group'>
+                                        <div class='row'>
+                                            <div class='col-sm-6'>
+                                                <label style='font-size:16px'>Notes(Option Tag)</label>
+                                            </div>
+                                            <div class='col-sm-6' id="optionDiv">
+                                                <textarea type='text' id='option_tag' name='Option_tag' class='form-control' style='width:100%' onblur="checkLengthOfNotes()"><?php echo $quote_values["option_tag"]; ?></textarea>
+                                                <span id='optionlen' style='color:red;font-size:15px;display:none'>Max 256 characters allowed </span>
                                             </div>
                                         </div>
                                     </div>
