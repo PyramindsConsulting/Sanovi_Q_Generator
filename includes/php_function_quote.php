@@ -214,7 +214,8 @@
         $temp=array();
         $ModeOfSale=$_SESSION['modeofsale'];
         $Country=$_SESSION['Country'];
-        $query="select * from BasePrices where mode_of_sale='$ModeOfSale' and product_support_questions='License' and country='$Country'";
+        $license=$_SESSION['license'];
+        $query="select * from BasePrices where mode_of_sale='$ModeOfSale' and product_support_questions='License' and country='$Country' and license_type='$license'";
              $result=mysqli_query($connect,$query); 
                 if ($result->num_rows > 0) {
                 while($row=mysqli_fetch_array($result)){
@@ -585,6 +586,36 @@ $count1=count($qty_3s);
 //    print_r($Qty_2s_3s);
     return $Qty_2s_3s;
 }
+
+
+function count_node_servers($qty_2s,$qty_3s){
+    $a=0;
+$count1=count($qty_3s);
+    for($i=0;$i<$count1;$i++){
+        $qty_que_3s[$i][0]=get_question($qty_3s[$i][0]);
+        $qty_que_3s[$i][1]=$qty_3s[$i][1];
+    }
+    $count2=count($qty_2s);
+    for($i=0;$i<$count2;$i++){
+        $qty_que_2s[$i][0]=get_question($qty_2s[$i][0]);
+        $qty_que_2s[$i][1]=$qty_2s[$i][1];
+    }
+    $count_of_servers_databases=0;
+    for($j=0;$j<=$count1;$j++){
+        for($i=0;$i<=$count2;$i++){
+            if($qty_que_2s[$i][0]==$qty_que_3s[$j][0]){
+                $Qty_2s_3s[$a][0]=$qty_que_2s[$i][0];//storing name
+                if(($Qty_2s_3s[$a][0]=="Number of Production Servers that are using Advanced Replication for data protection")||($Qty_2s_3s[$a][0]=="Number of Virtual Production Servers that are using Advanced Replication for data protection")){
+                   $Qty_2s_3s[$a][1]=$Qty_2s_3s[$a][1];//adding quantity
+               }else{
+                   $Qty_2s_3s[$a][1]=$qty_que_2s[$i][1]+$qty_que_3s[$j][1];//adding quantity
+                   $count_of_servers_databases+=$Qty_2s_3s[$a][1];
+               }
+            }    
+            }$a++;
+    }
+return $count_of_servers_databases;
+}
     function remove_nulls($arrayName){
        $a=0;
         $temp=array();
@@ -613,16 +644,16 @@ function get_exchange_rate($currency){
         return $exchange_rate;
     }
 
-function License_billing_quantity($data_2s_3s,$ProdModule,$Country,$ModeOfSale,$currency){
+function License_billing_quantity($data_2s_3s,$ProdModule,$Country,$ModeOfSale,$currency,$license){
         $temp=array();
         include ("../../includes/config.php");
         if($ModeOfSale!='Support Only Sale'){
-        $license=$data_2s_3s;
-        $count=count($license);
+        $license_qty=$data_2s_3s;
+        $count=count($license_qty);
         for($j=0;$j<$count+1;$j++){
-                $question=@$license[$j][0];
-                $qty=@$license[$j][1];
-                $query="select * from BasePrices where product_module= '$ProdModule' and question='$question' and country='$Country'";
+                $question=@$license_qty[$j][0];
+                $qty=@$license_qty[$j][1];
+                $query="select * from BasePrices where product_module= '$ProdModule' and question='$question' and country='$Country' and license_type='$license'";
                 $result=mysqli_query($connect,$query);
                 if(!$result){
                     echo "database query failed";
@@ -687,7 +718,7 @@ function Product_billing_quantity($tempArray,$ProdModule,$Country,$ModeOfSale,$c
             }
             return $temp;
         }
-        function Professional_billing_quantity($tempArray,$temparray2,$ProdModule,$Country,$ModeOfSale,$currency){
+        function Professional_billing_quantity($tempArray,$temparray2,$ProdModule,$Country,$ModeOfSale,$currency,$Productsupport,$prof_services_all,$license){
             $temp=array();
             include ("../../includes/post_value_arrays.php");
             include ("../../includes/config.php");
@@ -789,7 +820,7 @@ function Product_billing_quantity($tempArray,$ProdModule,$Country,$ModeOfSale,$c
                         $qty=$Qty_2s_3s[$j][1];
                         $simpleApps=round($qty*0.7);
                         $complexApps=$qty-$simpleApps; //Calculating complex apps at 30% of total
-                        $query="select * from BasePrices where product_module= '$ProdModule' and question='$question1' and country='$Country'";
+                        $query="select * from BasePrices where product_module= '$ProdModule' and question='$question1' and country='$Country' and license_type='$license'";
                         $result=mysqli_query($connect,$query);
                         if(!$result){
                             echo "database query failed";
@@ -898,6 +929,35 @@ function Product_billing_quantity($tempArray,$ProdModule,$Country,$ModeOfSale,$c
                     }
                     return $temp;
                 }
+    }
+    
+    function premiseProductTraining($ModeOfSale,$prof_premise_product_training,$nodeservers){
+        include ("../../includes/config.php");
+        $temp=array();
+//        $license=$_SESSION['license'];
+        $prof_premise_product_training=$_SESSION['premise_product_training'];
+        $Country=$_SESSION['Country'];
+         if($ModeOfSale=='First Time Sale'){
+                if($prof_premise_product_training=="Yes"){
+                    $node_servers=ceil($nodeservers/40);
+                    $query="select * from BasePrices where product_module='PREMISE PRODUCT TRAINING' and country='$Country'";
+                    $result=mysqli_query($connect,$query); 
+                    $row=mysqli_fetch_array($result);
+                    if(!$result){
+                        echo "database query failed";
+                    }
+                    $premise_training=$row['base_price']*$node_servers;
+                    $i=0;$j=0;
+                    $temp[$i][$j]=$row['part_number'];
+                    $j++;
+                    $temp[$i][$j]=$row['part_desc'];
+                    $j++;
+                    $temp[$i][$j]=$node_servers;
+                    $j++;
+                    $temp[$i][$j]=$premise_training;
+                }
+            }
+            return $temp;
     }
     function masterServerproduct_view($ModeOfSale,$Country){
         include ("../../includes/config.php");

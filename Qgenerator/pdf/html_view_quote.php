@@ -50,7 +50,6 @@ $lgt_details=fetch_lgt_data($refId, $verId);
 $crt_id=$lgt_details["license_crt_id"];
 $lht_id=$lgt_details["license_lht_id"];
 $date=$lgt_details["license_generation_date"];
-
 //fetching deatils of 2site and 3 site    
 $qty_2s=fetch_crt_2s_data($crt_id);
 $qty_3s=fetch_crt_3s_data($crt_id);
@@ -71,6 +70,7 @@ $license=$customer_details["license_type"];
 $product=$customer_details["product"];
 $ModeOfSale=$customer_details["mode_of_sale"];
 $ProdModule=$customer_details["product_module"];
+//echo $license;
 ?>
 <html> 
 
@@ -193,7 +193,9 @@ $ProdModule=$customer_details["product_module"];
                 <div class="col-sm-2"><?php echo currency_format($lht_data["finalLicenseCost"],$currency);?></div>
             </div>
         </div>
-        <div class="form-group">
+        <?php 
+            if($license=="Perpetual"){ ?>        
+                <div class="form-group">
             <div class="row">
                 <div class="col-sm-4">- Product Support</div>
                 
@@ -203,6 +205,9 @@ $ProdModule=$customer_details["product_module"];
                 <div class="col-sm-2"><?php echo currency_format($lht_data["finalSupportCost"],$currency);?></div>
             </div>
         </div>
+        <?php 
+            } ?>
+        
         <div class="form-group">
             <div class="row">
                 <div class="col-sm-4">- Professional Services</div>
@@ -248,8 +253,12 @@ $ProdModule=$customer_details["product_module"];
             </div>
         </div>
         <!--  license billing quantity       -->
-        <?php 
-            $licensebilling=License_billing_quantity($data_2s_3s,$ProdModule,$country,$ModeOfSale,$currency);
+        <?php
+            if($license=="Perpetual"){        
+                $licensebilling=License_billing_quantity($data_2s_3s,$ProdModule,$country,$ModeOfSale,$currency,$license);
+            }else{
+                $licensebilling=License_billing_quantity_subscription($data_2s_3s,$ProdModule,$country,$ModeOfSale,$currency,$license);
+            }
             $licensecount=count($licensebilling);
             for($i=0;$i<$licensecount;$i++) {
                 if($licensebilling[$i][0]!=""){
@@ -264,7 +273,7 @@ $ProdModule=$customer_details["product_module"];
                 }
             }
             
-            $master_server_license=masterServerLicense_view($ModeOfSale,$country);
+            $master_server_license=masterServerLicense_view($ModeOfSale,$country,$license);
             $master_server_license_count=count($master_server_license);
             for($i=0;$i<$master_server_license_count;$i++) {
                 if($master_server_license[$i][0]!=""){
@@ -290,9 +299,10 @@ $ProdModule=$customer_details["product_module"];
         <?php 
             $prof_qty=fetch_crt_prof_data($crt_id);
             $prof_services_all=$prof_qty[0][1];    
-            $profbilling=Professional_billing_quantity($prof_qty,$data_2s_3s,$ProdModule,$country,$ModeOfSale,$currency,$Productsupport,$prof_services_all);
+            $prof_premise_product_training=$prof_qty[16][1];
+          $profbilling=Professional_billing_quantity($prof_qty,$data_2s_3s,$ProdModule,$country,$ModeOfSale,$currency,$Productsupport,$prof_services_all);
             $profcount=count($profbilling);
-    
+            
             for($i=0;$i<$profcount;$i++) {
                 if($profbilling[$i][0]!=""){
                   echo   "<div class='form-group'>
@@ -307,6 +317,8 @@ $ProdModule=$customer_details["product_module"];
             }
             
             $master_server_prof= masterServerProf_view($ModeOfSale,$country);
+            $nodeservers=count_node_servers($qty_2s,$qty_3s,$bunker);
+//            print_r($master_server_prof);
             $master_server_prof_count=count($master_server_prof);
             for($i=0;$i<$master_server_prof_count;$i++) {
                 if($master_server_prof[$i][0]!=""){
@@ -320,9 +332,26 @@ $ProdModule=$customer_details["product_module"];
                         </div>";
                 }
             }
+            $premise_product_training= premiseProductTraining($ModeOfSale,$prof_premise_product_training,$country,$nodeservers);
+//            print_r($premise_product_training);
+            $premise_product_training_count=count($premise_product_training);
+            for($i=0;$i<$premise_product_training_count;$i++) {
+                if($premise_product_training[$i][0]!=""){
+                    echo   "<div class='form-group'>
+                            <div class='row'>
+                                <div class='col-sm-4'>".$premise_product_training[$i][0]."</div>
+                                <div class='col-sm-5'>".$premise_product_training[$i][1]."</div>
+                                <div class='col-sm-1'>".$premise_product_training[$i][2]."</div>
+                                <div class='col-sm-1'>".currency_format($premise_product_training[$i][3],$currency)."</div>
+                            </div>
+                        </div>";
+                }
+            }
             
         ?>
-        
+        <?php 
+            if($license=="Perpetual"){
+        ?>
          <!-- Product Support  billing Quantity        -->
         <div class="form-group" id="Professional_service">
             <div class="row">
@@ -364,7 +393,9 @@ $ProdModule=$customer_details["product_module"];
                         </div>";
                 }
             }
-            
+           } else{
+                
+            }
         ?>
        <?php  }//End of Annexure 1 If loop
             else{ ?>
@@ -381,7 +412,12 @@ $ProdModule=$customer_details["product_module"];
         </div>
         <!--  license billing quantity       -->
         <?php 
-            $licensebilling=License_billing_quantity($data_2s_3s,$ProdModule,$country,$ModeOfSale,$currency);
+           if($license=="Perpetual"){        
+                $licensebilling=License_billing_quantity($data_2s_3s,$ProdModule,$country,$ModeOfSale,$currency,$license);
+            }else{
+               $licensebilling=License_billing_quantity_subscription($data_2s_3s,$ProdModule,$country,$ModeOfSale,$currency,$license);
+            }
+            print_r($licensecount);    
             $licensecount=count($licensebilling);
             for($i=0;$i<$licensecount;$i++) {
                 if($licensebilling[$i][0]!=""){
@@ -395,7 +431,7 @@ $ProdModule=$customer_details["product_module"];
                 }
             }
             
-            $master_server_license=masterServerLicense_view($ModeOfSale,$country);
+            $master_server_license=masterServerLicense_view($ModeOfSale,$country,$license);
             $master_server_license_count=count($master_server_license);
             for($i=0;$i<$master_server_license_count;$i++) {
                 if($master_server_license[$i][0]!=""){
@@ -420,7 +456,9 @@ $ProdModule=$customer_details["product_module"];
         <?php 
             $prof_qty=fetch_crt_prof_data($crt_id);
             $prof_services_all=$prof_qty[0][1];    
-            $profbilling=Professional_billing_quantity($prof_qty,$data_2s_3s,$ProdModule,$country,$ModeOfSale,$currency,$Productsupport,$prof_services_all);
+            $prof_premise_product_training=$prof_qty[16][1];
+          
+                $profbilling=Professional_billing_quantity($prof_qty,$data_2s_3s,$ProdModule,$country,$ModeOfSale,$currency,$Productsupport,$prof_services_all,$license);
             $profcount=count($profbilling);
     
             for($i=0;$i<$profcount;$i++) {
@@ -436,6 +474,7 @@ $ProdModule=$customer_details["product_module"];
             }
             
             $master_server_prof= masterServerProf_view($ModeOfSale,$country);
+            $nodeservers=count_node_servers($qty_2s,$qty_3s,$bunker);
             $master_server_prof_count=count($master_server_prof);
             for($i=0;$i<$master_server_prof_count;$i++) {
                 if($master_server_prof[$i][0]!=""){
@@ -448,9 +487,27 @@ $ProdModule=$customer_details["product_module"];
                         </div>";
                 }
             }
+            $premise_product_training= premiseProductTraining($ModeOfSale,$prof_premise_product_training,$country,$nodeservers);
+//            print_r($premise_product_training);
+//                echo $nodeservers;
+            $premise_product_training_count=count($premise_product_training);
+            for($i=0;$i<$premise_product_training_count;$i++) {
+                if($premise_product_training[$i][0]!=""){
+                    echo   "<div class='form-group'>
+                            <div class='row'>
+                                <div class='col-sm-3'>".$premise_product_training[$i][0]."</div>
+                                <div class='col-sm-7'>".$premise_product_training[$i][1]."</div>
+                                <div class='col-sm-2'>".$premise_product_training[$i][2]."</div>
+                                
+                            </div>
+                        </div>";
+                }
+            }
             
         ?>
-        
+        <?php 
+        if($license=="Perpetual"){
+                ?>
         <!-- Product Training billing Quantity        -->
         <div class="form-group" id="Professional_service">
             <div class="row">
@@ -489,7 +546,10 @@ $ProdModule=$customer_details["product_module"];
                         </div>";
                 }
             }
-         } ?>
+         } 
+        
+        }
+        ?>
         <!-- User entered data with individual quantity listing        -->
         <div class="form-group">
             <div class="row"><b>Annexure-2: Customer Requirements

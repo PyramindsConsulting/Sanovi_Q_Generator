@@ -62,6 +62,7 @@ $prof_services_v_share_server=$_POST['Prof_Services_v_share_server'];
 $prof_services_v_share_db=$_POST['Prof_Services_v_share_db'];
 $prof_services_prod_ms=$_POST['Prof_Services_prod_ms'];
 $prof_services_prod_v_ms=$_POST['Prof_Services_prod_v_ms'];
+$prof_premise_product_training=$_POST['Premise_product_training'];
 $Discount_license=$_POST["Discount_license"];
 $Discount_prof_serv=$_POST["Discount_prof_serv"];
 $Discount_product_support=$_POST["Discount_product_support"];

@@ -62,6 +62,7 @@
         $details["Prof_Services_v_share_db"]=$row["Prof_noOfVirtualSharePointDatabases"];
         $details["Prof_Services_prod_ms"]=$row["Prof_noOfMSExchangeDatabases"];
         $details["Prof_Services_prod_v_ms"]=$row["Prof_noOfVirtualMSExchangeDatabases"];
+        $details["Prof_PremiseProductTraining"]=$row["Prof_PremiseProductTraining"];
         $details["Product_Support"]=$row["yearsOfSupport"];
         
         $lht_id=$refid."_".$verid;

@@ -561,9 +561,27 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                     </div><br>";
                             }
-                            echo "</div>";
+                            echo "<div class='row'>
+                                    <div class='col-sm-12'>
+                                        <div class='form-group'>
+                                            <div class='col-sm-8'>
+                                                Is Customer On-Premise Product Training Required?
+                                            </div>
+                                            <div class='col-sm-4'>
+                                                <div class='dropdown'>
+                                                    <select id='premise_product_training' class='form-control' name='Premise_product_training'>
+                                                        <option value='Yes'>Yes</option>
+                                                        <option value='No'>No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div></div><br>
+                                ";
                             echo '<div class="row"><button class="btn" type="button" id="button3" style="float:right ;margin-right:15px" >More</button>';
                             echo '<button type="button" class="btn" id="less3" style="float:right ;margin-right:15px" >Less</button></div><br>';
                             $query2 = "select * from QGeneratorQuestions where category='Prof-Services_advanced' limit 0,10";
@@ -855,6 +873,10 @@
                                                 <div class="row" id="prof_prod_v_ms">
                                                     <div class="col-xs-8">Prof Services Req on Virtual MS Exchange Data</div>
                                                     <div class="col-xs-4"><span id="Prof_prod_v_ms"></span></div>
+                                                </div>
+                                                <div class="row" id="prof_premise_product_training">
+                                                    <div class="col-xs-8">Is Customer On-Premise Product Training Required?</div>
+                                                    <div class="col-xs-4"><span id="Prof_premise"></span></div>
                                                 </div>
                                             </div>
                                             <br>

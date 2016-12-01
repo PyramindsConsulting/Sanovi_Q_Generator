@@ -78,7 +78,6 @@ $license=$_SESSION['license'];
 $product=$_SESSION['product'];
 $ModeOfSale=$_SESSION['modeofsale'];
 $ProdModule=$_SESSION['productModule'];
-
 //product support
 $ProdSupport=$_SESSION['productSupport'];
 
@@ -98,7 +97,7 @@ $license2scount=count($license_2s_cust_qty);
 
 //customer requirements license_3s qty
 $license_3s_cust_qty=$_SESSION['license_3s_qty'];
-$license_3s_cust_qty=remove_null($license_2s_cust_qty);
+$license_3s_cust_qty=remove_null($license_3s_cust_qty);
 $license3scount=count($license_3s_cust_qty);
 
 //customer requirements prof qty
@@ -184,12 +183,16 @@ $pdf->Cell(36,5,'-',0,0,'R');
 //$finalLicenseCost=currency_format($lht_data["finalLicenseCost"],$currency);
 $pdf->Cell(42,5,currency_format($lht_data["finalLicenseCost"],$currency),0,0,'R');
 $pdf->ln();
+if($license=="Perpetual"){    
 $pdf->Cell(103,5,'- Product Support',0,0);
 //$pdf->Cell(23,5,currency_format($lht_data["productSupportCost"],$currency),0,0,'R');
 //$pdf->Cell(25,5,$lht_data["discountPercentageOnSupport"],0,0,'R');
 $pdf->Cell(36,5,'-',0,0,'R');
 $pdf->Cell(42,5,currency_format($lht_data["finalSupportCost"],$currency),0,0,'R');
 $pdf->ln();
+}else{
+    
+}
 $pdf->Cell(103,5,'- Professional Services',0,0);
 //$pdf->Cell(23,5,currency_format($lht_data["PSCost"],$currency),0,0,'R');
 //$pdf->Cell(25,5,$lht_data["discountPercentageOnPS"],0,0,'R');
@@ -364,6 +367,44 @@ $bottom_margin = 0; // mm
         $pdf->ln();
       }
   }
+//$prof_premise_product_training=$prof_qty[16][1];
+$nodeservers=count_node_servers($license_2s_cust_qty,$license_3s_cust_qty);
+$premise_product_training= premiseProductTraining($ModeOfSale,$prof_premise_product_training,$nodeservers);
+$premise_product_training_count=count($premise_product_training);
+$height_of_cell = 30; // mm
+$page_height = 286.93; // mm (portrait letter)
+$bottom_margin = 0; // mm
+  for($i=0;$i<$premise_product_training_count;$i++) {
+      if($premise_product_training[$i][0]!=""){
+    $block=floor($i/1);
+    $space_left=$page_height-($pdf->GetY()+$bottom_margin); // space left on page
+      if ($i/1==floor($i/1) && $height_of_cell > $space_left) {
+        $pdf->AddPage(); // page break
+      }
+
+        $x=$pdf->GetX();
+        $y=$pdf->GetY();
+        $pdf->MultiCell(50,6,$premise_product_training[$i][0],0,'L');
+        $pdf->SetXY($x+50,$y);
+        $x=$pdf->GetX();
+        $y=$pdf->GetY();
+        $pdf->MultiCell(80,6,$premise_product_training[$i][1],0,'L');
+        $pdf->SetXY($x+70,$y);
+        $x=$pdf->GetX();
+        $y=$pdf->GetY();
+        $pdf->MultiCell(30,6,$premise_product_training[$i][2],0,'R');
+        $pdf->SetXY($x+25,$y);
+        $x=$pdf->GetX();
+        $y=$pdf->GetY();
+        $pdf->MultiCell(35,6,currency_format($premise_product_training[$i][3],$currency),0,'R');
+        $pdf->SetXY($x,$y);
+        $pdf->ln();
+        $pdf->ln();
+      }
+  }
+    
+//PRODUCT BILLING QUANTITY 
+if($license=="Perpetual"){    
 $pdf->ln();
 $pdf->AddPage('P','A4');
 $pdf->SetFont('Arial','',10);
@@ -438,6 +479,9 @@ $bottom_margin = 0; // mm
         $pdf->ln();
       }
   }
+}else{
+    
+}
 }//End of Annexure 1 If loop
 else{
 $pdf->AddPage('P','A4'); //ADD A NEW PAGE
@@ -448,7 +492,7 @@ $pdf->ln();
 $pdf->SetFont('Arial','',10);
 $pdf->SetFillColor(224, 224, 224);
 $pdf->Cell(50,10,'Part No/Licensing',0,0,'L',true);
-$pdf->Cell(70,10,'License Item Description',0,0,'',true);
+$pdf->Cell(80,10,'License Item Description',0,0,'',true);
 $pdf->Cell(30,10,'Qty',0,0,'R',true);
 $pdf->Cell(35,10,'                ',0,0,'C',true);
 $pdf->SetFont('Arial','',8);
@@ -471,8 +515,8 @@ $bottom_margin = 0; // mm
         $pdf->SetXY($x+50,$y);
         $x=$pdf->GetX();
         $y=$pdf->GetY();
-        $pdf->MultiCell(80,6,$license_qty[$i][1],0,'L');
-        $pdf->SetXY($x+70,$y);
+        $pdf->MultiCell(90,6,$license_qty[$i][1],0,'L');
+        $pdf->SetXY($x+80,$y);
         $x=$pdf->GetX();
         $y=$pdf->GetY();
         $pdf->MultiCell(30,6,$license_qty[$i][2],0,'R');
@@ -503,8 +547,8 @@ $bottom_margin = 0; // mm
         $pdf->SetXY($x+50,$y);
         $x=$pdf->GetX();
         $y=$pdf->GetY();
-        $pdf->MultiCell(80,6,$master_license[$i][1],0,'L');
-        $pdf->SetXY($x+70,$y);
+        $pdf->MultiCell(90,6,$master_license[$i][1],0,'L');
+        $pdf->SetXY($x+80,$y);
         $x=$pdf->GetX();
         $y=$pdf->GetY();
         $pdf->MultiCell(30,6,$master_license[$i][2],0,'R');
@@ -517,11 +561,13 @@ $bottom_margin = 0; // mm
         $pdf->ln();
       }
   }
+    
+//PROFESSIONAL BILLING QUANTITY    
 $pdf->ln();
 $pdf->SetFont('Arial','',10);
 $pdf->SetFillColor(224, 224, 224);
 $pdf->Cell(50,10,'Part No/Licensing',0,0,'L',true);
-$pdf->Cell(70,10,'Professional service Description',0,0,'',true);
+$pdf->Cell(80,10,'Professional service Description',0,0,'',true);
 $pdf->Cell(30,10,'Qty',0,0,'R',true);
 $pdf->Cell(35,10,'                         ',0,0,'C',true);
 $pdf->SetFont('Arial','',8);
@@ -545,7 +591,7 @@ $bottom_margin = 0; // mm
         $x=$pdf->GetX();
         $y=$pdf->GetY();
         $pdf->MultiCell(90,6,$prof_qty[$i][1],0,'L');
-        $pdf->SetXY($x+70,$y);
+        $pdf->SetXY($x+80,$y);
         $x=$pdf->GetX();
         $y=$pdf->GetY();
         $pdf->MultiCell(30,6,$prof_qty[$i][2],0,'R');
@@ -577,7 +623,7 @@ $bottom_margin = 0; // mm
         $x=$pdf->GetX();
         $y=$pdf->GetY();
         $pdf->MultiCell(90,6,$master_prof[$i][1],0,'L');
-        $pdf->SetXY($x+70,$y);
+        $pdf->SetXY($x+80,$y);
         $x=$pdf->GetX();
         $y=$pdf->GetY();
         $pdf->MultiCell(30,6,$master_prof[$i][2],0,'R');
@@ -590,6 +636,43 @@ $bottom_margin = 0; // mm
         $pdf->ln();
       }
   }
+//$prof_premise_product_training=$prof_qty[16][1];
+$nodeservers=count_node_servers($license_2s_cust_qty,$license_3s_cust_qty);
+$premise_product_training= premiseProductTraining($ModeOfSale,$prof_premise_product_training,$nodeservers);
+$premise_product_training_count=count($premise_product_training);
+$height_of_cell = 30; // mm
+$page_height = 286.93; // mm (portrait letter)
+$bottom_margin = 0; // mm
+  for($i=0;$i<$premise_product_training_count;$i++) {
+      if($premise_product_training[$i][0]!=""){
+    $block=floor($i/1);
+    $space_left=$page_height-($pdf->GetY()+$bottom_margin); // space left on page
+      if ($i/1==floor($i/1) && $height_of_cell > $space_left) {
+        $pdf->AddPage(); // page break
+      }
+
+        $x=$pdf->GetX();
+        $y=$pdf->GetY();
+        $pdf->MultiCell(50,6,$premise_product_training[$i][0],0,'L');
+        $pdf->SetXY($x+50,$y);
+        $x=$pdf->GetX();
+        $y=$pdf->GetY();
+        $pdf->MultiCell(90,6,$premise_product_training[$i][1],0,'L');
+        $pdf->SetXY($x+80,$y);
+        $x=$pdf->GetX();
+        $y=$pdf->GetY();
+        $pdf->MultiCell(30,6,$premise_product_training[$i][2],0,'R');
+        $pdf->SetXY($x+25,$y);
+        $x=$pdf->GetX();
+        $y=$pdf->GetY();
+        $pdf->MultiCell(35,6,'',0,'R');
+        $pdf->SetXY($x,$y);
+        $pdf->ln();
+        $pdf->ln();
+      }
+  }
+//PRODUCT BILLING QUANTITY
+if($license=="Perpetual"){    
 $pdf->ln();
 $pdf->AddPage('P','A4');
 $pdf->SetFont('Arial','',10);
@@ -664,6 +747,9 @@ $bottom_margin = 0; // mm
         $pdf->ln();
       }
   }
+}else{
+    
+}
 }
 //PAGE - 3 ANNEXURE-2
 $pdf->AddPage('P','A4'); //ADD A NEW PAGE
