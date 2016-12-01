@@ -185,12 +185,16 @@ $pdf->Cell(36,5,'-',0,0,'R');
 $finalLicenseCost=currency_format($lht_data["finalLicenseCost"],$currency);
 $pdf->Cell(42,5,currency_format($lht_data["finalLicenseCost"],$currency),0,0,'R');
 $pdf->ln();
+if($license=="Perpetual"){    
 $pdf->Cell(103,5,'- Product Support',0,0);
 //$pdf->Cell(23,5,currency_format($lht_data["productSupportCost"],$currency),0,0,'R');
 //$pdf->Cell(25,5,$lht_data["discountPercentageOnSupport"],0,0,'R');
 $pdf->Cell(36,5,'-',0,0,'R');
 $pdf->Cell(42,5,currency_format($lht_data["finalSupportCost"],$currency),0,0,'R');
 $pdf->ln();
+}else{
+    
+}
 $pdf->Cell(103,5,'- Professional Services',0,0);
 //$pdf->Cell(23,5,currency_format($lht_data["PSCost"],$currency),0,0,'R');
 //$pdf->Cell(25,5,$lht_data["discountPercentageOnPS"],0,0,'R');
@@ -228,8 +232,11 @@ $pdf->Cell(35,10,'Total Price '.$currency,0,0,'C',true);
 $pdf->SetFont('Arial','',8);
 $pdf->ln();
 
-
-$licensebilling=License_billing_quantity($data_2s_3s,$ProdModule,$country,$ModeOfSale,$currency);
+if($license=="Perpetual"){
+$licensebilling=License_billing_quantity($data_2s_3s,$ProdModule,$country,$ModeOfSale,$currency,$license);
+}else{
+$licensebilling=License_billing_quantity_subscription($data_2s_3s,$ProdModule,$country,$ModeOfSale,$currency,$license);
+}
 $licensecount=count($licensebilling);
 $height_of_cell = 30; // mm
 $page_height = 286.93; // mm (portrait letter)
@@ -262,7 +269,7 @@ $bottom_margin = 0; // mm
         $pdf->ln();
       }
   }
-$master_server_license=masterServerLicense_view($ModeOfSale,$country);
+$master_server_license=masterServerLicense_view($ModeOfSale,$country,$license);
 $master_server_license_count=count($master_server_license);
 $height_of_cell = 30; // mm
 $page_height = 286.93; // mm (portrait letter)
@@ -312,7 +319,7 @@ $pdf->ln();
 
 $prof_qty=fetch_crt_prof_data($crt_id);
 $prof_services_all=$prof_qty[0][1];    
-$profbilling=Professional_billing_quantity($prof_qty,$data_2s_3s,$ProdModule,$country,$ModeOfSale,$currency,$Productsupport,$prof_services_all);
+$profbilling=Professional_billing_quantity($prof_qty,$data_2s_3s,$ProdModule,$country,$ModeOfSale,$currency,$Productsupport,$prof_services_all,$license);
 $profcount=count($profbilling);
 
 $height_of_cell = 30; // mm
@@ -379,7 +386,45 @@ $bottom_margin = 0; // mm
         $pdf->ln();
       }
   }
+    
+$prof_premise_product_training=$prof_qty[16][1];
+$nodeservers=count_node_servers($qty_2s,$qty_3s,$bunker);
+$premise_product_training= premiseProductTraining($ModeOfSale,$prof_premise_product_training,$country,$nodeservers);
+$premise_product_training_count=count($premise_product_training);
+$height_of_cell = 30; // mm
+$page_height = 286.93; // mm (portrait letter)
+$bottom_margin = 0; // mm
+  for($i=0;$i<$premise_product_training_count;$i++) {
+      if($premise_product_training[$i][0]!=""){
+    $block=floor($i/1);
+    $space_left=$page_height-($pdf->GetY()+$bottom_margin); // space left on page
+      if ($i/1==floor($i/1) && $height_of_cell > $space_left) {
+        $pdf->AddPage(); // page break
+      }
+
+        $x=$pdf->GetX();
+        $y=$pdf->GetY();
+        $pdf->MultiCell(50,6,$premise_product_training[$i][0],0,'L');
+        $pdf->SetXY($x+50,$y);
+        $x=$pdf->GetX();
+        $y=$pdf->GetY();
+        $pdf->MultiCell(80,6,$premise_product_training[$i][1],0,'L');
+        $pdf->SetXY($x+70,$y);
+        $x=$pdf->GetX();
+        $y=$pdf->GetY();
+        $pdf->MultiCell(30,6,$premise_product_training[$i][2],0,'R');
+        $pdf->SetXY($x+25,$y);
+        $x=$pdf->GetX();
+        $y=$pdf->GetY();
+        $pdf->MultiCell(35,6,currency_format($premise_product_training[$i][3],$currency),0,'R');
+        $pdf->SetXY($x,$y);
+        $pdf->ln();
+        $pdf->ln();
+      }
+  }
+    
 //Product Support Billing Quantity 
+if($license=="Perpetual"){    
 $pdf->ln();
 $pdf->SetFont('Arial','',10);
 $pdf->SetFillColor(224, 224, 224);
@@ -457,6 +502,9 @@ $bottom_margin = 0; // mm
         $pdf->ln();
       }
   }
+}else{
+    
+}
 }//End of Annexure 1 If loop 
 else{
 $pdf->AddPage('P','A4'); //ADD A NEW PAGE
@@ -467,14 +515,17 @@ $pdf->ln();
 $pdf->SetFont('Arial','',10);
 $pdf->SetFillColor(224, 224, 224);
 $pdf->Cell(50,10,'Part No/Licensing',0,0,'L',true);
-$pdf->Cell(70,10,'License Item Description',0,0,'',true);
+$pdf->Cell(80,10,'License Item Description',0,0,'',true);
 $pdf->Cell(30,10,'Qty',0,0,'R',true);
 $pdf->Cell(35,10,'                   ',0,0,'C',true);
 $pdf->SetFont('Arial','',8);
 $pdf->ln();
 
-
-$licensebilling=License_billing_quantity($data_2s_3s,$ProdModule,$country,$ModeOfSale,$currency);
+if($license=="Perpetual"){ 
+$licensebilling=License_billing_quantity($data_2s_3s,$ProdModule,$country,$ModeOfSale,$currency,$license);
+}else{
+$licensebilling=License_billing_quantity_subscription($data_2s_3s,$ProdModule,$country,$ModeOfSale,$currency,$license);
+}
 $licensecount=count($licensebilling);
 $height_of_cell = 30; // mm
 $page_height = 286.93; // mm (portrait letter)
@@ -493,8 +544,8 @@ $bottom_margin = 0; // mm
         $pdf->SetXY($x+50,$y);
         $x=$pdf->GetX();
         $y=$pdf->GetY();
-        $pdf->MultiCell(80,5,$licensebilling[$i][1],0,'L');
-        $pdf->SetXY($x+70,$y);
+        $pdf->MultiCell(90,5,$licensebilling[$i][1],0,'L');
+        $pdf->SetXY($x+80,$y);
         $x=$pdf->GetX();
         $y=$pdf->GetY();
         $pdf->MultiCell(30,5,$licensebilling[$i][2],0,'R');
@@ -507,7 +558,7 @@ $bottom_margin = 0; // mm
         $pdf->ln();
       }
   }
-$master_server_license=masterServerLicense_view($ModeOfSale,$country);
+$master_server_license=masterServerLicense_view($ModeOfSale,$country,$license);
 $master_server_license_count=count($master_server_license);
 $height_of_cell = 30; // mm
 $page_height = 286.93; // mm (portrait letter)
@@ -526,8 +577,8 @@ $bottom_margin = 0; // mm
         $pdf->SetXY($x+50,$y);
         $x=$pdf->GetX();
         $y=$pdf->GetY();
-        $pdf->MultiCell(80,6,$master_server_license[$i][1],0,'L');
-        $pdf->SetXY($x+70,$y);
+        $pdf->MultiCell(90,6,$master_server_license[$i][1],0,'L');
+        $pdf->SetXY($x+80,$y);
         $x=$pdf->GetX();
         $y=$pdf->GetY();
         $pdf->MultiCell(30,6,$master_server_license[$i][2],0,'R');
@@ -548,7 +599,7 @@ $pdf->ln();
 $pdf->SetFont('Arial','',10);
 $pdf->SetFillColor(224, 224, 224);
 $pdf->Cell(50,10,'Part No/Licensing',0,0,'L',true);
-$pdf->Cell(70,10,'Professional Service Description',0,0,'',true);
+$pdf->Cell(80,10,'Professional Service Description',0,0,'',true);
 $pdf->Cell(30,10,'Qty',0,0,'R',true);
 $pdf->Cell(35,10,'             ',0,0,'C',true);
 $pdf->SetFont('Arial','',8);
@@ -556,7 +607,8 @@ $pdf->ln();
 
 
 $prof_qty=fetch_crt_prof_data($crt_id);
-$profbilling=Professional_billing_quantity($prof_qty,$data_2s_3s,$ProdModule,$country,$ModeOfSale,$currency,$Productsupport);
+$prof_services_all=$prof_qty[0][1];
+$profbilling=Professional_billing_quantity($prof_qty,$data_2s_3s,$ProdModule,$country,$ModeOfSale,$currency,$Productsupport,$prof_services_all,$license);
 $profcount=count($profbilling);
 
 $height_of_cell = 30; // mm
@@ -576,8 +628,8 @@ $bottom_margin = 0; // mm
         $pdf->SetXY($x+50,$y);
         $x=$pdf->GetX();
         $y=$pdf->GetY();
-        $pdf->MultiCell(80,5,$profbilling[$i][1],0,'L');
-        $pdf->SetXY($x+70,$y);
+        $pdf->MultiCell(90,5,$profbilling[$i][1],0,'L');
+        $pdf->SetXY($x+80,$y);
         $x=$pdf->GetX();
         $y=$pdf->GetY();
         $pdf->MultiCell(30,5,$profbilling[$i][2],0,'R');
@@ -609,8 +661,8 @@ $bottom_margin = 0; // mm
         $pdf->SetXY($x+50,$y);
         $x=$pdf->GetX();
         $y=$pdf->GetY();
-        $pdf->MultiCell(80,6,$master_server_prof[$i][1],0,'L');
-        $pdf->SetXY($x+70,$y);
+        $pdf->MultiCell(90,6,$master_server_prof[$i][1],0,'L');
+        $pdf->SetXY($x+80,$y);
         $x=$pdf->GetX();
         $y=$pdf->GetY();
         $pdf->MultiCell(30,6,$master_server_prof[$i][2],0,'R');
@@ -623,12 +675,49 @@ $bottom_margin = 0; // mm
         $pdf->ln();
       }
   }
+$prof_premise_product_training=$prof_qty[16][1];
+$nodeservers=count_node_servers($qty_2s,$qty_3s,$bunker);
+$premise_product_training= premiseProductTraining($ModeOfSale,$prof_premise_product_training,$country,$nodeservers);
+$premise_product_training_count=count($premise_product_training);
+$height_of_cell = 30; // mm
+$page_height = 286.93; // mm (portrait letter)
+$bottom_margin = 0; // mm
+  for($i=0;$i<$premise_product_training_count;$i++) {
+      if($premise_product_training[$i][0]!=""){
+    $block=floor($i/1);
+    $space_left=$page_height-($pdf->GetY()+$bottom_margin); // space left on page
+      if ($i/1==floor($i/1) && $height_of_cell > $space_left) {
+        $pdf->AddPage(); // page break
+      }
+
+        $x=$pdf->GetX();
+        $y=$pdf->GetY();
+        $pdf->MultiCell(50,6,$premise_product_training[$i][0],0,'L');
+        $pdf->SetXY($x+50,$y);
+        $x=$pdf->GetX();
+        $y=$pdf->GetY();
+        $pdf->MultiCell(90,6,$premise_product_training[$i][1],0,'L');
+        $pdf->SetXY($x+80,$y);
+        $x=$pdf->GetX();
+        $y=$pdf->GetY();
+        $pdf->MultiCell(30,6,$premise_product_training[$i][2],0,'R');
+        $pdf->SetXY($x+25,$y);
+        $x=$pdf->GetX();
+        $y=$pdf->GetY();
+        $pdf->MultiCell(35,6,'',0,'R');
+        $pdf->SetXY($x,$y);
+        $pdf->ln();
+        $pdf->ln();
+      }
+  }
+
 //Product Support Billing Quantity 
+if($license=="Perpetual"){    
 $pdf->ln();
 $pdf->SetFont('Arial','',10);
 $pdf->SetFillColor(224, 224, 224);
 $pdf->Cell(50,10,'Part No/Licensing',0,0,'L',true);
-$pdf->Cell(70,10,'Product Support Description',0,0,'',true);
+$pdf->Cell(80,10,'Product Support Description',0,0,'',true);
 $pdf->Cell(30,10,'Qty',0,0,'R',true);
 $pdf->Cell(35,10,'        ',0,0,'C',true);
 $pdf->SetFont('Arial','',8);
@@ -654,8 +743,8 @@ $bottom_margin = 0; // mm
         $pdf->SetXY($x+50,$y);
         $x=$pdf->GetX();
         $y=$pdf->GetY();
-        $pdf->MultiCell(80,5,$productbilling[$i][1],0,'L');
-        $pdf->SetXY($x+70,$y);
+        $pdf->MultiCell(90,5,$productbilling[$i][1],0,'L');
+        $pdf->SetXY($x+80,$y);
         $x=$pdf->GetX();
         $y=$pdf->GetY();
         $pdf->MultiCell(30,5,$productbilling[$i][2],0,'R');
@@ -687,8 +776,8 @@ $bottom_margin = 0; // mm
         $pdf->SetXY($x+50,$y);
         $x=$pdf->GetX();
         $y=$pdf->GetY();
-        $pdf->MultiCell(80,5,$master_server_product[$i][1],0,'L');
-        $pdf->SetXY($x+70,$y);
+        $pdf->MultiCell(90,5,$master_server_product[$i][1],0,'L');
+        $pdf->SetXY($x+80,$y);
         $x=$pdf->GetX();
         $y=$pdf->GetY();
         $pdf->MultiCell(30,5,$master_server_product[$i][2],0,'R');
@@ -701,6 +790,9 @@ $bottom_margin = 0; // mm
         $pdf->ln();
       }
   }
+}else{
+    
+}
 }
 //for($i=0;$i<12;$i++){
 //    if($license_qty[$i][0]!=""){

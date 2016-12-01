@@ -212,9 +212,10 @@
     function masterServerLicense(){
         include ("../../includes/config.php");
         $temp=array();
+//        $license=$_SESSION['license'];
         $ModeOfSale=$_SESSION['modeofsale'];
         $Country=$_SESSION['Country'];
-        $query="select * from BasePrices where mode_of_sale='$ModeOfSale' and product_support_questions='License' and country='$Country'";
+        $query="select * from BasePrices where mode_of_sale='$ModeOfSale' and product_support_questions='License' and country='$Country' and license_type='$license'";
              $result=mysqli_query($connect,$query); 
                 if ($result->num_rows > 0) {
                 while($row=mysqli_fetch_array($result)){
@@ -235,6 +236,8 @@
         $temp=array();
         $ModeOfSale=$_SESSION['modeofsale'];
         $Country=$_SESSION['Country'];
+//        $license=$_SESSION['license'];
+//        $query="select * from BasePrices where mode_of_sale='$ModeOfSale' and product_support_questions='Professional_services' and country='$Country'";
          $query="select * from BasePrices where mode_of_sale='$ModeOfSale' and product_support_questions='Professional_services' and country='$Country'";
              $result=mysqli_query($connect,$query); 
                 if ($result->num_rows > 0) {
@@ -256,7 +259,8 @@
         $temp=array();
         $ModeOfSale=$_SESSION['modeofsale'];
         $Country=$_SESSION['Country'];
-         $query="select * from BasePrices where mode_of_sale='$ModeOfSale' and product_support_questions='Product_support' and country='$Country'";
+//        $license=$_SESSION['license'];
+         $query="select * from BasePrices where mode_of_sale='$ModeOfSale' and product_support_questions='Product_support' and country='$Country' and license_type='$license'";
              $result=mysqli_query($connect,$query); 
                 if ($result->num_rows > 0) {
                 while($row=mysqli_fetch_array($result)){
@@ -391,6 +395,7 @@ function fetch_crt_prof_data($crt_id){
     $details["13"]["1"]=$row["Prof_noOfVirtualSharePointDatabases"];
     $details["14"]["1"]=$row["Prof_noOfMSExchangeDatabases"];
     $details["15"]["1"]=$row["Prof_noOfVirtualMSExchangeDatabases"];
+    $details["16"]["1"]=$row["Prof_PremiseProductTraining"];
 
     //Questions
     $details["0"]["0"]=$row["areProfessionalServicesRequired_Q"];
@@ -409,7 +414,7 @@ function fetch_crt_prof_data($crt_id){
     $details["13"]["0"]=$row["noOfVirtualSharePointDatabases_Prof"];
     $details["14"]["0"]=$row["noOfMSExchangeDatabases_Prof"];
     $details["15"]["0"]=$row["noOfVirtualMSExchangeDatabases_Prof"];
-    
+    $details["16"]["0"]=$row["OnPremiseProductTrainingReqd_Prof"];
     return $details;
 }
 
@@ -468,7 +473,7 @@ function fetch_crt_customer_data($crt_id){
     $details["cust_name"]=$row["cust_name"];
     $details["mode_of_sale"]=$row["mode_of_sale"];
     $details["product_module"]=$row["product_module"];
-    
+//    print_r($details);
     return $details;
 }
 
@@ -585,6 +590,35 @@ $count1=count($qty_3s);
 //    print_r($Qty_2s_3s);
     return $Qty_2s_3s;
 }
+
+function count_node_servers($qty_2s,$qty_3s,$bunker){
+    $a=0;
+$count1=count($qty_3s);
+    for($i=0;$i<$count1;$i++){
+        $qty_que_3s[$i][0]=get_question($qty_3s[$i][0]);
+        $qty_que_3s[$i][1]=$qty_3s[$i][1];
+    }
+    $count2=count($qty_2s);
+    for($i=0;$i<$count2;$i++){
+        $qty_que_2s[$i][0]=get_question($qty_2s[$i][0]);
+        $qty_que_2s[$i][1]=$qty_2s[$i][1];
+    }
+    $count_of_servers_databases=0;
+    for($j=0;$j<=$count1;$j++){
+        for($i=0;$i<=$count2;$i++){
+            if($qty_que_2s[$i][0]==$qty_que_3s[$j][0]){
+                $Qty_2s_3s[$a][0]=$qty_que_2s[$i][0];//storing name
+                if(($Qty_2s_3s[$a][0]=="Number of Production Servers that are using Advanced Replication for data protection")||($Qty_2s_3s[$a][0]=="Number of Virtual Production Servers that are using Advanced Replication for data protection")){
+                   $Qty_2s_3s[$a][1]=$Qty_2s_3s[$a][1];//adding quantity
+               }else{
+                   $Qty_2s_3s[$a][1]=$qty_que_2s[$i][1]+$qty_que_3s[$j][1];//adding quantity
+                   $count_of_servers_databases+=$Qty_2s_3s[$a][1];
+               }
+            }    
+            }$a++;
+    }
+return $count_of_servers_databases;
+}
     function remove_nulls($arrayName){
        $a=0;
         $temp=array();
@@ -613,17 +647,22 @@ function get_exchange_rate($currency){
         return $exchange_rate;
     }
 
-function License_billing_quantity($data_2s_3s,$ProdModule,$Country,$ModeOfSale,$currency){
+function License_billing_quantity($data_2s_3s,$ProdModule,$Country,$ModeOfSale,$currency,$license){
+//    echo $license;
         $temp=array();
         include ("../../includes/config.php");
         if($ModeOfSale!='Support Only Sale'){
-        $license=$data_2s_3s;
-        $count=count($license);
+        $license_qty=$data_2s_3s;
+//            print_r($license_qty);
+//        $license=$_SESSION['license'];   
+        $count=count($license_qty);
         for($j=0;$j<$count+1;$j++){
-                $question=@$license[$j][0];
-                $qty=@$license[$j][1];
-                $query="select * from BasePrices where product_module= '$ProdModule' and question='$question' and country='$Country'";
+                $question=@$license_qty[$j][0];
+                $qty=@$license_qty[$j][1];
+                $query="select * from BasePrices where product_module= '$ProdModule' and question='$question' and country='$Country' and license_type='$license'";
+//            echo $query;
                 $result=mysqli_query($connect,$query);
+//                print_r($result);
                 if(!$result){
                     echo "database query failed";
                     die();
@@ -640,14 +679,283 @@ function License_billing_quantity($data_2s_3s,$ProdModule,$Country,$ModeOfSale,$
                 $temp[$j][$i]=round($qty * $amount);
             }
             return $temp;
-            
         }
     }
+    
+    // FUNCTION FOR LICENSE QUANTITY SUBSCRIPTION 
 
+    function License_billing_quantity_subscription($data_2s_3s,$ProdModule,$Country,$ModeOfSale,$currency,$license){
+        include ("../../includes/config.php");
+        $temp=array();
+        if($ModeOfSale!='Support Only Sale'){
+        $license_qty=remove_null($data_2s_3s);
+//        print_r($license_qty);
+//        $license=$_SESSION['license'];
+        $count=count($license_qty);
+        $k=0;
+        for($j=0;$j<$count+1;$j++){
+                $question=@$license_qty[$j][0];
+                if($question=="Number of VM Images to be protected under Sanovi Cloud Continuity Module"){
+                        $value=$license_qty[$j][1];
+                        if($value!=0){
+                            $query="select * from BasePrices where product_module='Starter Pack' and question='$question' and country='$Country' and license_type='$license'";
+                            $result=mysqli_query($connect,$query); 
+                            $row=mysqli_fetch_array($result);
+                            if(!$result){
+                                echo "database query failed at starter pack";
+                            }
+                            $i=0;
+                            $temp[$k][$i]=$row['part_number'];
+                            $i++;
+                            $temp[$k][$i]=$row['part_desc'];
+                            $i++;
+                            $temp[$k][$i]=1;
+                            $i++;
+                            $temp[$k][$i]=round($row['base_price'] * get_exchange_rate());
+                            $k++;
+//                            echo $k;
+//                            print_r($temp);
+//                            $License_cost=$row['base_price'];
+                            $value=$value-20;
+                            if (($value > 0) && ($value < 100)){
+                                $vm_packcount_20=ceil($value/20);
+                                $query2="select * from BasePrices where product_module='$ProdModule' and question='$question' and product_support_questions='20Pack' and country='$Country' and license_type='$license'";
+                                $result=mysqli_query($connect,$query2); 
+                                $row=mysqli_fetch_array($result);
+                                if(!$result){
+                                    echo "database query failed";
+                                }
+                                $i=0;
+                                $temp[$k][$i]=$row['part_number'];
+                                $i++;
+                                $temp[$k][$i]=$row['part_desc'];
+                                $i++;
+                                $temp[$k][$i]=$vm_packcount_20;
+                                $i++;
+                                $temp[$k][$i]=round($vm_packcount_20 * $row['base_price'] * get_exchange_rate());
+                                $k++;
+//                                $License_cost=$License_cost + ($row['base_price']*$vm_packcount_20);
+                                }
+                                else if($value >= 100){
+                                $vm_packcount_100= ($value - $value % 100) / 100;
+                                $query2="select * from BasePrices where product_module='$ProdModule' and question='$question' and product_support_questions='100Pack' and country='$Country' and license_type='$license'";
+                                $result=mysqli_query($connect,$query2); 
+                                $row=mysqli_fetch_array($result);
+                                if(!$result){
+                                    echo "database query failed";
+                                }
+                                $i=0;
+                                $temp[$k][$i]=$row['part_number'];
+                                $i++;
+                                $temp[$k][$i]=$row['part_desc'];
+                                $i++;
+                                $temp[$k][$i]=$vm_packcount_100;
+                                $i++;
+                                $temp[$k][$i]=round($vm_packcount_100 * $row['base_price'] * get_exchange_rate());
+                                $k++;
+//                                    echo $k;
+                                   
+//                                $License_cost=$License_cost + ($row['base_price']*$vm_packcount_100);
+                                $value = ($value %  100);
+                                if($value!=0){
+                                $vm_packcount_20=ceil($value/20);
+                                $query2="select * from BasePrices where product_module='$ProdModule' and question='$question' and product_support_questions='20Pack' and country='$Country' and license_type='$license'";
+                                $result=mysqli_query($connect,$query2); 
+                                $row=mysqli_fetch_array($result);
+                                if(!$result){
+                                    echo "database query failed";
+                                }
+                                $i=0;
+                                $temp[$k][$i]=$row['part_number'];
+                                $i++;
+                                $temp[$k][$i]=$row['part_desc'];
+                                $i++;
+                                $temp[$k][$i]=$vm_packcount_20;
+                                $i++;
+                                $temp[$k][$i]=round($vm_packcount_20 * $row['base_price'] * get_exchange_rate());
+                                $k++;
+//                                     print_r($temp);
+                                }
+                                    
+                            }
+                        }
+//                        print_r($temp);
+                    }else if($question=="Number of VM Databases to be protected under Sanovi Cloud Continuity Module"){
+                        $value=$license_qty[$j][1];
+                        if($value!=0){
+                            if($value > 0 && $value < 25){
+                                $vm_packcount_5=ceil($value/5);
+                                $query2="select * from BasePrices where product_module='$ProdModule' and question='$question' and product_support_questions='5Pack' and country='$Country' and license_type='$license'";
+                                $result=mysqli_query($connect,$query2); 
+                                $row=mysqli_fetch_array($result);
+                                if(!$result){
+                                    echo "database query failed";
+                                }
+                                $i=0;
+                                $temp[$k][$i]=$row['part_number'];
+                                $i++;
+                                $temp[$k][$i]=$row['part_desc'];
+                                $i++;
+                                $temp[$k][$i]=$vm_packcount_5;
+                                $i++;
+                                $temp[$k][$i]=round($vm_packcount_5 * $row['base_price'] * get_exchange_rate());
+                                $k++;
+//                                $License_cost=$License_cost + ($row['base_price']*$vm_packcount_5);
+                                }
+                                else if($value >= 25){
+                                $vm_packcount_25= ($value - $value % 25) / 25;
+                                $query2="select * from BasePrices where product_module='$ProdModule' and question='$question' and product_support_questions='25Pack' and country='$Country' and license_type='$license'";
+                                $result=mysqli_query($connect,$query2); 
+                                $row=mysqli_fetch_array($result);
+                                if(!$result){
+                                    echo "database query failed";
+                                }
+                                $i=0;
+                                $temp[$k][$i]=$row['part_number'];
+                                $i++;
+                                $temp[$k][$i]=$row['part_desc'];
+                                $i++;
+                                $temp[$k][$i]=$vm_packcount_25;
+                                $i++;
+                                $temp[$k][$i]=round($vm_packcount_25 * $row['base_price'] * get_exchange_rate());
+                                $k++;
+//                                $License_cost=$License_cost + ($row['base_price']*$vm_packcount_25);
+                                $value = ($value %  25);
+                                if($value!=0){
+                                $vm_packcount_5=ceil($value/5);
+                                $query2="select * from BasePrices where product_module='$ProdModule' and question='$question' and product_support_questions='5Pack' and country='$Country' and license_type='$license'";
+                                $result=mysqli_query($connect,$query2); 
+                                $row=mysqli_fetch_array($result);
+                                if(!$result){
+                                    echo "database query failed";
+                                }
+                                $i=0;
+                                $temp[$k][$i]=$row['part_number'];
+                                $i++;
+                                $temp[$k][$i]=$row['part_desc'];
+                                $i++;
+                                $temp[$k][$i]=$vm_packcount_5;
+                                $i++;
+                                $temp[$k][$i]=round($vm_packcount_5 * $row['base_price'] * get_exchange_rate());
+                                $k++;
+//                                $License_cost=$License_cost + ($row['base_price']*$vm_packcount_5);
+                                }
+                                   
+                            }
+                        }
+                    }
+                    else if($question=="Number of Baremetal Windows/Linux Datas (Servers) to be protected under Sanovi Cloud Continuity Module"){
+                        $value=$license_qty[$j][1];
+                        if($value!=0){
+                            $query="select * from BasePrices where product_module='Starter Pack' and question='$question' and country='$Country' and license_type='$license'";
+                            $result=mysqli_query($connect,$query); 
+                            $row=mysqli_fetch_array($result);
+                            if(!$result){
+                                echo "database query failed";
+                            }
+                            $i=0;
+                            $temp[$k][$i]=$row['part_number'];
+                            $i++;
+                            $temp[$k][$i]=$row['part_desc'];
+                            $i++;
+                            $temp[$k][$i]=1;
+                            $i++;
+                            $temp[$k][$i]=round($row['base_price'] * get_exchange_rate());
+                            $k++;
+//                            $startervalue= $row['base_price'];
+//                            $License_cost = $License_cost + $startervalue;
+                            $value = $value-5;
+                            if ($value > 0){
+                                $query2="select * from BasePrices where product_module='$ProdModule' and question='$question' and country='$Country' and license_type='$license'";
+                                $result=mysqli_query($connect,$query2); 
+                                $row=mysqli_fetch_array($result);
+                                if(!$result){
+                                    echo "database query failed";
+                                }
+                                $i=0;
+                                $temp[$k][$i]=$row['part_number'];
+                                $i++;
+                                $temp[$k][$i]=$row['part_desc'];
+                                $i++;
+                                $temp[$k][$i]=$value;
+                                $i++;
+                                $temp[$k][$i]=round($value * $row['base_price'] * get_exchange_rate());
+                                $k++;
+//                                $License_cost=$License_cost + ($row['base_price']*$temp);
+                                }
+                        }
+                    }
+                    else if($question=="Number of Baremetal Unix Datas (Servers) to be protected under Sanovi Cloud Continuity Module"){
+                        $value=$license_qty[$j][1];
+                        if($value!=0){
+                            $query="select * from BasePrices where product_module='Starter Pack' and question='$question' and country='$Country' and license_type='$license'";
+                            $result=mysqli_query($connect,$query); 
+                            $row=mysqli_fetch_array($result);
+                            if(!$result){
+                                echo "database query failed";
+                            }
+                            $i=0;
+                            $temp[$k][$i]=$row['part_number'];
+                            $i++;
+                            $temp[$k][$i]=$row['part_desc'];
+                            $i++;
+                            $temp[$k][$i]=1;
+                            $i++;
+                            $temp[$k][$i]=round($row['base_price'] * get_exchange_rate());
+                            $k++;
+//                            $startervalue= $row['base_price'];
+//                            $License_cost = $License_cost + $startervalue;
+                            $value=$value-5;
+                            if ($value > 0){
+                                $query2="select * from BasePrices where product_module='$ProdModule' and question='$question' and country='$Country' and license_type='$license'";
+                                $result=mysqli_query($connect,$query2); 
+                                $row=mysqli_fetch_array($result);
+                                if(!$result){
+                                    echo "database query failed";
+                                }
+                                $i=0;
+                                $temp[$k][$i]=$row['part_number'];
+                                $i++;
+                                $temp[$k][$i]=$row['part_desc'];
+                                $i++;
+                                $temp[$k][$i]=$value;
+                                $i++;
+                                $temp[$k][$i]=round($value * $row['base_price'] * get_exchange_rate());
+                                $k++;
+//                                $License_cost=$License_cost + ($row['base_price']*$value);
+                                }
+                        }
+                    }
+                    else{
+                        $value=$license_qty[$j][1];
+                        if($value!=0){
+                            $query2="select * from BasePrices where product_module='$ProdModule' and question='$question' and country='$Country' and license_type='$license'";
+                            $result=mysqli_query($connect,$query2); 
+                            $row=mysqli_fetch_array($result);
+                            if(!$result){
+                                echo "database query failed";
+                            }
+                            $i=0;
+                            $temp[$k][$i]=$row['part_number'];
+                            $i++;
+                            $temp[$k][$i]=$row['part_desc'];
+                            $i++;
+                            $temp[$k][$i]=$value;
+                            $i++;
+                            $temp[$k][$i]=round($value * $row['base_price'] * get_exchange_rate());
+                            $k++;
+                        }
+                    }
+            }
+//            print_r($temp);
+            return $temp;
+            }
+    }
 function Product_billing_quantity($tempArray,$ProdModule,$Country,$ModeOfSale,$currency,$Productsupport){
             $temp=array();
 //            include ("../../includes/post_value_arrays.php");
             include ("../../includes/config.php");
+//            $license=$_SESSION['license'];
             $product_qty=remove_nulls($tempArray);
             $count=count($product_qty);
             for($i=0;$i<$count;$i++){
@@ -687,11 +995,13 @@ function Product_billing_quantity($tempArray,$ProdModule,$Country,$ModeOfSale,$c
             }
             return $temp;
         }
-        function Professional_billing_quantity($tempArray,$temparray2,$ProdModule,$Country,$ModeOfSale,$currency,$prof_services_all){
+
+        function Professional_billing_quantity($tempArray,$temparray2,$ProdModule,$Country,$ModeOfSale,$currency,$Productsupport,$prof_services_all,$license){
+//            echo $license;
             $temp=array();
 //            include ("../../includes/post_value_arrays.php");
             include ("../../includes/config.php");
-            
+//            $license=$_SESSION['license'];
             if($ModeOfSale!='Support Only Sale'){
             if($prof_services_all=="No"){
                     $QuestionsAndValues_Prof=remove_nulls($tempArray);
@@ -790,6 +1100,7 @@ function Product_billing_quantity($tempArray,$ProdModule,$Country,$ModeOfSale,$c
                         $simpleApps=round($qty*0.7);
                         $complexApps=$qty-$simpleApps; //Calculating complex apps at 30% of total
                         $query="select * from BasePrices where product_module= '$ProdModule' and question='$question1' and country='$Country'";
+//                        echo $query;
                         $result=mysqli_query($connect,$query);
                         if(!$result){
                             echo "database query failed";
@@ -860,10 +1171,11 @@ function Product_billing_quantity($tempArray,$ProdModule,$Country,$ModeOfSale,$c
                 }
         }
     }
-    function masterServerLicense_view($ModeOfSale,$Country){
+    function masterServerLicense_view($ModeOfSale,$Country,$license){
         include ("../../includes/config.php");
         $temp=array();
-        $query="select * from BasePrices where mode_of_sale='$ModeOfSale' and product_support_questions='License' and country='$Country'";
+//        $license=$_SESSION['license'];
+        $query="select * from BasePrices where mode_of_sale='$ModeOfSale' and product_support_questions='License' and country='$Country' and license_type='$license'";
              $result=mysqli_query($connect,$query); 
                 if ($result->num_rows > 0) {
                 while($row=mysqli_fetch_array($result)){
@@ -881,27 +1193,56 @@ function Product_billing_quantity($tempArray,$ProdModule,$Country,$ModeOfSale,$c
     }
      
     function masterServerProf_view($ModeOfSale,$Country){
-        include ("../includes/config.php");
+        include ("../../includes/config.php");
         $temp=array();
+//        $license=$_SESSION['license'];
          $query="select * from BasePrices where mode_of_sale='$ModeOfSale' and product_support_questions='Professional_services' and country='$Country'";
-             $result=mysqli_query($connect,$query); 
+              $result=mysqli_query($connect,$query); 
                 if ($result->num_rows > 0) {
                 while($row=mysqli_fetch_array($result)){
-                    $i=0;$j=0;
-                        $temp[$i][$j]=$row['part_number'];
-                        $j++;
-                        $temp[$i][$j]=$row['part_desc'];
-                        $j++;
-                        $temp[$i][$j]='1';
-                        $j++;
-                        $temp[$i][$j]=$row['base_price'];
-                    }
-                    return $temp;
+                $i=0;$j=0;
+                    $temp[$i][$j]=$row['part_number'];
+                    $j++;
+                    $temp[$i][$j]=$row['part_desc'];
+                    $j++;
+                    $temp[$i][$j]='1';
+                    $j++;
+                    $temp[$i][$j]=$row['base_price'];
                 }
+                return $temp;
+            }
+    }
+
+    function premiseProductTraining($ModeOfSale,$prof_premise_product_training,$Country,$nodeservers){
+        include ("../../includes/config.php");
+        $temp=array();
+//        $license=$_SESSION['license'];
+         if($ModeOfSale=='First Time Sale'){
+                if($prof_premise_product_training=="Yes"){
+                    $node_servers=ceil($nodeservers/40);
+                    $query="select * from BasePrices where product_module='PREMISE PRODUCT TRAINING' and country='$Country'";
+                    $result=mysqli_query($connect,$query); 
+                    $row=mysqli_fetch_array($result);
+                    if(!$result){
+                        echo "database query failed";
+                    }
+                    $premise_training=$row['base_price']*$node_servers;
+                    $i=0;$j=0;
+                    $temp[$i][$j]=$row['part_number'];
+                    $j++;
+                    $temp[$i][$j]=$row['part_desc'];
+                    $j++;
+                    $temp[$i][$j]=$node_servers;
+                    $j++;
+                    $temp[$i][$j]=$premise_training;
+                }
+            }
+            return $temp;
     }
     function masterServerproduct_view($ModeOfSale,$Country){
         include ("../../includes/config.php");
         $temp=array();
+//        $license=$_SESSION['license'];
          $query="select * from BasePrices where mode_of_sale='$ModeOfSale' and product_support_questions='Product_support' and country='$Country'";
              $result=mysqli_query($connect,$query); 
                 if ($result->num_rows > 0) {

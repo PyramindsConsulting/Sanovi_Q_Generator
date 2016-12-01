@@ -7,15 +7,20 @@
                 </div>
                 <br>
                 <?php
-                $license=License_billing_quantity($Qty_2s_3s);
-                $_SESSION['license_qty_ary']=$license;
-                $license=remove_nulls_in_array_four($license);
-                $count=count($license);
+                $license=$_SESSION['license'];
+                if($license=='Perpetual'){
+                    $license_qty=License_billing_quantity($Qty_2s_3s);
+                }else{
+                    $license_qty=License_billing_quantity_subscription($Qty_2s_3s);
+                }
+                $_SESSION['license_qty_ary']=$license_qty;
+                $license_qty=remove_nulls_in_array_four($license_qty);
+                $count=count($license_qty);
                 for($i=0;$i<$count;$i++){
-                    $part_number=$license[$i][0];
-                    $part_description=$license[$i][1];
-                    $part_qty=$license[$i][2];
-                    $part_price=$license[$i][3];
+                    $part_number=$license_qty[$i][0];
+                    $part_description=$license_qty[$i][1];
+                    $part_qty=$license_qty[$i][2];
+                    $part_price=$license_qty[$i][3];
                         echo "<div class='row'>";
                         echo    "<div class='form-group plaintxtbox'>";
                         echo        "<div class='col-sm-3'>";
@@ -36,8 +41,8 @@
                         echo "</div><br>";
                 }
 
-            
-            $query="select * from BasePrices where mode_of_sale='$ModeOfSale' and product_support_questions='License' and country='$Country'";
+            $license=$_SESSION['license'];
+            $query="select * from BasePrices where mode_of_sale='$ModeOfSale' and product_support_questions='License' and country='$Country' and license_type='$license'";
              $result=mysqli_query($connect,$query); 
                 if ($result->num_rows > 0) {
                 while($row=mysqli_fetch_array($result)){
@@ -132,6 +137,46 @@
                         echo        "</div>";
                         echo        "<div class='col-sm-1'>";
                         echo            "<input type='text' class='form-control' name='$part_qty' style='text-align:right' readonly value= '1'>";
+                        echo        "</div>";
+                        echo        "<div class='col-sm-1'>";
+                        echo            "<input type='text' class='form-control' name='$part_cost' style='text-align:right' readonly value= ''>";
+    //                        echo        "<textarea type='text' readonly size='100%'>".$part_price."</textarea>";
+                        echo        "</div>";
+                        echo     "</div>";
+                        echo "</div><br>";
+                    }
+                }
+             
+                $license=$_SESSION['license'];
+                 $query2="select * from BasePrices where product_module='PREMISE PRODUCT TRAINING' and country='$Country' and license_type='$license'";
+                $result2=mysqli_query($connect,$query2); 
+                if ($result2->num_rows > 0) {
+                while($row2=mysqli_fetch_array($result2)){
+                    $part_number=$row2['part_number'];
+                    $part_no="part_no_prof".$count;
+                    $part_des="part_desc_prof".$count;
+                    $part_qty="part_qty_prof".$count;
+                    $part_cost="part_price_prof".$count;
+                    $part_desc=$row2['part_desc'];
+                    
+                    
+                        if($ModeOfSale=='First Time Sale'){
+                            if($prof_premise_product_training=="Yes"){
+                                $node_servers=ceil($_SESSION['count_of_servers_databases']/40);
+                                $part_price=$node_servers*$row2['base_price']*get_exchange_rate();
+                            }
+                        }
+                        echo "<div class='row'>";
+                        echo    "<div class='form-group plaintxtbox'>";
+                        echo        "<div class='col-sm-3'>";
+                        echo            "<input type='text' class='form-control' name='$part_no' readonly value= '$part_number'".">";
+                        echo        "</div>";
+                        echo        "<div class='col-sm-7'>";
+                        echo          "<input type='text' readonly class='form-control' name='$part_des'  wrap='true' value= '$part_desc'".">";
+    //                        echo        "<textarea type='text' readonly cols='80%' >".$part_description."</textarea>";
+                        echo        "</div>";
+                        echo        "<div class='col-sm-1'>";
+                        echo            "<input type='text' class='form-control' name='$part_qty' style='text-align:right' readonly value= '$node_servers'".">";
                         echo        "</div>";
                         echo        "<div class='col-sm-1'>";
                         echo            "<input type='text' class='form-control' name='$part_cost' style='text-align:right' readonly value= ''>";

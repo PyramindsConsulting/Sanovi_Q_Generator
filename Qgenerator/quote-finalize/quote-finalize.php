@@ -36,8 +36,8 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <center>
-                                    <p><a href="http://quotedev.sanovi.com/pdf/new_quote.php"><button type="button" class="btn btn-primary">Preview Quote</button></a>
-                                    <a href="http://quotedev.sanovi.com/pdf/download_quote.php?refId=<?php echo $_SESSION['ref_id'];?>&verId=1"><button type="button" class="btn btn-success">Download Quote</button></a></p>
+                                    <p><a href="pdf/new_quote.php"><button type="button" class="btn btn-primary">Preview Quote</button></a>
+                                    <a href="pdf/download_quote.php?refId=<?php echo $_SESSION['ref_id'];?>&verId=1"><button type="button" class="btn btn-success">Download Quote</button></a></p>
                                 </center>
                             </div>
                         </div>

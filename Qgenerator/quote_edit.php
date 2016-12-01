@@ -126,22 +126,40 @@
                 include "../includes/mainmenu-mobile.php";
                 include "../includes/mainmenu.php";
                 //license cost values
-               $license_cost=get_exchange_rate()*(calculate_3site_licence_edit()+calculate_2site_licence_edit()+master_server_license_edit());
+//                echo $license;
+                if($license=="Perpetual"){
+                $license_cost=get_exchange_rate()*(calculate_3site_licence_edit()+calculate_2site_licence_edit()+master_server_license_edit());
                 $license_cost=round($license_cost);
                 $licenseDiscountValue=round($license_cost*($Discount_license/100));
                 $final_license_cost=round($license_cost-$licenseDiscountValue);
+                }else{
+                $license_cost=get_exchange_rate()*(calculate_2site_licence_subscription_edit()+calculate_3site_licence_subscription_edit()+master_server_license_edit());
+                $site_3s_discount=round(get_exchange_rate()*(calculate_3site_licence_subscription_edit()*0.5));
+                $license_cost=round($license_cost);
+                $licenseDiscountValue=round($license_cost*($Discount_license/100));
+                $final_license_cost=round($license_cost-$licenseDiscountValue);
+                }
+//                echo calculate_2site_licence_subscription_edit();
+               
 //                $3_site_bunker_discount=get_exchange_rate()*(calculate_3site_licence()*0.5);
 //                $3_site_bunker_discount=round($3_site_bunker_discount);
                 
                 //professional services
-                $professional_service_cost=round((calculate_prof_services_edit()+master_server_prof_edit())*get_exchange_rate());
+                $professional_service_cost=round((calculate_prof_services_edit()+master_server_prof_edit()+calculate_premise_product_training_edit())*get_exchange_rate());
                 $discountValueOnPs= round($professional_service_cost* ($Discount_prof_serv/100));  
                 $final_professional_cost=$professional_service_cost-$discountValueOnPs;
                 
                 //product support
+                //product support
+                if($license=="Perpetual"){
                 $product_cost=round((calculate_product_support_edit()+master_server_support_edit())*get_exchange_rate());
                 $prodDiscountValue=round($product_cost*($Discount_product_support/100));
                 $final_product_cost=$product_cost-$prodDiscountValue;
+                }else{
+                  $product_cost=0;
+                  $prodDiscountValue=0;
+                  $final_product_cost=0;
+                }
                 
                 //$product_training_cost
                 $product_training_cost=round(calculate_product_training_edit());
@@ -149,11 +167,16 @@
                 $final_product_training_cost=$product_training_cost-$product_training_discount_value;
                 
                 //total cost 
-                $final_cost_without_discount=$license_cost+$professional_service_cost+$product_cost;
-                $final_discount_cost=round($licenseDiscountValue+$discountValueOnPs+$prodDiscountValue);
+                $final_cost_without_discount=$license_cost+$professional_service_cost+$product_cost+$product_training_cost;
+                $final_discount_cost=round($licenseDiscountValue+$discountValueOnPs+$prodDiscountValue+$product_training_discount_value);
                 $final_cost_with_discount=round($final_cost_without_discount-$final_discount_cost);
                 
-                $totalValue=$final_cost_with_discount-round(get_exchange_rate()*(calculate_3site_licence_edit()*0.5));
+                if($license=="Perpetual"){
+                    $totalValue=$final_cost_with_discount-round(get_exchange_rate()*(calculate_3site_licence_edit()*0.5));
+                }else{
+                    $totalValue=$final_cost_with_discount-round(get_exchange_rate()*(calculate_3site_licence_subscription_edit()*0.5));
+                }
+//                $totalValue=$final_cost_with_discount-round(get_exchange_rate()*(calculate_3site_licence_edit()*0.5));
 //                $_SESSION['status_new']=$_SESSION["status"]."<br>";
                 $discountdeatails=get_discount_percentage_value($_SESSION['ref_id_edit'], $_SESSION['ver_id_edit']); 
                 if($_SESSION["status"]=="Finalized"){
@@ -243,7 +266,17 @@
                         </div>
                         <div class="row" id="background">
                         <div class="row">
-                            <div class="col-sm-5"><b>License fee for Perpetual Sanovi Cloud Continuity Module</b></div>
+                             <?php 
+                            if($license=="Perpetual"){ ?>                                   
+                                <div class="col-sm-6"><b>License fee for Perpetual Sanovi Cloud Continuity Module</b></div>
+                                <input hidden type="text" id="license_type" value="<?php echo $license; ?>">
+                           <?php
+                                }else{ ?>
+                               <div class="col-sm-6"><b>License fee for Subscription Sanovi Cloud Continuity Module</b></div>
+                                <input hidden type="text" id="license_type" value="<?php echo $license; ?>">
+                            <?php 
+                                }
+                            ?>  
                             <div class="col-sm-2"></div>
                             <div class="col-sm-1"></div>
                             <div class="col-sm-2"></div>
@@ -254,7 +287,7 @@
                         <div class="row">
                             <div class="col-sm-5"><b>-Licensing</b></div>
                             <div class="col-sm-2" style="text-align:right">
-                                <input class="form-control" type="number" id="license_cost" readonly value="<?php echo $license_cost; ?>">
+                                <input class="form-control" type="text" id="license_cost" readonly value="<?php echo $license_cost; ?>">
                                 <input type="hidden" id="max_discount" name="Max_Discount" value="<?php echo $_SESSION["Max_Discount"]; ?>">
                             </div>
                             <div class="col-sm-1" style="text-align:right">
@@ -268,26 +301,33 @@
                             </div>
                         </div>
                         <br>
-                        <div class="row">
-                            <div class="col-sm-5"><b>- Product Support</b></div>
-                            <div class="col-sm-2" style="text-align:right">
-                                <input class="form-control" type="number" id="product_support" readonly value="<?php echo $product_cost; ?>">
+                        <?php 
+                        if($license=="Perpetual"){    
+                            ?>
+                           <div class="row">
+                                <div class="col-sm-5"><b>- Product Support</b></div>
+                                <div class="col-sm-2" style="text-align:right">
+
+                                    <input class="form-control" type="text" id="product_support" readonly value="<?php 
+                                        echo $product_cost; ?>">
+                                </div>
+                                <div class="col-sm-1" style="text-align:right">
+                                    <input class="form-control" type="text" tabindex="2" id="discount_product_support" placeholder="%" onblur="calculate_product_support_cost()" name="Discount_product_support" value="<?php  echo $Discount_product_support; ?>">
+                                </div>
+                                <div class="col-sm-2" style="text-align:right">
+                                    <input class="form-control" readonly type="text" id="discount_product_support_value" name="Discount_product_support_value" value="<?php  echo round($prodDiscountValue); ?>">
+                                </div> 
+                                <div class="col-sm-2" style="text-align:right">
+                                    <input class="form-control" type="text" id="final_product_support_value" name="Final_product_support_value" readonly value="<?php  echo round($final_product_cost); ?>">
+                                </div>
                             </div>
-                            <div class="col-sm-1" style="text-align:right">
-                                <input class="form-control" type="text" id="discount_product_support" placeholder="%" onblur="calculate_product_support_cost()" tabindex="2" name="Discount_product_support" value="<?php echo $discountdeatails["Discount_product_support"]; ?>">
-                            </div>
-                            <div class="col-sm-2" style="text-align:right">
-                                <input class="form-control" readonly type="text" id="discount_product_support_value" name="Discount_product_support_value" value="<?php echo round($prodDiscountValue) ; ?>">
-                            </div>
-                            <div class="col-sm-2" style="text-align:right">
-                                <input class="form-control" type="text" id="final_product_support_value" name="Final_product_support_value" readonly value=" <?php echo round($final_product_cost); ?>">
-                            </div>
-                        </div>
-                        <br>
+                            <br>
+                      <?php  }
+                        ?>  
                         <div class="row">
                             <div class="col-sm-5"><b>- Professional Services for Implementation</b></div>
                             <div class="col-sm-2" style="text-align:right">
-                                <input class="form-control" type="number" id="professional_service_cost" readonly value="<?php echo $professional_service_cost ;  ?>" >
+                                <input class="form-control" type="text" id="professional_service_cost" readonly value="<?php echo $professional_service_cost ;  ?>" >
                             </div>
                             <div class="col-sm-1" style="text-align:right">
                                 <input class="form-control" type="text" tabindex="3" id="discount_prof_serv" name="Discount_prof_serv" placeholder="%" value="<?php echo $discountdeatails["Discount_prof_serv"];  ?>" onblur="calculate_professional_service_cost()">
@@ -303,7 +343,7 @@
                         <div class="row">
                             <div class="col-sm-5"><b>- DRM Product Training</b></div>
                             <div class="col-sm-2" style="text-align:right">
-                                <input class="form-control" type="number" id="product_training" readonly value="<?php echo $product_training_cost; ?>">
+                                <input class="form-control" type="text" id="product_training" readonly value="<?php echo $product_training_cost; ?>">
                            </div>
                              <div class="col-sm-1" style="text-align:right">
                                 <input class="form-control" type="text" tabindex="4" id="discount_product_training" name="Discount_product_training" placeholder="%" value="<?php echo $discountdeatails["Discount_product_training"]; ?>" onblur="calculate_product_training_cost()">

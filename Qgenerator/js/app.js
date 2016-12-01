@@ -48,6 +48,7 @@ $(document).ready(function () {
     });
     $('#full').click(function () {
         $("#panel3").hide(1000);
+        $("#prof_panel").hide(1000);
         document.getElementById('personalpanel1').style.display = "none";
         document.getElementById('button3').style.display = "none";
         document.getElementById('less3').style.display = "none";
@@ -330,6 +331,7 @@ $(document).ready(function () {
         else {
             $('#Prof_prod_v_ms').text($('#prof_services_prod_v_ms').val());
         }
+        $('#Prof_premise').text($('#premise_product_training').val());
         $('#productSupport').text($('#product_support').val());
     });
 
@@ -476,7 +478,7 @@ $(document).ready(function () {
         document.getElementById('panel3').style.display = "none";
         document.getElementById('personalpanel1').style.display = "none";
         document.getElementById('prof_panel').style.display = "none";
-        document.getElementById('button3').style.display = "none";
+        document.getElementById('button3').style.display = "inline";
         document.getElementById('less3').style.display = "none";
     }
     else {
@@ -504,6 +506,7 @@ $(document).ready(function () {
         document.getElementById('button3').style.display = "none";
     }
     else if ((prof_normal1 != 0) || (prof_normal2 != 0) || (prof_normal3 != 0) || (prof_normal4 != 0) || (prof_normal5 != 0) || (prof_normal6 != 0)) {
+//        alert('prof_panel');
         $("#prof_panel").show(1000);
         document.getElementById('less3').style.display = "inline";
         document.getElementById('button3').style.display = "none";
@@ -516,8 +519,14 @@ $(document).ready(function () {
     if ($('[id="partial"]').is(':checked')) {
         $("#panel3").show(1000);
         document.getElementById('personalpanel1').style.display = "inline";
+        document.getElementById('button3').style.display = "inline";
+        document.getElementById('less3').style.display = "none";
+    }else if($('[id="full"]').is(':checked')){
+        $("#panel3").hide(1000);
+        $("#prof_panel").hide(1000);
+        document.getElementById('personalpanel1').style.display = "none";
         document.getElementById('button3').style.display = "none";
-        document.getElementById('less3').style.display = "inline";
+        document.getElementById('less3').style.display = "none";
     }
     $("#button1").click(function () {
         $('html, body').animate({
