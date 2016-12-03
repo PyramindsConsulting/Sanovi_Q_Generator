@@ -10,6 +10,11 @@
             for($j=0;$j<=$count;$j++){
                 if(isset($QuestionsAndValues_2s[$j][0])){
                     $question=$QuestionsAndValues_2s[$j][0];
+                    if($question=='Number of SAP HANA Database Nodes on Production'){
+                      $value=0;  
+                    }else{
+                      $value=$QuestionsAndValues_2s[$j][1];
+                    }
                     $query="select base_price,question from BasePrices where product_module= '$ProdModule' and question='$question'and country='$Country' and license_type='$license'";
                     $result=mysqli_query($connect,$query);
                     if(!$result){
@@ -419,6 +424,11 @@
             for($j=0;$j<=$count;$j++){
                 if(isset($QuestionsAndValues_3s[$j][0])){
                     $question=$QuestionsAndValues_3s[$j][0];
+                    if($question=='Number of SAP HANA Database Nodes on Production'){
+                      $value=0;  
+                    }else{
+                      $value=$QuestionsAndValues_2s[$j][1];
+                    }
                     $query="select base_price,question from BasePrices where product_module= '$ProdModule' and question='$question'and country='$Country' and license_type='$license'";
                     $result=mysqli_query($connect,$query);
                     if(!$result){
@@ -440,8 +450,8 @@
         $professional_cost=0;
             if($ModeOfSale!='Support Only Sale'){
             if($prof_services_all=="No"){
-                    $QuestionsAndValues_Prof=remove_nulls_in_array($QuestionsAndValues_Prof);
-                    //print_r($QuestionsAndValues_Prof); 
+                    $QuestionsAndValues_Prof=remove_null($QuestionsAndValues_Prof);
+                    $QuestionsAndValues_Prof=Get_questions_to_prof($QuestionsAndValues_Prof,$Qty_2s_3s);
                     $count=count($QuestionsAndValues_Prof);
                     for($j=0;$j<$count;$j++){
                         $question1=@$QuestionsAndValues_Prof[$j][0];
@@ -510,16 +520,15 @@
                     }
                    
                 }else{
-                    
-                    $Qty_2s_3s=remove_nulls_in_array($Qty_2s_3s);
+                    $Qty_2s_3s=remove_null($Qty_2s_3s);
                     $QuestionsAndValues_Prof=remove_nulls_in_array($QuestionsAndValues_Prof);
-                    //print_r($temp);
-                    $count=count($Qty_2s_3s);
-                    for($j=0;$j<$count;$j++){
-                        
+                    $QuestionsAndValues_Prof=Get_questions_to_license($QuestionsAndValues_Prof,$Qty_2s_3s);
+                    $QuestionsAndValues_Prof=remove_null($QuestionsAndValues_Prof);
+                    $count=count($QuestionsAndValues_Prof);
+                    for($j=0;$j<=$count;$j++){
                         $question1=@$QuestionsAndValues_Prof[$j][0];
                         $question2=@$Qty_2s_3s[$j][0];
-                        $qty=@$Qty_2s_3s[$j][1];
+                        $qty=@$QuestionsAndValues_Prof[$j][1];
                         $simpleApps=round($qty*0.7);
 //                        echo $simpleApps;//Calculating simple apps at 70% of total
                         $complexApps=$qty-$simpleApps; //Calculating complex apps at 30% of total
@@ -1057,6 +1066,7 @@
             if($ModeOfSale!='Support Only Sale'){
             if($prof_services_all=="No"){
                     $QuestionsAndValues_Prof=remove_null($tempArray);
+                    $QuestionsAndValues_Prof=Get_questions_to_prof($QuestionsAndValues_Prof,$Qty_2s_3s);
                     $count=count($QuestionsAndValues_Prof);
                     for($j=0;$j<$count;$j++){
                         $question1=@$QuestionsAndValues_Prof[$j][0];
@@ -1133,15 +1143,15 @@
                     }
                    return $temp;
                 }else{
-                    
                     $Qty_2s_3s=remove_null($temparray2);
-                    
                     $QuestionsAndValues_Prof=remove_nulls_in_array($tempArray);
-                    $count=count($Qty_2s_3s);
-                    for($j=0;$j<$count;$j++){
+                    $QuestionsAndValues_Prof=Get_questions_to_license($QuestionsAndValues_Prof,$Qty_2s_3s);
+                    $QuestionsAndValues_Prof=remove_null($QuestionsAndValues_Prof);
+                    $count=count($QuestionsAndValues_Prof);
+                    for($j=0;$j<=$count;$j++){
                         $question1=@$QuestionsAndValues_Prof[$j][0];
                         $question2=@$Qty_2s_3s[$j][0];
-                        $qty=@$Qty_2s_3s[$j][1];
+                        $qty=@$QuestionsAndValues_Prof[$j][1];
                         $simpleApps=round($qty*0.7);
                         $complexApps=$qty-$simpleApps; //Calculating complex apps at 30% of total
                         $query="select * from BasePrices where product_module= '$ProdModule' and question='$question1' and country='$Country'";
@@ -1215,11 +1225,88 @@
 //                        <div class='col-xs-1' style='text-align:center'>"; echo $qty; echo "</div>
 //                        <div class='col-xs-1'>"; echo round($professional_service_value);echo "</div></div><br>";
                     }
+                    $temp=remove_nulls_in_array_four($temp);
                     return $temp;
                 }
 //            $_SESSION['prof_qty_ary']=$temp;
         }
 
+    }
+    function Get_questions_to_prof($profArray,$licenseArray){
+       $count=count($profArray);
+        $temp=array();
+        for($i=0;$i<$count;$i++){
+            if($profArray[$i][0]=="Professional Services Required on SAP HANA Database Units (per 64GB unit size) "){
+                $temp[$i][0]="Professional Services Required on SAP HANA Database Units (per 64GB unit size)";
+                $temp[$i][1]=0;
+            }else if($profArray[$i][0]=="Professional Services Required on SAP HANA Database Nodes on Production"){
+                $temp[$i][0]="Professional Services Required on SAP HANA Database Units (per 64GB unit size)";
+                $LicenseCount=count($licenseArray);
+                for($j=0;$j<=$LicenseCount;$j++){
+                    if($licenseArray[$j][0]=="Number of SAP HANA Database Nodes on Production"){
+                       $temp[$i][1]=$licenseArray[$j][1]; 
+                        $j=$LicenseCount+1;    
+                    }else{
+                       $temp[$i][1]=0;
+                    }
+//                    echo $temp[$i][1];
+                }
+            }else{
+               $temp[$i][0]=$profArray[$i][0];
+               $temp[$i][1]=$profArray[$i][1];
+            }
+        }
+      $temp=remove_null($temp);
+        return $temp;
+    }
+    function Get_questions_to_license($profArray,$licenseArray){
+        $count=count($licenseArray);
+        $temp=array();
+        for($i=0;$i<$count;$i++){
+            if($licenseArray[$i][0]=="Number of VM Images to be protected under Sanovi Cloud Continuity Module"){
+                $temp[$i][0]="Professional Services Required on VM Images to be protected under Sanovi Cloud Continuity Module";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of VM Databases to be protected under Sanovi Cloud Continuity Module"){
+                $temp[$i][0]="Professional Services Required on VM Databases to be protected under Sanovi Cloud Continuity Module";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of Baremetal Windows/Linux Datas (Servers) to be protected under Sanovi Cloud Continuity Module"){
+                $temp[$i][0]="Professional Services Required on Baremetal Windows/Linux Datas (Servers) to be protected under Sanovi Cloud Continuity Module";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of Baremetal Windows/Linux Databases to be protected under Sanovi Cloud Continuity Module"){
+                $temp[$i][0]="Professional Services Required on Baremetal Windows/Linux Databases to be protected under Sanovi Cloud Continuity Module";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of Baremetal Unix Datas (Servers) to be protected under Sanovi Cloud Continuity Module"){
+                $temp[$i][0]="Professional Services Required on Baremetal Unix Datas (Servers) to be protected under Sanovi Cloud Continuity Module";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of Baremetal Unix Databases to be protected under Sanovi Cloud Continuity Module"){
+                $temp[$i][0]="Professional Services Required on Baremetal Unix Databases to be protected under Sanovi Cloud Continuity Module";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of Sharepoint Servers to be protected under Sanovi Cloud Continuity Module"){
+                $temp[$i][0]="Professional Services Required on Sharepoint Servers to be protected under Sanovi Cloud Continuity Module";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of Virtual Sharepoint Servers to be protected under Sanovi Cloud Continuity Module"){
+                $temp[$i][0]="Professional Services Required on Virtual Sharepoint Servers to be protected under Sanovi Cloud Continuity Module";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of Production MS Exchange Data Availability Group (DAGs)"){
+                $temp[$i][0]="Professional Services Required on Production MS Exchange Data Availability Group (DAGs)";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of Production Virtual MS Exchange Data Availability Group ( DAGs)"){
+                $temp[$i][0]="Professional Services Required on Production Virtual MS Exchange Data Availability Group ( DAGs)";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of Production Servers that are using Advanced Replication for data protection"){
+                $temp[$i][0]="Professional Services Required on Production Servers that are using Advanced Replication for data protection";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of Virtual Production Servers that are using Advanced Replication for data protection"){
+                $temp[$i][0]="Professional Services Required on Virtual Production Servers that are using Advanced Replication for data protection";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of SAP HANA Database Nodes on Production"){
+                $temp[$i][0]="Professional Services Required on SAP HANA Database Units (per 64GB unit size)";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else{
+                
+            } 
+        }
+        return $temp;
     }
 
     function updateReferenceVersionTable_edit($ref_id_edit, $ver_id_edit){
@@ -1317,6 +1404,8 @@ product_module,
 2s_noOfMSExchangeDatabases,
 2s_noOfVirtualMSExchangeDatabases,
 2s_noOfserversforPFRReplication,
+2s_noOfSAPHANADatabases,
+2s_noOfSAPHANANodes,
 3s_isBunkerSite,
 3s_noOfVmImages,
 3s_noOfVmDatabases,
@@ -1331,6 +1420,8 @@ product_module,
 3s_noOfMSExchangeDatabases,
 3s_noOfVirtualMSExchangeDatabases,
 3s_noOfserversforPFRReplication,
+3s_noOfSAPHANADatabases,
+3s_noOfSAPHANANodes,
 areProfessionalServicesRequired,
 Prof_serviceType,
 Prof_noOfVmImages,
@@ -1347,6 +1438,8 @@ Prof_noOfVirtualSharePointServers,
 Prof_noOfVirtualSharePointDatabases,
 Prof_noOfMSExchangeDatabases,
 Prof_noOfVirtualMSExchangeDatabases,
+Prof_noOfSAPHANADatabases,
+Prof_noOfSAPHANANodes,
 Prof_PremiseProductTraining,
 yearsOfSupport,
 noOfVmImages_2s,
@@ -1362,6 +1455,8 @@ noOfMSExchangeDatabases_2s,
 noOfVirtualServersUsingAdvancedReplication_2s,
 noOfUsingAdvancedReplication_2s,
 noOfServersForPFRReplication_2s,
+noOfSAPHANADatabases_2s,
+noOfSAPHANANodes_2s,
 isBunkerSite_3s,
 noOfServersInBunkerSite_3s,
 noOfVmImages_3s,
@@ -1377,6 +1472,8 @@ noOfSharePointServers_3s,
 noOfVirtualMSExchangeDatabases_3s,
 noOfMSExchangeDatabases_3s,
 noOfServersForPFRReplication_3s,
+noOfSAPHANADatabases_3s,
+noOfSAPHANANodes_3s,
 areProfessionalServicesRequired_Q,
 serviceType_Prof,
 noOfVmImages_Prof,
@@ -1393,6 +1490,8 @@ noOfVirtualSharePointServers_Prof,
 noOfVirtualSharePointDatabases_Prof,
 noOfMSExchangeDatabases_Prof,
 noOfVirtualMSExchangeDatabases_Prof,
+noOfSAPHANADatabases_Prof,
+noOfSAPHANANodes_Prof,
 OnPremiseProductTrainingReqd_Prof)
         VALUES ('$license_crt_id',
 '$product',
@@ -1418,6 +1517,8 @@ OnPremiseProductTrainingReqd_Prof)
 '$prod_ms_2s',
 '$prod_v_ms_2s',
 '$servers_2s',
+'$sap_hana_data_2s',
+'$sap_hana_nodes_2s',
 '$bunker_3s',
 '$vm_images_3s',
 '$database_3s',
@@ -1432,6 +1533,8 @@ OnPremiseProductTrainingReqd_Prof)
 '$prod_ms_3s',
 '$prod_v_ms_3s',
 '$servers_3s',
+'$sap_hana_data_3s',
+'$sap_hana_nodes_3s',
 '$prof_services_all',
 '$Type_of_service',
 '$prof_services_vm_image',
@@ -1448,6 +1551,8 @@ OnPremiseProductTrainingReqd_Prof)
 '$prof_services_v_share_db',
 '$prof_services_prod_ms',
 '$prof_services_prod_v_ms',
+'$prof_services_sap_hana_data',
+'$prof_services_sap_hana_node',
 '$prof_premise_product_training',
 '$ProdSupport',
 'vm_images_2S',
@@ -1463,6 +1568,8 @@ OnPremiseProductTrainingReqd_Prof)
 'virtual_prod_2S',
 'prod_servers_2S',
 'servers_2S',
+'sap_hana_data_2S',
+'sap_hana_nodes_2S',
 'bunker_3S',
 'bunker_servers_3s',
 'vm_images_3S',
@@ -1478,6 +1585,8 @@ OnPremiseProductTrainingReqd_Prof)
 'prod_v_ms_3S',
 'prod_ms_3S',
 'servers_3S',
+'sap_hana_data_3S',
+'sap_hana_nodes_3S',
 'Prof_Services_all',
 'Prof_Services_type',
 'Prof_Services_vm_image',
@@ -1494,6 +1603,8 @@ OnPremiseProductTrainingReqd_Prof)
 'Prof_Services_v_share_db',
 'Prof_Services_prod_ms',
 'Prof_Services_prod_v_ms',
+'Prof_services_sap_hana_data',
+'Prof_services_sap_hana_node',
 'Premise_product_training')";
          $result=mysqli_query($connect, $query);
         if ($result) {
@@ -1533,6 +1644,8 @@ OnPremiseProductTrainingReqd_Prof)
         2s_noOfMSExchangeDatabases='$prod_ms_2s',
         2s_noOfVirtualMSExchangeDatabases='$prod_v_ms_2s',
         2s_noOfserversforPFRReplication='$servers_2s',
+        2s_noOfSAPHANADatabases='$sap_hana_data_2s',
+        2s_noOfSAPHANANodes='$sap_hana_nodes_2s',
         3s_isBunkerSite='$bunker_3s',
         3s_noOfVmImages='$vm_images_3s',
         3s_noOfVmDatabases='$database_3s',
@@ -1547,6 +1660,8 @@ OnPremiseProductTrainingReqd_Prof)
         3s_noOfMSExchangeDatabases='$prod_ms_3s',
         3s_noOfVirtualMSExchangeDatabases='$prod_v_ms_3s',
         3s_noOfserversforPFRReplication='$servers_3s',
+        3s_noOfSAPHANADatabases='$sap_hana_data_3s',
+        3s_noOfSAPHANANodes='$sap_hana_nodes_3s',
         areProfessionalServicesRequired='$prof_services_all',
         Prof_serviceType='$Type_of_service',
         Prof_noOfVmImages='$prof_services_vm_image',
@@ -1563,6 +1678,8 @@ OnPremiseProductTrainingReqd_Prof)
         Prof_noOfVirtualSharePointDatabases='$prof_services_v_share_db',
         Prof_noOfMSExchangeDatabases='$prof_services_prod_ms',
         Prof_noOfVirtualMSExchangeDatabases='$prof_services_prod_v_ms',
+        Prof_noOfSAPHANADatabases='$prof_services_sap_hana_data',
+        Prof_noOfSAPHANANodes='$prof_services_sap_hana_node',
         Prof_PremiseProductTraining='$prof_premise_product_training',
         yearsOfSupport='$ProdSupport',
         noOfVmImages_2s='vm_images_2S',
@@ -1578,6 +1695,8 @@ OnPremiseProductTrainingReqd_Prof)
         noOfVirtualServersUsingAdvancedReplication_2s='virtual_prod_2S',
         noOfUsingAdvancedReplication_2s='prod_servers_2S',
         noOfServersForPFRReplication_2s='servers_2S',
+        noOfSAPHANADatabases_2s='sap_hana_data_2S',
+        noOfSAPHANANodes_2s='sap_hana_nodes_2S',
         isBunkerSite_3s='bunker_3S',
         noOfServersInBunkerSite_3s='bunker_servers_3s',
         noOfVmImages_3s='vm_images_3S',
@@ -1593,6 +1712,8 @@ OnPremiseProductTrainingReqd_Prof)
         noOfVirtualMSExchangeDatabases_3s='prod_v_ms_3S',
         noOfMSExchangeDatabases_3s='prod_ms_3S',
         noOfServersForPFRReplication_3s='servers_3S',
+        noOfSAPHANADatabases_3s='sap_hana_data_3S',
+        noOfSAPHANANodes_3s='sap_hana_nodes_3S',
         areProfessionalServicesRequired_Q='Prof_Services_all',
         serviceType_Prof='Prof_Services_type',
         noOfVmImages_Prof='Prof_Services_vm_image',
@@ -1609,6 +1730,8 @@ OnPremiseProductTrainingReqd_Prof)
         noOfVirtualSharePointDatabases_Prof='Prof_Services_v_share_db',
         noOfMSExchangeDatabases_Prof='Prof_Services_prod_ms',
         noOfVirtualMSExchangeDatabases_Prof='Prof_Services_prod_v_ms',
+        noOfSAPHANADatabases_Prof='Prof_services_sap_hana_data',
+        noOfSAPHANANodes_Prof='Prof_services_sap_hana_node',
         OnPremiseProductTrainingReqd_Prof='Premise_product_training' where license_crt_id='$license_crt_id'";
          $result=mysqli_query($connect, $query);
         if ($result) {

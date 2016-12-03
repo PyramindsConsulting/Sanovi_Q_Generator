@@ -32,6 +32,8 @@
         $details["prod_ms_2S"]=$row["2s_noOfMSExchangeDatabases"];
         $details["prod_v_ms_2S"]=$row["2s_noOfVirtualMSExchangeDatabases"];
         $details["servers_2S"]=$row["2s_noOfServersForPFRReplication"];
+        $details["sap_hana_data_2S"]=$row["2s_noOfSAPHANADatabases"];
+        $details["sap_hana_nodes_2S"]=$row["2s_noOfSAPHANANodes"];
         $details["bunker_3S"]=$row["3s_isBunkerSite"];
         $details["vm_images_3S"]=$row["3s_noOfVmImages"];
         $details["database_3S"]=$row["3s_noOfVmDatabases"];
@@ -46,6 +48,8 @@
         $details["prod_ms_3S"]=$row["3s_noOfMSExchangeDatabases"];
         $details["prod_v_ms_3S"]=$row["3s_noOfVirtualMSExchangeDatabases"];
         $details["servers_3S"]=$row["3s_noOfServersForPFRReplication"];
+        $details["sap_hana_data_3S"]=$row["3s_noOfSAPHANADatabases"];
+        $details["sap_hana_nodes_3S"]=$row["3s_noOfSAPHANANodes"];
         $details["Prof_Services_all"]=$row["areProfessionalServicesRequired"];
         $details["Prof_Services_type"]=$row["Prof_serviceType"];
         $details["Prof_Services_vm_image"]=$row["Prof_noOfVmImages"];
@@ -62,6 +66,8 @@
         $details["Prof_Services_v_share_db"]=$row["Prof_noOfVirtualSharePointDatabases"];
         $details["Prof_Services_prod_ms"]=$row["Prof_noOfMSExchangeDatabases"];
         $details["Prof_Services_prod_v_ms"]=$row["Prof_noOfVirtualMSExchangeDatabases"];
+        $details["Prof_services_sap_hana_data"]=$row["Prof_noOfSAPHANADatabases"];
+        $details["Prof_services_sap_hana_node"]=$row["Prof_noOfSAPHANANodes"];
         $details["Prof_PremiseProductTraining"]=$row["Prof_PremiseProductTraining"];
         $details["Product_Support"]=$row["yearsOfSupport"];
         

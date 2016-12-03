@@ -747,6 +747,14 @@
                                                     <div class="col-xs-8">No of Servers that will use Sanovi PFR replication</div>
                                                     <div class="col-xs-4"><span id="Server_2"></span></div>
                                                 </div>
+                                                <div class="row" id="sap_hana_databases_2site">
+                                                    <div class="col-xs-8">No of SAP HANA Database Units</div>
+                                                    <div class="col-xs-4"><span id="Sap_hana_databases_2site"></span></div>
+                                                </div>
+                                                <div class="row" id="sap_hana_nodes_2site">
+                                                    <div class="col-xs-8">No of SAP HANA Nodes</div>
+                                                    <div class="col-xs-4"><span id="Sap_hana_nodes_2site"></span></div>
+                                                </div>
                                                 <div class="row">
                                                     <div class="col-xs-12" style="background-color:lightgrey">3-Site Configuration</div>
                                                 </div>
@@ -805,6 +813,14 @@
                                                 <div class="row" id="server_3">
                                                     <div class="col-xs-8">No of Servers that will use Sanovi PFR replication</div>
                                                     <div class="col-xs-4"><span id="Server_3"></span></div>
+                                                </div>
+                                                <div class="row" id="sap_hana_databases_3site">
+                                                    <div class="col-xs-8">No of SAP HANA Database Units</div>
+                                                    <div class="col-xs-4"><span id="Sap_hana_databases_3site"></span></div>
+                                                </div>
+                                                <div class="row" id="sap_hana_nodes_3site">
+                                                    <div class="col-xs-8">No of SAP HANA Nodes</div>
+                                                    <div class="col-xs-4"><span id="Sap_hana_nodes_3site"></span></div>
                                                 </div>
                                                 <br>
                                                 <div class="row">
@@ -873,6 +889,14 @@
                                                 <div class="row" id="prof_prod_v_ms">
                                                     <div class="col-xs-8">Prof Services Req on Virtual MS Exchange Data</div>
                                                     <div class="col-xs-4"><span id="Prof_prod_v_ms"></span></div>
+                                                </div>
+                                                <div class="row" id="prof_sap_hana_databases">
+                                                    <div class="col-xs-8">Prof Services Req on SAP HANA Database Units</div>
+                                                    <div class="col-xs-4"><span id="Prof_sap_hana_databases"></span></div>
+                                                </div>
+                                                <div class="row" id="prof_sap_hana_nodes">
+                                                    <div class="col-xs-8">Prof Services Req on SAP HANA Database Nodes on Production</div>
+                                                    <div class="col-xs-4"><span id="Prof_sap_hana_nodes"></span></div>
                                                 </div>
                                                 <div class="row" id="prof_premise_product_training">
                                                     <div class="col-xs-8">Is Customer On-Premise Product Training Required?</div>

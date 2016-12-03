@@ -10,7 +10,11 @@
             for($j=0;$j<=$count;$j++){
                 if(isset($QuestionsAndValues_2s[$j][0])){
                     $question=$QuestionsAndValues_2s[$j][0];
-                    
+                    if($question=='Number of SAP HANA Database Nodes on Production'){
+                      $value=0;  
+                    }else{
+                      $value=$QuestionsAndValues_2s[$j][1];
+                    }
                     $query="select base_price,question from BasePrices where product_module= '$ProdModule' and question='$question'and country='$Country' and license_type='$license'";
                     $result=mysqli_query($connect,$query);
                     if(!$result){
@@ -19,7 +23,7 @@
                     $row=mysqli_fetch_array($result);
 
                     //echo $row['base_price']*$QuestionsAndValues_2s[$j][1]." ".$row['question']."<br>";
-                    $license_2s+= $row['base_price']*$QuestionsAndValues_2s[$j][1];
+                    $license_2s+= $row['base_price']*$value;
                 }
             }
         }
@@ -398,7 +402,9 @@
         $_SESSION['premise_product_training']=$prof_premise_product_training; 
             if($ModeOfSale=='First Time Sale'){
                 if($prof_premise_product_training=="Yes"){
+//                    echo $_SESSION['count_of_servers_databases'];
                     $node_servers=ceil($_SESSION['count_of_servers_databases']/40);
+//                    echo $node_servers;
                     $query="select * from BasePrices where product_module='PREMISE PRODUCT TRAINING' and country='$Country'";
                     $result=mysqli_query($connect,$query); 
                     $row=mysqli_fetch_array($result);
@@ -408,6 +414,7 @@
                     $premise_training=$row['base_price']*$node_servers;
                 }
             }
+//        echo $premise_training;
         return $premise_training;
     }
 
@@ -422,6 +429,11 @@
             for($j=0;$j<=$count;$j++){
                 if(isset($QuestionsAndValues_3s[$j][0])){
                     $question=$QuestionsAndValues_3s[$j][0];
+                    if($question=='Number of SAP HANA Database Nodes on Production'){
+                      $value=0;  
+                    }else{
+                      $value=$QuestionsAndValues_2s[$j][1];
+                    }
                     $query="select base_price,question from BasePrices where product_module= '$ProdModule' and question='$question'and country='$Country' and license_type='$license'";
                     $result=mysqli_query($connect,$query);
                     if(!$result){
@@ -429,7 +441,7 @@
                     }
                     $row=mysqli_fetch_array($result);
                     //echo $row['base_price']*$QuestionsAndValues_2s[$j][1]." ".$row['question']."<br>";
-                    $licence_3s+= $row['base_price']*$QuestionsAndValues_3s[$j][1];
+                    $licence_3s+= $row['base_price']*$value;
                 }
             }
         }
@@ -442,157 +454,156 @@
         $professional_cost=0;
             if($ModeOfSale!='Support Only Sale'){
             if($prof_services_all=="No"){
-                    $QuestionsAndValues_Prof=remove_nulls_in_array($QuestionsAndValues_Prof);
-                    //print_r($QuestionsAndValues_Prof); 
-                    $count=count($QuestionsAndValues_Prof);
-                    for($j=0;$j<$count;$j++){
-                        $question1=@$QuestionsAndValues_Prof[$j][0];
-                        $qty=@$QuestionsAndValues_Prof[$j][1];
-                        $simpleApps=round($qty*0.7);
-                        $complexApps=$qty-$simpleApps; //Calculating complex apps at 30% of total
-                        $query="select * from BasePrices where product_module= '$ProdModule' and question='$question1' and country='$Country'";
-                        $result=mysqli_query($connect,$query);
-                        if(!$result){
-                            echo "database query failed";
-                            die();
-                        }
-                        $row=mysqli_fetch_array($result);
-                        $base_price=$row['base_price'];
-                        $simpleAppValue=0;
-                        $complexAppValue=0;
-                        for($i=$simpleApps;$i>0;$i--){
-                            if($i>3){    
-                                $query2="select * from LearningFactor where app='4'";
-                                $result2=mysqli_query($connect,$query2);
-                                if(!$result2){
-                                    echo "database query failed";
-                                    die();
-                                }
-                                $row=mysqli_fetch_array($result2);
-                                $simpleAppValue+= ($base_price * ($row['simple_app'])/100);
-                            }else{
-                                $query2="select * from LearningFactor where app='$i'";
-                                $result2=mysqli_query($connect,$query2);
-                                if(!$result2){
-                                    echo "database query failed";
-                                    die();
-                                }
-                                $row=mysqli_fetch_array($result2);
-                                $simpleAppValue+= ($base_price * ($row['simple_app'])/100);
-                            }
-                        }
-                        for($i=$complexApps;$i>0;$i--){
-                            if($i>3){    
-                                $query2="select * from LearningFactor where app='4'";
-                                $result2=mysqli_query($connect,$query2);
-                                if(!$result2){
-                                    echo "database query failed";
-                                    die();
-                                }
-                                $row=mysqli_fetch_array($result2);
-                                $complexAppValue+= ($base_price * ($row['complex_app'])/100);
-                            }else{
-                                $query2="select * from LearningFactor where app='$i'";
-                                $result2=mysqli_query($connect,$query2);
-                                if(!$result2){
-                                    echo "database query failed";
-                                    die();
-                                }
-                                $row=mysqli_fetch_array($result2);
-                                $complexAppValue+= ($base_price * ($row['complex_app'])/100);
-                            }
-                        }
-                         $professional_value=$simpleAppValue+$complexAppValue;
-                         if($Type_of_service=="Remote"){
-                            $professional_service_value=($professional_value * 0.6);
-                        }else{
-                            $professional_service_value=$professional_value;
-                         }
-                        $professional_cost+=$professional_service_value;
+                $QuestionsAndValues_Prof=remove_nulls_in_array($QuestionsAndValues_Prof);
+                $QuestionsAndValues_Prof=Get_questions_to_prof($QuestionsAndValues_Prof,$Qty_2s_3s);
+//                print_r();
+                $count=count($QuestionsAndValues_Prof);
+                for($j=0;$j<$count;$j++){
+                    $question1=@$QuestionsAndValues_Prof[$j][0];
+                    $qty=@$QuestionsAndValues_Prof[$j][1];
+                    $simpleApps=round($qty*0.7);
+                    $complexApps=$qty-$simpleApps; //Calculating complex apps at 30% of total
+                    $query="select * from BasePrices where product_module= '$ProdModule' and question='$question1' and country='$Country'";
+                    $result=mysqli_query($connect,$query);
+                    if(!$result){
+                        echo "database query failed";
+                        die();
                     }
-                   
-                }else{
-                    
-                    $Qty_2s_3s=remove_nulls_in_array($Qty_2s_3s);
-                    $QuestionsAndValues_Prof=remove_nulls_in_array($QuestionsAndValues_Prof);
-                    //print_r($temp);
-                    $count=count($Qty_2s_3s);
-                    for($j=0;$j<$count;$j++){
-                        
-                        $question1=@$QuestionsAndValues_Prof[$j][0];
-                        $question2=@$Qty_2s_3s[$j][0];
-                        $qty=@$Qty_2s_3s[$j][1];
-                        $simpleApps=round($qty*0.7);
-//                        echo $simpleApps;//Calculating simple apps at 70% of total
-                        $complexApps=$qty-$simpleApps; //Calculating complex apps at 30% of total
-//                        echo $complexApps;//Calculating simple apps at 70% of total
-                        $query="select * from BasePrices where product_module= '$ProdModule' and question='$question1' and country='$Country' and license_type='$license'";
-                        $result=mysqli_query($connect,$query);
-                        if(!$result){
-                            echo "database query failed";
-                            die();
-                        }
-                        $row=mysqli_fetch_array($result);
-                        $base_price=$row['base_price'];
-                    //    echo $base_price;
-                        $simpleAppValue=0;
-                        $complexAppValue=0;
-                        for($i=$simpleApps;$i>0;$i--){
-                            if($i>3){    
-                                $query2="select * from LearningFactor where app='4'";
-                                $result2=mysqli_query($connect,$query2);
-                                if(!$result2){
-                                    echo "database query failed";
-                                    die();
-                                }
-                                $row1=mysqli_fetch_array($result2);
-                                $simpleAppValue+= ($base_price * ($row1['simple_app'])/100);
-                            }else{
-                                $query2="select * from LearningFactor where app='$i'";
-                                $result2=mysqli_query($connect,$query2);
-                                if(!$result2){
-                                    echo "database query failed";
-                                    die();
-                                }
-                                $row1=mysqli_fetch_array($result2);
-                                $simpleAppValue+= ($base_price * ($row1['simple_app'])/100);
+                    $row=mysqli_fetch_array($result);
+                    $base_price=$row['base_price'];
+                    $simpleAppValue=0;
+                    $complexAppValue=0;
+                    for($i=$simpleApps;$i>0;$i--){
+                        if($i>3){    
+                            $query2="select * from LearningFactor where app='4'";
+                            $result2=mysqli_query($connect,$query2);
+                            if(!$result2){
+                                echo "database query failed";
+                                die();
                             }
-                        }
-                      //  echo $simpleAppValue;
-                        for($i=$complexApps;$i>0;$i--){
-                            if($i>3){    
-                                $query2="select * from LearningFactor where app='4'";
-                                $result2=mysqli_query($connect,$query2);
-                                if(!$result2){
-                                    echo "database query failed";
-                                    die();
-                                }
-                                $row1=mysqli_fetch_array($result2);
-                                $complexAppValue+= ($base_price * ($row1['complex_app'])/100);
-                            }else{
-                                $query2="select * from LearningFactor where app='$i'";
-                                $result2=mysqli_query($connect,$query2);
-                                if(!$result2){
-                                    echo "database query failed";
-                                    die();
-                                }
-                                $row1=mysqli_fetch_array($result2);
-                                $complexAppValue+= ($base_price * ($row1['complex_app'])/100);
-                            }
-                        }
-                        $professional_value=$simpleAppValue+$complexAppValue;
-                         if($Type_of_service=="Remote"){
-                            $professional_service_value=($professional_value * 0.6);
+                            $row=mysqli_fetch_array($result2);
+                            $simpleAppValue+= ($base_price * ($row['simple_app'])/100);
                         }else{
-                            $professional_service_value=$professional_value;
-                         }
-                        $professional_cost+=$professional_service_value;   
+                            $query2="select * from LearningFactor where app='$i'";
+                            $result2=mysqli_query($connect,$query2);
+                            if(!$result2){
+                                echo "database query failed";
+                                die();
+                            }
+                            $row=mysqli_fetch_array($result2);
+                            $simpleAppValue+= ($base_price * ($row['simple_app'])/100);
+                        }
                     }
+                    for($i=$complexApps;$i>0;$i--){
+                        if($i>3){    
+                            $query2="select * from LearningFactor where app='4'";
+                            $result2=mysqli_query($connect,$query2);
+                            if(!$result2){
+                                echo "database query failed";
+                                die();
+                            }
+                            $row=mysqli_fetch_array($result2);
+                            $complexAppValue+= ($base_price * ($row['complex_app'])/100);
+                        }else{
+                            $query2="select * from LearningFactor where app='$i'";
+                            $result2=mysqli_query($connect,$query2);
+                            if(!$result2){
+                                echo "database query failed";
+                                die();
+                            }
+                            $row=mysqli_fetch_array($result2);
+                            $complexAppValue+= ($base_price * ($row['complex_app'])/100);
+                        }
+                    }
+                     $professional_value=$simpleAppValue+$complexAppValue;
+                     if($Type_of_service=="Remote"){
+                        $professional_service_value=($professional_value * 0.6);
+                    }else{
+                        $professional_service_value=$professional_value;
+                     }
+                    $professional_cost+=$professional_service_value;
                 }
-            
+                   
+            }else{
+                $Qty_2s_3s=remove_null($temparray2);
+                $QuestionsAndValues_Prof=remove_nulls_in_array($tempArray);
+                $QuestionsAndValues_Prof=Get_questions_to_license($QuestionsAndValues_Prof,$Qty_2s_3s);
+                $count=count($QuestionsAndValues_Prof);
+                for($j=0;$j<=$count;$j++){
+                    $question1=@$QuestionsAndValues_Prof[$j][0];
+                    $question2=@$Qty_2s_3s[$j][0];
+                    $qty=@$QuestionsAndValues_Prof[$j][1];
+                    $simpleApps=round($qty*0.7);
+//                        echo $simpleApps;//Calculating simple apps at 70% of total
+                    $complexApps=$qty-$simpleApps; //Calculating complex apps at 30% of total
+//                        echo $complexApps;//Calculating simple apps at 70% of total
+                    $query="select * from BasePrices where product_module='$ProdModule' and question='$question1' and product_support_questions='$question2' and country='$Country'";
+                    $result=mysqli_query($connect,$query);
+                    if(!$result){
+                        echo "database query failed";
+                        die();
+                    }
+                    $row=mysqli_fetch_array($result);
+                    $base_price=$row['base_price'];
+                //    echo $base_price;
+                    $simpleAppValue=0;
+                    $complexAppValue=0;
+                    for($i=$simpleApps;$i>0;$i--){
+                        if($i>3){    
+                            $query2="select * from LearningFactor where app='4'";
+                            $result2=mysqli_query($connect,$query2);
+                            if(!$result2){
+                                echo "database query failed";
+                                die();
+                            }
+                            $row1=mysqli_fetch_array($result2);
+                            $simpleAppValue+= ($base_price * ($row1['simple_app'])/100);
+                        }else{
+                            $query2="select * from LearningFactor where app='$i'";
+                            $result2=mysqli_query($connect,$query2);
+                            if(!$result2){
+                                echo "database query failed";
+                                die();
+                            }
+                            $row1=mysqli_fetch_array($result2);
+                            $simpleAppValue+= ($base_price * ($row1['simple_app'])/100);
+                        }
+                    }
+                  //  echo $simpleAppValue;
+                    for($i=$complexApps;$i>0;$i--){
+                        if($i>3){    
+                            $query2="select * from LearningFactor where app='4'";
+                            $result2=mysqli_query($connect,$query2);
+                            if(!$result2){
+                                echo "database query failed";
+                                die();
+                            }
+                            $row1=mysqli_fetch_array($result2);
+                            $complexAppValue+= ($base_price * ($row1['complex_app'])/100);
+                        }else{
+                            $query2="select * from LearningFactor where app='$i'";
+                            $result2=mysqli_query($connect,$query2);
+                            if(!$result2){
+                                echo "database query failed";
+                                die();
+                            }
+                            $row1=mysqli_fetch_array($result2);
+                            $complexAppValue+= ($base_price * ($row1['complex_app'])/100);
+                        }
+                    }
+                    $professional_value=$simpleAppValue+$complexAppValue;
+                     if($Type_of_service=="Remote"){
+                        $professional_service_value=($professional_value * 0.6);
+                    }else{
+                        $professional_service_value=$professional_value;
+                     }
+                    $professional_cost+=$professional_service_value;   
+                }
             }
-        return $professional_cost;
+            
         }
+        return $professional_cost;
+    }
     function calculate_product_support(){
         include ("../includes/post_value_arrays.php");
         include ("../includes/config.php");
@@ -687,7 +698,23 @@
         return $temp;
 //        print_r($temp);
     } 
-    
+    function remove_nulls_in_question($arrayName){
+      $a=0;
+        $temp=array();
+        $count=count($arrayName);
+        for($i=0;$i<=$count+1;$i++){
+        if(!(is_null(@$arrayName[$i][0]))){
+            @$temp[$a][0]=@$arrayName[$i][0];
+            @$temp[$a][1]=@$arrayName[$i][1];
+            $a++;
+        }
+         else{
+           
+           }
+    }   
+//        print_r($temp);
+        return $temp;
+    }
     function remove_nulls_in_array_four($arrayName){
         $a=0;
         $temp=array();
@@ -716,7 +743,7 @@
         $license_qty=remove_null($tempArray);
         $license=$_SESSION['license'];
         $count=count($license_qty);
-        for($j=0;$j<$count+1;$j++){
+        for($j=0;$j<=$count+1;$j++){
                 $question=@$license_qty[$j][0];
                 $qty=@$license_qty[$j][1];
                 $query="select * from BasePrices where product_module= '$ProdModule' and question='$question' and country='$Country' and license_type='$license'";
@@ -1056,6 +1083,7 @@
             if($ModeOfSale!='Support Only Sale'){
             if($prof_services_all=="No"){
                     $QuestionsAndValues_Prof=remove_null($tempArray);
+                    $QuestionsAndValues_Prof=Get_questions_to_prof($QuestionsAndValues_Prof,$Qty_2s_3s);
                     $count=count($QuestionsAndValues_Prof);
                     for($j=0;$j<$count;$j++){
                         $question1=@$QuestionsAndValues_Prof[$j][0];
@@ -1132,15 +1160,16 @@
                     }
                    return $temp;
                 }else{
-                    
                     $Qty_2s_3s=remove_null($temparray2);
-                    
                     $QuestionsAndValues_Prof=remove_nulls_in_array($tempArray);
-                    $count=count($Qty_2s_3s);
-                    for($j=0;$j<$count;$j++){
+                    $QuestionsAndValues_Prof=Get_questions_to_license($QuestionsAndValues_Prof,$Qty_2s_3s);
+                    $QuestionsAndValues_Prof=remove_null($QuestionsAndValues_Prof);
+                    $count=count($QuestionsAndValues_Prof);
+//                    echo $count;
+                    for($j=0;$j<=$count;$j++){
                         $question1=@$QuestionsAndValues_Prof[$j][0];
                         $question2=@$Qty_2s_3s[$j][0];
-                        $qty=@$Qty_2s_3s[$j][1];
+                        $qty=@$QuestionsAndValues_Prof[$j][1];
                         $simpleApps=round($qty*0.7);
                         $complexApps=$qty-$simpleApps; //Calculating complex apps at 30% of total
                         $query="select * from BasePrices where product_module= '$ProdModule' and question='$question1' and country='$Country'";
@@ -1214,14 +1243,90 @@
 //                        <div class='col-xs-1' style='text-align:center'>"; echo $qty; echo "</div>
 //                        <div class='col-xs-1'>"; echo round($professional_service_value);echo "</div></div><br>";
                     }
+                    $temp=remove_nulls_in_array_four($temp);
                     return $temp;
                 }
 //            $_SESSION['prof_qty_ary']=$temp;
         }
 
     }
-        
 
+    function Get_questions_to_prof($profArray,$licenseArray){
+       $count=count($profArray);
+        $temp=array();
+        for($i=0;$i<$count;$i++){
+            if($profArray[$i][0]=="Professional Services Required on SAP HANA Database Units (per 64GB unit size) "){
+                $temp[$i][0]="Professional Services Required on SAP HANA Database Units (per 64GB unit size)";
+                $temp[$i][1]=0;
+            }else if($profArray[$i][0]=="Professional Services Required on SAP HANA Database Nodes on Production"){
+                $temp[$i][0]="Professional Services Required on SAP HANA Database Units (per 64GB unit size)";
+                $LicenseCount=count($licenseArray);
+                for($j=0;$j<=$LicenseCount;$j++){
+                    if($licenseArray[$j][0]=="Number of SAP HANA Database Nodes on Production"){
+                       $temp[$i][1]=$licenseArray[$j][1]; 
+                        $j=$LicenseCount+1;    
+                    }else{
+                       $temp[$i][1]=0;
+                    }
+//                    echo $temp[$i][1];
+                }
+            }else{
+               $temp[$i][0]=$profArray[$i][0];
+               $temp[$i][1]=$profArray[$i][1];
+            }
+        }
+      $temp=remove_null($temp);
+        return $temp;
+    }
+    function Get_questions_to_license($profArray,$licenseArray){
+        $count=count($licenseArray);
+        $temp=array();
+        for($i=0;$i<$count;$i++){
+            if($licenseArray[$i][0]=="Number of VM Images to be protected under Sanovi Cloud Continuity Module"){
+                $temp[$i][0]="Professional Services Required on VM Images to be protected under Sanovi Cloud Continuity Module";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of VM Databases to be protected under Sanovi Cloud Continuity Module"){
+                $temp[$i][0]="Professional Services Required on VM Databases to be protected under Sanovi Cloud Continuity Module";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of Baremetal Windows/Linux Datas (Servers) to be protected under Sanovi Cloud Continuity Module"){
+                $temp[$i][0]="Professional Services Required on Baremetal Windows/Linux Datas (Servers) to be protected under Sanovi Cloud Continuity Module";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of Baremetal Windows/Linux Databases to be protected under Sanovi Cloud Continuity Module"){
+                $temp[$i][0]="Professional Services Required on Baremetal Windows/Linux Databases to be protected under Sanovi Cloud Continuity Module";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of Baremetal Unix Datas (Servers) to be protected under Sanovi Cloud Continuity Module"){
+                $temp[$i][0]="Professional Services Required on Baremetal Unix Datas (Servers) to be protected under Sanovi Cloud Continuity Module";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of Baremetal Unix Databases to be protected under Sanovi Cloud Continuity Module"){
+                $temp[$i][0]="Professional Services Required on Baremetal Unix Databases to be protected under Sanovi Cloud Continuity Module";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of Sharepoint Servers to be protected under Sanovi Cloud Continuity Module"){
+                $temp[$i][0]="Professional Services Required on Sharepoint Servers to be protected under Sanovi Cloud Continuity Module";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of Virtual Sharepoint Servers to be protected under Sanovi Cloud Continuity Module"){
+                $temp[$i][0]="Professional Services Required on Virtual Sharepoint Servers to be protected under Sanovi Cloud Continuity Module";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of Production MS Exchange Data Availability Group (DAGs)"){
+                $temp[$i][0]="Professional Services Required on Production MS Exchange Data Availability Group (DAGs)";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of Production Virtual MS Exchange Data Availability Group ( DAGs)"){
+                $temp[$i][0]="Professional Services Required on Production Virtual MS Exchange Data Availability Group ( DAGs)";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of Production Servers that are using Advanced Replication for data protection"){
+                $temp[$i][0]="Professional Services Required on Production Servers that are using Advanced Replication for data protection";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of Virtual Production Servers that are using Advanced Replication for data protection"){
+                $temp[$i][0]="Professional Services Required on Virtual Production Servers that are using Advanced Replication for data protection";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else if($licenseArray[$i][0]=="Number of SAP HANA Database Nodes on Production"){
+                $temp[$i][0]="Professional Services Required on SAP HANA Database Units (per 64GB unit size)";
+                $temp[$i][1]=$licenseArray[$i][1];
+            }else{
+                
+            } 
+        }
+        return $temp;
+    }  
 
     function  generateReferenceId(){
         $num="";
@@ -1323,6 +1428,8 @@ product_module,
 2s_noOfMSExchangeDatabases,
 2s_noOfVirtualMSExchangeDatabases,
 2s_noOfserversforPFRReplication,
+2s_noOfSAPHANADatabases,
+2s_noOfSAPHANANodes,
 3s_isBunkerSite,
 3s_noOfVmImages,
 3s_noOfVmDatabases,
@@ -1337,6 +1444,8 @@ product_module,
 3s_noOfMSExchangeDatabases,
 3s_noOfVirtualMSExchangeDatabases,
 3s_noOfserversforPFRReplication,
+3s_noOfSAPHANADatabases,
+3s_noOfSAPHANANodes,
 areProfessionalServicesRequired,
 Prof_serviceType,
 Prof_noOfVmImages,
@@ -1353,6 +1462,8 @@ Prof_noOfVirtualSharePointServers,
 Prof_noOfVirtualSharePointDatabases,
 Prof_noOfMSExchangeDatabases,
 Prof_noOfVirtualMSExchangeDatabases,
+Prof_noOfSAPHANADatabases,
+Prof_noOfSAPHANANodes,
 Prof_PremiseProductTraining,
 yearsOfSupport,
 noOfVmImages_2s,
@@ -1368,6 +1479,8 @@ noOfMSExchangeDatabases_2s,
 noOfVirtualServersUsingAdvancedReplication_2s,
 noOfUsingAdvancedReplication_2s,
 noOfServersForPFRReplication_2s,
+noOfSAPHANADatabases_2s,
+noOfSAPHANANodes_2s,
 isBunkerSite_3s,
 noOfServersInBunkerSite_3s,
 noOfVmImages_3s,
@@ -1383,6 +1496,8 @@ noOfSharePointServers_3s,
 noOfVirtualMSExchangeDatabases_3s,
 noOfMSExchangeDatabases_3s,
 noOfServersForPFRReplication_3s,
+noOfSAPHANADatabases_3s,
+noOfSAPHANANodes_3s,
 areProfessionalServicesRequired_Q,
 serviceType_Prof,
 noOfVmImages_Prof,
@@ -1399,6 +1514,8 @@ noOfVirtualSharePointServers_Prof,
 noOfVirtualSharePointDatabases_Prof,
 noOfMSExchangeDatabases_Prof,
 noOfVirtualMSExchangeDatabases_Prof,
+noOfSAPHANADatabases_Prof,
+noOfSAPHANANodes_Prof,
 OnPremiseProductTrainingReqd_Prof)
         VALUES ('$license_crt_id',
 '$product',
@@ -1424,6 +1541,8 @@ OnPremiseProductTrainingReqd_Prof)
 '$prod_ms_2s',
 '$prod_v_ms_2s',
 '$servers_2s',
+'$sap_hana_data_2s',
+'$sap_hana_nodes_2s',
 '$bunker_3s',
 '$vm_images_3s',
 '$database_3s',
@@ -1438,6 +1557,8 @@ OnPremiseProductTrainingReqd_Prof)
 '$prod_ms_3s',
 '$prod_v_ms_3s',
 '$servers_3s',
+'$sap_hana_data_3s',
+'$sap_hana_nodes_3s',
 '$prof_services_all',
 '$Type_of_service',
 '$prof_services_vm_image',
@@ -1454,6 +1575,8 @@ OnPremiseProductTrainingReqd_Prof)
 '$prof_services_v_share_db',
 '$prof_services_prod_ms',
 '$prof_services_prod_v_ms',
+'$prof_services_sap_hana_data',
+'$prof_services_sap_hana_node',
 '$prof_premise_product_training',
 '$ProdSupport',
 'vm_images_2S',
@@ -1469,6 +1592,8 @@ OnPremiseProductTrainingReqd_Prof)
 'virtual_prod_2S',
 'prod_servers_2S',
 'servers_2S',
+'sap_hana_data_2S',
+'sap_hana_nodes_2S',
 'bunker_3S',
 'bunker_servers_3s',
 'vm_images_3S',
@@ -1484,6 +1609,8 @@ OnPremiseProductTrainingReqd_Prof)
 'prod_v_ms_3S',
 'prod_ms_3S',
 'servers_3S',
+'sap_hana_data_3S',
+'sap_hana_nodes_3S',
 'Prof_Services_all',
 'Prof_Services_type',
 'Prof_Services_vm_image',
@@ -1500,6 +1627,8 @@ OnPremiseProductTrainingReqd_Prof)
 'Prof_Services_v_share_db',
 'Prof_Services_prod_ms',
 'Prof_Services_prod_v_ms',
+'Prof_services_sap_hana_data',
+'Prof_services_sap_hana_node',
 'Premise_product_training')";
          $result=mysqli_query($connect, $query);
         if ($result) {

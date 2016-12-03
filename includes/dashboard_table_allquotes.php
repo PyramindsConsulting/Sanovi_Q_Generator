@@ -7,7 +7,7 @@
             
             
             <div class="row">
-                <table class="table table-hover" style="font-size:10px;">
+                <table class="table table-hover" style="font-size:12px;">
                 <thead>
                     <tr style="background-color:#33689C; color:WHITE;">
                         <th>Opportunity</th>
@@ -85,6 +85,9 @@
                                 
                                 <!-- Excel Export -->
                                 <a href="excel/quote/download.php?refId=<?php echo $ref_ids_created_by_users[$i][0]."&verId=".$versions[$latest_version]."&emailid=".$_SESSION["emailid"];?>" data-toggle="tooltip" data-placement="top" title="Export to Excel"><i class="fa fa-file-excel-o" aria-hidden="true"></i></a>
+                                
+								<!-- Quote Transfer ICON-->
+                               	<a href="admin/qutoe_transfer.php?refId=<?php echo $ref_ids_created_by_users[$i][0]."&verId=".$versions[$latest_version]; ?>" data-toggle="tooltip" data-placement="top" title="Transfer Quote"><span class="glyphicon glyphicon-transfer"> </span></a>
                                 
                                 <!--Delete Quote ICON -->
                                 <?php
