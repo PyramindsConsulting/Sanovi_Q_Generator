@@ -760,5 +760,144 @@
         $areas['reporting_row']=$row['reporting_row'];
     
         return $areas;
-    }
+    } 
+
+	//FUNCTION TO FILL ALL EMP NAMES & EMP IDS FOR QUOTE TRANSFER
+	function fill_user_data_in_new_owner(){
+		include "../../includes/config.php";
+		$query = $connect->query("SELECT * FROM users ORDER BY emp_id");
+		$user_string="";
+        while($result = $query->fetch_assoc()) {
+			$user_string.="<option value='".$result['emp_id']."'>".$result['emp_id']." - ".$result['emp_name']." - ".$result['login_role']." </option>";
+        }
+
+        return $user_string;
+	}
+
+	//FUNCTION TO FIND QUOTE OWNER DETAILS FOR QUOTE TRANSFER
+	function find_quote_owner_details($refId, $verId){
+		include "../../includes/config.php";
+		
+		$query="SELECT users.emp_id, users.emp_name, users.login_name, users.login_department FROM users INNER JOIN LicenseGeneration ON users.login_name=LicenseGeneration.login_name WHERE LicenseGeneration.license_reference_id='$refId' AND LicenseGeneration.license_revision_id='$verId'";
+        $result = mysqli_query($connect, $query);
+        //CHECK IF QUERY EXECUTES OR NOT
+        if(!$result){
+            die("Database Query Failed");
+        }
+		$row=mysqli_fetch_array($result);
+		$current_quote_owner_details=array();
+		$current_quote_owner_details["emp_id"]=$row["emp_id"];
+		$current_quote_owner_details["emp_name"]=$row["emp_name"];
+		$current_quote_owner_details["login_name"]=$row["login_name"];
+		$current_quote_owner_details["login_department"]=$row["login_department"];
+		
+		return $current_quote_owner_details;
+	}
+
+	//FUNCTION TO FIND QUOTE DETAILS FOR QUOTE TRANSFER
+	function find_quote_details_for_transfer($refId, $verId){
+		include "../../includes/config.php";
+		
+		$crt_id=$refId."_".$verId;
+		$query = "SELECT CustomerRequirements.cust_org_name, CustomerRequirements.cust_name, CustomerRequirements.partner, CustomerRequirements.option_tag FROM CustomerRequirements INNER JOIN LicenseGeneration ON CustomerRequirements.license_crt_id=LicenseGeneration.license_crt_id WHERE CustomerRequirements.license_crt_id='$crt_id'";
+		
+		$result = mysqli_query($connect, $query);
+        //CHECK IF QUERY EXECUTES OR NOT
+        if(!$result){
+            die("Database Query Failed");
+        }
+		$row=mysqli_fetch_array($result);
+		
+		$transfer_quote_details=array();
+		
+		$transfer_quote_details["cust_org_name"]=$row["cust_org_name"];
+		$transfer_quote_details["cust_name"]=$row["cust_name"];
+		$transfer_quote_details["partner"]=$row["partner"];
+		$transfer_quote_details["option_tag"]=$row["option_tag"];
+		
+		return($transfer_quote_details);
+	}
+
+	//FUNCTION TO UPDATE NEW QUOTE OWNER IN LGT
+	function update_new_quote_owner($refId, $verId, $new_quote_owner){
+		include "../../includes/config.php";
+		
+		$query = "SELECT login_name FROM users WHERE emp_id='$new_quote_owner'";
+		$result = mysqli_query($connect, $query);
+		if(!$result){
+            die("Database Query Failed at USERS");
+        }
+		$row=mysqli_fetch_array($result);
+		$new_quote_owner_login_name=$row["login_name"];
+		$query = "UPDATE LicenseGeneration SET login_name = '$new_quote_owner_login_name', approved_by_emp_id = NULL, approved_ts ='0000-00-00 00:00:00' WHERE license_reference_id='$refId'";
+		$result = mysqli_query($connect, $query);
+		if(!$result){
+            die("Database Query Failed at Quote Update");
+        }else{
+			return "Quote Transferred Successfully";
+		}
+	}
+
+//	//FUNCTION TO FIND MAX DISCOUNT OF QUOTE FROM LHT FOR QUOTE TRANSFER
+//	function find_max_discount_of_quote($refId, $verId){
+//		include "../../includes/config.php";
+//		
+//		$lht_id=$refId."_".$verId;
+//		$query="SELECT discountPercentageOnLicense, discountPercentageOnSupport, discountPercentageOnPS, discountPercentageOnTraining FROM LicenseHistory WHERE license_lht_id='$lht_id'";
+//		$result = mysqli_query($connect, $query);
+//        //CHECK IF QUERY EXECUTES OR NOT
+//        if(!$result){
+//            die("Database Query Failed");
+//        }
+//		$row=mysqli_fetch_array($result);
+//		
+//		return max($row["discountPercentageOnLicense"], $row["discountPercentageOnSupport"], $row["discountPercentageOnPS"], $row["discountPercentageOnTraining"]);
+//	}
+//
+//	//FUNCTION TO FIND REPORTING MANAGER OF NEW QUOTE OWNER BASED ON MAX DISCOUNT OF QUOTE FOR QUOTE TRANSFER
+//	function find_rep_manager_of_new_quote_owner($max_discount_in_quote, $new_quote_owner){
+//		include "../../includes/config.php";
+//		
+//		//FINDING REPORTING MANAGER OF NEW QUOTE OWNER
+//		$query="SELECT reporting_manager FROM users WHERE emp_id='$new_quote_owner'";
+//		$result = mysqli_query($connect, $query);
+//        //CHECK IF QUERY EXECUTES OR NOT
+//        if(!$result){
+//            die("Database Query Failed");
+//        }
+//		$row=mysqli_fetch_array($result);
+//		$rep_manager=$row["reporting_manager"];
+//		
+////		echo "Rep Manager - ".$rep_manager."<br>";
+//		//FINDING ROLE OF REPORTING MANAGER
+//		$query="SELECT login_role FROM users WHERE emp_id='$rep_manager'";
+//		$result = mysqli_query($connect, $query);
+//        //CHECK IF QUERY EXECUTES OR NOT
+//        if(!$result){
+//            die("Database Query Failed");
+//        }
+//		$row=mysqli_fetch_array($result);
+//		$rep_manager_role=$row["login_role"];
+//		
+////		echo "Rep Manager Role - ".$rep_manager_role."<br>";
+//		
+//		//FINDING MAX AND MIN APPROVAL DISCOUNT RANGE OF REPORTING MANAGER
+//		$query="SELECT MaxDiscount, MinDiscount FROM UserRoles WHERE UserRole='$rep_manager_role'";
+//		$result = mysqli_query($connect, $query);
+//        //CHECK IF QUERY EXECUTES OR NOT
+//        if(!$result){
+//            die("Database Query Failed");
+//        }
+//		$row=mysqli_fetch_array($result);
+//		$MaxDiscount=$row["MaxDiscount"];
+//		$MinDiscount=$row["MinDiscount"];
+//		
+//		if($max_discount_in_quote<=$MaxDiscount && $max_discount_in_quote>=$MinDiscount){
+//			echo "Reporting Manager - ".$rep_manager."<br>";
+//		}else{
+//			return find_rep_manager_of_new_quote_owner($max_discount_in_quote, $rep_manager);
+//		}
+//		
+//		
+//	}
 ?>

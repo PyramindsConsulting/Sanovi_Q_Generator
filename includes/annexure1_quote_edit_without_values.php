@@ -202,14 +202,13 @@
                 <?php
                 
                 $product=Product_billing_quantity_edit($QuestionsAndValues_2s);
-//                $product=remove_nulls_in_array_four($product);
                 $count=count($product);
-//                echo $count;
                 for($i=0;$i<$count;$i++){
                     $part_number=$product[$i][0];
                     $part_description=$product[$i][1];
                     $part_qty=$product[$i][2];
                     $part_price=$product[$i][3];
+                    if($part_number!=""){
                         echo "<div class='row'>";
                         echo    "<div class='form-group plaintxtbox'>";
                         echo        "<div class='col-sm-3'>";
@@ -229,6 +228,7 @@
                         echo     "</div>";
                         echo "</div><br>";
                     }
+                }
                     $query="select * from BasePrices where mode_of_sale='$ModeOfSale' and product_support_questions='Product_support' and country='$Country'";
                     $result=mysqli_query($connect,$query); 
                         if ($result->num_rows > 0) {

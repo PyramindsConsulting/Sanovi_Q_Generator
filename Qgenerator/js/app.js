@@ -148,6 +148,18 @@ $(document).ready(function () {
         else {
             $('#Server_2').text($('#servers_2s').val());
         }
+        if ($('#sap_hana_data_2s').val() == "") {
+            $('#sap_hana_databases_2site').hide();
+        }
+        else {
+            $('#Sap_hana_databases_2site').text($('#sap_hana_data_2s').val());
+        }
+        if ($('#sap_hana_nodes_2s').val() == "") {
+            $('#sap_hana_nodes_2site').hide();
+        }
+        else {
+            $('#Sap_hana_nodes_2site').text($('#sap_hana_nodes_2s').val());
+        }
         $('#bunker_3').text($('#bunker_3s').val());
         if ($('#vm_images_3s').val() == "") {
             $('#vm_image_3').hide();
@@ -221,11 +233,23 @@ $(document).ready(function () {
         else {
             $('#Prod_v_ms_3').text($('#prod_v_ms_3s').val());
         }
-        if ($('#servers_3s').val() == "") {
-            $('#server_3').hide();
+        if ($('#servers_3s').val() == "") { 
+            $('#server_3').hide(); 
         }
         else {
             $('#Server_3').text($('#servers_3s').val());
+        }
+        if ($('#sap_hana_data_3s').val() == "") {
+            $('#sap_hana_databases_3site').hide();
+        }
+        else {
+            $('#Sap_hana_databases_3site').text($('#sap_hana_data_3s').val());
+        }
+        if ($('#sap_hana_nodes_3s').val() == "") {
+            $('#sap_hana_nodes_3site').hide();
+        }
+        else {
+            $('#Sap_hana_nodes_3site').text($('#sap_hana_nodes_3s').val());
         }
         $('#prof_services').text($('input:radio[name=Prof_Services_all]:checked').val());
         $('#type_of_service').text($('input:radio[name=Prof_Services_type]:checked').val());
@@ -331,6 +355,19 @@ $(document).ready(function () {
         else {
             $('#Prof_prod_v_ms').text($('#prof_services_prod_v_ms').val());
         }
+        if ($('#prof_services_sap_hana_data').val() == "") {
+            $('#prof_sap_hana_databases').hide();
+        }
+        else {
+            $('#Prof_sap_hana_databases').text($('#prof_services_sap_hana_data').val());
+        }
+        if ($('#prof_services_sap_hana_node').val() == "") {
+//            alert($('#prof_services_sap_hana_node').val());
+            $('#prof_sap_hana_nodes').hide();
+        }
+        else {
+            $('#Prof_sap_hana_nodes').text($('#prof_services_sap_hana_node').val());
+        }
         $('#Prof_premise').text($('#premise_product_training').val());
         $('#productSupport').text($('#product_support').val());
     });
@@ -350,6 +387,8 @@ $(document).ready(function () {
             document.getElementById('prod_ms_2S').style.display = "inline";
             document.getElementById('prod_v_ms_2S').style.display = "inline";
             document.getElementById('servers_2S').style.display = "inline";
+            document.getElementById('sap_hana_data_2S').style.display = "inline";
+            document.getElementById('sap_hana_nodes_2S').style.display = "inline";
             document.getElementById('button1').style.display = "inline";
             document.getElementById('less1').style.display = "none";
         }
@@ -375,6 +414,8 @@ $(document).ready(function () {
             document.getElementById('virtual_server_3S').style.display = "inline";
             document.getElementById('prod_ms_3S').style.display = "inline";
             document.getElementById('prod_v_ms_3S').style.display = "inline";
+            document.getElementById('sap_hana_data_3S').style.display = "inline";
+            document.getElementById('sap_hana_nodes_3S').style.display = "inline";
             document.getElementById('button2').style.display = "inline";
             document.getElementById('less2').style.display = "none";
         }
@@ -434,6 +475,8 @@ $(document).ready(function () {
         document.getElementById('prod_ms_2S').style.display = "inline";
         document.getElementById('prod_v_ms_2S').style.display = "inline";
         document.getElementById('servers_2S').style.display = "inline";
+        document.getElementById('sap_hana_data_2S').style.display = "inline";
+        document.getElementById('sap_hana_nodes_2S').style.display = "inline";
         document.getElementById('button1').style.display = "inline";
         document.getElementById('less1').style.display = "none";
     });
@@ -453,6 +496,8 @@ $(document).ready(function () {
         document.getElementById('virtual_server_3S').style.display = "inline";
         document.getElementById('prod_ms_3S').style.display = "inline";
         document.getElementById('prod_v_ms_3S').style.display = "inline";
+        document.getElementById('sap_hana_data_3S').style.display = "inline";
+        document.getElementById('sap_hana_nodes_3S').style.display = "inline";
         document.getElementById('less2').style.display = "none";
         document.getElementById('button2').style.display = "inline";
     });
@@ -932,6 +977,8 @@ function next_page2() {
     var prod_ms_2s = document.getElementById('prod_ms_2s').value;
     var prod_v_ms_2s = document.getElementById('prod_v_ms_2s').value;
     var servers_2s = document.getElementById('servers_2s').value;
+    var sap_hana_data_2s = document.getElementById('sap_hana_data_2s').value;
+    var sap_hana_nodes_2s = document.getElementById('sap_hana_nodes_2s').value;
     var vm_images_3s = document.getElementById('vm_images_3s').value;
     var database_3s = document.getElementById('database_3s').value;
     var b_windows_datas_3s = document.getElementById('b_windows_datas_3s').value;
@@ -945,6 +992,8 @@ function next_page2() {
     var prod_ms_3s = document.getElementById('prod_ms_3s').value;
     var prod_v_ms_3s = document.getElementById('prod_v_ms_3s').value;
     var servers_3s = document.getElementById('servers_3s').value;
+    var sap_hana_data_3s = document.getElementById('sap_hana_data_3s').value;
+    var sap_hana_nodes_3s = document.getElementById('sap_hana_nodes_3s').value;
     if (!properNumber(vm_images_2s)) {
         var r = confirm("Please Enter Proper Value");
             document.getElementById('vm_images_2s').focus();
@@ -1045,6 +1094,26 @@ function next_page2() {
     }
     $("#servers_2S").removeClass("has-error");
     
+    if (!properNumber(sap_hana_data_2s)) {
+        var r = confirm("Please Enter Proper Value");
+            document.getElementById('sap_hana_data_2s').focus();
+            $("#sap_hana_data_2S").addClass("has-error");
+        document.getElementById("second").style.display = "block";
+        document.getElementById("third").style.display = "none";
+        return false;
+    }
+    $("#sap_hana_data_2S").removeClass("has-error");
+    
+    if (!properNumber(sap_hana_nodes_2s)) {
+        var r = confirm("Please Enter Proper Value");
+            document.getElementById('sap_hana_nodes_2s').focus();
+            $("#sap_hana_nodes_2S").addClass("has-error");
+        document.getElementById("second").style.display = "block";
+        document.getElementById("third").style.display = "none";
+        return false;
+    }
+    $("#sap_hana_nodes_2S").removeClass("has-error");
+    
     if (!properNumber(prod_servers_2s)) {
             document.getElementById('prod_servers_2s').focus();
         $("#prod_servers_2S").addClass("has-error");
@@ -1084,6 +1153,7 @@ function next_page2() {
         return false;
     }
     $("#database_3S").removeClass("has-error");
+    
     if (!properNumber(b_windows_datas_3s)) {
         var r = confirm("Please Enter Proper Value");
             document.getElementById('b_windows_datas_3s').focus();
@@ -1093,6 +1163,7 @@ function next_page2() {
         return false;
     }
     $("#b_windows_datas_3S").removeClass("has-error");
+    
     if (!properNumber(b_windows_db_3s)) {
         var r = confirm("Please Enter Proper Value");
             document.getElementById('b_windows_db_3s').focus();
@@ -1102,6 +1173,7 @@ function next_page2() {
         return false;
     }
     $("#b_windows_db_3S").removeClass("has-error");
+    
     if (!properNumber(b_unix_datas_3s)) {
         var r = confirm("Please Enter Proper Value");
             document.getElementById('b_unix_datas_3s').focus();
@@ -1111,6 +1183,7 @@ function next_page2() {
         return false;
     }
     $("#b_unix_datas_3S").removeClass("has-error");
+    
     if (!properNumber(b_unix_db_3s)) {
         var r = confirm("Please Enter Proper Value");
             document.getElementById('b_unix_db_3s').focus();
@@ -1156,6 +1229,7 @@ function next_page2() {
         return false;
     }
     $("#prod_v_ms_3S").removeClass("has-error");
+    
     if (!properNumber(servers_3s)) {
         var r = confirm("Please Enter Proper Value");
             document.getElementById('servers_3s').focus();
@@ -1165,6 +1239,28 @@ function next_page2() {
         return false;
     }
     $("#servers_3s").removeClass("has-error");
+    
+    if (!properNumber(sap_hana_data_3s)) {
+        var r = confirm("Please Enter Proper Value");
+            document.getElementById('sap_hana_data_3s').focus();
+            $("#sap_hana_data_3S").addClass("has-error");
+        document.getElementById("second").style.display = "block";
+        document.getElementById("third").style.display = "none";
+        return false;
+    }
+    $("#sap_hana_data_3S").removeClass("has-error");
+    
+    if (!properNumber(sap_hana_nodes_3s)) {
+        var r = confirm("Please Enter Proper Value");
+            document.getElementById('sap_hana_nodes_3s').focus();
+            $("#sap_hana_nodes_3S").addClass("has-error");
+        document.getElementById("second").style.display = "block";
+        document.getElementById("third").style.display = "none";
+        return false;
+    }
+    $("#sap_hana_nodes_3S").removeClass("has-error");
+    
+    
     if (!properNumber(prod_servers_3s)) {
         var r = confirm("Please Enter Proper Value");
             document.getElementById('prod_servers_3s').focus();
@@ -1228,6 +1324,8 @@ function next_page2() {
     document.getElementById("prof_services_v_share_db_addon").innerHTML = Number(site_2s_virtual_sharepoint_server_2s) + Number(site_3s_virtual_server_3s);
     document.getElementById("prof_services_prod_ms_addon").innerHTML = Number(site_2s_prod_ms_2s) + Number(site_3s_prod_ms_3s);
     document.getElementById("prof_services_prod_v_ms_addon").innerHTML = Number(site_2s_prod_v_ms_2s) + Number(site_3s_prod_v_ms_3s);
+    document.getElementById("prof_services_sap_hana_data_addon").innerHTML = Number(sap_hana_data_2s) + Number(sap_hana_data_3s);
+    document.getElementById("prof_services_sap_hana_node_addon").innerHTML = Number(sap_hana_nodes_2s) + Number(sap_hana_nodes_3s);
     $("#vm_images_2S").removeClass("has-error");
     $("#db_2S").removeClass("has-error");
     $("#b_windows_datas_2S").removeClass("has-error");
@@ -1239,6 +1337,8 @@ function next_page2() {
     $("#prod_ms_2S").removeClass("has-error");
     $("#prod_v_ms_2S").removeClass("has-error");
     $("#servers_2S").removeClass("has-error");
+    $("#sap_hana_data_2S").removeClass("has-error");
+    $("#sap_hana_nodes_2S").removeClass("has-error");
     $("#prod_servers_2S").removeClass("has-error");
      $("#virtual_prod_2S").removeClass("has-error");
     $("#vm_images_3S").removeClass("has-error");
@@ -1252,6 +1352,8 @@ function next_page2() {
     $("#prod_ms_3S").removeClass("has-error");
     $("#prod_v_ms_3S").removeClass("has-error");
     $("#servers_3s").removeClass("has-error");
+    $("#sap_hana_data_3S").removeClass("has-error");
+    $("#sap_hana_nodes_3S").removeClass("has-error");
     $("#prod_servers_3S").removeClass("has-error");
     $("#virtual_prod_3S").removeClass("has-error");
     $("#requirements").hide();
@@ -1423,6 +1525,9 @@ function roleBasedDiscount() {
     var prof_services_v_share_db = document.getElementById('prof_services_v_share_db').value;
     var prof_services_prod_ms = document.getElementById('prof_services_prod_ms').value;
     var prof_services_prod_v_ms = document.getElementById('prof_services_prod_v_ms').value;
+    var prof_services_sap_hana_data = document.getElementById('prof_services_sap_hana_data').value;
+    var prof_services_sap_hana_node = document.getElementById('prof_services_sap_hana_node').value;
+    
     if (!properNumber(prof_services_vm_image)) {
         var r = confirm("Please Enter Proper Value");
             document.getElementById('prof_services_vm_image').focus();
@@ -1519,6 +1624,22 @@ function roleBasedDiscount() {
         return false;
     }
     $("#Prof_Services_prod_v_ms").removeClass("has-error");
+    if (!properNumber(prof_services_sap_hana_data)) {
+        var r = confirm("Please Enter Proper Value");
+            document.getElementById('prof_services_sap_hana_data').focus();
+            $("#Prof_services_sap_hana_data").addClass("has-error");
+        document.getElementById("third").style.display = "block";
+        return false;
+    }
+    $("#Prof_services_sap_hana_data").removeClass("has-error");
+    if (!properNumber(prof_services_sap_hana_node)) {
+        var r = confirm("Please Enter Proper Value");
+            document.getElementById('prof_services_sap_hana_node').focus();
+            $("#Prof_services_sap_hana_node").addClass("has-error");
+        document.getElementById("third").style.display = "block";
+        return false;
+    }
+    $("#Prof_services_sap_hana_node").removeClass("has-error");
     if (!properNumber(prof_services_virtual_prod)) {
         var r = confirm("Please Enter Proper Value");
             document.getElementById('prof_services_virtual_prod').focus();
@@ -1548,6 +1669,8 @@ function roleBasedDiscount() {
     var site_2s_virtual_sharepoint_server_2s = document.getElementById("virtual_sharepoint_server_2s").value;
     var site_2s_prod_ms_2s = document.getElementById("prod_ms_2s").value;
     var site_2s_prod_v_ms_2s = document.getElementById("prod_v_ms_2s").value;
+    var sap_hana_data_2s = document.getElementById("sap_hana_data_2s").value;
+    var sap_hana_nodes_2s = document.getElementById("sap_hana_nodes_2s").value;
     var site_3s_vm_images_3s = document.getElementById("vm_images_3s").value;
     var site_3s_database_3s = document.getElementById("database_3s").value;
     var site_3s_b_windows_datas_3s = document.getElementById("b_windows_datas_3s").value;
@@ -1560,6 +1683,8 @@ function roleBasedDiscount() {
     var site_3s_virtual_server_3s = document.getElementById("virtual_server_3s").value;
     var site_3s_prod_ms_3s = document.getElementById("prod_ms_3s").value;
     var site_3s_prod_v_ms_3s = document.getElementById("prod_v_ms_3s").value;
+    var sap_hana_data_3s = document.getElementById("sap_hana_data_3s").value;
+    var sap_hana_nodes_3s = document.getElementById("sap_hana_nodes_3s").value;
     var prof_services_vm_image = document.getElementById('prof_services_vm_image').value;
     var prof_services_database = document.getElementById('prof_services_database').value;
     var prof_services_b_windows_datas = document.getElementById('prof_services_b_windows_datas').value;
@@ -1574,6 +1699,10 @@ function roleBasedDiscount() {
     var prof_services_v_share_db = document.getElementById('prof_services_v_share_db').value;
     var prof_services_prod_ms = document.getElementById('prof_services_prod_ms').value;
     var prof_services_prod_v_ms = document.getElementById('prof_services_prod_v_ms').value;
+    var prof_services_sap_hana_data = document.getElementById('prof_services_sap_hana_data').value;
+    var prof_services_sap_hana_node = document.getElementById('prof_services_sap_hana_node').value;
+    
+    
     if (prof_services_vm_image > (Number(site_2s_vm_images_2s) + Number(site_3s_vm_images_3s))) {
         document.getElementById('prof_services_vm_image').focus();
         $("#Prof_Services_vm_image").addClass("has-error");
@@ -1701,7 +1830,19 @@ function roleBasedDiscount() {
         $("#Prof_Services_prod_v_ms").addClass("has-error");
         return false;
     }
-    $("#Prof_Services_prod_v_ms").removeClass("has-error"); 
+    $("#Prof_Services_prod_v_ms").removeClass("has-error");
+    if (prof_services_sap_hana_data > (Number(sap_hana_data_2s) + Number(sap_hana_data_3s))) {
+        document.getElementById('prof_services_sap_hana_data').focus();
+        $("#Prof_services_sap_hana_data").addClass("has-error");
+        return false;
+    }
+    $("#Prof_services_sap_hana_data").removeClass("has-error");
+    if (prof_services_sap_hana_node > (Number(sap_hana_nodes_2s) + Number(sap_hana_nodes_3s))) {
+        document.getElementById('prof_services_sap_hana_node').focus();
+        $("#Prof_services_sap_hana_node").addClass("has-error");
+        return false;
+    }
+    $("#Prof_services_sap_hana_node").removeClass("has-error");
     document.getElementById("product_support").readOnly = true;
     document.getElementById("prof").checked = false;
     $("#table2").hide();

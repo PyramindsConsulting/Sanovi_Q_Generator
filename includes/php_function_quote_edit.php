@@ -301,6 +301,8 @@
     $details["10"]["1"]=$row["2s_noOfVirtualServersUsingAdvancedReplication"];
     $details["11"]["1"]=$row["2s_noOfUsingAdvancedReplication"];
     $details["12"]["1"]=$row["2s_noOfServersForPFRReplication"];
+    $details["13"]["1"]=$row["2s_noOfSAPHANADatabases"];
+    $details["14"]["1"]=$row["2s_noOfSAPHANANodes"];
 
     //Questions
     $details["0"]["0"]=$row["noOfVmImages_2s"];
@@ -316,6 +318,8 @@
     $details["10"]["0"]=$row["noOfVirtualServersUsingAdvancedReplication_2s"];
     $details["11"]["0"]=$row["noOfUsingAdvancedReplication_2s"];
     $details["12"]["0"]=$row["noOfServersForPFRReplication_2s"];
+    $details["13"]["0"]=$row["noOfSAPHANADatabases_2s"];
+    $details["14"]["0"]=$row["noOfSAPHANANodes_2s"];
     
     return $details;
 }
@@ -346,6 +350,8 @@ function fetch_crt_3s_data($crt_id){
     $details["12"]["1"]=$row["3s_noOfVirtualServersUsingAdvancedReplication"];
     $details["13"]["1"]=$row["3s_noOfUsingAdvancedReplication"];
     $details["14"]["1"]=$row["3s_noOfServersForPFRReplication"];
+    $details["15"]["1"]=$row["3s_noOfSAPHANADatabases"];
+    $details["16"]["1"]=$row["3s_noOfSAPHANANodes"];
 
     //Questions
     $details["0"]["0"]=$row["isBunkerSite_3s"];
@@ -363,6 +369,8 @@ function fetch_crt_3s_data($crt_id){
     $details["12"]["0"]=$row["noOfVirtualServersUsingAdvancedReplication_3s"];
     $details["13"]["0"]=$row["noOfUsingAdvancedReplication_3s"];
     $details["14"]["0"]=$row["noOfServersForPFRReplication_3s"];
+    $details["15"]["0"]=$row["noOfSAPHANADatabases_3s"];
+    $details["16"]["0"]=$row["noOfSAPHANANodes_3s"];
     
 //    print_r($details);
     return $details;
@@ -396,6 +404,8 @@ function fetch_crt_prof_data($crt_id){
     $details["14"]["1"]=$row["Prof_noOfMSExchangeDatabases"];
     $details["15"]["1"]=$row["Prof_noOfVirtualMSExchangeDatabases"];
     $details["16"]["1"]=$row["Prof_PremiseProductTraining"];
+    $details["17"]["1"]=$row["Prof_noOfSAPHANADatabases"];
+    $details["18"]["1"]=$row["Prof_noOfSAPHANANodes"];
 
     //Questions
     $details["0"]["0"]=$row["areProfessionalServicesRequired_Q"];
@@ -415,6 +425,8 @@ function fetch_crt_prof_data($crt_id){
     $details["14"]["0"]=$row["noOfMSExchangeDatabases_Prof"];
     $details["15"]["0"]=$row["noOfVirtualMSExchangeDatabases_Prof"];
     $details["16"]["0"]=$row["OnPremiseProductTrainingReqd_Prof"];
+    $details["17"]["0"]=$row["noOfSAPHANADatabases_Prof"];
+    $details["18"]["0"]=$row["noOfSAPHANANodes_Prof"];
     return $details;
 }
 

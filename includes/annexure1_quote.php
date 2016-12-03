@@ -209,6 +209,7 @@
                     $part_description=$product[$i][1];
                     $part_qty=$product[$i][2];
                     $part_price=$product[$i][3];
+                    if($part_number!=""){
                         echo "<div class='row'>";
                         echo    "<div class='form-group plaintxtbox'>";
                         echo        "<div class='col-sm-3'>";
@@ -228,6 +229,7 @@
                         echo     "</div>";
                         echo "</div><br>";
                     }
+                }
                     $query="select * from BasePrices where mode_of_sale='$ModeOfSale' and product_support_questions='Product_support' and country='$Country'";
                     $result=mysqli_query($connect,$query); 
                         if ($result->num_rows > 0) {
