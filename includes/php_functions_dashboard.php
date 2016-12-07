@@ -329,4 +329,18 @@
         }
 		return $refIds;
 	}
+
+    function find_current_calendar_year(){
+        $year1=date('Y');
+        $year2=date('y');
+        $month=date('n');    
+        $day=date('j');
+        if ($month > 3) { //
+           $nextyear = $year2 + 1;
+            $finYr = $year1."-".$nextyear;
+        } else {
+            $finYr = ($year1 - 1)."-".$year2;
+        }
+        return $finYr;
+    }
 ?>

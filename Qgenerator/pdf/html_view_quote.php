@@ -65,6 +65,7 @@ $customer_details=fetch_crt_customer_data($crt_id);
    
 $country=$customer_details["country"];
 $OrgName=$customer_details["cust_org_name"];
+$OptionTag=$customer_details["option_tag"];
 $currency=$customer_details["cust_currency"];
 $license=$customer_details["license_type"];
 $product=$customer_details["product"];
@@ -157,10 +158,15 @@ $ProdModule=$customer_details["product_module"];
         <div class="row">
                 <div class="col-sm-2"><b>Date :</b></div>
                 <div class="col-sm-2"><?php echo $date; ?></div>
+            
+            
         </div> 
         <div class="row">
                 <div class="col-sm-2"><b>Customer Name :</b></div>
                 <div class="col-sm-2"><?php echo $OrgName; ?></div>
+                
+            <div class="col-sm-offset-2 col-sm-3"><b>Notes:</b></div>
+                <div class="col-sm-3"><?php echo $OptionTag; ?></div>
         </div>
         <br>
         <div class="row">

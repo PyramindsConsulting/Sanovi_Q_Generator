@@ -483,6 +483,7 @@ function fetch_crt_customer_data($crt_id){
     $details["cust_currency"]=$row["cust_currency"];
     $details["cust_org_name"]=$row["cust_org_name"];
     $details["cust_name"]=$row["cust_name"];
+    $details["option_tag"]=$row["option_tag"];
     $details["mode_of_sale"]=$row["mode_of_sale"];
     $details["product_module"]=$row["product_module"];
 //    print_r($details);
