@@ -1,11 +1,128 @@
 <!--            FINDING ALL REFERENCE IDS -->
             <?php
-                $ref_ids_created_by_users=find_all_ref_ids_from_lgt_full_collection(); //ARRAY of REF IDs & EMP Names
+                $ref_ids_created_by_users_complete=find_all_ref_ids_from_lgt_full_collection(); //ARRAY of REF IDs & EMP Names
+				$no_of_ref_ids_created_by_users_complete=count($ref_ids_created_by_users_complete);
+
+				//FINDING GET VARIABLES
+				if(!$_GET["display"]){
+					$display_rows=5; //ASSIGNING DEFAULT ROWS TO DISPLAY AS 5
+				}else{ //GET VARIABLE VALIDATIONS
+					$get_display_value=$_GET["display"];
+					if(!is_numeric($get_display_value) || 
+					   ($get_display_value-floor($get_display_value))!=0 || 
+					   $get_display_value<1){
+						die("Invalid Inputs");
+					}else{
+						if ($get_display_value>$no_of_ref_ids_created_by_users_complete){
+							$display_rows=$no_of_ref_ids_created_by_users_complete;
+						}else{
+							$display_rows=$_GET["display"];
+						}
+						$no_of_pages=ceil($no_of_ref_ids_created_by_users_complete/$display_rows);
+					}
+				}
+				if(!$_GET["page"]){
+					$display_page=1;//ASSIGNING DEFAULT PAGE NO AS 1
+					$no_of_pages=ceil($no_of_ref_ids_created_by_users_complete/$display_rows);
+				}else{//GET VARIABLE VALIDATIONS
+					$get_page_value=$_GET["page"];
+					if(!is_numeric($get_page_value) || 
+					   $get_page_value>$no_of_pages || 
+					   ($get_page_value-floor($get_page_value))!=0 || 
+					   $get_page_value<1){
+						die("Invalid Inputs");
+					}else{
+						$display_page=$_GET["page"];
+					}
+				}
+				$j=0;
+				$k=($display_page-1)*$display_rows;
+
+				//LOADING THE QUOTE REFERENCE AND VERSION IDS
+				for($i=0;$i<$display_rows;$i++){
+					if(!$ref_ids_created_by_users_complete[$k][0]){
+						break;
+					}
+					$ref_ids_created_by_users[$j][0]=$ref_ids_created_by_users_complete[$k][0];
+					$ref_ids_created_by_users[$j][1]=$ref_ids_created_by_users_complete[$k][1];
+					$j++;
+					$k++;
+				}
                 $no_of_ref_ids_created_by_user=count($ref_ids_created_by_users)-1;
+				
+				//PHP BUTTON SUBMISSION RESPONSE CHECKS
+				if(isset($_POST["all_quotes_display"])){
+					echo "entered all_quotes_display";
+					$noOfQuotesToDisplay=$_POST['no_of_quotes_to_display'];
+					header("location: dashboard.php?View=AllQuotes&display=".$noOfQuotesToDisplay."&page=1");
+				}
+
+				if(isset($_POST["all_quotes_display_next"])){
+					$noOfQuotesToDisplay=$_POST['no_of_quotes_to_display'];
+					if($display_page<$no_of_pages){
+						$display_page++;
+					}else{
+					}
+					header("location: dashboard.php?View=AllQuotes&display=".$noOfQuotesToDisplay."&page=".$display_page);
+				}
+
+				if(isset($_POST["all_quotes_display_prev"])){
+					$noOfQuotesToDisplay=$_POST['no_of_quotes_to_display'];
+					if($display_page>1){
+						$display_page--;
+					}else{
+					}
+					header("location: dashboard.php?View=AllQuotes&display=".$noOfQuotesToDisplay."&page=".$display_page);
+				}
+
+				if(isset($_POST["all_quotes_display_first"])){
+					$noOfQuotesToDisplay=$_POST['no_of_quotes_to_display'];
+					$display_page=1;
+					header("location: dashboard.php?View=AllQuotes&display=".$noOfQuotesToDisplay."&page=".$display_page);
+				}
+
+				if(isset($_POST["all_quotes_display_last"])){
+					$noOfQuotesToDisplay=$_POST['no_of_quotes_to_display'];
+					$display_page=$no_of_pages;
+					header("location: dashboard.php?View=AllQuotes&display=".$noOfQuotesToDisplay."&page=".$display_page);
+				}
             ?>
             
-            
-            
+			<!--            NAVIGATION BUTTONS-->
+            <br>
+            <div class="row">
+				<form method="post">
+					<div class="col-sm-2">
+						<label for="no_of_quotes">Total No of Quotes :</label>
+					</div>
+					<div class="col-sm-1">
+						<input type="number" class="form-control" id="no_of_quotes" readonly value="<?php echo count($ref_ids_created_by_users_complete); ?>">
+					</div>
+
+					<div class="col-sm-1">
+						<label for="no_of_quotes_to_display">Display :</label>
+					</div>
+					<div class="col-sm-2">
+						<select class="form-control" id="no_of_quotes_to_display" name="no_of_quotes_to_display">
+							<option value="5" <?php if($display_rows==5){echo "selected";} ?>>5</option>
+							<option value="10" <?php if($display_rows==10){echo "selected";} ?>>10</option>
+							<option value="50" <?php if($display_rows==50){echo "selected";} ?>>50</option>
+							<option value="<?php echo $no_of_ref_ids_created_by_users_complete; ?>" <?php if($display_rows==$no_of_ref_ids_created_by_users_complete){echo "selected";} ?>>All (<?php echo $no_of_ref_ids_created_by_users_complete; ?>)</option>
+						</select>
+					</div>
+					<div class="col-sm-1">
+						<button type="submit" class="btn btn-primary" name="all_quotes_display">Go</button>
+					</div>
+					<div class="col-sm-4">
+						<button type="submit" name="all_quotes_display_first" style="background-color: transparent; border: none; padding-top: 5px;"><span class="glyphicon glyphicon-step-backward"></span></button>
+						<button type="submit" name="all_quotes_display_prev" style="background-color: transparent; border: none;padding-top: 5px;"><span class="glyphicon glyphicon-triangle-left" name=""></span></button>
+						<span style="padding-top: 5px; text-align: center;">Page-<?php echo $display_page;?>/<?php echo $no_of_pages; ?></span>
+						<button type="submit" name="all_quotes_display_next" style="background-color: transparent; border: none; padding-top: 5px;"><span class="glyphicon glyphicon-triangle-right"></span></button>
+						<button type="submit" name="all_quotes_display_last" style="background-color: transparent; border: none; padding-top: 5px;"><span class="glyphicon glyphicon-step-forward"></span></button>
+					</div>
+				</form>
+			</div>
+           <br>
             <div class="row">
                 <table class="table table-hover" style="font-size:12px;">
                 <thead>

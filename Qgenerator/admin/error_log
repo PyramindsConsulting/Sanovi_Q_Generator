@@ -1791,3 +1791,19 @@
 [02-Dec-2016 14:49:43 UTC] PHP Notice:  Use of undefined constant refId - assumed 'refId' in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/qutoe_transfer.php on line 62
 [02-Dec-2016 14:49:43 UTC] PHP Notice:  Use of undefined constant verId - assumed 'verId' in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/qutoe_transfer.php on line 63
 [02-Dec-2016 14:49:43 UTC] PHP Notice:  Undefined variable: emp_id in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/qutoe_transfer.php on line 71
+[12-Dec-2016 06:29:16 UTC] PHP Notice:  Use of undefined constant refId - assumed 'refId' in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/qutoe_transfer.php on line 58
+[12-Dec-2016 06:29:16 UTC] PHP Notice:  Use of undefined constant refId - assumed 'refId' in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/qutoe_transfer.php on line 62
+[12-Dec-2016 06:29:16 UTC] PHP Notice:  Use of undefined constant verId - assumed 'verId' in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/qutoe_transfer.php on line 63
+[12-Dec-2016 06:29:16 UTC] PHP Notice:  Undefined variable: emp_id in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/qutoe_transfer.php on line 71
+[12-Dec-2016 06:30:02 UTC] PHP Notice:  Use of undefined constant refId - assumed 'refId' in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/qutoe_transfer.php on line 58
+[12-Dec-2016 06:30:02 UTC] PHP Notice:  Use of undefined constant refId - assumed 'refId' in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/qutoe_transfer.php on line 62
+[12-Dec-2016 06:30:02 UTC] PHP Notice:  Use of undefined constant verId - assumed 'verId' in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/qutoe_transfer.php on line 63
+[12-Dec-2016 06:30:02 UTC] PHP Notice:  Undefined variable: emp_id in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/qutoe_transfer.php on line 71
+[12-Dec-2016 06:30:56 UTC] PHP Notice:  Use of undefined constant refId - assumed 'refId' in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/qutoe_transfer.php on line 58
+[12-Dec-2016 06:30:56 UTC] PHP Notice:  Use of undefined constant refId - assumed 'refId' in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/qutoe_transfer.php on line 62
+[12-Dec-2016 06:30:56 UTC] PHP Notice:  Use of undefined constant verId - assumed 'verId' in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/qutoe_transfer.php on line 63
+[12-Dec-2016 06:30:56 UTC] PHP Notice:  Undefined variable: emp_id in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/qutoe_transfer.php on line 71
+[12-Dec-2016 06:31:44 UTC] PHP Notice:  Use of undefined constant refId - assumed 'refId' in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/qutoe_transfer.php on line 58
+[12-Dec-2016 06:31:44 UTC] PHP Notice:  Use of undefined constant refId - assumed 'refId' in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/qutoe_transfer.php on line 62
+[12-Dec-2016 06:31:44 UTC] PHP Notice:  Use of undefined constant verId - assumed 'verId' in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/qutoe_transfer.php on line 63
+[12-Dec-2016 06:31:44 UTC] PHP Notice:  Undefined variable: emp_id in /home/sanoviitsupport/public_html/quotedev/SanoviTechnologies/Qgenerator/admin/qutoe_transfer.php on line 71
