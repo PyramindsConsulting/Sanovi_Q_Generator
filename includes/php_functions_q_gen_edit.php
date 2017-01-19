@@ -427,7 +427,7 @@
                     if($question=='Number of SAP HANA Database Nodes on Production'){
                       $value=0;  
                     }else{
-                      $value=$QuestionsAndValues_2s[$j][1];
+                      $value=$QuestionsAndValues_3s[$j][1];
                     }
                     $query="select base_price,question from BasePrices where product_module= '$ProdModule' and question='$question'and country='$Country' and license_type='$license'";
                     $result=mysqli_query($connect,$query);
@@ -435,7 +435,7 @@
                         echo "database query failed";
                     }
                     $row=mysqli_fetch_array($result);
-                    //echo $row['base_price']*$QuestionsAndValues_2s[$j][1]." ".$row['question']."<br>";
+                    //echo $row['base_price']*$QuestionsAndValues_3s[$j][1]." ".$row['question']."<br>";
                     $licence_3s+= $row['base_price']*$QuestionsAndValues_3s[$j][1];
                 }
             }
@@ -1344,10 +1344,10 @@
         include ("../includes/config.php");
         $version=getMaxVersionId(substr($_SESSION['ref_id_edit'],12));
         $license_lht_id=($_SESSION['ref_id_edit']."_".($version+1));
-        $finalLicenseCost=$licenseCostAfterDiscount-round(get_exchange_rate()*(calculate_3site_licence_edit()*0.5));
+        $finalLicenseCost=$licenseCostAfterDiscount+round(get_exchange_rate()*(calculate_3site_licence_edit()*0.5));
         $query="INSERT INTO LicenseHistory (license_lht_id,licenseCost,licenseDiscountValue,licenseCostAfterDiscount,productSupportCost,prodDiscountValue,finalSupportCost,PSCost,discountValueOnPs,finalPSCost,trainingCost,trainingDiscountValue,finalTrainingCost,discountPercentageOnBunkerSite,finalLicenseCost,totalValue)
-        VALUES ('$license_lht_id','$licenseCost','$licenseDiscountValue','$licenseCostAfterDiscount','$productSupoortCost','$prodDiscountValue',
-        '$finalSupportCost','$PSCost','$discountValueOnPs','$finalPSCost','$product_training_cost','$product_training_discount_value','$final_product_training_cost','50','$finalLicenseCost','$totalValue')";
+        VALUES ('$license_lht_id','$licenseCost','$licenseDiscountValue','$finalLicenseCost','$productSupoortCost','$prodDiscountValue',
+        '$finalSupportCost','$PSCost','$discountValueOnPs','$finalPSCost','$product_training_cost','$product_training_discount_value','$final_product_training_cost','50','$licenseCostAfterDiscount','$totalValue')";
         $result=mysqli_query($connect, $query);
         if ($result) {
 //            echo "New record created successfully";
@@ -1363,8 +1363,8 @@
         include ("../includes/post_value_array_edit.php");
         include ("../includes/config.php");
         $license_lht_id=($_SESSION['ref_id_edit']."_".$_SESSION['ver_id_edit']);
-        $finalLicenseCost=$licenseCostAfterDiscount-round(get_exchange_rate()*(calculate_3site_licence_edit()*0.5));
-        $query="UPDATE LicenseHistory set licenseCost='$licenseCost',licenseDiscountValue='$licenseDiscountValue',licenseCostAfterDiscount='$licenseCostAfterDiscount',productSupportCost='$productSupoortCost',prodDiscountValue='$prodDiscountValue',finalSupportCost='$finalSupportCost',PSCost='$PSCost',discountValueOnPs='$discountValueOnPs',finalPSCost='$finalPSCost',trainingCost='$product_training_cost',trainingDiscountValue='$product_training_discount_value',finalTrainingCost='$final_product_training_cost',discountPercentageOnBunkerSite='50',finalLicenseCost='$finalLicenseCost',totalValue='$totalValue' where license_lht_id='$license_lht_id'";
+        $finalLicenseCost=$licenseCostAfterDiscount+round(get_exchange_rate()*(calculate_3site_licence_edit()*0.5));
+        $query="UPDATE LicenseHistory set licenseCost='$licenseCost',licenseDiscountValue='$licenseDiscountValue',licenseCostAfterDiscount='$finalLicenseCost',productSupportCost='$productSupoortCost',prodDiscountValue='$prodDiscountValue',finalSupportCost='$finalSupportCost',PSCost='$PSCost',discountValueOnPs='$discountValueOnPs',finalPSCost='$finalPSCost',trainingCost='$product_training_cost',trainingDiscountValue='$product_training_discount_value',finalTrainingCost='$final_product_training_cost',discountPercentageOnBunkerSite='50',finalLicenseCost='$licenseCostAfterDiscount',totalValue='$totalValue' where license_lht_id='$license_lht_id'";
         $result=mysqli_query($connect, $query);
         if ($result) {
 //            echo "New record created successfully";

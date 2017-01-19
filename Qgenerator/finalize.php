@@ -20,7 +20,7 @@
     $discount_license_value=$_POST['Discount_license_value'];
     $final_license_value=$_POST['Discount_license_final_value'];
     $discount_3s=$_POST['discount_3s'];
-    $finalDiscountValue=$final_license_value-$discount_3s;
+//    $finalDiscountValue=$final_license_value-$discount_3s;
 
     
     //product_support

@@ -132,12 +132,14 @@
                 $license_cost=round($license_cost);
                 $licenseDiscountValue=round($license_cost*($Discount_license/100));
                 $final_license_cost=round($license_cost-$licenseDiscountValue);
+                $final_license_cost=$final_license_cost-round(get_exchange_rate()*(calculate_3site_licence_edit()*0.5));
                 }else{
                 $license_cost=get_exchange_rate()*(calculate_2site_licence_subscription_edit()+calculate_3site_licence_subscription_edit()+master_server_license_edit());
                 $site_3s_discount=round(get_exchange_rate()*(calculate_3site_licence_subscription_edit()*0.5));
                 $license_cost=round($license_cost);
                 $licenseDiscountValue=round($license_cost*($Discount_license/100));
                 $final_license_cost=round($license_cost-$licenseDiscountValue);
+                $final_license_cost=$final_license_cost-round(get_exchange_rate()*(calculate_3site_licence_subscription_edit()*0.5));
                 }
 //                echo calculate_2site_licence_subscription_edit();
                
@@ -255,7 +257,7 @@
                 </div>
                 <br> </div>
         
-        <form method="post" action="http://quotedev.sanovi.com/finalize_edit.php">
+        <form method="post" action="http://quoteuat.sanovi.com/finalize_edit.php">
             <div class="container" id="license">
                         <div class="row" id='bg_clr1'>
                             <div class="col-xs-5"><b>Item</b></div>
@@ -287,7 +289,7 @@
                         <div class="row">
                             <div class="col-sm-5"><b>-Licensing</b></div>
                             <div class="col-sm-2" style="text-align:right">
-                                <input class="form-control" type="text" id="license_cost" readonly value="<?php echo $license_cost; ?>">
+                                <input class="form-control" type="text" id="license_cost" readonly value="<?php echo $final_license_cost; ?>">
                                 <input type="hidden" id="max_discount" name="Max_Discount" value="<?php echo $_SESSION["Max_Discount"]; ?>">
                             </div>
                             <div class="col-sm-1" style="text-align:right">
@@ -312,7 +314,7 @@
                                         echo $product_cost; ?>">
                                 </div>
                                 <div class="col-sm-1" style="text-align:right">
-                                    <input class="form-control" type="text" tabindex="2" id="discount_product_support" placeholder="%" onblur="calculate_product_support_cost()" name="Discount_product_support" value="<?php  echo $Discount_product_support; ?>">
+                                    <input class="form-control" type="text" tabindex="2" id="discount_product_support" placeholder="%" onblur="calculate_product_support_cost()" name="Discount_product_support" value="<?php echo $discountdeatails["Discount_product_support"]; ?>">
                                 </div>
                                 <div class="col-sm-2" style="text-align:right">
                                     <input class="form-control" readonly type="text" id="discount_product_support_value" name="Discount_product_support_value" value="<?php  echo round($prodDiscountValue); ?>">

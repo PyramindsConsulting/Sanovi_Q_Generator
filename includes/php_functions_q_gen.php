@@ -432,7 +432,7 @@
                     if($question=='Number of SAP HANA Database Nodes on Production'){
                       $value=0;  
                     }else{
-                      $value=$QuestionsAndValues_2s[$j][1];
+                      $value=$QuestionsAndValues_3s[$j][1];
                     }
                     $query="select base_price,question from BasePrices where product_module= '$ProdModule' and question='$question'and country='$Country' and license_type='$license'";
                     $result=mysqli_query($connect,$query);
@@ -440,7 +440,7 @@
                         echo "database query failed";
                     }
                     $row=mysqli_fetch_array($result);
-                    //echo $row['base_price']*$QuestionsAndValues_2s[$j][1]." ".$row['question']."<br>";
+//                    echo $row['base_price']*$QuestionsAndValues_3s[$j][1]." ".$row['question']."<br>";
                     $licence_3s+= $row['base_price']*$value;
                 }
             }
@@ -1380,15 +1380,15 @@
         }
     }
     
-    function saveLicenseHistory($licenseCost,$licenseDiscountValue,$licenseCostAfterDiscount,$productSupoortCost,
+    function saveLicenseHistory($licenseCost,$licenseDiscountValue,$final_license_cost,$productSupoortCost,
                                $prodDiscountValue,$finalSupportCost,$PSCost, $discountValueOnPs,$finalPSCost,$product_training_cost,$product_training_discount_value,$final_product_training_cost,$totalValue){
         include ("../includes/post_value_arrays.php");
         include ("../includes/config.php");
         $license_lht_id=(generateReferenceId()."_1");
-        $finalLicenseCost=$licenseCostAfterDiscount-round(get_exchange_rate()*(calculate_3site_licence()*0.5));
+        $licenseCostAfterDiscount=$licenseCostAfterDiscount+round(get_exchange_rate()*(calculate_3site_licence()*0.5));
         $query="INSERT INTO LicenseHistory (license_lht_id,licenseCost,discountPercentageOnLicense,licenseDiscountValue,licenseCostAfterDiscount,productSupportCost,discountPercentageOnSupport,prodDiscountValue,finalSupportCost,PSCost,discountPercentageOnPS,discountValueOnPs,finalPSCost,trainingCost,discountPercentageOnTraining,trainingDiscountValue,finalTrainingCost,discountPercentageOnBunkerSite,finalLicenseCost,totalValue)
         VALUES ('$license_lht_id','$licenseCost','$Discount_license','$licenseDiscountValue','$licenseCostAfterDiscount','$productSupoortCost','$Discount_product_support','$prodDiscountValue',
-        '$finalSupportCost','$PSCost','$Discount_prof_serv','$discountValueOnPs','$finalPSCost','$product_training_cost','$Discount_product_training','$product_training_discount_value','$final_product_training_cost','50','$finalLicenseCost','$totalValue')";
+        '$finalSupportCost','$PSCost','$Discount_prof_serv','$discountValueOnPs','$finalPSCost','$product_training_cost','$Discount_product_training','$product_training_discount_value','$final_product_training_cost','50','$final_license_cost','$totalValue')";
         $result=mysqli_query($connect, $query);
         if ($result) {
 //            echo "New record created successfully";
@@ -1706,7 +1706,7 @@ function get_approver_name($rep_mg_emailid){
 }
     function updateDiscountValues($refid,$discountlicense,$discount_license_value,$final_license_value,$discount_3s,$product_support_discount,$product_support_discount_value,$product_support_value_after_discount,$professional_service_discount,$professional_service_discount_value,$professional_service_value_after_discount,$product_training_discount,$product_training_discount_value,$product_training_value_after_discount,$final_discount_value,$final_value_after_discount){
        include ("../includes/config.php");
-        $total_license_value=$final_license_value-$discount_3s;
+//        $total_license_value=$final_license_value-$discount_3s;
         $lht_id=$refid."_1";
         $query="UPDATE LicenseHistory set discountPercentageOnLicense='$discountlicense',
         licenseDiscountValue='$discount_license_value', 
@@ -1720,7 +1720,7 @@ function get_approver_name($rep_mg_emailid){
         discountPercentageOnTraining='$product_training_discount',
         trainingDiscountValue='$product_training_discount_value',
         finalTrainingCost='$product_training_value_after_discount',
-        finalLicenseCost='$total_license_value',
+        finalLicenseCost='$final_license_value',
         totalValue='$final_value_after_discount' where license_lht_id='$lht_id'";
         $result=mysqli_query($connect, $query);
         if ($result) {
