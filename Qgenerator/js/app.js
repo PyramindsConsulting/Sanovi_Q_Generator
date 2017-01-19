@@ -1375,8 +1375,8 @@ function valid_product() {
     if (x < 1) {
         document.getElementById("product_support").value = '1';
     }
-    if (x > 7) {
-        document.getElementById("product_support").value = '7';
+    if (x > 10) {
+        document.getElementById("product_support").value = '10';
     }
 }
 

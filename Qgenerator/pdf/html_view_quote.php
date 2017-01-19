@@ -186,7 +186,11 @@ $ProdModule=$customer_details["product_module"];
         <hr>
         <div class="form-group">
             <div class="row">
-                <div class="col-sm-6"> License fee for Perpetual Sanovi Cloud Continuity Module </div>
+                <div class="col-sm-6"><?php if($license=="Perpetual"){  
+                    echo "License fee for Perpetual Sanovi Cloud Continuity Module"; 
+                    }else{
+                    echo "License fee for Subscription Sanovi Cloud Continuity Module";
+            }?></div>
             </div>
         </div>
         <div class="form-group">

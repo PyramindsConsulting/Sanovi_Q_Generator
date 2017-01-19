@@ -129,12 +129,14 @@
                 $license_cost=round($license_cost);
                 $licenseDiscountValue=round($license_cost*($Discount_license/100));
                 $final_license_cost=round($license_cost-$licenseDiscountValue);
+                $final_license_cost=$final_license_cost-round(get_exchange_rate()*(calculate_3site_licence()*0.5));  
                 }else{
                 $license_cost=get_exchange_rate()*(calculate_2site_licence_subscription()+calculate_3site_licence_subscription()+master_server_license());
                 $site_3s_discount=round(get_exchange_rate()*(calculate_3site_licence_subscription()*0.5));
                 $license_cost=round($license_cost);
                 $licenseDiscountValue=round($license_cost*($Discount_license/100));
                 $final_license_cost=round($license_cost-$licenseDiscountValue);
+                $final_license_cost=$final_license_cost-round(get_exchange_rate()*(calculate_3site_licence_subscription()*0.5));
                 }
 //                $3_site_bunker_discount=get_exchange_rate()*(calculate_3site_licence()*0.5 /// calculate_3site_licence_subscription()++master_server_license_subscription() );
 //                $3_site_bunker_discount=round($3_site_bunker_discount);
@@ -172,7 +174,8 @@
                 }else{
                     $totalValue=$final_cost_with_discount-round(get_exchange_rate()*(calculate_3site_licence_subscription()*0.5));
                 }
-                
+//                $finalLicenseCost=$final_license_cost-round(get_exchange_rate()*(calculate_3site_licence()*0.5));
+//                $sitecost=calculate_3site_licence();
                  saveLicenseGeneration();       
                  saveLicenseHistory($license_cost,$licenseDiscountValue,$final_license_cost,$product_cost,$prodDiscountValue,$final_product_cost,$professional_service_cost,$discountValueOnPs,$final_professional_cost,$product_training_cost,$product_training_discount_value,$final_product_training_cost,$totalValue);
                  saveCustomerDetails();
@@ -228,7 +231,7 @@
                 </div>
                 <br> 
         </div>
-        <form method="post" action="http://quotedev.sanovi.com/finalize.php">
+        <form method="post" action="http://quoteuat.sanovi.com/finalize.php">
         <div class="container" id="license">
                         <div class="row" id='bg_clr1'>
                             <div class="col-xs-5"><b>Item</b></div>
@@ -259,7 +262,7 @@
                         <div class="row">
                             <div class="col-sm-5"><b>-Licensing</b></div>
                             <div class="col-sm-2" style="text-align:right">
-                                <input class="form-control" type="text" id="license_cost" readonly value="<?php echo $license_cost; ?>">
+                                <input class="form-control" type="text" id="license_cost" readonly value="<?php echo $final_license_cost; ?>">
                                 <input type="hidden" id="max_discount" name="Max_Discount" value="<?php echo $_SESSION["Max_Discount"]; ?>">
                             </div>
                             <div class="col-sm-1" style="text-align:right">

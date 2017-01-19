@@ -172,8 +172,11 @@ $pdf->ln();
 //$text=str_repeat('License fee for Perpetual Sanovi Cloud Continuity Module',20);
 //$nb=$pdf->WordWrap($text,120);
 //$pdf->MultiCell( 200, 40, $reportSubtitle, 1);
+if($license=="Perpetual"){    
 $pdf->MultiCell(60,5,'License fee for Perpetual Sanovi Cloud Continuity Module',0,'L');
-
+}else{
+$pdf->MultiCell(80,5,'License fee for Subscription Sanovi Cloud Continuity Module',0,'L');
+}
 //LICENSING PRICES & DISCOUNTS
 $pdf->Cell(103,5,'- Licensing',0,0); //
 $licensing=currency_format($lht_data["licenseCost"],$currency);
