@@ -84,7 +84,7 @@
                     $_SESSION['quote_creator_username']=$quote_creator;
                 }else{
                         $approval_assigned_to=approval_assigned_to_qgenerator_edit($ref_Id, $ver_Id);
-                        if($_SESSION["emp_id"]==$approval_assigned_to || $quote_status=="Draft"){
+                        if($_SESSION["emp_id"]==$approval_assigned_to){
                             $quote_creator=find_quote_created_user_quote_edit($ref_Id, $ver_Id);
                             $_SESSION['quote_creator_username']=$quote_creator;
                         }else{

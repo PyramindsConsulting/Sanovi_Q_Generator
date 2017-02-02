@@ -257,7 +257,7 @@
                 </div>
                 <br> </div>
         
-        <form method="post" action="http://quoteuat.sanovi.com/finalize_edit.php">
+        <form method="post" action="http://quotedev.sanovi.com/finalize_edit.php">
             <div class="container" id="license">
                         <div class="row" id='bg_clr1'>
                             <div class="col-xs-5"><b>Item</b></div>
@@ -314,7 +314,7 @@
                                         echo $product_cost; ?>">
                                 </div>
                                 <div class="col-sm-1" style="text-align:right">
-                                    <input class="form-control" type="text" tabindex="2" id="discount_product_support" placeholder="%" onblur="calculate_product_support_cost()" name="Discount_product_support" value="<?php echo $discountdeatails["Discount_product_support"]; ?>">
+                                    <input class="form-control" type="text" tabindex="2" id="discount_product_support" placeholder="%" onblur="calculate_product_support_cost()" name="Discount_product_support" value="<?php  echo $discountdeatails["Discount_product_support"]; ?>">
                                 </div>
                                 <div class="col-sm-2" style="text-align:right">
                                     <input class="form-control" readonly type="text" id="discount_product_support_value" name="Discount_product_support_value" value="<?php  echo round($prodDiscountValue); ?>">
@@ -434,6 +434,8 @@
                             </form>  
    <?php 
                     }else{
+                        $approver_emp_id=$_SESSION["rep_mg_emp_id"];
+                        draft_quoteRequestor_edit($_SESSION['ref_id'],$approver_emp_id,"No");
                ?>
                <br>
                <center style="color:green;"><b>Quote Saved Successfully</b><br> Ref No : <?php echo $_SESSION['ref_id_edit']; ?><br><br>Contact Your Manager for Approval </center>

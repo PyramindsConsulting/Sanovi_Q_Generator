@@ -1764,6 +1764,17 @@ OnPremiseProductTrainingReqd_Prof)
         }
     }
 
+    function draft_quoteRequestor_edit($refid,$approver_emp_id,$annexure_1){
+        include ("../includes/config.php");
+        $query="UPDATE LicenseGeneration set status='Draft',approved_by_emp_id='$approver_emp_id',annexure_1='$annexure_1' where license_reference_id='$refid'";
+        $result=mysqli_query($connect, $query);
+        if ($result) {
+        } else {
+            echo "Update failed_finalized";
+            die();
+        }
+    }
+
     function saveLicenseGeneration_edit_draft(){
         include ("../includes/post_value_array_edit.php");
         include ("../includes/config.php");

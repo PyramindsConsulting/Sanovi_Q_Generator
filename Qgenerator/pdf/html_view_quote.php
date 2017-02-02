@@ -32,14 +32,14 @@ if($_SESSION["userrole"]=="Administrator" || $_SESSION["userrole"]=="Chief Execu
         
     }else{
         if(($logged_in_user!=$quote_created_user) || ($_SESSION["userrole"]=="Quote Requestor")){
-            if($approval_assigned_to=="Draft"){
-            }else{
+//            if($approval_assigned_to=="Draft"){
+//            }else{
                 echo "<center><br>";
                 echo "<img src=\"..\images/Access-Denied.jpg\" width=\"25%\">";
                 echo "<p style=\"color:red;\">You are not authorized to visit this page</p>";
                 echo "</center>";
                 die();
-            }
+//            }
         }
     }
 }
