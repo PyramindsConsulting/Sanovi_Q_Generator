@@ -54,11 +54,11 @@
                                 <!--Approve Quote ICON -->
                                 <?php 
                                     if($_SESSION["userrole"]!="Quote Requestor"){
-                                        if($_SESSION["userrole"]!="Sales Manager"){
+//                                        if($_SESSION["userrole"]!="Sales Manager"){
                                 ?>
                                 <?php $generator_emailid=find_qgenerator_emailid($ref_ids_created_by_users[$i], $versions[$latest_version]); ?>
                                 <a onclick="return confirm('Are you sure to Finalize the Quote !');" href="quote_approve.php?refId=<?php echo $ref_ids_created_by_users[$i]."&verId=".$versions[$latest_version]."&qgenemailid=".$generator_emailid;?>" data-toggle="tooltip" data-placement="top" title="Approve Quote"><span class="glyphicon glyphicon-ok"> </span></a>
-                                <?php } ?>
+                                <?php //} ?>
                                 
                                 <!--View Quote ICON -->
                                     <a href="pdf/html_view_quote.php?refId=<?php echo $ref_ids_created_by_users[$i]."&verId=".$versions[$latest_version];?>" target="_blank" data-toggle="tooltip" data-placement="top" title="View Quote"><span class="glyphicon glyphicon-eye-open"> </span></a>
@@ -70,12 +70,12 @@
                                 
                                 <!--Edit Quote ICON -->
                                 <?php
-                                    if($_SESSION["userrole"]!="Sales Manager"){
+//                                    if($_SESSION["userrole"]!="Sales Manager"){
                                     if($quote_status=="Finalized"){?>
                                         <a onclick="return confirm('Finalized Quote cannot be edited. New version will be created. Confirm to proceed');" href="Q-Generator-Edit.php?refid=<?php echo $ref_ids_created_by_users[$i]."&verid=".$versions[$latest_version];?>" target="_blank" data-toggle="tooltip" data-placement="top" title="Edit Quote"><span class="glyphicon glyphicon-edit"> </span></a>
                                 <?php }else{ ?>
                                         <a href="Q-Generator-Edit.php?refid=<?php echo $ref_ids_created_by_users[$i]."&verid=".$versions[$latest_version];?>" target="_blank" data-toggle="tooltip" data-placement="top" title="Edit Quote"><span class="glyphicon glyphicon-edit"> </span></a>
-                                <?php } } ?>
+                                <?php } //} ?>
 
                                 <!--Download Quote ICON -->
 <!--

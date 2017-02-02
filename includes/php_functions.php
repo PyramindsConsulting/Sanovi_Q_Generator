@@ -53,6 +53,7 @@
                 $_SESSION["userdepartment"]=$row["login_department"];
                 $_SESSION["lastlogin"]=$row["login_lastlogin_ts"];
                 $_SESSION["emailid"]=$row["email_id"];
+                $_SESSION["rep_mg_emp_id"]=$row["reporting_manager"];
                 $_SESSION["sp_discount_percentage"]=$row["sp_discount_percentage"];
                 $query_userrole="SELECT MaxDiscount from UserRoles where UserRole='$user_role'";
                 $result_userrole=mysqli_query($connect, $query_userrole);

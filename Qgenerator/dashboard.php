@@ -112,10 +112,10 @@
                                 <?php } ?>
                                 <?php 
                                     if($_SESSION["userrole"]!="Quote Requestor"){
-                                        if($_SESSION["userrole"]!="Sales Manager"){
+//                                        if($_SESSION["userrole"]!="Sales Manager"){
                                 ?>
                                 <option value='ApprovedQuotes' <?php echo $ApprovedQuotes ?>>Approved Quotes</option>
-                                <?php }} ?>
+                                <?php }//} ?>
                                 
                                 <option value='SearchQuotes' <?php echo $SearchQuotes ?>>Search Quotes</option>
                             </select>
@@ -178,7 +178,7 @@
             <!--            DISPLAY APPROVED QUOTES -->
             <?php
                 if($SelectedView=="ApprovedQuotes"){
-                    if($_SESSION["userrole"]=="Quote Requestor" || $_SESSION["userrole"]=="Sales Manager"){
+                    if($_SESSION["userrole"]=="Quote Requestor"){
                         echo "<center><br>";
                         echo "<img src=\"images/Access-Denied.jpg\" width=\"25%\">";
                         echo "<p style=\"color:red;\">You are not authorized to visit this page</p>";

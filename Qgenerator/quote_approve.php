@@ -58,7 +58,7 @@
                                 $quote_creator=find_quote_created_user_for_approval($ref_id, $ver_id);
                                  
                                 if($_SESSION["userrole"]!="Quote Requestor"){
-                                    if($_SESSION["userrole"]!="Sales Manager"){
+//                                    if($_SESSION["userrole"]!="Sales Manager"){
                                         $quote_validity=is_valid_quote($ref_id, $ver_id); //CHECK THE EXISTANCE OF QUOTE
                                         if($quote_validity=="Quote Not Found" || $quote_validity=="Unknown Database Error! Contact Administrator"){
                                             echo "<center><p style=\"color:red;\"><br>$quote_validity</p></center>";
@@ -83,7 +83,7 @@
                                                 }
                                             }
                                         }
-                                    }
+//                                    }
                                 }
                                 else{
                                     echo "<center><br>";

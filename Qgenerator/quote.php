@@ -231,7 +231,7 @@
                 </div>
                 <br> 
         </div>
-        <form method="post" action="http://quoteuat.sanovi.com/finalize.php">
+        <form method="post" action="http://quotedev.sanovi.com/finalize.php">
         <div class="container" id="license">
                         <div class="row" id='bg_clr1'>
                             <div class="col-xs-5"><b>Item</b></div>
@@ -407,6 +407,8 @@
 
         <?php 
                     }else{
+                        $approver_emp_id=$_SESSION["rep_mg_emp_id"];
+                        draft_quoteRequestor($_SESSION['ref_id'],$approver_emp_id,"No");
                ?>
                 
                <br>

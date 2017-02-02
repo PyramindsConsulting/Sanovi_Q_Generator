@@ -1682,6 +1682,17 @@ function draft($refid,$approver_emp_id,$annexure_1){
         die();
     }
 }
+function draft_quoteRequestor($refid,$approver_emp_id,$annexure_1){
+    include ("../includes/config.php");
+    $query="UPDATE LicenseGeneration set status='Draft',approved_by_emp_id='$approver_emp_id',annexure_1='$annexure_1' where license_reference_id='$refid'";
+    $result=mysqli_query($connect, $query);
+    if ($result) {
+    } else {
+        echo "Update failed_finalized";
+        die();
+    }
+}
+
 function get_approver_emp_id($rep_mg_emailid){
     include ("../includes/config.php");
     $query="SELECT emp_id from users where email_id='$rep_mg_emailid'";
