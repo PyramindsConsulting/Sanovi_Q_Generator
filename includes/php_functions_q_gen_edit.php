@@ -565,7 +565,6 @@
                                 $simpleAppValue+= ($base_price * ($row1['simple_app'])/100);
                             }
                         }
-                      //  echo $simpleAppValue;
                         for($i=$complexApps;$i>0;$i--){
                             if($i>3){    
                                 $query2="select * from LearningFactor where app='4'";
@@ -594,6 +593,7 @@
                             $professional_service_value=$professional_value;
                          }
                         $professional_cost+=$professional_service_value;   
+                        echo $professional_cost."<br>";
                     }
                 }
             

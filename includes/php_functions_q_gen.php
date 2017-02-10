@@ -525,8 +525,8 @@
                 }
                    
             }else{
-                $Qty_2s_3s=remove_null($temparray2);
-                $QuestionsAndValues_Prof=remove_nulls_in_array($tempArray);
+                $Qty_2s_3s=remove_null($Qty_2s_3s);
+                $QuestionsAndValues_Prof=remove_nulls_in_array($QuestionsAndValues_Prof);
                 $QuestionsAndValues_Prof=Get_questions_to_license($QuestionsAndValues_Prof,$Qty_2s_3s);
                 $count=count($QuestionsAndValues_Prof);
                 for($j=0;$j<=$count;$j++){
@@ -537,7 +537,7 @@
 //                        echo $simpleApps;//Calculating simple apps at 70% of total
                     $complexApps=$qty-$simpleApps; //Calculating complex apps at 30% of total
 //                        echo $complexApps;//Calculating simple apps at 70% of total
-                    $query="select * from BasePrices where product_module='$ProdModule' and question='$question1' and product_support_questions='$question2' and country='$Country'";
+                    $query="select * from BasePrices where product_module= '$ProdModule' and question='$question1' and country='$Country' and license_type='$license'";
                     $result=mysqli_query($connect,$query);
                     if(!$result){
                         echo "database query failed";
@@ -597,7 +597,7 @@
                     }else{
                         $professional_service_value=$professional_value;
                      }
-                    $professional_cost+=$professional_service_value;   
+                    $professional_cost+=$professional_service_value;
                 }
             }
             

@@ -148,6 +148,7 @@
                 
                 //professional services
                 $professional_service_cost=round((calculate_prof_services_edit()+master_server_prof_edit()+calculate_premise_product_training_edit())*get_exchange_rate());
+                echo $professional_service_cost;
                 $discountValueOnPs= round($professional_service_cost* ($Discount_prof_serv/100));  
                 $final_professional_cost=$professional_service_cost-$discountValueOnPs;
                 
