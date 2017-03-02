@@ -182,7 +182,7 @@
                      
                 }
             }
-            return $License_cost;
+            return $License_cost*$ProdSupport;
         }
     }
 
@@ -338,7 +338,7 @@
                      
                 }
             }
-            return $License_cost;
+            return $License_cost*$ProdSupport;
         }
     }
 
@@ -537,15 +537,16 @@
 //                        echo $simpleApps;//Calculating simple apps at 70% of total
                     $complexApps=$qty-$simpleApps; //Calculating complex apps at 30% of total
 //                        echo $complexApps;//Calculating simple apps at 70% of total
-                    $query="select * from BasePrices where product_module= '$ProdModule' and question='$question1' and country='$Country' and license_type='$license'";
+                    $query="select * from BasePrices where product_module= '$ProdModule' and question='$question1' and country='$Country'";
                     $result=mysqli_query($connect,$query);
+//                    echo $query;
                     if(!$result){
                         echo "database query failed";
                         die();
                     }
                     $row=mysqli_fetch_array($result);
+//                    print_r($QuestionsAndValues_Prof);
                     $base_price=$row['base_price'];
-                //    echo $base_price;
                     $simpleAppValue=0;
                     $complexAppValue=0;
                     for($i=$simpleApps;$i>0;$i--){

@@ -126,7 +126,6 @@
                 include "../includes/mainmenu-mobile.php";
                 include "../includes/mainmenu.php";
                 //license cost values
-//                echo $license;
                 if($license=="Perpetual"){
                 $license_cost=get_exchange_rate()*(calculate_3site_licence_edit()+calculate_2site_licence_edit()+master_server_license_edit());
                 $license_cost=round($license_cost);
@@ -134,21 +133,16 @@
                 $final_license_cost=round($license_cost-$licenseDiscountValue);
                 $final_license_cost=$final_license_cost-round(get_exchange_rate()*(calculate_3site_licence_edit()*0.5));
                 }else{
-                $license_cost=get_exchange_rate()*(calculate_2site_licence_subscription_edit()+calculate_3site_licence_subscription_edit()+master_server_license_edit());
+                $license_cost=get_exchange_rate()*(calculate_2site_licence_subscription_edit()+calculate_3site_licence_subscription_edit()+(master_server_license_edit()*$ProdSupport));
                 $site_3s_discount=round(get_exchange_rate()*(calculate_3site_licence_subscription_edit()*0.5));
                 $license_cost=round($license_cost);
                 $licenseDiscountValue=round($license_cost*($Discount_license/100));
                 $final_license_cost=round($license_cost-$licenseDiscountValue);
                 $final_license_cost=$final_license_cost-round(get_exchange_rate()*(calculate_3site_licence_subscription_edit()*0.5));
                 }
-//                echo calculate_2site_licence_subscription_edit();
-               
-//                $3_site_bunker_discount=get_exchange_rate()*(calculate_3site_licence()*0.5);
-//                $3_site_bunker_discount=round($3_site_bunker_discount);
                 
                 //professional services
                 $professional_service_cost=round((calculate_prof_services_edit()+master_server_prof_edit()+calculate_premise_product_training_edit())*get_exchange_rate());
-                echo $professional_service_cost;
                 $discountValueOnPs= round($professional_service_cost* ($Discount_prof_serv/100));  
                 $final_professional_cost=$professional_service_cost-$discountValueOnPs;
                 
