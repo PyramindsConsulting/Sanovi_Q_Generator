@@ -183,7 +183,7 @@
                      
                 }
             }
-            return $License_cost;
+            return $License_cost*$ProdSupport;
         }
     }
     
@@ -339,7 +339,7 @@
                      
                 }
             }
-            return $License_cost;
+            return $License_cost*$ProdSupport;
         }
     }
     function master_server_license_edit(){
@@ -533,7 +533,7 @@
 //                        echo $simpleApps;//Calculating simple apps at 70% of total
                         $complexApps=$qty-$simpleApps; //Calculating complex apps at 30% of total
 //                        echo $complexApps;//Calculating simple apps at 70% of total
-                        $query="select * from BasePrices where product_module= '$ProdModule' and question='$question1' and country='$Country' and license_type='$license'";
+                        $query="select * from BasePrices where product_module= '$ProdModule' and question='$question1' and country='$Country'";
                         $result=mysqli_query($connect,$query);
                         if(!$result){
                             echo "database query failed";
@@ -593,7 +593,6 @@
                             $professional_service_value=$professional_value;
                          }
                         $professional_cost+=$professional_service_value;   
-                        echo $professional_cost."<br>";
                     }
                 }
             

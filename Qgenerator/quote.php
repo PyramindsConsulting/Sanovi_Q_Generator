@@ -131,22 +131,21 @@
                 $final_license_cost=round($license_cost-$licenseDiscountValue);
                 $final_license_cost=$final_license_cost-round(get_exchange_rate()*(calculate_3site_licence()*0.5));  
                 }else{
-                $license_cost=get_exchange_rate()*(calculate_2site_licence_subscription()+calculate_3site_licence_subscription()+master_server_license());
+                $license_cost=get_exchange_rate()*(calculate_2site_licence_subscription()+calculate_3site_licence_subscription()+(master_server_license()*$ProdSupport));
                 $site_3s_discount=round(get_exchange_rate()*(calculate_3site_licence_subscription()*0.5));
                 $license_cost=round($license_cost);
                 $licenseDiscountValue=round($license_cost*($Discount_license/100));
                 $final_license_cost=round($license_cost-$licenseDiscountValue);
                 $final_license_cost=$final_license_cost-round(get_exchange_rate()*(calculate_3site_licence_subscription()*0.5));
                 }
-//                $3_site_bunker_discount=get_exchange_rate()*(calculate_3site_licence()*0.5 /// calculate_3site_licence_subscription()++master_server_license_subscription() );
-//                $3_site_bunker_discount=round($3_site_bunker_discount);
                 
                 //professional services
                 $professional_service_cost=round((calculate_prof_services()+master_server_prof()+calculate_premise_product_training())*get_exchange_rate());
                 $discountValueOnPs= round($professional_service_cost* ($Discount_prof_serv/100));  
                 $final_professional_cost=$professional_service_cost-$discountValueOnPs;
                 
-                
+//                echo calculate_prof_services();
+                   
                 //product support
                 if($license=="Perpetual"){
                 $product_cost=round((calculate_product_support()+master_server_support())*get_exchange_rate());
