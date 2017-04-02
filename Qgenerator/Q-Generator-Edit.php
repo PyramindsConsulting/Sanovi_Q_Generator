@@ -303,7 +303,9 @@
                                                     <select name="Mode_of_sale" id="mode_of_sale" class="form-control" onchange="changemodeofquestions()">
                                                         <option value="First Time Sale" <?php echo $FST; ?>>First Time Sale</option>
                                                         <option value="Upgrade Sale" <?php echo $US; ?>>Upgrade Sale</option>
-                                                        <option value="Support Only Sale" <?php echo $SOS; ?>>Support Only Sale</option>
+<!--                                                        //Incase of enable all questions remove the below comments
+<!--                                                        <option value="Support Only Sale" <?php //echo $SOS; ?>>Support Only Sale</option>-->
+<!--                                                //Incase of enable all questions remove the above comments and remove this line -->
                                                     </select><span id="drop1" style="color:red; font-size:15px; display:none">Please select an option</span> </div>
                                             </div>
                                         </div>
@@ -331,8 +333,12 @@
                                                     ?>
                                                     <select name="Product_module" id="product_module" class="form-control">
                                                         <option value="DR Lifecycle Bundle" <?php echo $DRLB; ?>>DR Lifecycle Bundle</option>
-                                                        <option value="Drill Manager" <?php echo $DM; ?>>Drill Manager</option>
-                                                        <option value="Monitor/Recovery Bundle" <?php echo $MRB; ?>>Monitor/Recovery Bundle</option>
+<!--                                                        //Incase of enable all questions remove the below comments
+<!--
+                                                        <option value="Drill Manager" <?php //echo $DM; ?>>Drill Manager</option>
+                                                        <option value="Monitor/Recovery Bundle" <?php //echo $MRB; ?>>Monitor/Recovery Bundle</option>
+-->
+<!--                                                        //Incase of enable all questions remove the above comments and remove this line -->
                                                     </select><span id="drop2" style="color:red; font-size:15px; display:none">Please select an option</span> </div>
                                             </div>
                                         </div>
@@ -385,80 +391,80 @@
                                                                 </div><br>";
                                                         }
                                                         
-                                                        
-                                                        $query3 = "select * from QGeneratorQuestions where category='2-Site_normal_set2' limit 0,20";
-                                                        $set2=$connect->query($query3);
-                                                        echo "<div id='2_site_panel' class='panel panel-default' style='padding-top:20px;'>";
-                                                        while($row = $set2->fetch_assoc()) {
-                                                                 
-                                                          echo "<div class='row'>
-                                                                    <div class='col-sm-1'>
-                                                                    </div>
-                                                                    <div class='col-sm-10'> 
-                                                                        <div class='form-group' id='".$row['name']."'> 
-                                                                            <div class='col-sm-8'>" . $row["question"] . "</div>
-                                                                            <div class='col-sm-4'>
-                                                                                <input type='hidden' value='".$row["question"]."' name='".$row['id']."'>
-                                                                                <input class='form-control' type='text' id='".$row['id']."' name='".$row['name']."' placeholder='0'
-                                                                                value='".$quote_values[$row['name']]."'
-                                                                                style='width:100%'>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class='col-sm-1'>
-                                                                    </div>
-                                                                </div><br>";
-                                                        }
-                                                        echo "</div>";
-                                                         echo '<div class="row"><button class="btn" type="button" id="less1" style="float:right ;margin-right:15px" >Less</button>';
-                                                echo '<button type="button" class="btn" id="button1" style="float:right ;margin-right:15px" >More</button></div><br>';
-                                                        $query2 = "select * from QGeneratorQuestions where category='2-Site_advanced' limit 0,10";
-                                                        $advanced_replication= $connect->query($query2);
-                                                        if ($advanced_replication->num_rows > 0) {
-                                                        echo"<div class='row'>
-                                                                <div class='col-sm-12'>
-                                                                <div class='form-group addPersonPanel'>
-                                                            <div class='panel panel-default'>
-                                                            <div class='panel-heading'>
-                                                                <label class='radio-inline'>";
-                                                            if(($quote_values['prod_servers_2S']!=0)||($quote_values['virtual_prod_2S']!=0))
-                                                                    {
-                                                                        echo "<input type='checkbox' checked class='licence' id='advanced_replication' onclick='displayAdvanced()' >&nbsp;&nbsp; Any Servers On Advanced Replication
-                                                                </label>";
-                                                                    }else{
-                                                                    echo "<input type='checkbox' class='licence' id='advanced_replication' onclick='displayAdvanced()' >&nbsp;&nbsp; Any Servers On Advanced Replication
-                                                                </label>";
-                                                                }
-                                                            echo "</div>
-                                                            <div class='panel-body collapse' id='inline_table'>";
-                                                             while($row = $advanced_replication->fetch_assoc()) {
-                                                                 
-                                                          echo "<div class='row'>
-                                                                    <div class='col-sm-12'> 
-                                                                        <div class='form-group' id='".$row['name']."'> 
-                                                                            <div class='col-sm-8'>" . $row["question"] . "</div>
-                                                                            
-                                                                            <div class='col-sm-4'>
-                                                                                <div class='input-group' id='".$row['name']."'>
-                                                                                <input type='hidden' value='".$row["question"]."' name='".$row['id']."'>
-                                                                                <input class='form-control' type='text' id='".$row['id']."' name='".$row['name']."' placeholder='0' value='".$quote_values[$row['name']]."' style='width:100%' onblur='correctValuesEnteredIn2s_vm()'>
-                                                                                <span class='input-group-btn'>
-                                                                                    <button class='btn btn-secondary' type='button' id='".$row['addon']."'>0</button>
-                                                                                </span>
-                                                                                </div> 
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                </div><br>";
-                                                        }
-                                                            echo "<span id='advancedCheck' style='color:red;font-size:15px;display:none'>Add VM Imges,BM Win/Lin Datas and Bm Unix Datas to select Advanced replication </span>";
-                                                             echo "</div></div></div></div>
-                                                             </div>";
-                                                        }else{
-                                                            echo "0 results";
-                                                        }
-                                               
+                                                        //Incase of enable all questions remove the below comments
+//                                                        $query3 = "select * from QGeneratorQuestions where category='2-Site_normal_set2' limit 0,20";
+//                                                        $set2=$connect->query($query3);
+//                                                        echo "<div id='2_site_panel' class='panel panel-default' style='padding-top:20px;'>";
+//                                                        while($row = $set2->fetch_assoc()) {
+//                                                                 
+//                                                          echo "<div class='row'>
+//                                                                    <div class='col-sm-1'>
+//                                                                    </div>
+//                                                                    <div class='col-sm-10'> 
+//                                                                        <div class='form-group' id='".$row['name']."'> 
+//                                                                            <div class='col-sm-8'>" . $row["question"] . "</div>
+//                                                                            <div class='col-sm-4'>
+//                                                                                <input type='hidden' value='".$row["question"]."' name='".$row['id']."'>
+//                                                                                <input class='form-control' type='text' id='".$row['id']."' name='".$row['name']."' placeholder='0'
+//                                                                                value='".$quote_values[$row['name']]."'
+//                                                                                style='width:100%'>
+//                                                                            </div>
+//                                                                        </div>
+//                                                                    </div>
+//                                                                    <div class='col-sm-1'>
+//                                                                    </div>
+//                                                                </div><br>";
+//                                                        }
+//                                                        echo "</div>";
+//                                                         echo '<div class="row"><button class="btn" type="button" id="less1" style="float:right ;margin-right:15px" >Less</button>';
+//                                                echo '<button type="button" class="btn" id="button1" style="float:right ;margin-right:15px" >More</button></div><br>';
+//                                                        $query2 = "select * from QGeneratorQuestions where category='2-Site_advanced' limit 0,10";
+//                                                        $advanced_replication= $connect->query($query2);
+//                                                        if ($advanced_replication->num_rows > 0) {
+//                                                        echo"<div class='row'>
+//                                                                <div class='col-sm-12'>
+//                                                                <div class='form-group addPersonPanel'>
+//                                                            <div class='panel panel-default'>
+//                                                            <div class='panel-heading'>
+//                                                                <label class='radio-inline'>";
+//                                                            if(($quote_values['prod_servers_2S']!=0)||($quote_values['virtual_prod_2S']!=0))
+//                                                                    {
+//                                                                        echo "<input type='checkbox' checked class='licence' id='advanced_replication' onclick='displayAdvanced()' >&nbsp;&nbsp; Any Servers On Advanced Replication
+//                                                                </label>";
+//                                                                    }else{
+//                                                                    echo "<input type='checkbox' class='licence' id='advanced_replication' onclick='displayAdvanced()' >&nbsp;&nbsp; Any Servers On Advanced Replication
+//                                                                </label>";
+//                                                                }
+//                                                            echo "</div>
+//                                                            <div class='panel-body collapse' id='inline_table'>";
+//                                                             while($row = $advanced_replication->fetch_assoc()) {
+//                                                                 
+//                                                          echo "<div class='row'>
+//                                                                    <div class='col-sm-12'> 
+//                                                                        <div class='form-group' id='".$row['name']."'> 
+//                                                                            <div class='col-sm-8'>" . $row["question"] . "</div>
+//                                                                            
+//                                                                            <div class='col-sm-4'>
+//                                                                                <div class='input-group' id='".$row['name']."'>
+//                                                                                <input type='hidden' value='".$row["question"]."' name='".$row['id']."'>
+//                                                                                <input class='form-control' type='text' id='".$row['id']."' name='".$row['name']."' placeholder='0' value='".$quote_values[$row['name']]."' style='width:100%' onblur='correctValuesEnteredIn2s_vm()'>
+//                                                                                <span class='input-group-btn'>
+//                                                                                    <button class='btn btn-secondary' type='button' id='".$row['addon']."'>0</button>
+//                                                                                </span>
+//                                                                                </div> 
+//                                                                            </div>
+//                                                                        </div>
+//                                                                    </div>
+//                                                                    
+//                                                                </div><br>";
+//                                                        }
+//                                                            echo "<span id='advancedCheck' style='color:red;font-size:15px;display:none'>Add VM Imges,BM Win/Lin Datas and Bm Unix Datas to select Advanced replication </span>";
+//                                                             echo "</div></div></div></div>
+//                                                             </div>";
+//                                                        }else{
+//                                                            echo "0 results";
+//                                                        }
+                                               //Incase of enable all questions remove the above comments and remove this line 
                                                 echo "           </div>
                                                             </div>
                                                         </div>";
@@ -521,76 +527,76 @@
                                                     </div><br>"; 
                                             }
                                             
-                                                        
-                                                        $query3 = "select * from QGeneratorQuestions where category='3-Site_normal_set2' limit 0,20";
-                                                        $set2=$connect->query($query3);
-                                                        echo "<div id='3_site_panel' class='panel panel-default' style='padding-top:20px;'>"; 
-                                                        while($row = $set2->fetch_assoc()) {
-                                                                 
-                                                          echo "<div class='row'>
-                                                                    <div class='col-sm-12'> 
-                                                                        <div class='form-group' id='".$row['name']."'> 
-                                                                            <div class='col-sm-8'>" . $row["question"] . "</div>
-                                                                            <div class='col-sm-4'>
-                                                                                <input type='hidden' value='".$row["question"]."' name='".$row['id']."'>
-                                                                                <input class='form-control' type='text' id='".$row['id']."' name='".$row['name']."' placeholder='0' 
-                                                                                value='".$quote_values[$row['name']]."'
-                                                                                style='width:100%'>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div><br>";
-                                                        }
-                                                        echo "</div>";
-                                            echo '<div class="row"><button class="btn" type="button" id="button2" style="float:right ;margin-right:15px">More</button>';
-                                echo '<button class="btn" type="button" id="less2" style="float:right ;margin-right:15px" >Less</button></div><br>';
-                                                        $query2 = "select * from QGeneratorQuestions where category='3-Site_advanced' limit 0,10";
-                                                        $advanced_replication= $connect->query($query2);
-                                                        if ($advanced_replication->num_rows > 0) {
-                                                        echo"<div class='row'>
-                                                                <div class='col-sm-12'>
-                                                                    <div class='form-group addPersonPanel' id='personalpanel'>
-                                                                        <div class='panel panel-default'>
-                                                                            <div class='panel-heading'>
-                                                                                <label class='radio-inline'>";
-                                                                                if(($quote_values['prod_servers_3S']!=0)||$quote_values['virtual_prod_3S']!=0){
-                                                                                    echo "<input type='checkbox' checked class='licence' id='advanced_replication_3s' onclick='displayAdvance_3s()'>&nbsp;&nbsp; Any Servers On Advanced Replication
-                                                                                </label>" ;
-                                                                                }else{
-                                                                                    echo "<input type='checkbox' class='licence' id='advanced_replication_3s' onclick='displayAdvance_3s()'>&nbsp;&nbsp; Any Servers On Advanced Replication
-                                                                                </label>" ;
-                                                                                }
-                                                                            echo "</div>
-                                                                            <div class='panel-body collapse' id='inline_table1'>";
-                                                                            while($row = $advanced_replication->fetch_assoc()) {
-                                                                 
-                                                                            echo "<div class='row'>
-                                                                                    <div class='col-sm-12'> 
-                                                                                        <div class='form-group' id='".$row['name']."'> 
-                                                                                            <div class='col-sm-8'>" . $row["question"] . "</div>
-                                                                                            <div class='col-sm-4'>
-                                                                                            <div class='input-group' id='".$row['name']."'>
-                                                                                            <input type='hidden' value='".$row["question"]."' name='".$row['id']."'>
-                                                                                            <input class='form-control' type='text' id='".$row['id']."' name='".$row['name']."' placeholder='0' value='".$quote_values[$row['name']]."' style='width:100%'  onblur='correctValuesEnteredIn3s_vm()'>
-                                                                                            <span class='input-group-btn'>
-                                                                                                <button class='btn btn-secondary' type='button' id='".$row['addon']."'>0</button>
-                                                                                            </span>
-                                                                                            </div> 
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div><br>";
-                                                                            } 
-                                                            echo "<span id='advancedCheck_3s' style='color:red;font-size:15px;display:none'>Add VM Imges,BM Win/Lin Datas and Bm Unix Datas to select Advanced replication </span>";
-                                                                        echo "</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>";
-                                                        }else{
-                                                            echo "0 results";
-                                                        }
-                                
+                                            //Incase of enable all questions remove the below comments            
+//                                                        $query3 = "select * from QGeneratorQuestions where category='3-Site_normal_set2' limit 0,20";
+//                                                        $set2=$connect->query($query3);
+//                                                        echo "<div id='3_site_panel' class='panel panel-default' style='padding-top:20px;'>"; 
+//                                                        while($row = $set2->fetch_assoc()) {
+//                                                                 
+//                                                          echo "<div class='row'>
+//                                                                    <div class='col-sm-12'> 
+//                                                                        <div class='form-group' id='".$row['name']."'> 
+//                                                                            <div class='col-sm-8'>" . $row["question"] . "</div>
+//                                                                            <div class='col-sm-4'>
+//                                                                                <input type='hidden' value='".$row["question"]."' name='".$row['id']."'>
+//                                                                                <input class='form-control' type='text' id='".$row['id']."' name='".$row['name']."' placeholder='0' 
+//                                                                                value='".$quote_values[$row['name']]."'
+//                                                                                style='width:100%'>
+//                                                                            </div>
+//                                                                        </div>
+//                                                                    </div>
+//                                                                </div><br>";
+//                                                        }
+//                                                        echo "</div>";
+//                                            echo '<div class="row"><button class="btn" type="button" id="button2" style="float:right ;margin-right:15px">More</button>';
+//                                echo '<button class="btn" type="button" id="less2" style="float:right ;margin-right:15px" >Less</button></div><br>';
+//                                                        $query2 = "select * from QGeneratorQuestions where category='3-Site_advanced' limit 0,10";
+//                                                        $advanced_replication= $connect->query($query2);
+//                                                        if ($advanced_replication->num_rows > 0) {
+//                                                        echo"<div class='row'>
+//                                                                <div class='col-sm-12'>
+//                                                                    <div class='form-group addPersonPanel' id='personalpanel'>
+//                                                                        <div class='panel panel-default'>
+//                                                                            <div class='panel-heading'>
+//                                                                                <label class='radio-inline'>";
+//                                                                                if(($quote_values['prod_servers_3S']!=0)||$quote_values['virtual_prod_3S']!=0){
+//                                                                                    echo "<input type='checkbox' checked class='licence' id='advanced_replication_3s' onclick='displayAdvance_3s()'>&nbsp;&nbsp; Any Servers On Advanced Replication
+//                                                                                </label>" ;
+//                                                                                }else{
+//                                                                                    echo "<input type='checkbox' class='licence' id='advanced_replication_3s' onclick='displayAdvance_3s()'>&nbsp;&nbsp; Any Servers On Advanced Replication
+//                                                                                </label>" ;
+//                                                                                }
+//                                                                            echo "</div>
+//                                                                            <div class='panel-body collapse' id='inline_table1'>";
+//                                                                            while($row = $advanced_replication->fetch_assoc()) {
+//                                                                 
+//                                                                            echo "<div class='row'>
+//                                                                                    <div class='col-sm-12'> 
+//                                                                                        <div class='form-group' id='".$row['name']."'> 
+//                                                                                            <div class='col-sm-8'>" . $row["question"] . "</div>
+//                                                                                            <div class='col-sm-4'>
+//                                                                                            <div class='input-group' id='".$row['name']."'>
+//                                                                                            <input type='hidden' value='".$row["question"]."' name='".$row['id']."'>
+//                                                                                            <input class='form-control' type='text' id='".$row['id']."' name='".$row['name']."' placeholder='0' value='".$quote_values[$row['name']]."' style='width:100%'  onblur='correctValuesEnteredIn3s_vm()'>
+//                                                                                            <span class='input-group-btn'>
+//                                                                                                <button class='btn btn-secondary' type='button' id='".$row['addon']."'>0</button>
+//                                                                                            </span>
+//                                                                                            </div> 
+//                                                                                            </div>
+//                                                                                        </div>
+//                                                                                    </div>
+//                                                                                </div><br>";
+//                                                                            } 
+//                                                            echo "<span id='advancedCheck_3s' style='color:red;font-size:15px;display:none'>Add VM Imges,BM Win/Lin Datas and Bm Unix Datas to select Advanced replication </span>";
+//                                                                        echo "</div>
+//                                                                        </div>
+//                                                                    </div>
+//                                                                </div>
+//                                                            </div>";
+//                                                        }else{
+//                                                            echo "0 results";
+//                                                        }
+                                //Incase of enable all questions remove the above comments and remove this line 
                                 echo "</div></div></div>";
                                 } else {
                                      echo "0 results";
@@ -687,9 +693,7 @@
                                                             <label class='radio-inline'>
                                                                 <input  id='On-site' type='radio' name='Prof_Services_type' " .$Prof_Type_Onsite." value='On-site'>
                                                             On-site</label>
-                                                            <label class='radio-inline'>
-                                                                <input  id='Remote' type='radio' name='Prof_Services_type' value='Remote' ".$Prof_Type_Remote.">
-                                                            Remote</label>
+                                                           
                                                         </div>
                                                 </div>
                                         </div>
@@ -715,101 +719,101 @@
                                 }
                                 echo "</div>";
                                 
-                                                        
-                            $query3 = "select * from QGeneratorQuestions where category='Prof-Services_normal_set2' limit 0,20";
-                            $set2=$connect->query($query3);
-                            echo "<div id='prof_panel' class='panel panel-default' style='padding-top:20px;'>";
-                            while($row = $set2->fetch_assoc()) {
-
-                              echo "<div class='row'>
-                                        
-                                        <div class='col-sm-12'> 
-                                            <div class='form-group' id='".$row['name']."'> 
-                                                <div class='col-sm-8'>" . $row["question"] . "</div>
-                                                <div class='col-sm-4'>
-                                                <div class='input-group'>
-                                                        <input type='hidden' value='".$row["question"]."' name='".$row['id']."'>
-                                                        <input class='form-control' class='form-control' type='text' id='" .$row['id']."' name='" .$row['name']."' placeholder='0' value='".$quote_values[$row['name']]."'  style='width:100%'>
-                                                        <span class='input-group-btn'>
-                                                                    <button class='btn btn-secondary' type='button' id='".$row['addon']."'>0</button>
-                                                        </span>
-                                                </div>" . "
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div><br>";
-                            }
-                            echo "<div class='row'>
-                                    <div class='col-sm-12'>
-                                        <div class='form-group'>
-                                            <div class='col-sm-8'>
-                                                Is Customer On-Premise Product Training Required?
-                                            </div>
-                                            <div class='col-sm-4'>
-                                                <div class='dropdown'>
-                                                    <select id='premise_product_training' class='form-control' name='Premise_product_training'>";
-                                                    if($quote_values['Prof_PremiseProductTraining']=="Yes"){
-                                                        echo "<option value='Yes' selected >Yes</option>
-                                                        <option value='No'>No</option>";
-                                                    }else if($quote_values['Prof_PremiseProductTraining']=="No"){
-                                                        echo "<option value='Yes'>Yes</option>
-                                                        <option value='No' selected >No</option>";
-                                                    }
-                                                    echo "</select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div></div><br>";
-                            echo '<div class="row"><button class="btn" type="button" id="button3" style="float:right ;margin-right:15px" >More</button>';
-                            echo '<button type="button" class="btn" id="less3" style="float:right ;margin-right:15px" >Less</button></div><br>';
-                            $query2 = "select * from QGeneratorQuestions where category='Prof-Services_advanced' limit 0,10";
-                            $advanced_replication= $connect->query($query2);
-                            if ($advanced_replication->num_rows > 0) {
-                            echo"<div class='row'>
-                                    <div class='col-sm-12'>
-                                        <div class='form-group addPersonPanel' id='personalpanel1'>
-                                            <div class='panel panel-default'>
-                                                <div class='panel-heading'>
-                                                    <label class='radio-inline'>";
-                                                        if(($quote_values['Prof_Services_prod_servers']!="0")||($quote_values['Prof_Services_virtual_prod']!="0")){
-                                                        echo "<input type='checkbox' checked class='licence' id='advanced_replication_prof'onclick='dispalyAdvance_prof()' >&nbsp;&nbsp;Any Professional Services for Advanced Replication
-                                                    </label>";
-                                                        }else {
-                                                           echo "<input type='checkbox' class='licence' id='advanced_replication_prof'onclick='dispalyAdvance_prof()' >&nbsp;&nbsp;Any Professional Services for Advanced Replication
-                                                    </label>"; 
-                                                        }
-                                                echo "</div>
-                                                <div class='panel-body collapse' id='inline_table2'>";
-                                                while($row = $advanced_replication->fetch_assoc()) {
-
-                                                echo "<div class='row'>
-                                                        <div class='col-sm-12'> 
-                                                            <div class='form-group' id='".$row['name']."'> 
-                                                                <div class='col-sm-8'>" . $row["question"] . "</div>
-                                                                <div class='col-sm-4' >
-                                                                <div class='input-group' id='".$row['name']."'>
-                                                                        <input type='hidden' value='".$row["question"]."' name='".$row['id']."'>
-                                                                        <input class='form-control' class='form-control' type='text' id='" .$row['id']."' name='" .$row['name']."' onblur='correctValuesEnteredInprof()' placeholder='0' id='value' value='".$quote_values[$row['name']]."'   style='width:100%'>
-                                                                        <span class='input-group-btn'>
-                                                                                    <button class='btn btn-secondary' type='button' id='".$row['addon']."'>0</button>
-                                                                                    </span>
-                                                                </div>" . "
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div><br>";
-                                                }
-                                echo "<span id='advancedCheck_Prof' style='color:red;font-size:15px;display:none'>Add VM Imges,BM Win/Lin Datas and Bm Unix Datas to select Advanced replication </span>";
-                                            echo "</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>";
-                            }else{
-                                echo "0 results";
-                            }
-                            
+                            //Incase of enable all questions remove the below comments                            
+//                            $query3 = "select * from QGeneratorQuestions where category='Prof-Services_normal_set2' limit 0,20";
+//                            $set2=$connect->query($query3);
+//                            echo "<div id='prof_panel' class='panel panel-default' style='padding-top:20px;'>";
+//                            while($row = $set2->fetch_assoc()) {
+//
+//                              echo "<div class='row'>
+//                                        
+//                                        <div class='col-sm-12'> 
+//                                            <div class='form-group' id='".$row['name']."'> 
+//                                                <div class='col-sm-8'>" . $row["question"] . "</div>
+//                                                <div class='col-sm-4'>
+//                                                <div class='input-group'>
+//                                                        <input type='hidden' value='".$row["question"]."' name='".$row['id']."'>
+//                                                        <input class='form-control' class='form-control' type='text' id='" .$row['id']."' name='" .$row['name']."' placeholder='0' value='".$quote_values[$row['name']]."'  style='width:100%'>
+//                                                        <span class='input-group-btn'>
+//                                                                    <button class='btn btn-secondary' type='button' id='".$row['addon']."'>0</button>
+//                                                        </span>
+//                                                </div>" . "
+//                                                </div>
+//                                            </div>
+//                                        </div>
+//                                    </div><br>";
+//                            }
+//                            echo "<div class='row'>
+//                                    <div class='col-sm-12'>
+//                                        <div class='form-group'>
+//                                            <div class='col-sm-8'>
+//                                                Is Customer On-Premise Product Training Required?
+//                                            </div>
+//                                            <div class='col-sm-4'>
+//                                                <div class='dropdown'>
+//                                                    <select id='premise_product_training' class='form-control' name='Premise_product_training'>";
+//                                                    if($quote_values['Prof_PremiseProductTraining']=="Yes"){
+//                                                        echo "<option value='Yes' selected >Yes</option>
+//                                                        <option value='No'>No</option>";
+//                                                    }else if($quote_values['Prof_PremiseProductTraining']=="No"){
+//                                                        echo "<option value='Yes'>Yes</option>
+//                                                        <option value='No' selected >No</option>";
+//                                                    }
+//                                                    echo "</select>
+//                                                </div>
+//                                            </div>
+//                                        </div>
+//                                    </div>
+//                                </div></div><br>";
+//                            echo '<div class="row"><button class="btn" type="button" id="button3" style="float:right ;margin-right:15px" >More</button>';
+//                            echo '<button type="button" class="btn" id="less3" style="float:right ;margin-right:15px" >Less</button></div><br>';
+//                            $query2 = "select * from QGeneratorQuestions where category='Prof-Services_advanced' limit 0,10";
+//                            $advanced_replication= $connect->query($query2);
+//                            if ($advanced_replication->num_rows > 0) {
+//                            echo"<div class='row'>
+//                                    <div class='col-sm-12'>
+//                                        <div class='form-group addPersonPanel' id='personalpanel1'>
+//                                            <div class='panel panel-default'>
+//                                                <div class='panel-heading'>
+//                                                    <label class='radio-inline'>";
+//                                                        if(($quote_values['Prof_Services_prod_servers']!="0")||($quote_values['Prof_Services_virtual_prod']!="0")){
+//                                                        echo "<input type='checkbox' checked class='licence' id='advanced_replication_prof'onclick='dispalyAdvance_prof()' >&nbsp;&nbsp;Any Professional Services for Advanced Replication
+//                                                    </label>";
+//                                                        }else {
+//                                                           echo "<input type='checkbox' class='licence' id='advanced_replication_prof'onclick='dispalyAdvance_prof()' >&nbsp;&nbsp;Any Professional Services for Advanced Replication
+//                                                    </label>"; 
+//                                                        }
+//                                                echo "</div>
+//                                                <div class='panel-body collapse' id='inline_table2'>";
+//                                                while($row = $advanced_replication->fetch_assoc()) {
+//
+//                                                echo "<div class='row'>
+//                                                        <div class='col-sm-12'> 
+//                                                            <div class='form-group' id='".$row['name']."'> 
+//                                                                <div class='col-sm-8'>" . $row["question"] . "</div>
+//                                                                <div class='col-sm-4' >
+//                                                                <div class='input-group' id='".$row['name']."'>
+//                                                                        <input type='hidden' value='".$row["question"]."' name='".$row['id']."'>
+//                                                                        <input class='form-control' class='form-control' type='text' id='" .$row['id']."' name='" .$row['name']."' onblur='correctValuesEnteredInprof()' placeholder='0' id='value' value='".$quote_values[$row['name']]."'   style='width:100%'>
+//                                                                        <span class='input-group-btn'>
+//                                                                                    <button class='btn btn-secondary' type='button' id='".$row['addon']."'>0</button>
+//                                                                                    </span>
+//                                                                </div>" . "
+//                                                                </div>
+//                                                            </div>
+//                                                        </div>
+//                                                    </div><br>";
+//                                                }
+//                                echo "<span id='advancedCheck_Prof' style='color:red;font-size:15px;display:none'>Add VM Imges,BM Win/Lin Datas and Bm Unix Datas to select Advanced replication </span>";
+//                                            echo "</div>
+//                                            </div>
+//                                        </div>
+//                                    </div>
+//                                </div>";
+//                            }else{
+//                                echo "0 results";
+//                            }
+                            //Incase of enable all questions remove the above comments and remove this line 
                             echo "</div></div></div></div>";
                      
 
@@ -821,6 +825,11 @@
                     
                     
                         ?>
+<!--
+                                         <label class='radio-inline'>
+                                                                <input  id='Remote' type='radio' name='Prof_Services_type' value='Remote' ".$Prof_Type_Remote.">
+                                                            Remote</label>
+-->
                                          <div class="contianer">
                                             <div class="row">
                                                 <div class="col-sm-12">
@@ -905,6 +914,8 @@
                                                     <div class="col-xs-8">No of Bm Unix DB's</div>
                                                     <div class="col-xs-4"><span id="Bm_ud_2"></span></div>
                                                 </div>
+<!--                                                //Incase of enable all questions remove the below comments-->
+<!--
                                                 <div class="row" id="bm_sar_2">
                                                     <div class="col-xs-8">No of Bm Servers that are using Advanced Replication</div>
                                                     <div class="col-xs-4"><span id="Bm_sar_2"></span></div>
@@ -941,6 +952,8 @@
                                                     <div class="col-xs-8">No of SAP HANA Nodes</div>
                                                     <div class="col-xs-4"><span id="Sap_hana_nodes_2site"></span></div>
                                                 </div>
+-->
+<!--                                                //Incase of enable all questions remove the above comments and remove this line -->
                                                 <div class="row">
                                                     <div class="col-xs-12" style="background-color:lightgrey">3-Site Configuration</div>
                                                 </div>
@@ -972,6 +985,8 @@
                                                     <div class="col-xs-8">No of Bm Unix DB's</div>
                                                     <div class="col-xs-4"><span id="Bm_ud_3"></span></div>
                                                 </div>
+<!--                                                //Incase of enable all questions remove the below comments-->
+<!--
                                                 <div class="row" id="bm_sar_3">
                                                     <div class="col-xs-8">No of Bm Servers that are using Advanced Replication</div>
                                                     <div class="col-xs-4"><span id="Bm_sar_3"></span></div>
@@ -1008,6 +1023,8 @@
                                                     <div class="col-xs-8">No of SAP HANA Nodes</div>
                                                     <div class="col-xs-4"><span id="Sap_hana_nodes_3site"></span></div>
                                                 </div>
+-->
+<!--                                                //Incase of enable all questions remove the above comments and remove this line -->
                                                 <br>
                                                 <div class="row">
                                                     <div class="col-xs-12" style="background-color:lightgrey">Professional Services Requirement</div>
@@ -1044,6 +1061,8 @@
                                                     <div class="col-xs-8">Prof Services Req on Bm Unix DB's</div>
                                                     <div class="col-xs-4"><span id="Prof_b_unix_db"></span></div>
                                                 </div>
+<!--                                                //Incase of enable all questions remove the below comments-->
+<!--
                                                 <div class="row" id="prof_prod_servers">
                                                     <div class="col-xs-8">Prof Services Req on Bm Servers using Advanced Replication</div>
                                                     <div class="col-xs-4"><span id="Prof_prod_servers"></span></div>
@@ -1088,6 +1107,8 @@
                                                     <div class="col-xs-8">Is Customer On-Premise Product Training Required?</div>
                                                     <div class="col-xs-4"><span id="Prof_premise"></span></div>
                                                 </div>
+-->
+<!--                                                //Incase of enable all questions remove the above comments and remove this line -->
                                             </div>
                                             <br>
                                                 <div class="row">

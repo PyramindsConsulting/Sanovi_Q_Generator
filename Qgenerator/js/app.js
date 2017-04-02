@@ -42,16 +42,16 @@ $(document).ready(function () {
     });
     $('#partial').click(function () {
         $("#panel3").show(1000);
-        document.getElementById('personalpanel1').style.display = "inline";
-        document.getElementById('button3').style.display = "inline";
-        document.getElementById('less3').style.display = "none";
+//        document.getElementById('personalpanel1').style.display = "inline";
+//        document.getElementById('button3').style.display = "inline";
+//        document.getElementById('less3').style.display = "none";
     });
     $('#full').click(function () {
         $("#panel3").hide(1000);
-        $("#prof_panel").hide(1000);
-        document.getElementById('personalpanel1').style.display = "none";
-        document.getElementById('button3').style.display = "none";
-        document.getElementById('less3').style.display = "none";
+//        $("#prof_panel").hide(1000);
+//        document.getElementById('personalpanel1').style.display = "none";
+//        document.getElementById('button3').style.display = "none";
+//        document.getElementById('less3').style.display = "none";
     });
     $('#backbutton').click(function () {
         $("#requirements").hide(1000);
@@ -305,70 +305,74 @@ $(document).ready(function () {
         else {
             $('#Prof_b_unix_db').text($('#prof_services_b_unix_db').val());
         }
-        if ($('#prof_services_prod_servers').val() == "") {
-            $('#prof_prod_servers').hide();
-        }
-        else {
-            $('#Prof_prod_servers').text($('#prof_services_prod_servers').val());
-            document.getElementById('Prof_prod_servers').innerHTML=$('#prof_services_prod_servers').val();
-        }
-        if ($('#prof_services_virtual_prod').val() == "") {
-            $('#prof_virtual_prod').hide();
-        }
-        else {
-            $('#Prof_virtual_prod').text($('#prof_services_virtual_prod').val());
-            document.getElementById('Prof_virtual_prod').innerHTML=$('#prof_services_virtual_prod').val();
-        }
-        if ($('#prof_services_share_server').val() == "") {
-            $('#prof_share_server').hide();
-        }
-        else {
-            $('#Prof_share_server').text($('#prof_services_share_server').val());
-        }
-        if ($('#prof_services_share_db').val() == "") {
-            $('#prof_share_db').hide();
-        }
-        else {
-            $('#Prof_share_db').text($('#prof_services_share_db').val());
-        }
-        if ($('#prof_services_v_share_server').val() == "") {
-            $('#prof_v_share_server').hide();
-        }
-        else {
-            $('#Prof_v_share_server').text($('#prof_services_v_share_server').val());
-        }
-        if ($('#prof_services_v_share_db').val() == "") {
-            $('#prof_v_share_db').hide();
-        }
-        else {
-            $('#Prof_v_share_db').text($('#prof_services_v_share_db').val());
-        }
-        if ($('#prof_services_prod_ms').val() == "") {
-            $('#prof_prod_ms').hide();
-        }
-        else {
-            $('#Prof_prod_ms').text($('#prof_services_prod_ms').val());
-        }
-        if ($('#prof_services_prod_v_ms').val() == "") {
-            $('#prof_prod_v_ms').hide();
-        }
-        else {
-            $('#Prof_prod_v_ms').text($('#prof_services_prod_v_ms').val());
-        }
-        if ($('#prof_services_sap_hana_data').val() == "") {
-            $('#prof_sap_hana_databases').hide();
-        }
-        else {
-            $('#Prof_sap_hana_databases').text($('#prof_services_sap_hana_data').val());
-        }
-        if ($('#prof_services_sap_hana_node').val() == "") {
-//            alert($('#prof_services_sap_hana_node').val());
-            $('#prof_sap_hana_nodes').hide();
-        }
-        else {
-            $('#Prof_sap_hana_nodes').text($('#prof_services_sap_hana_node').val());
-        }
-        $('#Prof_premise').text($('#premise_product_training').val());
+        
+        //Incase of enable all questions remove the below comments    
+//        if ($('#prof_services_prod_servers').val() == "") {
+//            $('#prof_prod_servers').hide();
+//        }
+//        else {
+//            $('#Prof_prod_servers').text($('#prof_services_prod_servers').val());
+//            document.getElementById('Prof_prod_servers').innerHTML=$('#prof_services_prod_servers').val();
+//        }
+//        if ($('#prof_services_virtual_prod').val() == "") {
+//            $('#prof_virtual_prod').hide();
+//        }
+//        else {
+//            $('#Prof_virtual_prod').text($('#prof_services_virtual_prod').val());
+//            document.getElementById('Prof_virtual_prod').innerHTML=$('#prof_services_virtual_prod').val();
+//        }
+//        if ($('#prof_services_share_server').val() == "") {
+//            $('#prof_share_server').hide();
+//        }
+//        else {
+//            $('#Prof_share_server').text($('#prof_services_share_server').val());
+//        }
+//        if ($('#prof_services_share_db').val() == "") {
+//            $('#prof_share_db').hide();
+//        }
+//        else {
+//            $('#Prof_share_db').text($('#prof_services_share_db').val());
+//        }
+//        if ($('#prof_services_v_share_server').val() == "") {
+//            $('#prof_v_share_server').hide();
+//        }
+//        else {
+//            $('#Prof_v_share_server').text($('#prof_services_v_share_server').val());
+//        }
+//        if ($('#prof_services_v_share_db').val() == "") {
+//            $('#prof_v_share_db').hide();
+//        }
+//        else {
+//            $('#Prof_v_share_db').text($('#prof_services_v_share_db').val());
+//        }
+//        if ($('#prof_services_prod_ms').val() == "") {
+//            $('#prof_prod_ms').hide();
+//        }
+//        else {
+//            $('#Prof_prod_ms').text($('#prof_services_prod_ms').val());
+//        }
+//        if ($('#prof_services_prod_v_ms').val() == "") {
+//            $('#prof_prod_v_ms').hide();
+//        }
+//        else {
+//            $('#Prof_prod_v_ms').text($('#prof_services_prod_v_ms').val());
+//        }
+//        if ($('#prof_services_sap_hana_data').val() == "") {
+//            $('#prof_sap_hana_databases').hide();
+//        }
+//        else {
+//            $('#Prof_sap_hana_databases').text($('#prof_services_sap_hana_data').val());
+//        }
+//        if ($('#prof_services_sap_hana_node').val() == "") {
+////            alert($('#prof_services_sap_hana_node').val());
+//            $('#prof_sap_hana_nodes').hide();
+//        }
+//        else {
+//            $('#Prof_sap_hana_nodes').text($('#prof_services_sap_hana_node').val());
+//        }
+//        $('#Prof_premise').text($('#premise_product_training').val());
+       //Incase of enable all questions remove the above comments and remove this line  
+        
         $('#productSupport').text($('#product_support').val());
     });
 
@@ -381,23 +385,25 @@ $(document).ready(function () {
             document.getElementById('b_windows_db_2S').style.display = "inline";
             document.getElementById('b_unix_datas_2S').style.display = "inline";
             document.getElementById('b_unix_db_2S').style.display = "inline";
-            document.getElementById('2_site_panel').style.display = "none";
-            document.getElementById('share_server_2S').style.display = "inline";
-            document.getElementById('virtual_sharepoint_server_2S').style.display = "inline";
-            document.getElementById('prod_ms_2S').style.display = "inline";
-            document.getElementById('prod_v_ms_2S').style.display = "inline";
-            document.getElementById('servers_2S').style.display = "inline";
-            document.getElementById('sap_hana_data_2S').style.display = "inline";
-            document.getElementById('sap_hana_nodes_2S').style.display = "inline";
-            document.getElementById('button1').style.display = "inline";
-            document.getElementById('less1').style.display = "none";
+//Incase of enable all questions remove the below comments              
+//            document.getElementById('2_site_panel').style.display = "none";
+//            document.getElementById('share_server_2S').style.display = "inline";
+//            document.getElementById('virtual_sharepoint_server_2S').style.display = "inline";
+//            document.getElementById('prod_ms_2S').style.display = "inline";
+//            document.getElementById('prod_v_ms_2S').style.display = "inline";
+//            document.getElementById('servers_2S').style.display = "inline";
+//            document.getElementById('sap_hana_data_2S').style.display = "inline";
+//            document.getElementById('sap_hana_nodes_2S').style.display = "inline";
+//            document.getElementById('button1').style.display = "inline";
+//            document.getElementById('less1').style.display = "none";
+//Incase of enable all questions remove the above comments and remove this line            
         }
         else {
             $("#table").hide();
         }
-        if (document.getElementById('advanced_replication_3s').checked) {
-            $("#3-site").prop("checked", true);
-        }
+//        if (document.getElementById('advanced_replication_3s').checked) {
+//            $("#3-site").prop("checked", true);
+//        }
         if ($("#3-site").is(":checked")){
             $("#table1").show();
             document.getElementById('servers_3S').style.display = "inline";
@@ -407,45 +413,52 @@ $(document).ready(function () {
             document.getElementById('b_windows_db_3S').style.display = "inline";
             document.getElementById('b_unix_datas_3S').style.display = "inline";
             document.getElementById('b_unix_db_3S').style.display = "inline";
-            document.getElementById('3_site_panel').style.display = "none";
-            document.getElementById('prod_servers_3S').style.display = "inline";
-            document.getElementById('virtual_prod_3S').style.display = "inline";
-            document.getElementById('share_server_3S').style.display = "inline";
-            document.getElementById('virtual_server_3S').style.display = "inline";
-            document.getElementById('prod_ms_3S').style.display = "inline";
-            document.getElementById('prod_v_ms_3S').style.display = "inline";
-            document.getElementById('sap_hana_data_3S').style.display = "inline";
-            document.getElementById('sap_hana_nodes_3S').style.display = "inline";
-            document.getElementById('button2').style.display = "inline";
-            document.getElementById('less2').style.display = "none";
+            
+//Incase of enable all questions remove the below comments            
+//            document.getElementById('3_site_panel').style.display = "none";
+//            document.getElementById('prod_servers_3S').style.display = "inline";
+//            document.getElementById('virtual_prod_3S').style.display = "inline";
+//            document.getElementById('share_server_3S').style.display = "inline";
+//            document.getElementById('virtual_server_3S').style.display = "inline";
+//            document.getElementById('prod_ms_3S').style.display = "inline";
+//            document.getElementById('prod_v_ms_3S').style.display = "inline";
+//            document.getElementById('sap_hana_data_3S').style.display = "inline";
+//            document.getElementById('sap_hana_nodes_3S').style.display = "inline";
+//            document.getElementById('button2').style.display = "inline";
+//            document.getElementById('less2').style.display = "none";
+//Incase of enable all questions remove the above comments and remove this line   
         }
         else {
             $("#table1").hide();
         }
-        if ($("#advanced_replication").is(":checked")) {
-            $("#inline_table").show();
-            document.getElementById('prod_servers_2S').style.display = "inline";
-            document.getElementById('virtual_prod_2S').style.display = "inline";
-        }
-        else {
-            $("#inline_table").hide();
-        }
-        if ($("#advanced_replication_3s").is(":checked")) {
-            $("#inline_table1").show();
-            document.getElementById('prod_servers_3S').style.display = "inline";
-            document.getElementById('virtual_prod_3S').style.display = "inline";
-        }
-        else {
-            $("#inline_table1").hide();
-        }
-        if ($("#advanced_replication_prof").is(":checked")) {
-            $("#inline_table2").show();
-            document.getElementById('Prof_Services_prod_servers').style.display = "inline";
-            document.getElementById('Prof_Services_virtual_prod').style.display = "inline";
-        }
-        else {
-            $("#inline_table2").hide();
-        }
+        
+//Incase of enable all questions remove the below comments        
+//        if ($("#advanced_replication").is(":checked")) {
+//            $("#inline_table").show();
+//            document.getElementById('prod_servers_2S').style.display = "inline";
+//            document.getElementById('virtual_prod_2S').style.display = "inline";
+//        }
+//        else {
+//            $("#inline_table").hide();
+//        }
+//        if ($("#advanced_replication_3s").is(":checked")) {
+//            $("#inline_table1").show();
+//            document.getElementById('prod_servers_3S').style.display = "inline";
+//            document.getElementById('virtual_prod_3S').style.display = "inline";
+//        }
+//        else {
+//            $("#inline_table1").hide();
+//        }
+//        if ($("#advanced_replication_prof").is(":checked")) {
+//            $("#inline_table2").show();
+//            document.getElementById('Prof_Services_prod_servers').style.display = "inline";
+//            document.getElementById('Prof_Services_virtual_prod').style.display = "inline";
+//        }
+//        else {
+//            $("#inline_table2").hide();
+//        }
+//Incase of enable all questions remove the above comments and remove this line      
+        
         if ($("#product").is(":checked")) {
             $("#table3").show();
         }
@@ -469,37 +482,37 @@ $(document).ready(function () {
         document.getElementById('b_windows_db_2S').style.display = "inline";
         document.getElementById('b_unix_datas_2S').style.display = "inline";
         document.getElementById('b_unix_db_2S').style.display = "inline";
-        document.getElementById('2_site_panel').style.display = "none";
-        document.getElementById('share_server_2S').style.display = "inline";
-        document.getElementById('virtual_sharepoint_server_2S').style.display = "inline";
-        document.getElementById('prod_ms_2S').style.display = "inline";
-        document.getElementById('prod_v_ms_2S').style.display = "inline";
-        document.getElementById('servers_2S').style.display = "inline";
-        document.getElementById('sap_hana_data_2S').style.display = "inline";
-        document.getElementById('sap_hana_nodes_2S').style.display = "inline";
-        document.getElementById('button1').style.display = "inline";
-        document.getElementById('less1').style.display = "none";
+//        document.getElementById('2_site_panel').style.display = "none";
+//        document.getElementById('share_server_2S').style.display = "inline";
+//        document.getElementById('virtual_sharepoint_server_2S').style.display = "inline";
+//        document.getElementById('prod_ms_2S').style.display = "inline";
+//        document.getElementById('prod_v_ms_2S').style.display = "inline";
+//        document.getElementById('servers_2S').style.display = "inline";
+//        document.getElementById('sap_hana_data_2S').style.display = "inline";
+//        document.getElementById('sap_hana_nodes_2S').style.display = "inline";
+//        document.getElementById('button1').style.display = "inline";
+//        document.getElementById('less1').style.display = "none";
     });
     $('#3-site').change(function () {
         $("#table1").slideToggle();
-        document.getElementById('servers_3S').style.display = "inline";
         document.getElementById('vm_images_3S').style.display = "inline";
         document.getElementById('database_3S').style.display = "inline";
         document.getElementById('b_windows_datas_3S').style.display = "inline";
         document.getElementById('b_windows_db_3S').style.display = "inline";
         document.getElementById('b_unix_datas_3S').style.display = "inline";
         document.getElementById('b_unix_db_3S').style.display = "inline";
-        document.getElementById('3_site_panel').style.display = "none";
-        document.getElementById('prod_servers_3S').style.display = "inline";
-        document.getElementById('virtual_prod_3S').style.display = "inline";
-        document.getElementById('share_server_3S').style.display = "inline";
-        document.getElementById('virtual_server_3S').style.display = "inline";
-        document.getElementById('prod_ms_3S').style.display = "inline";
-        document.getElementById('prod_v_ms_3S').style.display = "inline";
-        document.getElementById('sap_hana_data_3S').style.display = "inline";
-        document.getElementById('sap_hana_nodes_3S').style.display = "inline";
-        document.getElementById('less2').style.display = "none";
-        document.getElementById('button2').style.display = "inline";
+//        document.getElementById('servers_3S').style.display = "inline";
+//        document.getElementById('3_site_panel').style.display = "none";
+//        document.getElementById('prod_servers_3S').style.display = "inline";
+//        document.getElementById('virtual_prod_3S').style.display = "inline";
+//        document.getElementById('share_server_3S').style.display = "inline";
+//        document.getElementById('virtual_server_3S').style.display = "inline";
+//        document.getElementById('prod_ms_3S').style.display = "inline";
+//        document.getElementById('prod_v_ms_3S').style.display = "inline";
+//        document.getElementById('sap_hana_data_3S').style.display = "inline";
+//        document.getElementById('sap_hana_nodes_3S').style.display = "inline";
+//        document.getElementById('less2').style.display = "none";
+//        document.getElementById('button2').style.display = "inline";
     });
     $('#product').change(function () {
         $("#table3").slideToggle();
@@ -521,79 +534,79 @@ $(document).ready(function () {
     if ($("#prof").is(":checked")) {
         $("#table2").show();
         document.getElementById('panel3').style.display = "none";
-        document.getElementById('personalpanel1').style.display = "none";
-        document.getElementById('prof_panel').style.display = "none";
-        document.getElementById('button3').style.display = "inline";
-        document.getElementById('less3').style.display = "none";
+//        document.getElementById('personalpanel1').style.display = "none";
+//        document.getElementById('prof_panel').style.display = "none";
+//        document.getElementById('button3').style.display = "inline";
+//        document.getElementById('less3').style.display = "none";
     }
     else {
         $("#table2").hide();
     }
     $('#prof').change(function () {
         document.getElementById('panel3').style.display = "none";
-        document.getElementById('personalpanel1').style.display = "none";
-        document.getElementById('prof_panel').style.display = "none";
-        document.getElementById('button3').style.display = "none";
-        document.getElementById('less3').style.display = "none";
+//        document.getElementById('personalpanel1').style.display = "none";
+//        document.getElementById('prof_panel').style.display = "none";
+//        document.getElementById('button3').style.display = "none";
+//        document.getElementById('less3').style.display = "none";
         $("#table2").slideToggle();
     });
 });
-$(document).ready(function () {
-    var prof_normal1 = document.getElementById('prof_services_share_server').value;
-    var prof_normal2 = document.getElementById('prof_services_share_db').value;
-    var prof_normal3 = document.getElementById('prof_services_v_share_server').value;
-    var prof_normal4 = document.getElementById('prof_services_v_share_db').value;
-    var prof_normal5 = document.getElementById('prof_services_prod_ms').value;
-    var prof_normal6 = document.getElementById('prof_services_prod_v_ms').value;
-    if ((prof_normal1 == "") || (prof_normal2 == "") || (prof_normal3 == "") || (prof_normal4 == "") || (prof_normal5 == "") || (prof_normal6 == "")) {
-        $("#prof_panel").hide(1000);
-        document.getElementById('less3').style.display = "none";
-        document.getElementById('button3').style.display = "none";
-    }
-    else if ((prof_normal1 != 0) || (prof_normal2 != 0) || (prof_normal3 != 0) || (prof_normal4 != 0) || (prof_normal5 != 0) || (prof_normal6 != 0)) {
-//        alert('prof_panel');
-        $("#prof_panel").show(1000);
-        document.getElementById('less3').style.display = "inline";
-        document.getElementById('button3').style.display = "none";
-    }
-    else {
-        $("#prof_panel").hide(1000);
-        document.getElementById('less3').style.display = "none";
-        document.getElementById('button3').style.display = "none";
-    }
-    if ($('[id="partial"]').is(':checked')) {
-        $("#panel3").show(1000);
-        document.getElementById('personalpanel1').style.display = "inline";
-        document.getElementById('button3').style.display = "inline";
-        document.getElementById('less3').style.display = "none";
-    }else if($('[id="full"]').is(':checked')){
-        $("#panel3").hide(1000);
-        $("#prof_panel").hide(1000);
-        document.getElementById('personalpanel1').style.display = "none";
-        document.getElementById('button3').style.display = "none";
-        document.getElementById('less3').style.display = "none";
-    }
-    $("#button1").click(function () {
-        $('html, body').animate({
-            scrollTop: $("#b_unix_db_2S").offset().top
-        }, 1500);
-    });
-    $("#less1").click(function () {
-        $('html, body').animate({
-            scrollTop: $("#top").offset().top
-        }, 500);
-    });
-    $("#button2").click(function () {
-        $('html, body').animate({
-            scrollTop: $("#b_unix_db_3S").offset().top
-        }, 1000);
-    });
-    $("#button3").click(function () {
-        $('html, body').animate({
-            scrollTop: $("#Prof_Services_b_unix_db").offset().top
-        }, 1000);
-    });
-});
+//$(document).ready(function () {
+//    var prof_normal1 = document.getElementById('prof_services_share_server').value;
+//    var prof_normal2 = document.getElementById('prof_services_share_db').value;
+//    var prof_normal3 = document.getElementById('prof_services_v_share_server').value;
+//    var prof_normal4 = document.getElementById('prof_services_v_share_db').value;
+//    var prof_normal5 = document.getElementById('prof_services_prod_ms').value;
+//    var prof_normal6 = document.getElementById('prof_services_prod_v_ms').value;
+//    if ((prof_normal1 == "") || (prof_normal2 == "") || (prof_normal3 == "") || (prof_normal4 == "") || (prof_normal5 == "") || (prof_normal6 == "")) {
+//        $("#prof_panel").hide(1000);
+//        document.getElementById('less3').style.display = "none";
+//        document.getElementById('button3').style.display = "none";
+//    }
+//    else if ((prof_normal1 != 0) || (prof_normal2 != 0) || (prof_normal3 != 0) || (prof_normal4 != 0) || (prof_normal5 != 0) || (prof_normal6 != 0)) {
+////        alert('prof_panel');
+//        $("#prof_panel").show(1000);
+//        document.getElementById('less3').style.display = "inline";
+//        document.getElementById('button3').style.display = "none";
+//    }
+//    else {
+//        $("#prof_panel").hide(1000);
+//        document.getElementById('less3').style.display = "none";
+//        document.getElementById('button3').style.display = "none";
+//    }
+//    if ($('[id="partial"]').is(':checked')) {
+//        $("#panel3").show(1000);
+//        document.getElementById('personalpanel1').style.display = "inline";
+//        document.getElementById('button3').style.display = "inline";
+//        document.getElementById('less3').style.display = "none";
+//    }else if($('[id="full"]').is(':checked')){
+//        $("#panel3").hide(1000);
+//        $("#prof_panel").hide(1000);
+//        document.getElementById('personalpanel1').style.display = "none";
+//        document.getElementById('button3').style.display = "none";
+//        document.getElementById('less3').style.display = "none";
+//    }
+//    $("#button1").click(function () {
+//        $('html, body').animate({
+//            scrollTop: $("#b_unix_db_2S").offset().top
+//        }, 1500);
+//    });
+//    $("#less1").click(function () {
+//        $('html, body').animate({
+//            scrollTop: $("#top").offset().top
+//        }, 500);
+//    });
+//    $("#button2").click(function () {
+//        $('html, body').animate({
+//            scrollTop: $("#b_unix_db_3S").offset().top
+//        }, 1000);
+//    });
+//    $("#button3").click(function () {
+//        $('html, body').animate({
+//            scrollTop: $("#Prof_Services_b_unix_db").offset().top
+//        }, 1000);
+//    });
+//});
 window.onload = function () {
     document.getElementById("first").style.display = "block";
     document.getElementById("second").style.display = "none";
@@ -756,20 +769,24 @@ function checkNumbers(num1, num2) {
         return false;
     }
 }
+
+
+
 // Function that executes on click of first next button.
 function next_page1() {
+    
     var elem = document.getElementById("name").value;
-    var elem4 = document.getElementById("customer_name").value;
     var partner = document.getElementById("partner").value;
     var elem2 = document.getElementById("productname").value;
     var elem3 = document.getElementById("product_module").value;
+    var elem4 = document.getElementById("customer_name").value;
     if ((elem == "") && (elem4 == "") && (partner == "")) {
         //        if (partner == "") {
-        document.getElementById('namelen').style.display = "inline";
         document.getElementById('namecheck').style.display = "none";
         document.getElementById('customername').style.display = "inline";
         document.getElementById('customernamecheck').style.display = "none";
         document.getElementById('partnerlen').style.display = "inline";
+        document.getElementById('namelen').style.display = "inline";
         document.getElementById('partnernamecheck').style.display = "none";
         document.getElementById("first").style.display = "block";
         document.getElementById("second").style.display = "none";
@@ -926,31 +943,30 @@ function next_page1() {
             document.getElementById("third").style.display = "none";
         }
         else {
-            document.getElementById('namelen').style.display = "none";
-            document.getElementById('customername').style.display = "none";
-            document.getElementById('partnerlen').style.display = "none";
-            document.getElementById("second").style.display = "block";
-            document.getElementById("first").style.display = "none";
-            document.getElementById("third").style.display = "none";
-            document.getElementById("customerName").innerHTML = elem;
-            document.getElementById("customerName2").innerHTML = elem;
-            document.getElementById("productName").innerHTML = elem2;
-            document.getElementById("productName2").innerHTML = elem2;
-            document.getElementById("productModule").innerHTML = elem3;
-            document.getElementById("productModule2").innerHTML = elem3;
+            if(checkLengthOfNotes()){
+                document.getElementById('namelen').style.display = "none";
+                document.getElementById('customername').style.display = "none";
+                document.getElementById('partnerlen').style.display = "none";
+                document.getElementById("second").style.display = "block";
+                document.getElementById("first").style.display = "none";
+                document.getElementById("third").style.display = "none";
+                document.getElementById("customerName").innerHTML = elem;
+                document.getElementById("customerName2").innerHTML = elem;
+                document.getElementById("productName").innerHTML = elem2;
+                document.getElementById("productName2").innerHTML = elem2;
+                document.getElementById("productModule").innerHTML = elem3;
+                document.getElementById("productModule2").innerHTML = elem3;
+                return true;
+            }else{
+                document.getElementById("first").style.display = "block";
+                document.getElementById("second").style.display = "none";
+                document.getElementById("third").style.display = "none";
+                return false;
+            }
+            
         }
     }
-    if(checkLengthOfNotes()){
-        document.getElementById("first").style.display = "none";
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return true;
-    }else{
-        document.getElementById("first").style.display = "block";
-        document.getElementById("second").style.display = "none";
-        document.getElementById("third").style.display = "none";
-        return false;
-    }
+    
 }
 
 function properNumber(numb) {
@@ -970,34 +986,38 @@ function next_page2() {
     var b_windows_db_2s = document.getElementById('b_windows_db_2s').value;
     var b_unix_datas_2s = document.getElementById('b_unix_datas_2s').value;
     var b_unix_db_2s = document.getElementById('b_unix_db_2s').value;
-    var prod_servers_2s = document.getElementById('prod_servers_2s').value;
-    var virtual_prod_2s = document.getElementById('virtual_prod_2s').value;
-    var share_server_2s = document.getElementById('share_server_2s').value;
-    var virtual_sharepoint_server_2s = document.getElementById('virtual_sharepoint_server_2s').value;
-    var prod_ms_2s = document.getElementById('prod_ms_2s').value;
-    var prod_v_ms_2s = document.getElementById('prod_v_ms_2s').value;
-    var servers_2s = document.getElementById('servers_2s').value;
-    var sap_hana_data_2s = document.getElementById('sap_hana_data_2s').value;
-    var sap_hana_nodes_2s = document.getElementById('sap_hana_nodes_2s').value;
+    //Incase of enable all questions remove the below comments  
+//    var prod_servers_2s = document.getElementById('prod_servers_2s').value;
+//    var virtual_prod_2s = document.getElementById('virtual_prod_2s').value;
+//    var share_server_2s = document.getElementById('share_server_2s').value;
+//    var virtual_sharepoint_server_2s = document.getElementById('virtual_sharepoint_server_2s').value;
+//    var prod_ms_2s = document.getElementById('prod_ms_2s').value;
+//    var prod_v_ms_2s = document.getElementById('prod_v_ms_2s').value;
+//    var servers_2s = document.getElementById('servers_2s').value;
+//    var sap_hana_data_2s = document.getElementById('sap_hana_data_2s').value;
+//    var sap_hana_nodes_2s = document.getElementById('sap_hana_nodes_2s').value;
+    //Incase of enable all questions remove the above comments and remove this line
     var vm_images_3s = document.getElementById('vm_images_3s').value;
     var database_3s = document.getElementById('database_3s').value;
     var b_windows_datas_3s = document.getElementById('b_windows_datas_3s').value;
     var b_windows_db_3s = document.getElementById('b_windows_db_3s').value;
     var b_unix_datas_3s = document.getElementById('b_unix_datas_3s').value;
     var b_unix_db_3s = document.getElementById('b_unix_db_3s').value;
-    var prod_servers_3s = document.getElementById('prod_servers_3s').value;
-    var virtual_prod_3s = document.getElementById('virtual_prod_3s').value;
-    var share_server_3s = document.getElementById('share_server_3s').value;
-    var virtual_server_3s = document.getElementById('virtual_server_3s').value;
-    var prod_ms_3s = document.getElementById('prod_ms_3s').value;
-    var prod_v_ms_3s = document.getElementById('prod_v_ms_3s').value;
-    var servers_3s = document.getElementById('servers_3s').value;
-    var sap_hana_data_3s = document.getElementById('sap_hana_data_3s').value;
-    var sap_hana_nodes_3s = document.getElementById('sap_hana_nodes_3s').value;
+    //Incase of enable all questions remove the below comments  
+//    var prod_servers_3s = document.getElementById('prod_servers_3s').value;
+//    var virtual_prod_3s = document.getElementById('virtual_prod_3s').value;
+//    var share_server_3s = document.getElementById('share_server_3s').value;
+//    var virtual_server_3s = document.getElementById('virtual_server_3s').value;
+//    var prod_ms_3s = document.getElementById('prod_ms_3s').value;
+//    var prod_v_ms_3s = document.getElementById('prod_v_ms_3s').value;
+//    var servers_3s = document.getElementById('servers_3s').value;
+//    var sap_hana_data_3s = document.getElementById('sap_hana_data_3s').value;
+//    var sap_hana_nodes_3s = document.getElementById('sap_hana_nodes_3s').value;
+    //Incase of enable all questions remove the above comments and remove this line
     if (!properNumber(vm_images_2s)) {
         var r = confirm("Please Enter Proper Value");
-            document.getElementById('vm_images_2s').focus();
-            $("#vm_images_2S").addClass("has-error");
+        document.getElementById('vm_images_2s').focus();
+        $("#vm_images_2S").addClass("has-error");
         document.getElementById("second").style.display = "block";
         document.getElementById("third").style.display = "none";
         return false;
@@ -1048,93 +1068,101 @@ function next_page2() {
         return false;
     }
     $("#b_unix_db_2S").removeClass("has-error");
-    if (!properNumber(share_server_2s)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('share_server_2s').focus();
-        $("#share_server_2S").addClass("has-error");
-        document.getElementById("second").style.display = "inline";
-        document.getElementById("third").style.display = "none";
-        return false;
-    }
-    $("#share_server_2S").removeClass("has-error");
-    if (!properNumber(virtual_sharepoint_server_2s)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('virtual_sharepoint_server_2s').focus();
-         $("#virtual_sharepoint_server_2S").addClass("has-error");
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return false;
-    }
-    $("#virtual_sharepoint_server_2S").removeClass("has-error");
-    if (!properNumber(prod_ms_2s)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('prod_ms_2s').focus();
-        $("#prod_ms_2S").addClass("has-error");
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return false;
-    }
-    $("#prod_ms_2S").removeClass("has-error");
-    if (!properNumber(prod_v_ms_2s)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('prod_v_ms_2s').focus();
-        $("#prod_v_ms_2S").addClass("has-error");
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return false;
-    }
-    $("#prod_v_ms_2S").removeClass("has-error");
-    if (!properNumber(servers_2s)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('servers_2s').focus();
-            $("#servers_2S").addClass("has-error");
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return false;
-    }
-    $("#servers_2S").removeClass("has-error");
     
-    if (!properNumber(sap_hana_data_2s)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('sap_hana_data_2s').focus();
-            $("#sap_hana_data_2S").addClass("has-error");
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return false;
-    }
-    $("#sap_hana_data_2S").removeClass("has-error");
+    //Incase of enable all questions remove the below comments  
     
-    if (!properNumber(sap_hana_nodes_2s)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('sap_hana_nodes_2s').focus();
-            $("#sap_hana_nodes_2S").addClass("has-error");
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return false;
-    }
-    $("#sap_hana_nodes_2S").removeClass("has-error");
     
-    if (!properNumber(prod_servers_2s)) {
-            document.getElementById('prod_servers_2s').focus();
-        $("#prod_servers_2S").addClass("has-error");
-//        alert("Please Enter Proper Value PROD");
-//        alert(document.getElementById('prod_servers_2S').value);
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return false;
-    }
-    $("#prod_servers_2S").removeClass("has-error");
+//    if (!properNumber(share_server_2s)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('share_server_2s').focus();
+//        $("#share_server_2S").addClass("has-error");
+//        document.getElementById("second").style.display = "inline";
+//        document.getElementById("third").style.display = "none";
+//        return false;
+//    }
+//    $("#share_server_2S").removeClass("has-error");
+//    if (!properNumber(virtual_sharepoint_server_2s)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('virtual_sharepoint_server_2s').focus();
+//         $("#virtual_sharepoint_server_2S").addClass("has-error");
+//        document.getElementById("second").style.display = "block";
+//        document.getElementById("third").style.display = "none";
+//        return false;
+//    }
+//    $("#virtual_sharepoint_server_2S").removeClass("has-error");
+//    if (!properNumber(prod_ms_2s)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('prod_ms_2s').focus();
+//        $("#prod_ms_2S").addClass("has-error");
+//        document.getElementById("second").style.display = "block";
+//        document.getElementById("third").style.display = "none";
+//        return false;
+//    }
+//    $("#prod_ms_2S").removeClass("has-error");
+//    if (!properNumber(prod_v_ms_2s)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('prod_v_ms_2s').focus();
+//        $("#prod_v_ms_2S").addClass("has-error");
+//        document.getElementById("second").style.display = "block";
+//        document.getElementById("third").style.display = "none";
+//        return false;
+//    }
+//    $("#prod_v_ms_2S").removeClass("has-error");
+//    if (!properNumber(servers_2s)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('servers_2s').focus();
+//            $("#servers_2S").addClass("has-error");
+//        document.getElementById("second").style.display = "block";
+//        document.getElementById("third").style.display = "none";
+//        return false;
+//    }
+//    $("#servers_2S").removeClass("has-error");
+//    
+//    if (!properNumber(sap_hana_data_2s)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('sap_hana_data_2s').focus();
+//            $("#sap_hana_data_2S").addClass("has-error");
+//        document.getElementById("second").style.display = "block";
+//        document.getElementById("third").style.display = "none";
+//        return false;
+//    }
+//    $("#sap_hana_data_2S").removeClass("has-error");
+//    
+//    if (!properNumber(sap_hana_nodes_2s)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('sap_hana_nodes_2s').focus();
+//            $("#sap_hana_nodes_2S").addClass("has-error");
+//        document.getElementById("second").style.display = "block";
+//        document.getElementById("third").style.display = "none";
+//        return false;
+//    }
+//    $("#sap_hana_nodes_2S").removeClass("has-error");
+//    
+//    if (!properNumber(prod_servers_2s)) {
+//            document.getElementById('prod_servers_2s').focus();
+//        $("#prod_servers_2S").addClass("has-error");
+////        alert("Please Enter Proper Value PROD");
+////        alert(document.getElementById('prod_servers_2S').value);
+//        document.getElementById("second").style.display = "block";
+//        document.getElementById("third").style.display = "none";
+//        return false;
+//    }
+//    $("#prod_servers_2S").removeClass("has-error");
+//    
+//    if (!properNumber(virtual_prod_2s)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('virtual_prod_2s').focus();
+////        document.getElementById('virtual_prod_2s').focus();
+////            $("#virtual_prod_2S").addClass("has-error has-feedback");
+//        document.getElementById("second").style.display = "block";
+//        document.getElementById("third").style.display = "none";
+//        return false;
+//    }
+//    $("#virtual_prod_2S").removeClass("has-error");
     
-    if (!properNumber(virtual_prod_2s)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('virtual_prod_2s').focus();
-//        document.getElementById('virtual_prod_2s').focus();
-//            $("#virtual_prod_2S").addClass("has-error has-feedback");
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return false;
-    }
-    $("#virtual_prod_2S").removeClass("has-error");
+    //Incase of enable all questions remove the above comments and remove this line
+    
+    
     if (!properNumber(vm_images_3s)) {
         var r = confirm("Please Enter Proper Value");
             document.getElementById('vm_images_3s').focus();
@@ -1193,92 +1221,98 @@ function next_page2() {
         return false;
     }
     $("#b_unix_db_3S").removeClass("has-error");
-    if (!properNumber(share_server_3s)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('share_server_3s').focus();
-            $("#share_server_3S").addClass("has-error");
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return false;
-    }
-    $("#share_server_3S").removeClass("has-error");
-    if (!properNumber(virtual_server_3s)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('virtual_server_3s').focus();
-            $("#virtual_server_3S").addClass("has-error");
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return false;
-    }
-    $("#virtual_server_3S").removeClass("has-error");
-    if (!properNumber(prod_ms_3s)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('prod_ms_3s').focus();
-            $("#prod_ms_3S").addClass("has-error");
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return false;
-    }
-    $("#prod_ms_3S").removeClass("has-error");
-    if (!properNumber(prod_v_ms_3s)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('prod_v_ms_3s').focus();
-            $("#prod_v_ms_3S").addClass("has-error");
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return false;
-    }
-    $("#prod_v_ms_3S").removeClass("has-error");
     
-    if (!properNumber(servers_3s)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('servers_3s').focus();
-            $("#servers_3s").addClass("has-error");
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return false;
-    }
-    $("#servers_3s").removeClass("has-error");
-    
-    if (!properNumber(sap_hana_data_3s)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('sap_hana_data_3s').focus();
-            $("#sap_hana_data_3S").addClass("has-error");
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return false;
-    }
-    $("#sap_hana_data_3S").removeClass("has-error");
-    
-    if (!properNumber(sap_hana_nodes_3s)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('sap_hana_nodes_3s').focus();
-            $("#sap_hana_nodes_3S").addClass("has-error");
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return false;
-    }
-    $("#sap_hana_nodes_3S").removeClass("has-error");
+   //Incase of enable all questions remove the below comments  
     
     
-    if (!properNumber(prod_servers_3s)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('prod_servers_3s').focus();
-            $("#prod_servers_3S").addClass("has-error");
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return false;
-    }
-    $("#prod_servers_3S").removeClass("has-error");
-    if (!properNumber(virtual_prod_3s)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('virtual_prod_3s').focus();
-            $("#virtual_prod_3S").addClass("has-error");
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return false;
-    }
-    $("#virtual_prod_3S").removeClass("has-error");
+//    if (!properNumber(share_server_3s)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('share_server_3s').focus();
+//            $("#share_server_3S").addClass("has-error");
+//        document.getElementById("second").style.display = "block";
+//        document.getElementById("third").style.display = "none";
+//        return false;
+//    }
+//    $("#share_server_3S").removeClass("has-error");
+//    if (!properNumber(virtual_server_3s)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('virtual_server_3s').focus();
+//            $("#virtual_server_3S").addClass("has-error");
+//        document.getElementById("second").style.display = "block";
+//        document.getElementById("third").style.display = "none";
+//        return false;
+//    }
+//    $("#virtual_server_3S").removeClass("has-error");
+//    if (!properNumber(prod_ms_3s)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('prod_ms_3s').focus();
+//            $("#prod_ms_3S").addClass("has-error");
+//        document.getElementById("second").style.display = "block";
+//        document.getElementById("third").style.display = "none";
+//        return false;
+//    }
+//    $("#prod_ms_3S").removeClass("has-error");
+//    if (!properNumber(prod_v_ms_3s)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('prod_v_ms_3s').focus();
+//            $("#prod_v_ms_3S").addClass("has-error");
+//        document.getElementById("second").style.display = "block";
+//        document.getElementById("third").style.display = "none";
+//        return false;
+//    }
+//    $("#prod_v_ms_3S").removeClass("has-error");
+//    
+//    if (!properNumber(servers_3s)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('servers_3s').focus();
+//            $("#servers_3s").addClass("has-error");
+//        document.getElementById("second").style.display = "block";
+//        document.getElementById("third").style.display = "none";
+//        return false;
+//    }
+//    $("#servers_3s").removeClass("has-error");
+//    
+//    if (!properNumber(sap_hana_data_3s)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('sap_hana_data_3s').focus();
+//            $("#sap_hana_data_3S").addClass("has-error");
+//        document.getElementById("second").style.display = "block";
+//        document.getElementById("third").style.display = "none";
+//        return false;
+//    }
+//    $("#sap_hana_data_3S").removeClass("has-error");
+//    
+//    if (!properNumber(sap_hana_nodes_3s)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('sap_hana_nodes_3s').focus();
+//            $("#sap_hana_nodes_3S").addClass("has-error");
+//        document.getElementById("second").style.display = "block";
+//        document.getElementById("third").style.display = "none";
+//        return false;
+//    }
+//    $("#sap_hana_nodes_3S").removeClass("has-error");
+//    
+//    
+//    if (!properNumber(prod_servers_3s)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('prod_servers_3s').focus();
+//            $("#prod_servers_3S").addClass("has-error");
+//        document.getElementById("second").style.display = "block";
+//        document.getElementById("third").style.display = "none";
+//        return false;
+//    }
+//    $("#prod_servers_3S").removeClass("has-error");
+//    if (!properNumber(virtual_prod_3s)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('virtual_prod_3s').focus();
+//            $("#virtual_prod_3S").addClass("has-error");
+//        document.getElementById("second").style.display = "block";
+//        document.getElementById("third").style.display = "none";
+//        return false;
+//    }
+//    $("#virtual_prod_3S").removeClass("has-error");
+    //Incase of enable all questions remove the above comments and remove this line
+    
     
 //    else {
 //        document.getElementById("second").style.display = "none";
@@ -1290,83 +1324,103 @@ function next_page2() {
     var site_2s_b_windows_db_2s = document.getElementById("b_windows_db_2s").value;
     var site_2s_b_unix_datas_2s = document.getElementById("b_unix_datas_2s").value;
     var site_2s_b_unix_db_2s = document.getElementById("b_unix_db_2s").value;
-    var site_2s_prod_servers_2s = document.getElementById("prod_servers_2s").value;
-    var site_2s_virtual_prod_2s = document.getElementById("virtual_prod_2s").value;
-    var site_2s_share_server_2s = document.getElementById("share_server_2s").value;
-    var site_2s_virtual_sharepoint_server_2s = document.getElementById("virtual_sharepoint_server_2s").value;
-    var site_2s_prod_ms_2s = document.getElementById("prod_ms_2s").value;
-    var site_2s_prod_v_ms_2s = document.getElementById("prod_v_ms_2s").value;
+    
+    //Incase of enable all questions remove the below comments  
+//    var site_2s_prod_servers_2s = document.getElementById("prod_servers_2s").value;
+//    var site_2s_virtual_prod_2s = document.getElementById("virtual_prod_2s").value;
+//    var site_2s_share_server_2s = document.getElementById("share_server_2s").value;
+//    var site_2s_virtual_sharepoint_server_2s = document.getElementById("virtual_sharepoint_server_2s").value;
+//    var site_2s_prod_ms_2s = document.getElementById("prod_ms_2s").value;
+//    var site_2s_prod_v_ms_2s = document.getElementById("prod_v_ms_2s").value;
+    //Incase of enable all questions remove the above comments and remove this line
+    
     var site_3s_vm_images_3s = document.getElementById("vm_images_3s").value;
     var site_3s_database_3s = document.getElementById("database_3s").value;
     var site_3s_b_windows_datas_3s = document.getElementById("b_windows_datas_3s").value;
     var site_3s_b_windows_db_3s = document.getElementById("b_windows_db_3s").value;
     var site_3s_b_unix_datas_3s = document.getElementById("b_unix_datas_3s").value;
     var site_3s_b_unix_db_3s = document.getElementById("b_unix_db_3s").value;
-    var site_3s_prod_servers_3s = document.getElementById("prod_servers_3s").value;
-    var site_3s_virtual_prod_3s = document.getElementById("virtual_prod_3s").value;
-    var site_3s_share_server_3s = document.getElementById("share_server_3s").value;
-    var site_3s_virtual_server_3s = document.getElementById("virtual_server_3s").value;
-    var site_3s_prod_ms_3s = document.getElementById("prod_ms_3s").value;
-    var site_3s_prod_v_ms_3s = document.getElementById("prod_v_ms_3s").value;
+    
+    //Incase of enable all questions remove the below comments  
+//    var site_3s_prod_servers_3s = document.getElementById("prod_servers_3s").value;
+//    var site_3s_virtual_prod_3s = document.getElementById("virtual_prod_3s").value;
+//    var site_3s_share_server_3s = document.getElementById("share_server_3s").value;
+//    var site_3s_virtual_server_3s = document.getElementById("virtual_server_3s").value;
+//    var site_3s_prod_ms_3s = document.getElementById("prod_ms_3s").value;
+//    var site_3s_prod_v_ms_3s = document.getElementById("prod_v_ms_3s").value;
+    //Incase of enable all questions remove the above comments and remove this line
+    
     document.getElementById("prof_services_vm_image_addon").innerHTML = Number(site_2s_vm_images_2s) + Number(site_3s_vm_images_3s);
     document.getElementById("prof_services_database_addon").innerHTML = Number(site_2s_db_2s) + Number(site_3s_database_3s);
     document.getElementById("prof_services_b_windows_datas_addon").innerHTML = Number(site_2s_b_windows_datas_2s) + Number(site_3s_b_windows_datas_3s);
     document.getElementById("prof_services_b_windows_db_addon").innerHTML = Number(site_2s_b_windows_db_2s) + Number(site_3s_b_windows_db_3s);
     document.getElementById("prof_services_b_unix_datas_addon").innerHTML = Number(site_2s_b_unix_datas_2s) + Number(site_3s_b_unix_datas_3s);
     document.getElementById("prof_services_b_unix_db_addon").innerHTML = Number(site_2s_b_unix_db_2s) + Number(site_3s_b_unix_db_3s);
-    document.getElementById("prof_services_prod_servers_addon").innerHTML = Number(site_2s_prod_servers_2s) + Number(site_3s_prod_servers_3s);
-    document.getElementById("prof_services_virtual_prod_addon").value = Number(site_2s_prod_servers_2s) + Number(site_3s_prod_servers_3s);
-    document.getElementById("prof_services_virtual_prod_addon").innerHTML = Number(site_2s_virtual_prod_2s) + Number(site_3s_virtual_prod_3s);
-    document.getElementById("prof_services_prod_servers_addon").value  = Number(site_2s_virtual_prod_2s) + Number(site_3s_virtual_prod_3s);
-    document.getElementById("prof_services_share_server_addon").innerHTML = Number(site_2s_share_server_2s) + Number(site_3s_share_server_3s);
-    document.getElementById("prof_services_share_db_addon").innerHTML = Number(site_2s_share_server_2s) + Number(site_3s_share_server_3s);
-    document.getElementById("prof_services_v_share_server_addon").innerHTML = Number(site_2s_virtual_sharepoint_server_2s) + Number(site_3s_virtual_server_3s);
-    document.getElementById("prof_services_v_share_db_addon").innerHTML = Number(site_2s_virtual_sharepoint_server_2s) + Number(site_3s_virtual_server_3s);
-    document.getElementById("prof_services_prod_ms_addon").innerHTML = Number(site_2s_prod_ms_2s) + Number(site_3s_prod_ms_3s);
-    document.getElementById("prof_services_prod_v_ms_addon").innerHTML = Number(site_2s_prod_v_ms_2s) + Number(site_3s_prod_v_ms_3s);
-    document.getElementById("prof_services_sap_hana_data_addon").innerHTML = Number(sap_hana_data_2s) + Number(sap_hana_data_3s);
-    document.getElementById("prof_services_sap_hana_node_addon").innerHTML = Number(sap_hana_nodes_2s) + Number(sap_hana_nodes_3s);
+    
+ //Incase of enable all questions remove the below comments     
+//    document.getElementById("prof_services_prod_servers_addon").innerHTML = Number(site_2s_prod_servers_2s) + Number(site_3s_prod_servers_3s);
+//    document.getElementById("prof_services_virtual_prod_addon").value = Number(site_2s_prod_servers_2s) + Number(site_3s_prod_servers_3s);
+//    document.getElementById("prof_services_virtual_prod_addon").innerHTML = Number(site_2s_virtual_prod_2s) + Number(site_3s_virtual_prod_3s);
+//    document.getElementById("prof_services_prod_servers_addon").value  = Number(site_2s_virtual_prod_2s) + Number(site_3s_virtual_prod_3s);
+//    document.getElementById("prof_services_share_server_addon").innerHTML = Number(site_2s_share_server_2s) + Number(site_3s_share_server_3s);
+//    document.getElementById("prof_services_share_db_addon").innerHTML = Number(site_2s_share_server_2s) + Number(site_3s_share_server_3s);
+//    document.getElementById("prof_services_v_share_server_addon").innerHTML = Number(site_2s_virtual_sharepoint_server_2s) + Number(site_3s_virtual_server_3s);
+//    document.getElementById("prof_services_v_share_db_addon").innerHTML = Number(site_2s_virtual_sharepoint_server_2s) + Number(site_3s_virtual_server_3s);
+//    document.getElementById("prof_services_prod_ms_addon").innerHTML = Number(site_2s_prod_ms_2s) + Number(site_3s_prod_ms_3s);
+//    document.getElementById("prof_services_prod_v_ms_addon").innerHTML = Number(site_2s_prod_v_ms_2s) + Number(site_3s_prod_v_ms_3s);
+//    document.getElementById("prof_services_sap_hana_data_addon").innerHTML = Number(sap_hana_data_2s) + Number(sap_hana_data_3s);
+//    document.getElementById("prof_services_sap_hana_node_addon").innerHTML = Number(sap_hana_nodes_2s) + Number(sap_hana_nodes_3s);
+//Incase of enable all questions remove the above comments and remove this line
+
     $("#vm_images_2S").removeClass("has-error");
     $("#db_2S").removeClass("has-error");
     $("#b_windows_datas_2S").removeClass("has-error");
     $("#b_windows_db_2S").removeClass("has-error");
     $("#b_unix_datas_2S").removeClass("has-error");
     $("#b_unix_db_2S").removeClass("has-error");
-     $("#share_server_2S").removeClass("has-error");
-    $("#virtual_sharepoint_server_2S").removeClass("has-error");
-    $("#prod_ms_2S").removeClass("has-error");
-    $("#prod_v_ms_2S").removeClass("has-error");
-    $("#servers_2S").removeClass("has-error");
-    $("#sap_hana_data_2S").removeClass("has-error");
-    $("#sap_hana_nodes_2S").removeClass("has-error");
-    $("#prod_servers_2S").removeClass("has-error");
-     $("#virtual_prod_2S").removeClass("has-error");
+    
+   //Incase of enable all questions remove the below comments   
+//    $("#share_server_2S").removeClass("has-error");
+//    $("#virtual_sharepoint_server_2S").removeClass("has-error");
+//    $("#prod_ms_2S").removeClass("has-error");
+//    $("#prod_v_ms_2S").removeClass("has-error");
+//    $("#servers_2S").removeClass("has-error");
+//    $("#sap_hana_data_2S").removeClass("has-error");
+//    $("#sap_hana_nodes_2S").removeClass("has-error");
+//    $("#prod_servers_2S").removeClass("has-error");
+//     $("#virtual_prod_2S").removeClass("has-error");
+    //Incase of enable all questions remove the above comments and remove this line
+    
     $("#vm_images_3S").removeClass("has-error");
     $("#database_3S").removeClass("has-error");
     $("#b_windows_datas_3S").removeClass("has-error");
     $("#b_windows_db_3S").removeClass("has-error");
     $("#b_unix_datas_3S").removeClass("has-error");
     $("#b_unix_db_3S").removeClass("has-error");
-    $("#share_server_3S").removeClass("has-error");
-    $("#virtual_server_3S").removeClass("has-error");
-    $("#prod_ms_3S").removeClass("has-error");
-    $("#prod_v_ms_3S").removeClass("has-error");
-    $("#servers_3s").removeClass("has-error");
-    $("#sap_hana_data_3S").removeClass("has-error");
-    $("#sap_hana_nodes_3S").removeClass("has-error");
-    $("#prod_servers_3S").removeClass("has-error");
-    $("#virtual_prod_3S").removeClass("has-error");
-    $("#requirements").hide();
-    if (correctValuesEnteredIn2s_vm() && correctValuesEnteredIn3s_vm()) {
+    
+  //Incase of enable all questions remove the below comments    
+//    $("#share_server_3S").removeClass("has-error");
+//    $("#virtual_server_3S").removeClass("has-error");
+//    $("#prod_ms_3S").removeClass("has-error");
+//    $("#prod_v_ms_3S").removeClass("has-error");
+//    $("#servers_3s").removeClass("has-error");
+//    $("#sap_hana_data_3S").removeClass("has-error");
+//    $("#sap_hana_nodes_3S").removeClass("has-error");
+//    $("#prod_servers_3S").removeClass("has-error");
+//    $("#virtual_prod_3S").removeClass("has-error");
+    
+//    if (correctValuesEnteredIn2s_vm() && correctValuesEnteredIn3s_vm()) {
+//        return true;
+//    }
+//    else {
+//        document.getElementById("second").style.display = "block";
+//        document.getElementById("third").style.display = "none";
+//        return false;
+//    }
+  //Incase of enable all questions remove the above comments and remove this line  
         document.getElementById("second").style.display = "none";
         document.getElementById("third").style.display = "block";
-        return true;
-    }
-    else {
-        document.getElementById("second").style.display = "block";
-        document.getElementById("third").style.display = "none";
-        return false;
-    }
+    $("#requirements").hide();
     
 }
 
@@ -1517,16 +1571,16 @@ function roleBasedDiscount() {
     var prof_services_b_windows_db = document.getElementById('prof_services_b_windows_db').value;
     var prof_services_b_unix_datas = document.getElementById('prof_services_b_unix_datas').value;
     var prof_services_b_unix_db = document.getElementById('prof_services_b_unix_db').value;
-    var prof_services_prod_servers = document.getElementById('prof_services_prod_servers').value;
-    var prof_services_virtual_prod = document.getElementById('prof_services_virtual_prod').value;
-    var prof_services_share_server = document.getElementById('prof_services_share_server').value;
-    var prof_services_share_db = document.getElementById('prof_services_share_db').value;
-    var prof_services_v_share_server = document.getElementById('prof_services_v_share_server').value;
-    var prof_services_v_share_db = document.getElementById('prof_services_v_share_db').value;
-    var prof_services_prod_ms = document.getElementById('prof_services_prod_ms').value;
-    var prof_services_prod_v_ms = document.getElementById('prof_services_prod_v_ms').value;
-    var prof_services_sap_hana_data = document.getElementById('prof_services_sap_hana_data').value;
-    var prof_services_sap_hana_node = document.getElementById('prof_services_sap_hana_node').value;
+//    var prof_services_prod_servers = document.getElementById('prof_services_prod_servers').value;
+//    var prof_services_virtual_prod = document.getElementById('prof_services_virtual_prod').value;
+//    var prof_services_share_server = document.getElementById('prof_services_share_server').value;
+//    var prof_services_share_db = document.getElementById('prof_services_share_db').value;
+//    var prof_services_v_share_server = document.getElementById('prof_services_v_share_server').value;
+//    var prof_services_v_share_db = document.getElementById('prof_services_v_share_db').value;
+//    var prof_services_prod_ms = document.getElementById('prof_services_prod_ms').value;
+//    var prof_services_prod_v_ms = document.getElementById('prof_services_prod_v_ms').value;
+//    var prof_services_sap_hana_data = document.getElementById('prof_services_sap_hana_data').value;
+//    var prof_services_sap_hana_node = document.getElementById('prof_services_sap_hana_node').value;
     
     if (!properNumber(prof_services_vm_image)) {
         var r = confirm("Please Enter Proper Value");
@@ -1576,86 +1630,90 @@ function roleBasedDiscount() {
         return false;
     }
     $("#Prof_Services_b_unix_db").removeClass("has-error");
-    if (!properNumber(prof_services_share_server)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('prof_services_share_server').focus();
-            $("#Prof_Services_share_server").addClass("has-error");
-        document.getElementById("third").style.display = "block";
-        return false;
-    }
-    $("#Prof_Services_share_server").removeClass("has-error");
-    if (!properNumber(prof_services_share_db)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('prof_services_share_db').focus();
-            $("#Prof_Services_share_db").addClass("has-error");
-        document.getElementById("third").style.display = "block";
-        return false;
-    }
-    $("#Prof_Services_share_db").removeClass("has-error");
-    if (!properNumber(prof_services_v_share_server)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('prof_services_v_share_server').focus();
-            $("#Prof_Services_v_share_server").addClass("has-error");
-        document.getElementById("third").style.display = "block";
-        return false;
-    }
-    $("#Prof_Services_v_share_server").removeClass("has-error");
-    if (!properNumber(prof_services_v_share_db)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('prof_services_v_share_db').focus();
-            $("#Prof_Services_v_share_db").addClass("has-error");
-        document.getElementById("third").style.display = "block";
-        return false;
-    }
-    $("#Prof_Services_v_share_db").removeClass("has-error");
-    if (!properNumber(prof_services_prod_ms)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('prof_services_prod_ms').focus();
-            $("#Prof_Services_prod_ms").addClass("has-error");
-        document.getElementById("third").style.display = "block";
-        return false;
-    }
-    $("#Prof_Services_prod_ms").removeClass("has-error");
-    if (!properNumber(prof_services_prod_v_ms)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('prof_services_prod_v_ms').focus();
-            $("#Prof_Services_prod_v_ms").addClass("has-error");
-        document.getElementById("third").style.display = "block";
-        return false;
-    }
-    $("#Prof_Services_prod_v_ms").removeClass("has-error");
-    if (!properNumber(prof_services_sap_hana_data)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('prof_services_sap_hana_data').focus();
-            $("#Prof_services_sap_hana_data").addClass("has-error");
-        document.getElementById("third").style.display = "block";
-        return false;
-    }
-    $("#Prof_services_sap_hana_data").removeClass("has-error");
-    if (!properNumber(prof_services_sap_hana_node)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('prof_services_sap_hana_node').focus();
-            $("#Prof_services_sap_hana_node").addClass("has-error");
-        document.getElementById("third").style.display = "block";
-        return false;
-    }
-    $("#Prof_services_sap_hana_node").removeClass("has-error");
-    if (!properNumber(prof_services_virtual_prod)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('prof_services_virtual_prod').focus();
-            $("#Prof_Services_virtual_prod").addClass("has-error");
-        document.getElementById("third").style.display = "block";
-        return false;
-    }
-    $("#Prof_Services_virtual_prod").removeClass("has-error");
-    if (!properNumber(prof_services_prod_servers)) {
-        var r = confirm("Please Enter Proper Value");
-            document.getElementById('prof_services_prod_servers').focus();
-            $("#Prof_Services_prod_servers").addClass("has-error");
-        document.getElementById("third").style.display = "block";
-        return false;
-    }
-    $("#Prof_Services_prod_servers").removeClass("has-error");
+    
+    //Incase of enable all questions remove the below comments   
+//    if (!properNumber(prof_services_share_server)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('prof_services_share_server').focus();
+//            $("#Prof_Services_share_server").addClass("has-error");
+//        document.getElementById("third").style.display = "block";
+//        return false;
+//    }
+//    $("#Prof_Services_share_server").removeClass("has-error");
+//    if (!properNumber(prof_services_share_db)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('prof_services_share_db').focus();
+//            $("#Prof_Services_share_db").addClass("has-error");
+//        document.getElementById("third").style.display = "block";
+//        return false;
+//    }
+//    $("#Prof_Services_share_db").removeClass("has-error");
+//    if (!properNumber(prof_services_v_share_server)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('prof_services_v_share_server').focus();
+//            $("#Prof_Services_v_share_server").addClass("has-error");
+//        document.getElementById("third").style.display = "block";
+//        return false;
+//    }
+//    $("#Prof_Services_v_share_server").removeClass("has-error");
+//    if (!properNumber(prof_services_v_share_db)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('prof_services_v_share_db').focus();
+//            $("#Prof_Services_v_share_db").addClass("has-error");
+//        document.getElementById("third").style.display = "block";
+//        return false;
+//    }
+//    $("#Prof_Services_v_share_db").removeClass("has-error");
+//    if (!properNumber(prof_services_prod_ms)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('prof_services_prod_ms').focus();
+//            $("#Prof_Services_prod_ms").addClass("has-error");
+//        document.getElementById("third").style.display = "block";
+//        return false;
+//    }
+//    $("#Prof_Services_prod_ms").removeClass("has-error");
+//    if (!properNumber(prof_services_prod_v_ms)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('prof_services_prod_v_ms').focus();
+//            $("#Prof_Services_prod_v_ms").addClass("has-error");
+//        document.getElementById("third").style.display = "block";
+//        return false;
+//    }
+//    $("#Prof_Services_prod_v_ms").removeClass("has-error");
+//    if (!properNumber(prof_services_sap_hana_data)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('prof_services_sap_hana_data').focus();
+//            $("#Prof_services_sap_hana_data").addClass("has-error");
+//        document.getElementById("third").style.display = "block";
+//        return false;
+//    }
+//    $("#Prof_services_sap_hana_data").removeClass("has-error");
+//    if (!properNumber(prof_services_sap_hana_node)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('prof_services_sap_hana_node').focus();
+//            $("#Prof_services_sap_hana_node").addClass("has-error");
+//        document.getElementById("third").style.display = "block";
+//        return false;
+//    }
+//    $("#Prof_services_sap_hana_node").removeClass("has-error");
+//    if (!properNumber(prof_services_virtual_prod)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('prof_services_virtual_prod').focus();
+//            $("#Prof_Services_virtual_prod").addClass("has-error");
+//        document.getElementById("third").style.display = "block";
+//        return false;
+//    }
+//    $("#Prof_Services_virtual_prod").removeClass("has-error");
+//    if (!properNumber(prof_services_prod_servers)) {
+//        var r = confirm("Please Enter Proper Value");
+//            document.getElementById('prof_services_prod_servers').focus();
+//            $("#Prof_Services_prod_servers").addClass("has-error");
+//        document.getElementById("third").style.display = "block";
+//        return false;
+//    }
+//    $("#Prof_Services_prod_servers").removeClass("has-error");
+    //Incase of enable all questions remove the above comments and remove this line  
+    
     //professsional services validation
     var site_2s_vm_images_2s = document.getElementById("vm_images_2s").value;
     var site_2s_db_2s = document.getElementById("db_2s").value;
@@ -1663,45 +1721,55 @@ function roleBasedDiscount() {
     var site_2s_b_windows_db_2s = document.getElementById("b_windows_db_2s").value;
     var site_2s_b_unix_datas_2s = document.getElementById("b_unix_datas_2s").value;
     var site_2s_b_unix_db_2s = document.getElementById("b_unix_db_2s").value;
-    var site_2s_prod_servers_2s = document.getElementById("prod_servers_2s").value;
-    var site_2s_virtual_prod_2s = document.getElementById("virtual_prod_2s").value;
-    var site_2s_share_server_2s = document.getElementById("share_server_2s").value;
-    var site_2s_virtual_sharepoint_server_2s = document.getElementById("virtual_sharepoint_server_2s").value;
-    var site_2s_prod_ms_2s = document.getElementById("prod_ms_2s").value;
-    var site_2s_prod_v_ms_2s = document.getElementById("prod_v_ms_2s").value;
-    var sap_hana_data_2s = document.getElementById("sap_hana_data_2s").value;
-    var sap_hana_nodes_2s = document.getElementById("sap_hana_nodes_2s").value;
+    
+    //Incase of enable all questions remove the below comments   
+//    var site_2s_prod_servers_2s = document.getElementById("prod_servers_2s").value;
+//    var site_2s_virtual_prod_2s = document.getElementById("virtual_prod_2s").value;
+//    var site_2s_share_server_2s = document.getElementById("share_server_2s").value;
+//    var site_2s_virtual_sharepoint_server_2s = document.getElementById("virtual_sharepoint_server_2s").value;
+//    var site_2s_prod_ms_2s = document.getElementById("prod_ms_2s").value;
+//    var site_2s_prod_v_ms_2s = document.getElementById("prod_v_ms_2s").value;
+//    var sap_hana_data_2s = document.getElementById("sap_hana_data_2s").value;
+//    var sap_hana_nodes_2s = document.getElementById("sap_hana_nodes_2s").value;
+    //Incase of enable all questions remove the above comments and remove this line  
+    
     var site_3s_vm_images_3s = document.getElementById("vm_images_3s").value;
     var site_3s_database_3s = document.getElementById("database_3s").value;
     var site_3s_b_windows_datas_3s = document.getElementById("b_windows_datas_3s").value;
     var site_3s_b_windows_db_3s = document.getElementById("b_windows_db_3s").value;
     var site_3s_b_unix_datas_3s = document.getElementById("b_unix_datas_3s").value;
     var site_3s_b_unix_db_3s = document.getElementById("b_unix_db_3s").value;
-    var site_3s_prod_servers_3s = document.getElementById("prod_servers_3s").value;
-    var site_3s_virtual_prod_3s = document.getElementById("virtual_prod_3s").value;
-    var site_3s_share_server_3s = document.getElementById("share_server_3s").value;
-    var site_3s_virtual_server_3s = document.getElementById("virtual_server_3s").value;
-    var site_3s_prod_ms_3s = document.getElementById("prod_ms_3s").value;
-    var site_3s_prod_v_ms_3s = document.getElementById("prod_v_ms_3s").value;
-    var sap_hana_data_3s = document.getElementById("sap_hana_data_3s").value;
-    var sap_hana_nodes_3s = document.getElementById("sap_hana_nodes_3s").value;
+    
+    //Incase of enable all questions remove the below comments   
+//    var site_3s_prod_servers_3s = document.getElementById("prod_servers_3s").value;
+//    var site_3s_virtual_prod_3s = document.getElementById("virtual_prod_3s").value;
+//    var site_3s_share_server_3s = document.getElementById("share_server_3s").value;
+//    var site_3s_virtual_server_3s = document.getElementById("virtual_server_3s").value;
+//    var site_3s_prod_ms_3s = document.getElementById("prod_ms_3s").value;
+//    var site_3s_prod_v_ms_3s = document.getElementById("prod_v_ms_3s").value;
+//    var sap_hana_data_3s = document.getElementById("sap_hana_data_3s").value;
+//    var sap_hana_nodes_3s = document.getElementById("sap_hana_nodes_3s").value;
+    //Incase of enable all questions remove the above comments and remove this line  
+    
     var prof_services_vm_image = document.getElementById('prof_services_vm_image').value;
     var prof_services_database = document.getElementById('prof_services_database').value;
     var prof_services_b_windows_datas = document.getElementById('prof_services_b_windows_datas').value;
     var prof_services_b_windows_db = document.getElementById('prof_services_b_windows_db').value;
     var prof_services_b_unix_datas = document.getElementById('prof_services_b_unix_datas').value;
     var prof_services_b_unix_db = document.getElementById('prof_services_b_unix_db').value;
-    var prof_services_prod_servers = document.getElementById('prof_services_prod_servers').value;
-    var prof_services_virtual_prod = document.getElementById('prof_services_virtual_prod').value;
-    var prof_services_share_server = document.getElementById('prof_services_share_server').value;
-    var prof_services_share_db = document.getElementById('prof_services_share_db').value;
-    var prof_services_v_share_server = document.getElementById('prof_services_v_share_server').value;
-    var prof_services_v_share_db = document.getElementById('prof_services_v_share_db').value;
-    var prof_services_prod_ms = document.getElementById('prof_services_prod_ms').value;
-    var prof_services_prod_v_ms = document.getElementById('prof_services_prod_v_ms').value;
-    var prof_services_sap_hana_data = document.getElementById('prof_services_sap_hana_data').value;
-    var prof_services_sap_hana_node = document.getElementById('prof_services_sap_hana_node').value;
     
+    //Incase of enable all questions remove the below comments   
+//    var prof_services_prod_servers = document.getElementById('prof_services_prod_servers').value;
+//    var prof_services_virtual_prod = document.getElementById('prof_services_virtual_prod').value;
+//    var prof_services_share_server = document.getElementById('prof_services_share_server').value;
+//    var prof_services_share_db = document.getElementById('prof_services_share_db').value;
+//    var prof_services_v_share_server = document.getElementById('prof_services_v_share_server').value;
+//    var prof_services_v_share_db = document.getElementById('prof_services_v_share_db').value;
+//    var prof_services_prod_ms = document.getElementById('prof_services_prod_ms').value;
+//    var prof_services_prod_v_ms = document.getElementById('prof_services_prod_v_ms').value;
+//    var prof_services_sap_hana_data = document.getElementById('prof_services_sap_hana_data').value;
+//    var prof_services_sap_hana_node = document.getElementById('prof_services_sap_hana_node').value;
+    //Incase of enable all questions remove the above comments and remove this line  
     
     if (prof_services_vm_image > (Number(site_2s_vm_images_2s) + Number(site_3s_vm_images_3s))) {
         document.getElementById('prof_services_vm_image').focus();
@@ -1753,96 +1821,99 @@ function roleBasedDiscount() {
 //        document.getElementById('prof_services_virtual_prod').focus();
 //        return false;
 //    }
-    var prof_prod_vm=document.getElementById("prof_services_vm_image").value;
-//    alert(prof_prod_vm);
-    var prof_prod_vm_addon=document.getElementById("prof_services_virtual_prod").value;
-    var prof_prod_bm_win=document.getElementById("prof_services_b_windows_datas").value;
-    var prof_prod_bm_lin=document.getElementById("prof_services_b_unix_datas").value;
-    var prof_prod_bm_addon=document.getElementById("prof_services_prod_servers").value;
-    var advanced_add_on_limit=Number(prof_prod_bm_win)+Number(prof_prod_bm_lin);
-    if (checkNumbers(prof_prod_vm_addon,prof_prod_vm) || checkNumbers(prof_prod_bm_addon, advanced_add_on_limit)) {
-        if (checkNumbers(prof_prod_vm_addon,prof_prod_vm) && !checkNumbers(prof_prod_bm_addon, advanced_add_on_limit)) {
-            $("#inline_table2").show();
-            document.getElementById('prof_services_virtual_prod').focus();
-            $("#Prof_Services_virtual_prod").addClass("has-error has-feedback");
-            $("#Prof_Services_prod_servers").removeClass("has-error");
-            return false;
-        }
-        else if (checkNumbers(prof_prod_bm_addon, advanced_add_on_limit) && !checkNumbers(prof_prod_vm_addon,prof_prod_vm)) {
-            $("#inline_table2").show();
-            document.getElementById('prof_services_prod_servers').focus();
-            $("#Prof_Services_prod_servers").addClass("has-error has-feedback");
-            $("#Prof_Services_virtual_prod").removeClass("has-error");
-            return false;
-        }
-        else {
-            $("#inline_table2").show();
-            document.getElementById('prof_services_prod_servers').focus();
-            $("#Prof_Services_prod_servers").addClass("has-error has-feedback");
-            return false;
-        }
-    }
-    else if (checkNumbers(prof_prod_vm_addon,prof_prod_vm) && checkNumbers(prof_prod_bm_addon, advanced_add_on_limit)) {
-        $("#inline_table2").show();
-        document.getElementById('prof_services_prod_servers').focus();
-        $("#Prof_Services_prod_servers").addClass("has-error has-feedback");
-        return false;
-    }
-    $("#Prof_Services_prod_servers").removeClass("has-error"); 
-    if (prof_services_share_server > (Number(site_2s_share_server_2s) + Number(site_3s_share_server_3s))) {
-        $("#prof_panel").show();
-        document.getElementById('prof_services_share_server').focus();
-        $("#Prof_Services_share_server").addClass("has-error");
-        return false;
-    }
-    $("#Prof_Services_share_server").removeClass("has-error"); 
-    if (prof_services_share_db > (Number(site_2s_share_server_2s) + Number(site_3s_share_server_3s))) {
-        $("#prof_panel").show();
-        document.getElementById('prof_services_share_db').focus();
-        $("#Prof_Services_share_db").addClass("has-error");
-        return false;
-    }
-    $("#Prof_Services_share_db").removeClass("has-error"); 
-    if (prof_services_v_share_server > (Number(site_2s_virtual_sharepoint_server_2s) + Number(site_3s_virtual_server_3s))) {
-        $("#prof_panel").show();
-        document.getElementById('prof_services_v_share_server').focus();
-        $("#Prof_Services_v_share_server").addClass("has-error");
-        return false;
-    }
-    $("#Prof_Services_v_share_server").removeClass("has-error"); 
-    if (prof_services_v_share_db > (Number(site_2s_virtual_sharepoint_server_2s) + Number(site_3s_virtual_server_3s))) {
-        $("#prof_panel").show();
-        document.getElementById('prof_services_v_share_db').focus();
-        $("#Prof_Services_v_share_db").addClass("has-error");
-        return false;
-    }
-    $("#Prof_Services_v_share_db").removeClass("has-error"); 
-    if (prof_services_prod_ms > (Number(site_2s_prod_ms_2s) + Number(site_3s_prod_ms_3s))) {
-        $("#prof_panel").show();
-        document.getElementById('prof_services_prod_ms').focus();
-        $("#Prof_Services_prod_ms").addClass("has-error");
-        return false;
-    }
-    $("#Prof_Services_prod_ms").removeClass("has-error"); 
-    if (prof_services_prod_ms > (Number(site_2s_prod_v_ms_2s) + Number(site_3s_prod_v_ms_3s))) {
-        $("#prof_panel").show();
-        document.getElementById('prof_services_prod_v_ms').focus();
-        $("#Prof_Services_prod_v_ms").addClass("has-error");
-        return false;
-    }
-    $("#Prof_Services_prod_v_ms").removeClass("has-error");
-    if (prof_services_sap_hana_data > (Number(sap_hana_data_2s) + Number(sap_hana_data_3s))) {
-        document.getElementById('prof_services_sap_hana_data').focus();
-        $("#Prof_services_sap_hana_data").addClass("has-error");
-        return false;
-    }
-    $("#Prof_services_sap_hana_data").removeClass("has-error");
-    if (prof_services_sap_hana_node > (Number(sap_hana_nodes_2s) + Number(sap_hana_nodes_3s))) {
-        document.getElementById('prof_services_sap_hana_node').focus();
-        $("#Prof_services_sap_hana_node").addClass("has-error");
-        return false;
-    }
-    $("#Prof_services_sap_hana_node").removeClass("has-error");
+    
+   //Incase of enable all questions remove the below comments    
+//    var prof_prod_vm=document.getElementById("prof_services_vm_image").value;
+//    var prof_prod_vm_addon=document.getElementById("prof_services_virtual_prod").value;
+//    var prof_prod_bm_win=document.getElementById("prof_services_b_windows_datas").value;
+//    var prof_prod_bm_lin=document.getElementById("prof_services_b_unix_datas").value;
+//    var prof_prod_bm_addon=document.getElementById("prof_services_prod_servers").value;
+//    var advanced_add_on_limit=Number(prof_prod_bm_win)+Number(prof_prod_bm_lin);
+//    if (checkNumbers(prof_prod_vm_addon,prof_prod_vm) || checkNumbers(prof_prod_bm_addon, advanced_add_on_limit)) {
+//        if (checkNumbers(prof_prod_vm_addon,prof_prod_vm) && !checkNumbers(prof_prod_bm_addon, advanced_add_on_limit)) {
+//            $("#inline_table2").show();
+//            document.getElementById('prof_services_virtual_prod').focus();
+//            $("#Prof_Services_virtual_prod").addClass("has-error has-feedback");
+//            $("#Prof_Services_prod_servers").removeClass("has-error");
+//            return false;
+//        }
+//        else if (checkNumbers(prof_prod_bm_addon, advanced_add_on_limit) && !checkNumbers(prof_prod_vm_addon,prof_prod_vm)) {
+//            $("#inline_table2").show();
+//            document.getElementById('prof_services_prod_servers').focus();
+//            $("#Prof_Services_prod_servers").addClass("has-error has-feedback");
+//            $("#Prof_Services_virtual_prod").removeClass("has-error");
+//            return false;
+//        }
+//        else {
+//            $("#inline_table2").show();
+//            document.getElementById('prof_services_prod_servers').focus();
+//            $("#Prof_Services_prod_servers").addClass("has-error has-feedback");
+//            return false;
+//        }
+//    }
+//    else if (checkNumbers(prof_prod_vm_addon,prof_prod_vm) && checkNumbers(prof_prod_bm_addon, advanced_add_on_limit)) {
+//        $("#inline_table2").show();
+//        document.getElementById('prof_services_prod_servers').focus();
+//        $("#Prof_Services_prod_servers").addClass("has-error has-feedback");
+//        return false;
+//    }
+//    $("#Prof_Services_prod_servers").removeClass("has-error"); 
+//    if (prof_services_share_server > (Number(site_2s_share_server_2s) + Number(site_3s_share_server_3s))) {
+//        $("#prof_panel").show();
+//        document.getElementById('prof_services_share_server').focus();
+//        $("#Prof_Services_share_server").addClass("has-error");
+//        return false;
+//    }
+//    $("#Prof_Services_share_server").removeClass("has-error"); 
+//    if (prof_services_share_db > (Number(site_2s_share_server_2s) + Number(site_3s_share_server_3s))) {
+//        $("#prof_panel").show();
+//        document.getElementById('prof_services_share_db').focus();
+//        $("#Prof_Services_share_db").addClass("has-error");
+//        return false;
+//    }
+//    $("#Prof_Services_share_db").removeClass("has-error"); 
+//    if (prof_services_v_share_server > (Number(site_2s_virtual_sharepoint_server_2s) + Number(site_3s_virtual_server_3s))) {
+//        $("#prof_panel").show();
+//        document.getElementById('prof_services_v_share_server').focus();
+//        $("#Prof_Services_v_share_server").addClass("has-error");
+//        return false;
+//    }
+//    $("#Prof_Services_v_share_server").removeClass("has-error"); 
+//    if (prof_services_v_share_db > (Number(site_2s_virtual_sharepoint_server_2s) + Number(site_3s_virtual_server_3s))) {
+//        $("#prof_panel").show();
+//        document.getElementById('prof_services_v_share_db').focus();
+//        $("#Prof_Services_v_share_db").addClass("has-error");
+//        return false;
+//    }
+//    $("#Prof_Services_v_share_db").removeClass("has-error"); 
+//    if (prof_services_prod_ms > (Number(site_2s_prod_ms_2s) + Number(site_3s_prod_ms_3s))) {
+//        $("#prof_panel").show();
+//        document.getElementById('prof_services_prod_ms').focus();
+//        $("#Prof_Services_prod_ms").addClass("has-error");
+//        return false;
+//    }
+//    $("#Prof_Services_prod_ms").removeClass("has-error"); 
+//    if (prof_services_prod_ms > (Number(site_2s_prod_v_ms_2s) + Number(site_3s_prod_v_ms_3s))) {
+//        $("#prof_panel").show();
+//        document.getElementById('prof_services_prod_v_ms').focus();
+//        $("#Prof_Services_prod_v_ms").addClass("has-error");
+//        return false;
+//    }
+//    $("#Prof_Services_prod_v_ms").removeClass("has-error");
+//    if (prof_services_sap_hana_data > (Number(sap_hana_data_2s) + Number(sap_hana_data_3s))) {
+//        document.getElementById('prof_services_sap_hana_data').focus();
+//        $("#Prof_services_sap_hana_data").addClass("has-error");
+//        return false;
+//    }
+//    $("#Prof_services_sap_hana_data").removeClass("has-error");
+//    if (prof_services_sap_hana_node > (Number(sap_hana_nodes_2s) + Number(sap_hana_nodes_3s))) {
+//        document.getElementById('prof_services_sap_hana_node').focus();
+//        $("#Prof_services_sap_hana_node").addClass("has-error");
+//        return false;
+//    }
+//    $("#Prof_services_sap_hana_node").removeClass("has-error");
+    //Incase of enable all questions remove the above comments and remove this line  
+    
     document.getElementById("product_support").readOnly = true;
     document.getElementById("prof").checked = false;
     $("#table2").hide();
