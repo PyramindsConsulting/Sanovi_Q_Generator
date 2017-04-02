@@ -148,44 +148,47 @@
                     }
                 }
                 $license=$_SESSION['license'];
-                 $query2="select * from BasePrices where product_module='PREMISE PRODUCT TRAINING' and country='$Country'";
-                $result2=mysqli_query($connect,$query2); 
-                if ($result2->num_rows > 0) {
-                while($row2=mysqli_fetch_array($result2)){
-                    $part_number=$row2['part_number'];
-                    $part_no="part_no_prof".$count;
-                    $part_des="part_desc_prof".$count;
-                    $part_qty="part_qty_prof".$count;
-                    $part_cost="part_price_prof".$count;
-                    $part_desc=$row2['part_desc'];
-                    
-                    
-                        if($ModeOfSale=='First Time Sale'){
-                            if($prof_premise_product_training=="Yes"){
-                                $node_servers=ceil($_SESSION['count_of_servers_databases']/40);
-                                $part_price=$node_servers*$row2['base_price']*get_exchange_rate();
-                            }
-                        }
-                        echo "<div class='row'>";
-                        echo    "<div class='form-group plaintxtbox'>";
-                        echo        "<div class='col-sm-3'>";
-                        echo            "<input type='text' class='form-control' name='$part_no' readonly value= '$part_number'".">";
-                        echo        "</div>";
-                        echo        "<div class='col-sm-7'>";
-                        echo          "<input type='text' readonly class='form-control' name='$part_des'  wrap='true' value= '$part_desc'".">";
-    //                        echo        "<textarea type='text' readonly cols='80%' >".$part_description."</textarea>";
-                        echo        "</div>";
-                        echo        "<div class='col-sm-1'>";
-                        echo            "<input type='text' class='form-control' name='$part_qty' style='text-align:right' readonly value= '$node_servers'>";
-                        echo        "</div>";
-                        echo        "<div class='col-sm-1'>";
-                        echo            "<input type='text' class='form-control' name='$part_cost' style='text-align:right' readonly value= '$part_price'".">";
-    //                        echo        "<textarea type='text' readonly size='100%'>".$part_price."</textarea>";
-                        echo        "</div>";
-                        echo     "</div>";
-                        echo "</div><br>";
-                    }
-                }
+             
+             //Incase of enable all questions remove the below comments
+//                 $query2="select * from BasePrices where product_module='PREMISE PRODUCT TRAINING' and country='$Country'";
+//                $result2=mysqli_query($connect,$query2); 
+//                if ($result2->num_rows > 0) {
+//                while($row2=mysqli_fetch_array($result2)){
+//                    $part_number=$row2['part_number'];
+//                    $part_no="part_no_prof".$count;
+//                    $part_des="part_desc_prof".$count;
+//                    $part_qty="part_qty_prof".$count;
+//                    $part_cost="part_price_prof".$count;
+//                    $part_desc=$row2['part_desc'];
+//                    
+//                    
+//                        if($ModeOfSale=='First Time Sale'){
+//                            if($prof_premise_product_training=="Yes"){
+//                                $node_servers=ceil($_SESSION['count_of_servers_databases']/40);
+//                                $part_price=$node_servers*$row2['base_price']*get_exchange_rate();
+//                            }
+//                        }
+//                        echo "<div class='row'>";
+//                        echo    "<div class='form-group plaintxtbox'>";
+//                        echo        "<div class='col-sm-3'>";
+//                        echo            "<input type='text' class='form-control' name='$part_no' readonly value= '$part_number'".">";
+//                        echo        "</div>";
+//                        echo        "<div class='col-sm-7'>";
+//                        echo          "<input type='text' readonly class='form-control' name='$part_des'  wrap='true' value= '$part_desc'".">";
+//    //                        echo        "<textarea type='text' readonly cols='80%' >".$part_description."</textarea>";
+//                        echo        "</div>";
+//                        echo        "<div class='col-sm-1'>";
+//                        echo            "<input type='text' class='form-control' name='$part_qty' style='text-align:right' readonly value= '$node_servers'>";
+//                        echo        "</div>";
+//                        echo        "<div class='col-sm-1'>";
+//                        echo            "<input type='text' class='form-control' name='$part_cost' style='text-align:right' readonly value= '$part_price'".">";
+//    //                        echo        "<textarea type='text' readonly size='100%'>".$part_price."</textarea>";
+//                        echo        "</div>";
+//                        echo     "</div>";
+//                        echo "</div><br>";
+//                    }
+//                }
+             //Incase of enable all questions remove the above comments and remove this line 
             ?>
             </div>
             <div id="box">
